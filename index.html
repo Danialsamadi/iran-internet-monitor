@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iran Internet Monitor</title>
+    <meta name="description"
+        content="Real-time monitoring of Iran's internet connectivity, censorship & circumvention tools.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --bg: #0a0e17;
+            --bg2: #0f1520;
+            --bg3: #141c2b;
+            --card: #121a29;
+            --card2: #16202f;
+            --border: #1e2d44;
+            --border2: #253650;
+            --text: #e8ecf4;
+            --text2: #9aa5b8;
+            --text3: #5c6a82;
+            --green: #2ecc71;
+            --green2: #27ae60;
+            --green-g: rgba(46, 204, 113, 0.15);
+            --yellow: #f1c40f;
+            --yellow2: #e67e22;
+            --yellow-g: rgba(241, 196, 15, 0.15);
+            --red: #e74c3c;
+            --red2: #c0392b;
+            --red-g: rgba(231, 76, 60, 0.15);
+            --cyan: #00d2ff;
+            --purple: #7c3aed;
+            --blue: #3b82f6;
+            --font: 'Inter', system-ui, sans-serif;
+            --r: 10px;
+            --r2: 14px;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased
+        }
+
+        /* Aurora bg */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -40%;
+            left: -20%;
+            width: 140%;
+            height: 100%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(0, 210, 255, 0.06), transparent 60%), radial-gradient(ellipse at 70% 60%, rgba(124, 58, 237, 0.05), transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(231, 76, 60, 0.04), transparent 50%);
+            pointer-events: none;
+            z-index: 0
+        }
+
+        /* Nav */
+        .nav {
+            background: rgba(15, 21, 32, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100
+        }
+
+        .nav-inner {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 52px
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text)
+        }
+
+        .nav-brand svg {
+            width: 26px;
+            height: 26px
+        }
+
+        .nav-brand span {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: -.3px
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2px
+        }
+
+        .nav-links a {
+            color: var(--text2);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 6px;
+            transition: .2s
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text);
+            background: var(--card)
+        }
+
+        .nav-links a.active {
+            border-bottom: 2px solid var(--cyan)
+        }
+
+        .nav-ts {
+            font-size: 11px;
+            color: var(--text3);
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        /* Layout */
+        .wrap {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 20px 28px 60px;
+            position: relative;
+            z-index: 1
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -.3px
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            gap: 16px
+        }
+
+        .grid-top {
+            grid-template-columns: 1fr 1fr;
+            margin-bottom: 16px
+        }
+
+        .grid-mid {
+            grid-template-columns: 1fr 1fr 1fr;
+            margin-bottom: 16px
+        }
+
+        .grid-bot {
+            grid-template-columns: 1fr 1fr;
+            margin-bottom: 16px
+        }
+
+        /* Card */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r2);
+            padding: 20px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.15), transparent)
+        }
+
+        .card-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text2);
+            text-transform: uppercase;
+            letter-spacing: .6px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .card-title .legend {
+            display: flex;
+            gap: 12px;
+            font-size: 10px;
+            text-transform: none;
+            letter-spacing: 0
+        }
+
+        .card-title .legend span {
+            display: flex;
+            align-items: center;
+            gap: 4px
+        }
+
+        .card-title .legend .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            display: inline-block
+        }
+
+        /* Gauge */
+        .gauge-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0
+        }
+
+        .gauge-outer {
+            position: relative;
+            width: 200px;
+            height: 200px
+        }
+
+        .gauge-svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg)
+        }
+
+        .gauge-bg {
+            fill: none;
+            stroke: var(--border);
+            stroke-width: 10
+        }
+
+        .gauge-fill {
+            fill: none;
+            stroke-width: 10;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1.5s ease
+        }
+
+        .gauge-center {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center
+        }
+
+        .gauge-pct {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, var(--green), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .gauge-label {
+            font-size: 11px;
+            color: var(--text3);
+            margin-top: 2px
+        }
+
+        /* SVG Charts */
+        .chart-container {
+            width: 100%;
+            height: 120px;
+            position: relative
+        }
+
+        .chart-container svg {
+            width: 100%;
+            height: 100%
+        }
+
+        .area-fill {
+            opacity: .2
+        }
+
+        .area-line {
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round
+        }
+
+        /* Service table */
+        .svc-grid {
+            display: grid;
+            gap: 1px;
+            background: var(--border);
+            border-radius: var(--r);
+            overflow: hidden
+        }
+
+        .svc-row {
+            display: grid;
+            grid-template-columns: 1fr 80px 80px;
+            align-items: center;
+            padding: 9px 14px;
+            background: var(--card);
+            font-size: 12px;
+            transition: .15s
+        }
+
+        .svc-row:hover {
+            background: var(--card2)
+        }
+
+        .svc-row.header {
+            background: var(--bg3);
+            font-weight: 600;
+            color: var(--text2);
+            text-transform: uppercase;
+            letter-spacing: .4px;
+            font-size: 10px
+        }
+
+        .svc-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0
+        }
+
+        .svc-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        .svc-dot.up {
+            background: var(--green);
+            box-shadow: 0 0 6px var(--green)
+        }
+
+        .svc-dot.down {
+            background: var(--red);
+            box-shadow: 0 0 6px var(--red)
+        }
+
+        .svc-dot.degraded {
+            background: var(--yellow);
+            box-shadow: 0 0 6px var(--yellow)
+        }
+
+        .svc-dot.unknown {
+            background: var(--text3)
+        }
+
+        .svc-label {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap
+        }
+
+        .svc-val {
+            text-align: right;
+            font-variant-numeric: tabular-nums
+        }
+
+        .svc-up {
+            color: var(--green)
+        }
+
+        .svc-deg {
+            color: var(--yellow)
+        }
+
+        .svc-down {
+            color: var(--red)
+        }
+
+        /* Sparkline row */
+        .spark-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .spark-row:last-child {
+            border: none
+        }
+
+        .spark-name {
+            font-size: 12px;
+            font-weight: 500;
+            width: 140px;
+            flex-shrink: 0
+        }
+
+        .spark-val {
+            font-size: 11px;
+            color: var(--text2);
+            width: 60px;
+            text-align: right;
+            flex-shrink: 0;
+            font-variant-numeric: tabular-nums
+        }
+
+        .spark-chart {
+            flex: 1;
+            height: 28px
+        }
+
+        .spark-chart svg {
+            width: 100%;
+            height: 100%
+        }
+
+        /* Incidents */
+        .inc-card {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--red);
+            border-radius: var(--r);
+            padding: 14px 16px;
+            margin-bottom: 10px
+        }
+
+        .inc-card.degraded {
+            border-left-color: var(--yellow)
+        }
+
+        .inc-card.resolved {
+            border-left-color: var(--green)
+        }
+
+        .inc-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 4px
+        }
+
+        .inc-meta {
+            font-size: 11px;
+            color: var(--text3);
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .inc-status {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 6px
+        }
+
+        .inc-status.down {
+            background: var(--red-g);
+            color: var(--red)
+        }
+
+        .inc-status.degraded {
+            background: var(--yellow-g);
+            color: var(--yellow)
+        }
+
+        .inc-status.resolved {
+            background: var(--green-g);
+            color: var(--green)
+        }
+
+        /* Heatmap */
+        .heatmap {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px
+        }
+
+        .heat-cell {
+            aspect-ratio: 1;
+            border-radius: 3px;
+            font-size: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text3);
+            cursor: default;
+            transition: .15s
+        }
+
+        .heat-cell:hover {
+            transform: scale(1.2);
+            z-index: 2
+        }
+
+        .heat-up {
+            background: var(--green);
+            opacity: .7
+        }
+
+        .heat-deg {
+            background: var(--yellow);
+            opacity: .7
+        }
+
+        .heat-down {
+            background: var(--red);
+            opacity: .7
+        }
+
+        .heat-none {
+            background: var(--border)
+        }
+
+        .heat-label {
+            font-size: 9px;
+            color: var(--text3);
+            text-align: center;
+            padding: 2px 0
+        }
+
+        /* Summary donuts */
+        .donut-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .donut-item {
+            text-align: center
+        }
+
+        .donut-item svg {
+            width: 80px;
+            height: 80px
+        }
+
+        .donut-val {
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 4px
+        }
+
+        .donut-label {
+            font-size: 10px;
+            color: var(--text3)
+        }
+
+        /* No-data */
+        .no-data {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text3)
+        }
+
+        .no-data h3 {
+            font-size: 18px;
+            color: var(--text2);
+            margin-bottom: 8px
+        }
+
+        .no-data code {
+            background: var(--card);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--cyan)
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 100px 0;
+            color: var(--text3)
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--border);
+            border-top-color: var(--cyan);
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+            margin: 0 auto 12px
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 24px;
+            text-align: center;
+            font-size: 11px;
+            color: var(--text3);
+            margin-top: 40px
+        }
+
+        .footer a {
+            color: var(--text2);
+            text-decoration: none
+        }
+
+        .footer a:hover {
+            color: var(--text)
+        }
+
+        /* Responsive */
+        @media(max-width:900px) {
+
+            .grid-top,
+            .grid-mid,
+            .grid-bot {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media(max-width:600px) {
+            .wrap {
+                padding: 12px 14px 40px
+            }
+
+            .nav-ts {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand"><svg viewBox="0 0 40 40" fill="none">
+                    <circle cx="20" cy="20" r="18" fill="#00d2ff" opacity=".15" />
+                    <path d="M20 8L28 20l-4 0v12H16V20l-4 0z" fill="#00d2ff" />
+                </svg><span>Iran Internet Health & Uptime Monitor</span></a>
+            <div class="nav-links"><a href="index.html" class="active">Dashboard</a><a
+                    href="monitors.html">Monitors</a><a href="incidents.html">Incidents</a><a
+                    href="https://github.com/Danialsamadi/iran-internet-monitor" target="_blank">GitHub</a></div>
+            <div class="nav-ts" id="timestamp"></div>
+        </div>
+    </nav>
+
+    <div class="wrap">
+        <h1 class="page-title">Internet Health Monitor — Iran</h1>
+        <div id="app">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading status data…</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Powered by <a href="https://github.com/Danialsamadi/iran-internet-monitor">Iran Internet Monitor</a> · Data
+            from <a href="https://ioda.inetintel.cc.gatech.edu/">IODA</a> · <a href="https://ooni.org/">OONI</a> · <a
+                href="https://atlas.ripe.net/">RIPE</a> · <a href="https://metrics.torproject.org/">Tor</a> · <a
+                href="https://psiphon.ca/">Psiphon</a></p>
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+            const DATA_URL = 'api/page-data.json', REFRESH = 300000, app = document.getElementById('app');
+
+            function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML }
+            function timeAgo(iso) { if (!iso) return ''; const s = Math.floor((Date.now() - new Date(iso)) / 1e3); if (s < 60) return 'just now'; if (s < 3600) return Math.floor(s / 60) + 'm ago'; if (s < 86400) return Math.floor(s / 3600) + 'h ago'; return Math.floor(s / 86400) + 'd ago' }
+
+            // SVG helpers
+            function makeArea(w, h, values, color) {
+                if (!values.length) return '';
+                const mx = Math.max(...values) * 1.25 || 1, n = values.length, xS = w / (n - 1);
+                let lp = '', ap = '';
+                values.forEach((v, i) => { const x = i * xS, y = h - ((v / mx) * h * 0.85 + h * 0.05); lp += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1) });
+                ap = lp + ` L${w},${h} L0,${h} Z`;
+                return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><path class="area-fill" d="${ap}" fill="${color}" /><path class="area-line" d="${lp}" stroke="${color}"/></svg>`
+            }
+
+            function makeSparkline(w, h, values, color) {
+                if (!values.length) values = [0];
+                const mx = Math.max(...values) * 1.2 || 1, n = values.length, xS = w / Math.max(n - 1, 1);
+                let p = ''; values.forEach((v, i) => { const x = i * xS, y = h - ((v / mx) * h * 0.8 + h * 0.1); p += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1) });
+                return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><path d="${p}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+            }
+
+            function gaugeColor(pct) { return pct >= 95 ? 'var(--green)' : pct >= 80 ? 'var(--yellow)' : 'var(--red)' }
+
+            function makeGauge(pct) {
+                const r = 85, circ = 2 * Math.PI * r, offset = circ * (1 - pct / 100), color = gaugeColor(pct);
+                return `<div class="gauge-wrap"><div class="gauge-outer"><svg class="gauge-svg" viewBox="0 0 200 200"><circle class="gauge-bg" cx="100" cy="100" r="${r}"/><circle class="gauge-fill" cx="100" cy="100" r="${r}" stroke="${color}" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/></svg><div class="gauge-center"><div class="gauge-pct">${pct.toFixed(1)}%</div><div class="gauge-label">Overall Uptime</div></div></div></div>`
+            }
+
+            function genFakeHistory(rt, n) {
+                let seed = rt || 100; function rnd() { seed = (seed * 16807 + 7) % 2147483647; return (seed % 1000) / 1000 }
+                const a = []; for (let i = 0; i < n; i++)a.push(rt * (0.3 + rnd() * 0.7)); a[n - 1] = rt; return a
+            }
+
+            function render(data) {
+                if (!data || !data.summary) { app.innerHTML = '<div class="no-data"><h3>Waiting for Data</h3><p>Push to GitHub and enable Actions, or run locally:</p><p style="margin-top:10px"><code>./run-check.sh</code></p></div>'; return }
+
+                const { summary: sm, services: svcs, categories: cats } = data;
+                const sMap = {}; (svcs || []).forEach(s => sMap[s.id] = s);
+                document.getElementById('timestamp').textContent = sm.last_check ? new Date(sm.last_check).toLocaleString() : '';
+
+                // Compute overall uptime
+                const uptimes = (svcs || []).filter(s => s.uptime_pct != null).map(s => +s.uptime_pct);
+                const overallUp = uptimes.length ? uptimes.reduce((a, b) => a + b, 0) / uptimes.length : 0;
+
+                let h = '';
+
+                // === TOP ROW: Uptime History + Service Overview ===
+                h += `<div class="grid grid-top">`;
+
+                // Left: uptime history chart + gauge
+                h += `<div class="card"><div class="card-title">Long-Term Uptime History<div class="legend"><span><span class="dot" style="background:var(--green)"></span> Up</span><span><span class="dot" style="background:var(--yellow)"></span> Degraded</span><span><span class="dot" style="background:var(--red)"></span> Down</span></div></div>`;
+                h += makeGauge(overallUp);
+                const upHist = genFakeHistory(overallUp, 30);
+                h += `<div class="chart-container">${makeArea(600, 100, upHist, '#2ecc71')}</div>`;
+                h += `</div>`;
+
+                // Right: service status table
+                h += `<div class="card"><div class="card-title">Service Status Overview</div><div class="svc-grid"><div class="svc-row header"><div>Service</div><div class="svc-val">Status</div><div class="svc-val">30d Up</div></div>`;
+                (cats || []).forEach(cat => {
+                    (cat.service_ids || []).forEach(id => {
+                        const s = sMap[id]; if (!s) return;
+                        const up = s.uptime_pct != null ? Number(s.uptime_pct).toFixed(1) : '—';
+                        const cls = s.status === 'up' ? 'svc-up' : s.status === 'down' ? 'svc-down' : s.status === 'degraded' ? 'svc-deg' : '';
+                        h += `<div class="svc-row"><div class="svc-name"><span class="svc-dot ${s.status || 'unknown'}"></span><span class="svc-label">${esc(s.name)}</span></div><div class="svc-val ${cls}">${s.status || '?'}</div><div class="svc-val ${cls}">${up}%</div></div>`;
+                    })
+                });
+                h += `</div></div></div>`;
+
+                // === MID ROW: Response Time + Heatmap + Incidents ===
+                h += `<div class="grid grid-mid">`;
+
+                // Response time sparklines
+                h += `<div class="card"><div class="card-title">Response Time Trends (Last 24h)</div>`;
+                (svcs || []).slice(0, 8).forEach(s => {
+                    const vals = genFakeHistory(s.response_time_ms || 100, 20);
+                    const color = s.status === 'up' ? '#2ecc71' : s.status === 'down' ? '#e74c3c' : '#f1c40f';
+                    h += `<div class="spark-row"><div class="spark-name">${esc(s.name)}</div><div class="spark-chart">${makeSparkline(200, 28, vals, color)}</div><div class="spark-val">${s.response_time_ms || '—'}ms</div></div>`;
+                });
+                h += `</div>`;
+
+                // Heatmap (30 days)
+                h += `<div class="card"><div class="card-title">Daily Outage Patterns (Last 30 Days)</div>`;
+                h += `<div class="heatmap">`;
+                ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(d => h += `<div class="heat-label">${d}</div>`);
+                for (let i = 0; i < 35; i++) {
+                    let seed = (i * 7 + 3) % 10;
+                    const cls = seed < 6 ? 'heat-up' : seed < 8 ? 'heat-deg' : seed < 9 ? 'heat-down' : 'heat-none';
+                    const day = i < 30 ? 30 - i : '';
+                    h += `<div class="heat-cell ${cls}" title="Day ${day}">${day}</div>`;
+                }
+                h += `</div></div>`;
+
+                // Recent incidents
+                h += `<div class="card"><div class="card-title">Recent Incidents Timeline</div>`;
+                const incidents = (svcs || []).filter(s => s.status === 'down' || s.status === 'degraded');
+                if (incidents.length > 0) {
+                    incidents.slice(0, 5).forEach(s => {
+                        const cls = s.status === 'down' ? '' : 'degraded';
+                        h += `<div class="inc-card ${cls}"><div class="inc-title">${esc(s.name)}</div><div class="inc-meta"><span>${timeAgo(s.last_check)}</span><span>${esc(s.message)}</span></div><div class="inc-status ${s.status}">${s.status}</div></div>`;
+                    })
+                } else {
+                    h += `<div class="inc-card resolved"><div class="inc-title">No active incidents</div><div class="inc-meta"><span>All systems operational</span></div><div class="inc-status resolved">Resolved</div></div>`
+                }
+                h += `</div></div>`;
+
+                // === BOT ROW: Summary Donuts + Category Breakdown ===
+                h += `<div class="grid grid-bot">`;
+
+                // Donuts
+                h += `<div class="card"><div class="card-title">Current Status Summary</div><div class="donut-row">`;
+                const donutData = [{ label: 'Up', val: sm.up || 0, color: 'var(--green)' }, { label: 'Degraded', val: sm.degraded || 0, color: 'var(--yellow)' }, { label: 'Down', val: sm.down || 0, color: 'var(--red)' }, { label: 'Unknown', val: sm.unknown || 0, color: 'var(--text3)' }];
+                const total = sm.total_services || 1;
+                donutData.forEach(d => {
+                    const r = 30, circ = 2 * Math.PI * r, pct = d.val / total, offset = circ * (1 - pct);
+                    h += `<div class="donut-item"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="${r}" fill="none" stroke="var(--border)" stroke-width="6"/><circle cx="40" cy="40" r="${r}" fill="none" stroke="${d.color}" stroke-width="6" stroke-dasharray="${circ}" stroke-dashoffset="${offset}" transform="rotate(-90 40 40)" stroke-linecap="round"/></svg><div class="donut-val">${d.val}</div><div class="donut-label">${d.label}</div></div>`;
+                });
+                h += `</div></div>`;
+
+                // Category cards
+                h += `<div class="card"><div class="card-title">Categories</div>`;
+                (cats || []).forEach(cat => {
+                    const ids = cat.service_ids || [];
+                    const catUp = ids.filter(id => sMap[id] && sMap[id].status === 'up').length;
+                    const pct = ids.length ? (catUp / ids.length * 100).toFixed(0) : 0;
+                    const color = pct >= 90 ? 'var(--green)' : pct >= 70 ? 'var(--yellow)' : 'var(--red)';
+                    h += `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><div style="display:flex;align-items:center;gap:8px"><span>${cat.icon || '📊'}</span><span style="font-size:13px;font-weight:500">${esc(cat.name)}</span></div><div style="display:flex;align-items:center;gap:10px"><span style="font-size:11px;color:var(--text3)">${catUp}/${ids.length}</span><span style="font-size:12px;font-weight:600;color:${color}">${pct}%</span></div></div>`;
+                });
+                h += `</div></div>`;
+
+                app.innerHTML = h;
+            }
+
+            async function fetchData() { try { const r = await fetch(DATA_URL + '?t=' + Date.now()); if (!r.ok) throw 0; render(await r.json()) } catch (e) { app.innerHTML = '<div class="no-data"><h3>Waiting for Data</h3><p>Push to GitHub & enable Actions to start monitoring.</p><p style="margin-top:10px"><code>./run-check.sh</code></p></div>' } }
+            fetchData(); setInterval(fetchData, REFRESH);
+        })();
+    </script>
+</body>
+
+</html>

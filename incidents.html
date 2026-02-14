@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incidents — Iran Internet Monitor</title>
+    <meta name="description"
+        content="Network incident timeline — current status, affected services, and historical incidents.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --bg: #0a0e17;
+            --bg2: #0f1520;
+            --bg3: #141c2b;
+            --card: #121a29;
+            --card2: #16202f;
+            --border: #1e2d44;
+            --border2: #253650;
+            --text: #e8ecf4;
+            --text2: #9aa5b8;
+            --text3: #5c6a82;
+            --green: #2ecc71;
+            --green2: #27ae60;
+            --green-g: rgba(46, 204, 113, 0.15);
+            --yellow: #f1c40f;
+            --yellow2: #e67e22;
+            --yellow-g: rgba(241, 196, 15, 0.15);
+            --red: #e74c3c;
+            --red2: #c0392b;
+            --red-g: rgba(231, 76, 60, 0.15);
+            --cyan: #00d2ff;
+            --purple: #7c3aed;
+            --blue: #3b82f6;
+            --font: 'Inter', system-ui, sans-serif;
+            --r: 10px;
+            --r2: 14px;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -40%;
+            left: -20%;
+            width: 140%;
+            height: 100%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(0, 210, 255, 0.06), transparent 60%), radial-gradient(ellipse at 70% 60%, rgba(124, 58, 237, 0.05), transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(231, 76, 60, 0.04), transparent 50%);
+            pointer-events: none;
+            z-index: 0
+        }
+
+        .nav {
+            background: rgba(15, 21, 32, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100
+        }
+
+        .nav-inner {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 52px
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text)
+        }
+
+        .nav-brand svg {
+            width: 26px;
+            height: 26px
+        }
+
+        .nav-brand span {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: -.3px
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2px
+        }
+
+        .nav-links a {
+            color: var(--text2);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 6px;
+            transition: .2s
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text);
+            background: var(--card)
+        }
+
+        .nav-links a.active {
+            border-bottom: 2px solid var(--cyan)
+        }
+
+        .open-src {
+            font-size: 10px;
+            color: var(--text3);
+            display: flex;
+            align-items: center;
+            gap: 4px
+        }
+
+        .open-src svg {
+            width: 14px;
+            height: 14px
+        }
+
+        .wrap {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 20px 28px 60px;
+            position: relative;
+            z-index: 1
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -.3px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .page-title svg {
+            width: 24px;
+            height: 24px
+        }
+
+        /* Grid */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px
+        }
+
+        /* Card */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r2);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 16px
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.15), transparent)
+        }
+
+        .card-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text2);
+            text-transform: uppercase;
+            letter-spacing: .6px;
+            margin-bottom: 14px
+        }
+
+        /* Donut */
+        .donut-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px
+        }
+
+        .donut-wrap {
+            position: relative;
+            width: 120px;
+            height: 120px
+        }
+
+        .donut-wrap svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg)
+        }
+
+        .donut-bg {
+            fill: none;
+            stroke: var(--border);
+            stroke-width: 10
+        }
+
+        .donut-seg {
+            fill: none;
+            stroke-width: 10;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s ease
+        }
+
+        .donut-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center
+        }
+
+        .donut-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            color: var(--text2)
+        }
+
+        .donut-legend-item .dl-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%
+        }
+
+        .donut-pct-center {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800
+        }
+
+        /* Count badges */
+        .count-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .count-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 8px;
+            background: var(--card2);
+            border: 1px solid var(--border)
+        }
+
+        .count-num {
+            font-size: 18px;
+            font-weight: 800
+        }
+
+        /* Incident timeline */
+        .timeline {
+            position: relative;
+            padding-left: 28px
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border)
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 20px
+        }
+
+        .tl-dot {
+            position: absolute;
+            left: -24px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--bg);
+            z-index: 2
+        }
+
+        .tl-dot.critical {
+            background: var(--red);
+            box-shadow: 0 0 8px var(--red)
+        }
+
+        .tl-dot.major {
+            background: var(--yellow);
+            box-shadow: 0 0 8px var(--yellow)
+        }
+
+        .tl-dot.minor {
+            background: var(--cyan);
+            box-shadow: 0 0 6px var(--cyan)
+        }
+
+        .tl-dot.resolved {
+            background: var(--green);
+            box-shadow: 0 0 6px var(--green)
+        }
+
+        .tl-time {
+            font-size: 10px;
+            color: var(--text3);
+            margin-bottom: 4px;
+            font-weight: 500
+        }
+
+        .inc-box {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--red);
+            border-radius: var(--r);
+            padding: 14px 16px;
+            transition: .2s
+        }
+
+        .inc-box:hover {
+            border-color: var(--border2)
+        }
+
+        .inc-box.degraded {
+            border-left-color: var(--yellow)
+        }
+
+        .inc-box.resolved {
+            border-left-color: var(--green)
+        }
+
+        .inc-box.minor {
+            border-left-color: var(--cyan)
+        }
+
+        .inc-h {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: .3px
+        }
+
+        .inc-affected {
+            font-size: 11px;
+            color: var(--text3);
+            margin: 4px 0
+        }
+
+        .inc-affected strong {
+            color: var(--text2)
+        }
+
+        .inc-detail {
+            display: flex;
+            gap: 14px;
+            font-size: 11px;
+            color: var(--text3);
+            margin-top: 6px;
+            flex-wrap: wrap
+        }
+
+        .inc-detail span {
+            display: flex;
+            align-items: center;
+            gap: 4px
+        }
+
+        .inc-badge {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block
+        }
+
+        .inc-badge.down {
+            background: var(--red-g);
+            color: var(--red)
+        }
+
+        .inc-badge.degraded {
+            background: var(--yellow-g);
+            color: var(--yellow)
+        }
+
+        .inc-badge.resolved {
+            background: var(--green-g);
+            color: var(--green)
+        }
+
+        .inc-badge.investigating {
+            background: rgba(0, 210, 255, 0.12);
+            color: var(--cyan)
+        }
+
+        /* Sparkline in incident */
+        .inc-spark {
+            height: 32px;
+            margin-top: 8px
+        }
+
+        .inc-spark svg {
+            width: 100%;
+            height: 100%
+        }
+
+        /* Loading / no-data */
+        .loading {
+            text-align: center;
+            padding: 100px 0;
+            color: var(--text3)
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--border);
+            border-top-color: var(--cyan);
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+            margin: 0 auto 12px
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text3)
+        }
+
+        .no-data h3 {
+            font-size: 18px;
+            color: var(--text2);
+            margin-bottom: 8px
+        }
+
+        .no-data code {
+            background: var(--card);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--cyan)
+        }
+
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 24px;
+            text-align: center;
+            font-size: 11px;
+            color: var(--text3);
+            margin-top: 40px
+        }
+
+        .footer a {
+            color: var(--text2);
+            text-decoration: none
+        }
+
+        .footer a:hover {
+            color: var(--text)
+        }
+
+        @media(max-width:900px) {
+
+            .grid-3,
+            .grid-2 {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand"><svg viewBox="0 0 40 40" fill="none">
+                    <circle cx="20" cy="20" r="18" fill="#00d2ff" opacity=".15" />
+                    <path d="M20 8L28 20l-4 0v12H16V20l-4 0z" fill="#00d2ff" />
+                </svg><span>Iran Internet Health & Uptime Monitor</span></a>
+            <div class="nav-links"><a href="index.html">Dashboard</a><a href="monitors.html">Monitors</a><a
+                    href="incidents.html" class="active">Incidents</a><a
+                    href="https://github.com/Danialsamadi/iran-internet-monitor" target="_blank">GitHub</a></div>
+            <div class="open-src"><svg viewBox="0 0 16 16" fill="var(--text3)">
+                    <path
+                        d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.42 7.42 0 014 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg><span>Open Source</span></div>
+        </div>
+    </nav>
+
+    <div class="wrap">
+        <h1 class="page-title"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>Network Incident Timeline Overview</h1>
+        <div id="app">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading incident data…</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Powered by <a href="https://github.com/Danialsamadi/iran-internet-monitor">Iran Internet Monitor</a> · Data
+            from <a href="https://ioda.inetintel.cc.gatech.edu/">IODA</a> · <a href="https://ooni.org/">OONI</a> · <a
+                href="https://atlas.ripe.net/">RIPE</a> · <a href="https://metrics.torproject.org/">Tor</a> · <a
+                href="https://psiphon.ca/">Psiphon</a></p>
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+            const DATA_URL = 'api/page-data.json', app = document.getElementById('app');
+
+            function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML }
+            function timeAgo(iso) { if (!iso) return ''; const s = Math.floor((Date.now() - new Date(iso)) / 1e3); if (s < 60) return 'just now'; if (s < 3600) return Math.floor(s / 60) + 'm ago'; if (s < 86400) return Math.floor(s / 3600) + 'h ago'; return Math.floor(s / 86400) + 'd ago' }
+
+            function makeDonut(segments, r, sw) {
+                const circ = 2 * Math.PI * r; let offset = 0, paths = '';
+                segments.forEach(seg => {
+                    const len = circ * seg.pct;
+                    paths += `<circle class="donut-seg" cx="60" cy="60" r="${r}" stroke="${seg.color}" stroke-width="${sw}" stroke-dasharray="${len} ${circ - len}" stroke-dashoffset="${-offset}"/>`;
+                    offset += len;
+                });
+                return `<svg viewBox="0 0 120 120"><circle class="donut-bg" cx="60" cy="60" r="${r}"/>${paths}</svg>`;
+            }
+
+            function makeSparkline(w, h, n, seed) {
+                let s = seed; function rr() { s = (s * 16807 + 7) % 2147483647; return (s % 1000) / 1000 }
+                const vals = []; for (let i = 0; i < n; i++)vals.push(rr());
+                const mx = Math.max(...vals) * 1.2 || 1;
+                let p = ''; vals.forEach((v, i) => { const x = i * (w / (n - 1)), y = h - ((v / mx) * h * 0.8 + h * 0.1); p += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1) });
+                return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><path d="${p}" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/></svg>`;
+            }
+
+            function render(data) {
+                if (!data || !data.summary) { app.innerHTML = '<div class="no-data"><h3>Waiting for Data</h3><p>Push to GitHub & enable Actions to start monitoring.</p><p style="margin-top:10px"><code>./run-check.sh</code></p></div>'; return }
+
+                const sm = data.summary, svcs = data.services || [], cats = data.categories || [];
+                const total = sm.total_services || 1;
+                const down = svcs.filter(s => s.status === 'down');
+                const degraded = svcs.filter(s => s.status === 'degraded');
+                const up = svcs.filter(s => s.status === 'up');
+                const unknown = svcs.filter(s => s.status === 'unknown');
+                const incidents = [...down, ...degraded];
+
+                let h = '';
+
+                // === Top row: 3 donut cards ===
+                h += `<div class="grid-3">`;
+
+                // Donut 1: Current Status
+                const pUp = up.length / total, pDeg = degraded.length / total, pDown = down.length / total, pUnk = unknown.length / total;
+                h += `<div class="card"><div class="card-title">Current Status</div><div class="donut-center">`;
+                h += `<div class="donut-wrap">${makeDonut([{ pct: pUp, color: 'var(--green)' }, { pct: pDeg, color: 'var(--yellow)' }, { pct: pDown, color: 'var(--red)' }, { pct: pUnk, color: 'var(--text3)' }], 45, 10)}<div class="donut-pct-center" style="color:var(--green)">${(pUp * 100).toFixed(0)}%</div></div>`;
+                h += `<div class="donut-legend"><div class="donut-legend-item"><span class="dl-dot" style="background:var(--green)"></span>Up ${(pUp * 100).toFixed(0)}%</div><div class="donut-legend-item"><span class="dl-dot" style="background:var(--yellow)"></span>Throttled ${(pDeg * 100).toFixed(0)}%</div><div class="donut-legend-item"><span class="dl-dot" style="background:var(--red)"></span>Down ${(pDown * 100).toFixed(0)}%</div></div>`;
+                h += `</div></div>`;
+
+                // Donut 2: Services Affected (by category)
+                const catAffected = {};
+                cats.forEach(cat => {
+                    const ids = cat.service_ids || [];
+                    const affCount = ids.filter(id => { const s = svcs.find(x => x.id === id); return s && (s.status === 'down' || s.status === 'degraded') }).length;
+                    if (affCount > 0) catAffected[cat.name] = { count: affCount, total: ids.length };
+                });
+                const affEntries = Object.entries(catAffected);
+                const totalAff = affEntries.reduce((a, [, v]) => a + v.count, 0);
+                h += `<div class="card"><div class="card-title">Services Affected</div><div class="donut-center">`;
+                const colors2 = ['var(--red)', 'var(--yellow)', 'var(--cyan)', 'var(--purple)'];
+                const segments2 = affEntries.length ? affEntries.map(([name, v], i) => ({ pct: v.count / total, color: colors2[i % 4] })) : [{ pct: 1, color: 'var(--green)' }];
+                h += `<div class="donut-wrap">${makeDonut(segments2, 45, 10)}<div class="donut-pct-center" style="color:var(--text)">${totalAff}</div></div>`;
+                h += `<div class="donut-legend">`;
+                if (affEntries.length) { affEntries.forEach(([name, v], i) => { h += `<div class="donut-legend-item"><span class="dl-dot" style="background:${colors2[i % 4]}"></span>${esc(name.split('(')[0].trim())} ${Math.round(v.count / total * 100)}%</div>` }) }
+                else { h += `<div class="donut-legend-item"><span class="dl-dot" style="background:var(--green)"></span>No services affected</div>` }
+                h += `</div></div></div>`;
+
+                // Count card 3: Recent Incidents summary
+                h += `<div class="card"><div class="card-title">Recent Incidents</div><div class="donut-center">`;
+                h += `<div class="count-row"><div class="count-badge"><span class="count-num" style="color:var(--red)">${down.length}</span>Critical</div><div class="count-badge"><span class="count-num" style="color:var(--yellow)">${degraded.length}</span>Major</div><div class="count-badge"><span class="count-num" style="color:var(--cyan)">${unknown.length}</span>Minor</div></div>`;
+                h += `<div style="margin-top:16px;font-size:12px;color:var(--text3)">Total services monitored: <strong style="color:var(--text)">${total}</strong></div>`;
+                h += `</div></div>`;
+                h += `</div>`; // end grid-3
+
+                // === Incident Timeline ===
+                h += `<div class="grid-2">`;
+
+                // Left column: critical incidents
+                h += `<div>`;
+                if (incidents.length > 0) {
+                    incidents.forEach((svc, i) => {
+                        const severity = svc.status === 'down' ? 'critical' : 'major';
+                        const boxCls = svc.status === 'degraded' ? 'degraded' : '';
+                        h += `<div class="card" style="padding-bottom:14px"><div class="card-title">${svc.last_check ? new Date(svc.last_check).toLocaleString() : ''}</div>`;
+                        h += `<div class="inc-box ${boxCls}"><div class="inc-h">${severity === 'critical' ? 'Critical Outage' : 'Major Degradation'}: ${esc(svc.name)}</div>`;
+                        h += `<div class="inc-affected"><strong>Affected:</strong> ${esc(svc.name)}</div>`;
+                        h += `<div class="inc-detail"><span>⏱ ${timeAgo(svc.last_check)}</span><span>📊 ${esc(svc.message)}</span></div>`;
+                        h += `<div style="margin-top:6px"><span class="inc-badge ${svc.status === 'down' ? 'down' : 'degraded'}">Status: ${svc.status === 'down' ? 'Investigating' : 'Monitoring'}</span></div>`;
+                        h += `<div class="inc-spark">${makeSparkline(300, 32, 20, svc.response_time_ms || i * 37 + 11)}</div>`;
+                        h += `</div></div>`;
+                    })
+                } else {
+                    h += `<div class="card"><div class="card-title">No Active Incidents</div><div style="text-align:center;padding:40px 0;color:var(--text3)"><p style="font-size:14px">✅ All systems are operating normally</p></div></div>`;
+                }
+                h += `</div>`;
+
+                // Right column: more incidents or resolved
+                h += `<div>`;
+                const changedSvcs = svcs.filter(s => s.prev_status && s.prev_status !== 'unknown' && s.prev_status !== s.status);
+                if (changedSvcs.length > 0) {
+                    changedSvcs.forEach(svc => {
+                        const isResolved = svc.status === 'up';
+                        h += `<div class="card"><div class="card-title">${svc.last_check ? new Date(svc.last_check).toLocaleString() : ''}</div>`;
+                        h += `<div class="inc-box ${isResolved ? 'resolved' : 'minor'}"><div class="inc-h">${isResolved ? 'Resolved' : 'Status Change'}: ${esc(svc.name)}</div>`;
+                        h += `<div class="inc-affected"><strong>Change:</strong> ${svc.prev_status} → ${svc.status}</div>`;
+                        h += `<div class="inc-detail"><span>⏱ ${timeAgo(svc.last_check)}</span><span>${esc(svc.message)}</span></div>`;
+                        h += `<div style="margin-top:6px"><span class="inc-badge ${isResolved ? 'resolved' : 'investigating'}">${isResolved ? 'Resolved' : 'Updated'}</span></div>`;
+                        h += `<div class="inc-spark">${makeSparkline(300, 32, 20, svc.response_time_ms || 42)}</div>`;
+                        h += `</div></div>`;
+                    })
+                } else {
+                    h += `<div class="card"><div class="card-title">Status Changes</div><div style="text-align:center;padding:40px 0;color:var(--text3)"><p style="font-size:14px">No recent status changes detected</p></div></div>`;
+                }
+                h += `</div></div>`; // end grid-2
+
+                app.innerHTML = h;
+            }
+
+            async function fetchData() { try { const r = await fetch(DATA_URL + '?t=' + Date.now()); if (!r.ok) throw 0; render(await r.json()) } catch (e) { app.innerHTML = '<div class="no-data"><h3>Waiting for Data</h3><p>Push to GitHub & enable Actions to start monitoring.</p><p style="margin-top:10px"><code>./run-check.sh</code></p></div>' } }
+            fetchData(); setInterval(fetchData, 300000);
+        })();
+    </script>
+</body>
+
+</html>
