@@ -1378,14 +1378,17 @@
                 }
                 h += `</div></div>`;
 
-                // === Sparklines (filterable) ===
-                h += `<div class="card"><div class="card-title">Response time by service (filtered)</div><div class="multi-spark-wrap" id="spark-wrap">`;
-                sparkList.forEach((s, i) => {
-                    const vals = genFakeHistory(s.response_time_ms || 100, 20);
-                    const color = s.status === 'up' ? COLORS.up : s.status === 'down' ? COLORS.down : COLORS.degraded;
-                    h += `<div class="multi-spark-row" data-id="${s.id}"><div class="spark-name"><span class="svc-dot ${s.status || 'unknown'}"></span>${esc(s.name)}</div><div class="spark-chart">${makeSparkline(200, 36, vals, color)}</div><div class="spark-val">${s.response_time_ms || '—'}ms</div></div>`;
+                // === Response time by service — ApexCharts area with threshold (negative style) ===
+                const RESPONSE_THRESHOLD_MS = 500;
+                const byServiceAreaSeries = responseSeries.map(function(s) {
+                    const data = s.values.map(function(y, i) {
+                        const t = now - (23 - i) * 3600000;
+                        return { x: t, y: Math.round(y) };
+                    });
+                    return { name: s.name, data: data };
                 });
-                h += `</div></div>`;
+                h += `<div class="card"><div class="card-title">Response time by service (filtered) — green below ${RESPONSE_THRESHOLD_MS}ms, red above</div>`;
+                h += `<div id="chart-response-by-service" class="apex-chart-wrap"></div></div>`;
 
                 // === BOT ROW: Status (ApexCharts multiple radialbars) + Bar chart + Categories ===
                 h += `<div class="grid grid-bot">`;
@@ -1496,6 +1499,37 @@
                         var respChart = new ApexCharts(respEl, respOpts);
                         respChart.render();
                         chartList.push(respChart);
+                    }
+
+                    // Response time by service (filtered) — area with negative/threshold style (https://apexcharts.com/javascript-chart-demos/area-charts/negative/)
+                    var byServiceEl = document.getElementById('chart-response-by-service');
+                    if (byServiceEl && byServiceAreaSeries.length) {
+                        var byServiceOpts = {
+                            series: byServiceAreaSeries,
+                            chart: { type: 'area', height: 220, stacked: false, toolbar: { show: false }, zoom: { enabled: false }, background: 'transparent' },
+                            colors: responseSeries.map(function(s) { return s.color; }),
+                            stroke: { width: 1, curve: 'smooth' },
+                            dataLabels: { enabled: false },
+                            fill: { type: 'solid', opacity: 0.2 },
+                            plotOptions: {
+                                line: {
+                                    colors: {
+                                        threshold: RESPONSE_THRESHOLD_MS,
+                                        colorAboveThreshold: '#e74c3c',
+                                        colorBelowThreshold: '#2ecc71'
+                                    }
+                                }
+                            },
+                            xaxis: { type: 'datetime', labels: { style: { colors: '#5c6a82' } } },
+                            yaxis: { labels: { style: { colors: '#5c6a82' } } },
+                            grid: { borderColor: 'var(--border)', strokeDashArray: 2 },
+                            legend: { position: 'top', horizontalAlign: 'right', labels: { colors: '#9aa5b8' } },
+                            tooltip: { shared: true, theme: 'dark' },
+                            theme: { mode: 'dark' }
+                        };
+                        var byServiceChart = new ApexCharts(byServiceEl, byServiceOpts);
+                        byServiceChart.render();
+                        chartList.push(byServiceChart);
                     }
 
                     window.iranMonitorCharts = chartList;
