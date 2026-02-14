@@ -14,14 +14,14 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 <!--START_STATUS_TABLE-->
 | Service | Status | Response | Uptime |
 |---------|--------|----------|--------|
-| 🟩 **IODA Outage Alerts** | up | 587ms | 100% |
-| 🟩 **IODA BGP Visibility** | up | 816ms | 90% |
-| 🟩 **IODA Google Traffic** | up | 748ms | 90% |
+| 🟩 **IODA Outage Alerts** | up | 557ms | 100% |
+| 🟩 **IODA BGP Visibility** | up | 736ms | 90.9090909090909% |
+| 🟩 **IODA Google Traffic** | up | 719ms | 90.9090909090909% |
 | ⬜ **IODA Latency** | unknown | 1026ms | 14.285714285714285% |
 | ⬜ **IODA Packet Loss** | unknown | 905ms | 14.285714285714285% |
-| 🟩 **IODA MERIT Telescope** | up | 797ms | 90% |
-| 🟩 **IODA Active Probing** | up | 773ms | 90% |
-| 🟥 **irinter.net Score** | down | 637ms | 0% |
+| 🟩 **IODA MERIT Telescope** | up | 722ms | 90.9090909090909% |
+| 🟩 **IODA Active Probing** | up | 741ms | 90.9090909090909% |
+| 🟥 **irinter.net Score** | down | 593ms | 0% |
 | 🟩 **ArvanCloud (AS205585)** | up | 503ms | 85.71428571428571% |
 | 🟩 **Asiatech (AS43754)** | up | 584ms | 85.71428571428571% |
 | 🟩 **Irancell (AS44244)** | up | 409ms | 85.71428571428571% |
@@ -53,7 +53,7 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 | 🟩 **Tor Relay Users (Iran)** | up | 420ms | 100% |
 <!--END_STATUS_TABLE-->
 
-> Last checked: 2026-02-14T19:17:10Z
+> Last checked: 2026-02-14T19:24:10Z
 > 24 up · 1 degraded · 7 down · 5 unknown
 
 ## ⭐ How it works
