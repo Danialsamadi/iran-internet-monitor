@@ -1,15 +1,15 @@
-{"generated":"2026-02-14T18:09:10Z","services":[
+{"generated":"2026-02-14T18:15:10Z","services":[
 {
   "id": "ioda-alerts",
   "name": "IODA Outage Alerts",
   "status": "up",
   "message": "No active outage alerts",
   "value": 0,
-  "response_time_ms": 542,
+  "response_time_ms": 224,
   "http_code": 200,
   "uptime_pct": 100,
-  "last_check": "2026-02-14T18:09:08Z",
-  "last_check_epoch": 1771092548,
+  "last_check": "2026-02-14T18:15:09Z",
+  "last_check_epoch": 1771092909,
   "prev_status": "up"
 },
 {
@@ -17,12 +17,12 @@
   "name": "IODA BGP Visibility",
   "status": "up",
   "message": "Healthy — signal at 100% of normal",
-  "value": 99.98672584337424,
-  "response_time_ms": 802,
+  "value": 99.98660751273096,
+  "response_time_ms": 440,
   "http_code": 200,
-  "uptime_pct": 80,
-  "last_check": "2026-02-14T18:09:08Z",
-  "last_check_epoch": 1771092548,
+  "uptime_pct": 83.33333333333334,
+  "last_check": "2026-02-14T18:15:09Z",
+  "last_check_epoch": 1771092909,
   "prev_status": "up"
 },
 {
@@ -31,11 +31,11 @@
   "status": "up",
   "message": "Healthy — signal at 98% of normal",
   "value": 98.08860751488669,
-  "response_time_ms": 734,
+  "response_time_ms": 446,
   "http_code": 200,
-  "uptime_pct": 80,
-  "last_check": "2026-02-14T18:09:08Z",
-  "last_check_epoch": 1771092548,
+  "uptime_pct": 83.33333333333334,
+  "last_check": "2026-02-14T18:15:09Z",
+  "last_check_epoch": 1771092909,
   "prev_status": "up"
 },
 {
@@ -70,11 +70,11 @@
   "status": "up",
   "message": "Healthy — signal at 91% of normal",
   "value": 91.0731883002935,
-  "response_time_ms": 688,
+  "response_time_ms": 422,
   "http_code": 200,
-  "uptime_pct": 80,
-  "last_check": "2026-02-14T18:09:08Z",
-  "last_check_epoch": 1771092548,
+  "uptime_pct": 83.33333333333334,
+  "last_check": "2026-02-14T18:15:09Z",
+  "last_check_epoch": 1771092909,
   "prev_status": "up"
 },
 {
@@ -82,12 +82,12 @@
   "name": "IODA Active Probing",
   "status": "up",
   "message": "Healthy — signal at 99% of normal",
-  "value": 99.04861800364678,
-  "response_time_ms": 698,
+  "value": 99.05376591801432,
+  "response_time_ms": 419,
   "http_code": 200,
-  "uptime_pct": 80,
-  "last_check": "2026-02-14T18:09:08Z",
-  "last_check_epoch": 1771092548,
+  "uptime_pct": 83.33333333333334,
+  "last_check": "2026-02-14T18:15:09Z",
+  "last_check_epoch": 1771092909,
   "prev_status": "up"
 },
 {
@@ -96,11 +96,11 @@
   "status": "down",
   "message": "Poor — network score 0/100",
   "value": 0,
-  "response_time_ms": 572,
+  "response_time_ms": 454,
   "http_code": 200,
   "uptime_pct": 0,
-  "last_check": "2026-02-14T18:09:08Z",
-  "last_check_epoch": 1771092548,
+  "last_check": "2026-02-14T18:15:09Z",
+  "last_check_epoch": 1771092909,
   "prev_status": "down"
 },
 {
@@ -489,11 +489,11 @@
 ],
 "summary":
 {
-  "checked_this_run": 30,
+  "checked_this_run": 6,
   "degraded": 1,
   "down": 6,
-  "last_check": "2026-02-14T18:09:08Z",
-  "last_check_epoch": 1771092548,
+  "last_check": "2026-02-14T18:15:09Z",
+  "last_check_epoch": 1771092909,
   "overall_status": "major_outage",
   "total_services": 37,
   "unknown": 4,
