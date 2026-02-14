@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0e17">
     <title>Monitors — Iran Internet Monitor</title>
     <meta name="description"
         content="Detailed health monitoring for each service — response times, outage patterns, and incident history.">
@@ -35,12 +36,15 @@
             --red: #e74c3c;
             --red2: #c0392b;
             --red-g: rgba(231, 76, 60, 0.15);
-            --cyan: #00d2ff;
+            --accent: #25aff4;
+            --accent-g: rgba(37, 175, 244, 0.15);
+            --cyan: #25aff4;
             --purple: #7c3aed;
             --blue: #3b82f6;
-            --font: 'Inter', system-ui, sans-serif;
-            --r: 10px;
-            --r2: 14px;
+            --font: 'Inter', system-ui, -apple-system, sans-serif;
+            --r: 8px;
+            --r2: 8px;
+            --touch: 44px;
         }
 
         body {
@@ -59,7 +63,7 @@
             left: -20%;
             width: 140%;
             height: 100%;
-            background: radial-gradient(ellipse at 30% 20%, rgba(0, 210, 255, 0.06), transparent 60%), radial-gradient(ellipse at 70% 60%, rgba(124, 58, 237, 0.05), transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(231, 76, 60, 0.04), transparent 50%);
+            background: radial-gradient(ellipse at 30% 20%, rgba(37, 175, 244, 0.07), transparent 60%), radial-gradient(ellipse at 70% 60%, rgba(124, 58, 237, 0.05), transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(231, 76, 60, 0.04), transparent 50%);
             pointer-events: none;
             z-index: 0
         }
@@ -124,7 +128,8 @@
         }
 
         .nav-links a.active {
-            border-bottom: 2px solid var(--cyan)
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent)
         }
 
         .wrap {
@@ -187,9 +192,9 @@
         }
 
         .svc-btn.active {
-            background: rgba(0, 210, 255, 0.12);
-            border-color: var(--cyan);
-            color: var(--cyan)
+            background: var(--accent-g);
+            border-color: var(--accent);
+            color: var(--accent)
         }
 
         .svc-btn .dot {
@@ -216,7 +221,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.15), transparent)
+            background: linear-gradient(90deg, transparent, rgba(37, 175, 244, 0.2), transparent)
         }
 
         .card-title {
@@ -268,13 +273,27 @@
         /* Chart */
         .chart-box {
             width: 100%;
-            height: 180px;
-            position: relative
+            height: 200px;
+            position: relative;
+            cursor: crosshair
         }
 
         .chart-box svg {
             width: 100%;
-            height: 100%
+            height: 100%;
+            display: block
+        }
+
+        .chart-grid-line {
+            stroke: var(--border);
+            stroke-dasharray: 2 4;
+            opacity: .6
+        }
+
+        .chart-axis-text {
+            fill: var(--text3);
+            font-size: 10px;
+            font-variant-numeric: tabular-nums
         }
 
         .area-fill {
@@ -286,6 +305,50 @@
             stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round
+        }
+
+        .monitor-chart-tooltip {
+            position: fixed;
+            background: var(--bg3);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            padding: 8px 12px;
+            font-size: 11px;
+            color: var(--text);
+            pointer-events: none;
+            z-index: 200;
+            box-shadow: 0 4px 20px rgba(0,0,0,.4);
+            opacity: 0;
+            transition: opacity .15s
+        }
+
+        .monitor-chart-tooltip.visible {
+            opacity: 1
+        }
+
+        .time-range-chips {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap
+        }
+
+        .time-range-chips .chip {
+            font-size: 11px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text2);
+            cursor: pointer;
+            transition: .2s
+        }
+
+        .time-range-chips .chip:hover,
+        .time-range-chips .chip.active {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-g)
         }
 
         /* Stats row */
@@ -324,7 +387,7 @@
         }
 
         .stat-val.cyan {
-            color: var(--cyan)
+            color: var(--accent)
         }
 
         .stat-label {
@@ -472,7 +535,7 @@
             width: 32px;
             height: 32px;
             border: 3px solid var(--border);
-            border-top-color: var(--cyan);
+            border-top-color: var(--accent);
             border-radius: 50%;
             animation: spin .7s linear infinite;
             margin: 0 auto 12px
@@ -499,9 +562,9 @@
         .no-data code {
             background: var(--card);
             padding: 4px 10px;
-            border-radius: 6px;
+            border-radius: var(--r);
             font-size: 12px;
-            color: var(--cyan)
+            color: var(--accent)
         }
 
         .footer {
@@ -522,44 +585,101 @@
             color: var(--text)
         }
 
-        @media(max-width:900px) {
-
-            .grid-2,
-            .grid-detail {
-                grid-template-columns: 1fr
-            }
+        .nav-toggle {
+            display: none;
+            width: var(--touch);
+            height: var(--touch);
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            border-radius: var(--r);
+            -webkit-tap-highlight-color: transparent
         }
 
-        @media(max-width:600px) {
-            .wrap {
-                padding: 12px 14px 40px
-            }
+        .nav-toggle:focus-visible { outline: 2px solid var(--accent) }
+        .nav-toggle span { display: block; width: 20px; height: 2px; background: currentColor; border-radius: 1px; margin: 6px 0; transition: .2s }
+        .nav-toggle span::before, .nav-toggle span::after { content: ''; display: block; width: 20px; height: 2px; background: currentColor; border-radius: 1px; transition: .2s }
+        .nav.open .nav-toggle span { background: transparent }
+        .nav.open .nav-toggle span::before { transform: translateY(8px) rotate(45deg) }
+        .nav.open .nav-toggle span::after { transform: translateY(-8px) rotate(-45deg) }
 
-            .stats-row {
-                flex-direction: column
+        @media (max-width: 900px) {
+            .grid-2, .grid-detail { grid-template-columns: 1fr }
+        }
+
+        @media (max-width: 768px) {
+            .nav-inner { padding: 0 16px; min-height: var(--touch) }
+            .nav-toggle { display: flex }
+            .nav-links {
+                position: fixed;
+                top: 52px;
+                left: 0;
+                right: 0;
+                background: var(--bg2);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 12px;
+                gap: 4px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: transform .2s, opacity .2s, visibility .2s;
+                z-index: 99;
+                box-shadow: 0 8px 24px rgba(0,0,0,.3)
             }
+            .nav.open .nav-links { transform: translateY(0); opacity: 1; visibility: visible }
+            .nav-links a { padding: 12px 16px; min-height: var(--touch); display: flex; align-items: center; border-radius: var(--r) }
+        }
+
+        @media (max-width: 600px) {
+            .wrap {
+                padding: 16px 16px 48px;
+                padding-left: max(16px, env(safe-area-inset-left));
+                padding-right: max(16px, env(safe-area-inset-right));
+                padding-bottom: max(48px, env(safe-area-inset-bottom))
+            }
+            .page-title { font-size: 18px }
+            .stats-row { flex-direction: column }
+            .stat-card { min-width: 100% }
+            .svc-selector { gap: 8px }
+            .svc-btn { min-height: var(--touch); padding: 10px 16px }
+            .chart-box { height: 140px }
         }
     </style>
 </head>
 
 <body>
-    <nav class="nav">
+    <nav class="nav" id="nav">
         <div class="nav-inner">
-            <a href="index.html" class="nav-brand"><svg viewBox="0 0 40 40" fill="none">
-                    <circle cx="20" cy="20" r="18" fill="#00d2ff" opacity=".15" />
-                    <path d="M20 8L28 20l-4 0v12H16V20l-4 0z" fill="#00d2ff" />
-                </svg><span>Iran Internet Health & Uptime Monitor</span></a>
-            <div class="nav-links"><a href="index.html">Dashboard</a><a href="monitors.html"
-                    class="active">Monitors</a><a href="incidents.html">Incidents</a><a
-                    href="https://github.com/Danialsamadi/iran-internet-monitor" target="_blank">GitHub</a></div>
+            <a href="index.html" class="nav-brand" aria-label="Home"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                    <circle cx="20" cy="20" r="18" fill="var(--accent)" opacity=".15" />
+                    <path d="M20 8L28 20l-4 0v12H16V20l-4 0z" fill="var(--accent)" />
+                </svg><span>Iran Internet Status</span></a>
+            <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+            <div class="nav-links">
+                <a href="index.html">Dashboard</a>
+                <a href="monitors.html" class="active">Monitors</a>
+                <a href="incidents.html">Incidents</a>
+                <a href="https://github.com/Danialsamadi/iran-internet-monitor" target="_blank" rel="noopener">GitHub</a>
+            </div>
         </div>
     </nav>
+    <script>document.getElementById('nav').addEventListener('click', function(e) {
+        if (e.target.closest('.nav-toggle')) {
+            this.classList.toggle('open');
+            this.querySelector('.nav-toggle').setAttribute('aria-expanded', this.classList.contains('open'));
+        }
+    });</script>
 
     <div class="wrap">
+        <div id="monitor-tooltip" class="monitor-chart-tooltip" aria-hidden="true"></div>
         <div class="page-hdr">
             <div>
                 <h1 class="page-title">Service Specific Health Details</h1>
-                <p class="page-sub">Select a service to view 24h response time, outage patterns, and incident history
+                <p class="page-sub">Select a service to view response time, outage patterns, and incident history. Use the time range to filter the chart.
                 </p>
             </div>
         </div>
@@ -583,6 +703,7 @@
             'use strict';
             const DATA_URL = 'api/page-data.json', app = document.getElementById('app'), pills = document.getElementById('svc-pills');
             let allData = null, selectedId = null;
+            let chartTimeRange = 24;
 
             function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML }
             function timeAgo(iso) { if (!iso) return ''; const s = Math.floor((Date.now() - new Date(iso)) / 1e3); if (s < 60) return 'just now'; if (s < 3600) return Math.floor(s / 60) + 'm ago'; if (s < 86400) return Math.floor(s / 3600) + 'h ago'; return Math.floor(s / 86400) + 'd ago' }
@@ -594,6 +715,39 @@
                 const mx = Math.max(...vals) * 1.25 || 1, n = vals.length, xS = w / Math.max(n - 1, 1);
                 let p = ''; vals.forEach((v, i) => { const x = i * xS, y = h - ((v / mx) * h * 0.85 + h * 0.05); p += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1) });
                 return close ? p + ` L${w},${h} L0,${h} Z` : p;
+            }
+
+            function makeChartWithGrid(w, h, vals24, valsDeg, pad) {
+                pad = pad || { left: 40, right: 16, top: 12, bottom: 28 };
+                const innerW = w - pad.left - pad.right, innerH = h - pad.top - pad.bottom;
+                const mx = Math.max(...vals24) * 1.2 || 1;
+                let grid = '';
+                for (let g = 1; g < 4; g++) {
+                    const gy = pad.top + (innerH / 4) * g;
+                    grid += '<line x1="' + pad.left + '" y1="' + gy + '" x2="' + (pad.left + innerW) + '" y2="' + gy + '" class="chart-grid-line"/>';
+                }
+                for (let g = 1; g < 5; g++) {
+                    const gx = pad.left + (innerW / 5) * g;
+                    grid += '<line x1="' + gx + '" y1="' + pad.top + '" x2="' + gx + '" y2="' + (pad.top + innerH) + '" class="chart-grid-line"/>';
+                }
+                const scaleH = innerH / mx;
+                let pDeg = '', p24 = '';
+                vals24.forEach((v, i) => {
+                    const x = pad.left + (i / Math.max(vals24.length - 1, 1)) * innerW;
+                    const y = pad.top + innerH - v * scaleH * 0.9;
+                    p24 += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1);
+                });
+                valsDeg.forEach((v, i) => {
+                    const x = pad.left + (i / Math.max(valsDeg.length - 1, 1)) * innerW;
+                    const y = pad.top + innerH - Math.min(v, mx) * scaleH * 0.9;
+                    pDeg += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1);
+                });
+                /* Line chart for trend — minimal fill to avoid obscuring data */
+                const areaDeg = pDeg + ' L' + (pad.left + innerW) + ',' + (pad.top + innerH) + ' L' + pad.left + ',' + (pad.top + innerH) + ' Z';
+                const area24 = p24 + ' L' + (pad.left + innerW) + ',' + (pad.top + innerH) + ' L' + pad.left + ',' + (pad.top + innerH) + ' Z';
+                const axes = '<text x="' + (pad.left - 4) + '" y="' + (pad.top + 10) + '" class="chart-axis-text" text-anchor="end">' + Math.round(mx) + 'ms</text><text x="' + (pad.left - 4) + '" y="' + (pad.top + innerH + 4) + '" class="chart-axis-text" text-anchor="end">0</text>';
+                const labels = '<text x="' + pad.left + '" y="' + (h - 6) + '" class="chart-axis-text">' + (chartTimeRange === 12 ? '12h ago' : chartTimeRange === 48 ? '48h ago' : '24h ago') + '</text><text x="' + (pad.left + innerW) + '" y="' + (h - 6) + '" class="chart-axis-text" text-anchor="end">Now</text>';
+                return '<svg viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none"><g>' + grid + '</g><path class="area-fill" d="' + areaDeg + '" fill="var(--purple)" opacity=".08"/><path class="area-line" d="' + pDeg + '" stroke="var(--purple)"/><path class="area-fill" d="' + area24 + '" fill="var(--accent)" opacity=".08"/><path class="area-line" d="' + p24 + '" stroke="var(--accent)"/><g>' + axes + labels + '</g></svg>';
             }
 
             function renderPills(svcs) {
@@ -633,36 +787,25 @@
                 // Grid: chart + heatmap/incidents
                 h += `<div class="grid-detail">`;
 
-                // Left: 24h response time chart
-                h += `<div class="card"><div class="card-title">24-Hour Response Time History (ms)<div class="legend"><span><span class="ldot" style="background:var(--cyan)"></span> Response</span><span><span class="ldot" style="background:var(--purple)"></span> Degraded</span></div></div>`;
-                h += `<div class="chart-box"><svg viewBox="0 0 700 160" preserveAspectRatio="none">`;
-                // Degraded area
-                h += `<path class="area-fill" d="${makePath(700, 160, valsDeg, true)}" fill="var(--purple)"/>`;
-                h += `<path class="area-line" d="${makePath(700, 160, valsDeg, false)}" stroke="var(--purple)"/>`;
-                // Response area
-                h += `<path class="area-fill" d="${makePath(700, 160, vals24, true)}" fill="var(--cyan)"/>`;
-                h += `<path class="area-line" d="${makePath(700, 160, vals24, false)}" stroke="var(--cyan)"/>`;
-                // Grid lines
-                for (let i = 1; i < 4; i++) { const y = i * 40; h += `<line x1="0" y1="${y}" x2="700" y2="${y}" stroke="var(--border)" stroke-dasharray="4"/>` }
-                // Value labels
-                const maxRT = Math.max(...vals24);
-                h += `<text x="4" y="16" fill="var(--text3)" font-size="9">${Math.round(maxRT)}ms</text>`;
-                h += `<text x="4" y="${156}" fill="var(--text3)" font-size="9">0ms</text>`;
-                // Peak marker
-                const peakIdx = vals24.indexOf(maxRT);
-                const peakX = peakIdx * (700 / 47), peakY = 160 - ((maxRT / (maxRT * 1.25)) * 160 * 0.85 + 160 * 0.05);
-                h += `<circle cx="${peakX}" cy="${peakY}" r="4" fill="var(--red)" stroke="var(--bg)" stroke-width="2"/>`;
-                h += `<text x="${peakX + 8}" y="${peakY - 6}" fill="var(--red)" font-size="9" font-weight="600">${Math.round(maxRT)}ms</text>`;
-                h += `</svg></div>`;
-                // Time axis
-                h += `<div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text3);padding-top:6px"><span>24h ago</span><span>18h</span><span>12h</span><span>6h</span><span>Now</span></div>`;
+                // Left: Response time chart with time range filter
+                const nPoints = chartTimeRange === 12 ? 24 : chartTimeRange === 48 ? 96 : 48;
+                const vals24b = genHistory(rt, nPoints);
+                const valsDegb = genHistory(rt * 0.3, nPoints);
+                h += `<div class="card"><div class="card-title">Response Time History (ms)<div class="legend"><span><span class="ldot" style="background:var(--accent)"></span> Response</span><span><span class="ldot" style="background:var(--purple)"></span> Degraded</span></div></div>`;
+                h += `<div class="time-range-chips">`;
+                [12, 24, 48].forEach(hrs => {
+                    h += `<button type="button" class="chip ${chartTimeRange === hrs ? 'active' : ''}" data-hours="${hrs}">${hrs}h</button>`;
+                });
                 h += `</div>`;
+                h += `<div class="chart-box" data-values="[${vals24b.join(',')}]" data-unit="ms">`;
+                h += makeChartWithGrid(700, 200, vals24b, valsDegb);
+                h += `</div></div>`;
 
                 // Right column
                 h += `<div>`;
 
                 // Heatmap
-                h += `<div class="card"><div class="card-title">Daily Outage Patterns (Last 30 Days)<div class="legend"><span><span class="ldot" style="background:var(--green)"></span> Normal</span><span><span class="ldot" style="background:var(--red)"></span> Major Outage</span></div></div>`;
+                h += `<div class="card"><div class="card-title">Outage calendar (30d)</div>`;
                 h += `<div class="heatmap-grid">`;
                 ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(d => h += `<div class="heat-label">${d}</div>`);
                 let seed2 = svc.response_time_ms || 42;
@@ -701,6 +844,33 @@
                 h += `</div></div>`;
 
                 app.innerHTML = h;
+
+                // Time range chip handlers
+                app.querySelectorAll('.time-range-chips .chip').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        chartTimeRange = parseInt(this.dataset.hours, 10);
+                        renderDetail();
+                    });
+                });
+
+                // Chart tooltip
+                const chartBox = app.querySelector('.chart-box');
+                const tipEl = document.getElementById('monitor-tooltip');
+                if (chartBox && tipEl && chartBox.dataset.values) {
+                    const vals = (function() { try { return JSON.parse(chartBox.dataset.values || '[]'); } catch(e) { return []; } })();
+                    chartBox.addEventListener('mousemove', function(e) {
+                        const rect = this.getBoundingClientRect();
+                        const x = (e.clientX - rect.left) / rect.width;
+                        const i = Math.min(Math.floor(x * vals.length), vals.length - 1);
+                        if (i >= 0 && vals[i] != null) {
+                            tipEl.innerHTML = '<strong>' + Math.round(vals[i]) + 'ms</strong>';
+                            tipEl.classList.add('visible');
+                            tipEl.style.left = (e.clientX + 12) + 'px';
+                            tipEl.style.top = (e.clientY + 8) + 'px';
+                        }
+                    });
+                    chartBox.addEventListener('mouseleave', function() { tipEl.classList.remove('visible'); });
+                }
             }
 
             async function fetchData() {
