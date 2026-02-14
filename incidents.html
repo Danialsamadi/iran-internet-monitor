@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0e17">
     <title>Incidents — Iran Internet Monitor</title>
     <meta name="description"
         content="Network incident timeline — current status, affected services, and historical incidents.">
@@ -35,12 +36,15 @@
             --red: #e74c3c;
             --red2: #c0392b;
             --red-g: rgba(231, 76, 60, 0.15);
-            --cyan: #00d2ff;
+            --accent: #25aff4;
+            --accent-g: rgba(37, 175, 244, 0.15);
+            --cyan: #25aff4;
             --purple: #7c3aed;
             --blue: #3b82f6;
-            --font: 'Inter', system-ui, sans-serif;
-            --r: 10px;
-            --r2: 14px;
+            --font: 'Inter', system-ui, -apple-system, sans-serif;
+            --r: 8px;
+            --r2: 8px;
+            --touch: 44px;
         }
 
         body {
@@ -59,7 +63,7 @@
             left: -20%;
             width: 140%;
             height: 100%;
-            background: radial-gradient(ellipse at 30% 20%, rgba(0, 210, 255, 0.06), transparent 60%), radial-gradient(ellipse at 70% 60%, rgba(124, 58, 237, 0.05), transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(231, 76, 60, 0.04), transparent 50%);
+            background: radial-gradient(ellipse at 30% 20%, rgba(37, 175, 244, 0.07), transparent 60%), radial-gradient(ellipse at 70% 60%, rgba(124, 58, 237, 0.05), transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(231, 76, 60, 0.04), transparent 50%);
             pointer-events: none;
             z-index: 0
         }
@@ -124,7 +128,8 @@
         }
 
         .nav-links a.active {
-            border-bottom: 2px solid var(--cyan)
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent)
         }
 
         .open-src {
@@ -195,7 +200,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.15), transparent)
+            background: linear-gradient(90deg, transparent, rgba(37, 175, 244, 0.2), transparent)
         }
 
         .card-title {
@@ -340,8 +345,8 @@
         }
 
         .tl-dot.minor {
-            background: var(--cyan);
-            box-shadow: 0 0 6px var(--cyan)
+            background: var(--accent);
+            box-shadow: 0 0 6px var(--accent)
         }
 
         .tl-dot.resolved {
@@ -438,8 +443,8 @@
         }
 
         .inc-badge.investigating {
-            background: rgba(0, 210, 255, 0.12);
-            color: var(--cyan)
+            background: var(--accent-g);
+            color: var(--accent)
         }
 
         /* Sparkline in incident */
@@ -464,7 +469,7 @@
             width: 32px;
             height: 32px;
             border: 3px solid var(--border);
-            border-top-color: var(--cyan);
+            border-top-color: var(--accent);
             border-radius: 50%;
             animation: spin .7s linear infinite;
             margin: 0 auto 12px
@@ -491,9 +496,9 @@
         .no-data code {
             background: var(--card);
             padding: 4px 10px;
-            border-radius: 6px;
+            border-radius: var(--r);
             font-size: 12px;
-            color: var(--cyan)
+            color: var(--accent)
         }
 
         .footer {
@@ -514,32 +519,98 @@
             color: var(--text)
         }
 
-        @media(max-width:900px) {
+        .nav-toggle {
+            display: none;
+            width: var(--touch);
+            height: var(--touch);
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            border-radius: var(--r);
+            -webkit-tap-highlight-color: transparent
+        }
 
-            .grid-3,
-            .grid-2 {
-                grid-template-columns: 1fr
+        .nav-toggle:focus-visible { outline: 2px solid var(--accent) }
+        .nav-toggle span { display: block; width: 20px; height: 2px; background: currentColor; border-radius: 1px; margin: 6px 0; transition: .2s }
+        .nav-toggle span::before, .nav-toggle span::after { content: ''; display: block; width: 20px; height: 2px; background: currentColor; border-radius: 1px; transition: .2s }
+        .nav.open .nav-toggle span { background: transparent }
+        .nav.open .nav-toggle span::before { transform: translateY(8px) rotate(45deg) }
+        .nav.open .nav-toggle span::after { transform: translateY(-8px) rotate(-45deg) }
+
+        @media (max-width: 900px) {
+            .grid-3, .grid-2 { grid-template-columns: 1fr }
+        }
+
+        @media (max-width: 768px) {
+            .nav-inner { padding: 0 16px; min-height: var(--touch) }
+            .nav-toggle { display: flex }
+            .nav-links {
+                position: fixed;
+                top: 52px;
+                left: 0;
+                right: 0;
+                background: var(--bg2);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 12px;
+                gap: 4px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: transform .2s, opacity .2s, visibility .2s;
+                z-index: 99;
+                box-shadow: 0 8px 24px rgba(0,0,0,.3)
             }
+            .nav.open .nav-links { transform: translateY(0); opacity: 1; visibility: visible }
+            .nav-links a { padding: 12px 16px; min-height: var(--touch); display: flex; align-items: center; border-radius: var(--r) }
+            .open-src { display: none }
+            .timeline { padding-left: 20px }
+            .timeline::before { left: 5px }
+            .tl-dot { left: -18px; width: 10px; height: 10px }
+        }
+
+        @media (max-width: 600px) {
+            .wrap {
+                padding: 16px 16px 48px;
+                padding-left: max(16px, env(safe-area-inset-left));
+                padding-right: max(16px, env(safe-area-inset-right));
+                padding-bottom: max(48px, env(safe-area-inset-bottom))
+            }
+            .page-title { font-size: 18px; flex-wrap: wrap }
+            .page-title svg { flex-shrink: 0 }
+            .count-row { flex-direction: column }
+            .count-badge { min-width: 100%; justify-content: center }
+            .inc-box, .inc-h { font-size: 13px }
         }
     </style>
 </head>
 
 <body>
-    <nav class="nav">
+    <nav class="nav" id="nav">
         <div class="nav-inner">
-            <a href="index.html" class="nav-brand"><svg viewBox="0 0 40 40" fill="none">
-                    <circle cx="20" cy="20" r="18" fill="#00d2ff" opacity=".15" />
-                    <path d="M20 8L28 20l-4 0v12H16V20l-4 0z" fill="#00d2ff" />
-                </svg><span>Iran Internet Health & Uptime Monitor</span></a>
-            <div class="nav-links"><a href="index.html">Dashboard</a><a href="monitors.html">Monitors</a><a
-                    href="incidents.html" class="active">Incidents</a><a
-                    href="https://github.com/Danialsamadi/iran-internet-monitor" target="_blank">GitHub</a></div>
-            <div class="open-src"><svg viewBox="0 0 16 16" fill="var(--text3)">
-                    <path
-                        d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.42 7.42 0 014 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z" />
-                </svg><span>Open Source</span></div>
+            <a href="index.html" class="nav-brand" aria-label="Home"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                    <circle cx="20" cy="20" r="18" fill="var(--accent)" opacity=".15" />
+                    <path d="M20 8L28 20l-4 0v12H16V20l-4 0z" fill="var(--accent)" />
+                </svg><span>Iran Internet Status</span></a>
+            <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+            <div class="nav-links">
+                <a href="index.html">Dashboard</a>
+                <a href="monitors.html">Monitors</a>
+                <a href="incidents.html" class="active">Incidents</a>
+                <a href="https://github.com/Danialsamadi/iran-internet-monitor" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="open-src"><svg viewBox="0 0 16 16" fill="var(--text3)" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.42 7.42 0 014 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>Open Source</span></div>
         </div>
     </nav>
+    <script>document.getElementById('nav').addEventListener('click', function(e) {
+        if (e.target.closest('.nav-toggle')) {
+            this.classList.toggle('open');
+            this.querySelector('.nav-toggle').setAttribute('aria-expanded', this.classList.contains('open'));
+        }
+    });</script>
 
     <div class="wrap">
         <h1 class="page-title"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2">

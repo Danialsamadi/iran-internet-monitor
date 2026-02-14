@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0e17">
     <title>Iran Internet Monitor</title>
     <meta name="description"
         content="Real-time monitoring of Iran's internet connectivity, censorship & circumvention tools.">
@@ -16,6 +17,7 @@
         }
 
         :root {
+            /* Iran Internet Status Dashboard theme */
             --bg: #0a0e17;
             --bg2: #0f1520;
             --bg3: #141c2b;
@@ -35,12 +37,15 @@
             --red: #e74c3c;
             --red2: #c0392b;
             --red-g: rgba(231, 76, 60, 0.15);
-            --cyan: #00d2ff;
+            --accent: #25aff4;
+            --accent-g: rgba(37, 175, 244, 0.15);
+            --cyan: #25aff4;
             --purple: #7c3aed;
             --blue: #3b82f6;
-            --font: 'Inter', system-ui, sans-serif;
-            --r: 10px;
-            --r2: 14px;
+            --font: 'Inter', system-ui, -apple-system, sans-serif;
+            --r: 8px;
+            --r2: 8px;
+            --touch: 44px;
         }
 
         body {
@@ -52,7 +57,7 @@
             -webkit-font-smoothing: antialiased
         }
 
-        /* Aurora bg */
+        /* Aurora bg — accent #25aff4 */
         body::before {
             content: '';
             position: fixed;
@@ -60,7 +65,7 @@
             left: -20%;
             width: 140%;
             height: 100%;
-            background: radial-gradient(ellipse at 30% 20%, rgba(0, 210, 255, 0.06), transparent 60%), radial-gradient(ellipse at 70% 60%, rgba(124, 58, 237, 0.05), transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(231, 76, 60, 0.04), transparent 50%);
+            background: radial-gradient(ellipse at 30% 20%, rgba(37, 175, 244, 0.07), transparent 60%), radial-gradient(ellipse at 70% 60%, rgba(124, 58, 237, 0.05), transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(231, 76, 60, 0.04), transparent 50%);
             pointer-events: none;
             z-index: 0
         }
@@ -126,7 +131,8 @@
         }
 
         .nav-links a.active {
-            border-bottom: 2px solid var(--cyan)
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent)
         }
 
         .nav-ts {
@@ -170,7 +176,7 @@
         }
 
         .grid-bot {
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             margin-bottom: 16px
         }
 
@@ -191,7 +197,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.15), transparent)
+            background: linear-gradient(90deg, transparent, rgba(37, 175, 244, 0.2), transparent)
         }
 
         .card-title {
@@ -273,7 +279,7 @@
             font-size: 42px;
             font-weight: 800;
             letter-spacing: -2px;
-            background: linear-gradient(135deg, var(--green), var(--cyan));
+            background: linear-gradient(135deg, var(--green), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent
         }
@@ -540,32 +546,277 @@
             padding: 2px 0
         }
 
-        /* Summary donuts */
-        .donut-row {
+        /* Graph filters */
+        .graph-filters {
             display: flex;
-            gap: 20px;
-            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 14px 18px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r2)
+        }
+
+        .graph-filters label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text2);
+            text-transform: uppercase;
+            letter-spacing: .4px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .graph-filters select {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-family: var(--font);
+            font-size: 12px;
+            padding: 8px 12px;
+            border-radius: var(--r);
+            cursor: pointer;
+            min-width: 140px
+        }
+
+        .graph-filters select:focus {
+            outline: none;
+            border-color: var(--accent)
+        }
+
+        .graph-filters .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             flex-wrap: wrap
         }
 
-        .donut-item {
-            text-align: center
+        .graph-filters .chip {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text2);
+            cursor: pointer;
+            transition: .2s
         }
 
-        .donut-item svg {
-            width: 80px;
-            height: 80px
+        .graph-filters .chip:hover,
+        .graph-filters .chip.active {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-g)
         }
 
-        .donut-val {
-            font-size: 16px;
-            font-weight: 700;
-            margin-top: 4px
+        /* Chart card with axes */
+        .chart-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r2);
+            padding: 20px;
+            position: relative;
+            overflow: hidden
         }
 
-        .donut-label {
+        .chart-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(37, 175, 244, 0.2), transparent)
+        }
+
+        .chart-card .card-title {
+            margin-bottom: 16px
+        }
+
+        .chart-area-wrap {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            margin: 8px 0 24px
+        }
+
+        .chart-area-wrap {
+            cursor: crosshair
+        }
+
+        .chart-area-wrap svg {
+            width: 100%;
+            height: 100%;
+            display: block
+        }
+
+        .chart-svg {
+            overflow: visible
+        }
+
+        .chart-grid line {
+            stroke: var(--border);
+            stroke-dasharray: 2 4;
+            opacity: .6
+        }
+
+        .chart-axis {
+            fill: var(--text3);
             font-size: 10px;
-            color: var(--text3)
+            font-variant-numeric: tabular-nums
+        }
+
+        .chart-tooltip {
+            position: fixed;
+            background: var(--bg3);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            padding: 8px 12px;
+            font-size: 11px;
+            color: var(--text);
+            pointer-events: none;
+            z-index: 200;
+            box-shadow: 0 4px 20px rgba(0,0,0,.4);
+            opacity: 0;
+            transition: opacity .15s
+        }
+
+        .chart-tooltip.visible {
+            opacity: 1
+        }
+
+        .chart-tooltip strong {
+            color: var(--accent)
+        }
+
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border)
+        }
+
+        .chart-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--text2);
+            cursor: pointer;
+            user-select: none;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: .2s
+        }
+
+        .chart-legend-item:hover {
+            background: var(--card2);
+            color: var(--text)
+        }
+
+        .chart-legend-item.hidden {
+            opacity: .4;
+            text-decoration: line-through
+        }
+
+        .chart-legend-item .leg-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            flex-shrink: 0
+        }
+
+        .multi-spark-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 0
+        }
+
+        .multi-spark-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 80px;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            font-size: 12px;
+            transition: .15s
+        }
+
+        .multi-spark-row:last-child {
+            border-bottom: none
+        }
+
+        .multi-spark-row.hidden {
+            display: none
+        }
+
+        .multi-spark-row:hover {
+            background: var(--card2)
+        }
+
+        .multi-spark-row .spark-name {
+            width: auto;
+            min-width: 0
+        }
+
+        .multi-spark-row .spark-chart {
+            height: 36px;
+            min-width: 120px
+        }
+
+        @media (max-width: 600px) {
+            .graph-filters { flex-direction: column; align-items: stretch }
+            .graph-filters select { min-width: 100% }
+            .chart-area-wrap { height: 180px }
+            .multi-spark-row { grid-template-columns: 1fr 70px }
+            .multi-spark-row .spark-chart { min-width: 80px }
+        }
+
+        /* Single donut — proportions (avoid pie with many slices) */
+        .donut-single-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px
+        }
+
+        .donut-single-wrap .donut-single {
+            width: 140px;
+            height: 140px
+        }
+
+        .donut-legend-inline {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px 14px;
+            font-size: 11px;
+            color: var(--text2)
+        }
+
+        .donut-legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            display: inline-block
+        }
+
+        .bar-chart-wrap {
+            width: 100%;
+            min-height: 160px
+        }
+
+        .bar-chart-wrap svg {
+            width: 100%;
+            height: auto;
+            display: block
         }
 
         /* No-data */
@@ -584,9 +835,9 @@
         .no-data code {
             background: var(--card);
             padding: 4px 10px;
-            border-radius: 6px;
+            border-radius: var(--r);
             font-size: 12px;
-            color: var(--cyan)
+            color: var(--accent)
         }
 
         /* Loading */
@@ -600,7 +851,7 @@
             width: 32px;
             height: 32px;
             border: 3px solid var(--border);
-            border-top-color: var(--cyan);
+            border-top-color: var(--accent);
             border-radius: 50%;
             animation: spin .7s linear infinite;
             margin: 0 auto 12px
@@ -631,44 +882,149 @@
             color: var(--text)
         }
 
-        /* Responsive */
-        @media(max-width:900px) {
-
-            .grid-top,
-            .grid-mid,
-            .grid-bot {
-                grid-template-columns: 1fr
-            }
+        /* Mobile: hamburger + touch targets */
+        .nav-toggle {
+            display: none;
+            width: var(--touch);
+            height: var(--touch);
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            border-radius: var(--r);
+            -webkit-tap-highlight-color: transparent
         }
 
-        @media(max-width:600px) {
-            .wrap {
-                padding: 12px 14px 40px
+        .nav-toggle:focus-visible {
+            outline: 2px solid var(--accent)
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: currentColor;
+            border-radius: 1px;
+            margin: 6px 0;
+            transition: .2s
+        }
+
+        .nav-toggle span::before,
+        .nav-toggle span::after {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: currentColor;
+            border-radius: 1px;
+            transition: .2s
+        }
+
+        .nav.open .nav-toggle span { background: transparent }
+        .nav.open .nav-toggle span::before { transform: translateY(8px) rotate(45deg) }
+        .nav.open .nav-toggle span::after { transform: translateY(-8px) rotate(-45deg) }
+
+        @media (max-width: 900px) {
+            .grid-top, .grid-mid { grid-template-columns: 1fr }
+            .grid-bot { grid-template-columns: 1fr }
+        }
+
+        @media (max-width: 768px) {
+            .nav-inner {
+                padding: 0 16px;
+                min-height: var(--touch)
             }
 
-            .nav-ts {
-                display: none
+            .nav-toggle { display: flex }
+
+            .nav-links {
+                position: fixed;
+                top: 52px;
+                left: 0;
+                right: 0;
+                background: var(--bg2);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 12px;
+                gap: 4px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: transform .2s, opacity .2s, visibility .2s;
+                z-index: 99;
+                box-shadow: 0 8px 24px rgba(0,0,0,.3)
             }
+
+            .nav.open .nav-links {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible
+            }
+
+            .nav-links a {
+                padding: 12px 16px;
+                min-height: var(--touch);
+                display: flex;
+                align-items: center;
+                border-radius: var(--r)
+            }
+
+            .nav-ts { display: none }
+        }
+
+        @media (max-width: 600px) {
+            .wrap {
+                padding: 16px 16px 48px;
+                padding-left: max(16px, env(safe-area-inset-left));
+                padding-right: max(16px, env(safe-area-inset-right));
+                padding-bottom: max(48px, env(safe-area-inset-bottom))
+            }
+
+            .page-title { font-size: 18px; margin-bottom: 16px }
+
+            .svc-row {
+                grid-template-columns: 1fr 70px 60px;
+                padding: 12px 10px;
+                font-size: 11px
+            }
+
+            .gauge-outer { width: 160px; height: 160px }
+            .gauge-pct { font-size: 32px }
+            .card { padding: 16px }
+            .heat-cell { font-size: 7px }
         }
     </style>
 </head>
 
 <body>
-    <nav class="nav">
+    <nav class="nav" id="nav">
         <div class="nav-inner">
-            <a href="index.html" class="nav-brand"><svg viewBox="0 0 40 40" fill="none">
-                    <circle cx="20" cy="20" r="18" fill="#00d2ff" opacity=".15" />
-                    <path d="M20 8L28 20l-4 0v12H16V20l-4 0z" fill="#00d2ff" />
-                </svg><span>Iran Internet Health & Uptime Monitor</span></a>
-            <div class="nav-links"><a href="index.html" class="active">Dashboard</a><a
-                    href="monitors.html">Monitors</a><a href="incidents.html">Incidents</a><a
-                    href="https://github.com/Danialsamadi/iran-internet-monitor" target="_blank">GitHub</a></div>
+            <a href="index.html" class="nav-brand" aria-label="Home"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                    <circle cx="20" cy="20" r="18" fill="var(--accent)" opacity=".15" />
+                    <path d="M20 8L28 20l-4 0v12H16V20l-4 0z" fill="var(--accent)" />
+                </svg><span>Iran Internet Status</span></a>
+            <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+            <div class="nav-links">
+                <a href="index.html" class="active">Dashboard</a>
+                <a href="monitors.html">Monitors</a>
+                <a href="incidents.html">Incidents</a>
+                <a href="https://github.com/Danialsamadi/iran-internet-monitor" target="_blank" rel="noopener">GitHub</a>
+            </div>
             <div class="nav-ts" id="timestamp"></div>
         </div>
     </nav>
+    <script>document.getElementById('nav').addEventListener('click', function(e) {
+        if (e.target.closest('.nav-toggle')) {
+            this.classList.toggle('open');
+            this.querySelector('.nav-toggle').setAttribute('aria-expanded', this.classList.contains('open'));
+        }
+    });</script>
 
     <div class="wrap">
         <h1 class="page-title">Internet Health Monitor — Iran</h1>
+        <div id="chart-tooltip" class="chart-tooltip" aria-hidden="true"></div>
         <div id="app">
             <div class="loading">
                 <div class="spinner"></div>
@@ -721,30 +1077,241 @@
                 const a = []; for (let i = 0; i < n; i++)a.push(rt * (0.3 + rnd() * 0.7)); a[n - 1] = rt; return a
             }
 
+            const COLORS = { up: '#2ecc71', degraded: '#f1c40f', down: '#e74c3c', unknown: '#5c6a82' };
+            /* Limited palette for line charts — avoid too many colors */
+            const SERIES_COLORS = ['#25aff4', '#2ecc71', '#f1c40f', '#e74c3c', '#5c6a82'];
+
+            function getFilteredServices(data, filter) {
+                if (!data || !data.services) return [];
+                let list = data.services.slice();
+                if (filter.category && filter.category !== 'all') {
+                    const cats = data.categories || [];
+                    const idx = parseInt(filter.category, 10);
+                    if (!isNaN(idx) && cats[idx]) {
+                        const ids = cats[idx].service_ids || [];
+                        list = list.filter(s => ids.includes(s.id));
+                    }
+                }
+                if (filter.status && filter.status !== 'all') list = list.filter(s => (s.status || '') === filter.status);
+                return list;
+            }
+
+            function parseHistoryCsv(txt) {
+                const rows = [];
+                txt.split(/\n/).forEach(line => {
+                    const parts = line.trim().split(',');
+                    if (parts.length >= 4) rows.push({ ts: parts[0], status: parts[1], value: parseFloat(parts[2]) || 0, rt: parseInt(parts[3], 10) || 0 });
+                });
+                return rows;
+            }
+
+            function buildUptimeFromHistory(rows, days) {
+                if (!rows.length) return null;
+                const byDay = {};
+                rows.forEach(r => {
+                    const d = r.ts.slice(0, 10);
+                    if (!byDay[d]) byDay[d] = { up: 0, total: 0 };
+                    byDay[d].total++;
+                    if (r.status === 'up') byDay[d].up++;
+                });
+                const sorted = Object.keys(byDay).sort();
+                const start = sorted[0];
+                const out = [];
+                for (let i = 0; i < days; i++) {
+                    const d = new Date();
+                    d.setDate(d.getDate() - (days - 1 - i));
+                    const key = d.toISOString().slice(0, 10);
+                    const v = byDay[key];
+                    out.push(v ? (v.up / v.total * 100) : null);
+                }
+                return out;
+            }
+
+            function buildResponseFromHistory(rows, points) {
+                if (!rows.length) return null;
+                const len = Math.min(rows.length, points);
+                const step = Math.max(1, Math.floor(rows.length / len));
+                const out = [];
+                for (let i = 0; i < len; i++) {
+                    const r = rows[rows.length - 1 - i * step];
+                    if (r) out.push(r.rt || 0);
+                }
+                return out.reverse();
+            }
+
+            function makeAreaChartWithGrid(w, h, values, color, opts) {
+                opts = opts || {};
+                const pad = { left: opts.yAxis ? 36 : 8, right: 8, top: 8, bottom: opts.xAxis ? 20 : 8 };
+                const innerW = w - pad.left - pad.right, innerH = h - pad.top - pad.bottom;
+                if (!values.length) return '';
+                const clean = values.map(v => v == null ? 0 : v);
+                const mx = Math.max(...clean) * 1.1 || 100;
+                const n = clean.length;
+                const xS = innerW / Math.max(n - 1, 1);
+                let path = '', areaPath = '';
+                clean.forEach((v, i) => {
+                    const x = pad.left + i * xS;
+                    const y = pad.top + innerH - (v / mx) * innerH * 0.9;
+                    path += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1);
+                    areaPath = path + ` L${pad.left + innerW},${pad.top + innerH} L${pad.left},${pad.top + innerH} Z`;
+                });
+                let grid = '';
+                for (let g = 1; g < 4; g++) {
+                    const gy = pad.top + (innerH / 4) * g;
+                    grid += `<line x1="${pad.left}" y1="${gy}" x2="${pad.left + innerW}" y2="${gy}" class="chart-grid"/>`;
+                }
+                for (let g = 1; g < 5; g++) {
+                    const gx = pad.left + (innerW / 5) * g;
+                    grid += `<line x1="${gx}" y1="${pad.top}" x2="${gx}" y2="${pad.top + innerH}" class="chart-grid"/>`;
+                }
+                let axes = '';
+                if (opts.yAxis) {
+                    axes += `<text x="${pad.left - 4}" y="${pad.top + 10}" class="chart-axis" text-anchor="end">${Math.round(mx)}%</text>`;
+                    axes += `<text x="${pad.left - 4}" y="${pad.top + innerH + 4}" class="chart-axis" text-anchor="end">0%</text>`;
+                }
+                if (opts.xAxis && opts.labels) {
+                    opts.labels.forEach((lbl, i) => {
+                        const x = pad.left + (innerW * (i / (opts.labels.length - 1)));
+                        axes += `<text x="${x}" y="${h - 4}" class="chart-axis" text-anchor="middle">${lbl}</text>`;
+                    });
+                }
+                /* Line chart: trend over time — minimal fill so data is not obscured */
+                return `<svg viewBox="0 0 ${w} ${h}" class="chart-svg"><g>${grid}</g><path class="area-fill" d="${areaPath}" fill="${color}" opacity=".06"/><path d="${path}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><g>${axes}</g></svg>`;
+            }
+
+            function makeLineChartOnly(w, h, values, color, opts) {
+                opts = opts || {};
+                const pad = { left: opts.yAxis ? 36 : 8, right: 8, top: 8, bottom: opts.xAxis ? 20 : 8 };
+                const innerW = w - pad.left - pad.right, innerH = h - pad.top - pad.bottom;
+                if (!values.length) return '';
+                const clean = values.map(v => v == null ? 0 : v);
+                const mx = Math.max(...clean) * 1.1 || 100;
+                const n = clean.length;
+                const xS = innerW / Math.max(n - 1, 1);
+                let path = '';
+                clean.forEach((v, i) => {
+                    const x = pad.left + i * xS;
+                    const y = pad.top + innerH - (v / mx) * innerH * 0.9;
+                    path += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1);
+                });
+                let grid = '';
+                for (let g = 1; g < 4; g++) {
+                    const gy = pad.top + (innerH / 4) * g;
+                    grid += `<line x1="${pad.left}" y1="${gy}" x2="${pad.left + innerW}" y2="${gy}" class="chart-grid"/>`;
+                }
+                for (let g = 1; g < 5; g++) {
+                    const gx = pad.left + (innerW / 5) * g;
+                    grid += `<line x1="${gx}" y1="${pad.top}" x2="${gx}" y2="${pad.top + innerH}" class="chart-grid"/>`;
+                }
+                let axes = '';
+                if (opts.yAxis) {
+                    axes += `<text x="${pad.left - 4}" y="${pad.top + 10}" class="chart-axis" text-anchor="end">${Math.round(mx)}%</text>`;
+                    axes += `<text x="${pad.left - 4}" y="${pad.top + innerH + 4}" class="chart-axis" text-anchor="end">0%</text>`;
+                }
+                if (opts.xAxis && opts.labels) {
+                    opts.labels.forEach((lbl, i) => {
+                        const x = pad.left + (innerW * (i / (opts.labels.length - 1)));
+                        axes += `<text x="${x}" y="${h - 4}" class="chart-axis" text-anchor="middle">${lbl}</text>`;
+                    });
+                }
+                return `<svg viewBox="0 0 ${w} ${h}" class="chart-svg"><g>${grid}</g><path d="${path}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><g>${axes}</g></svg>`;
+            }
+
+            function makeBarChart(w, h, bars, pad) {
+                pad = pad || { left: 100, right: 44, top: 16, bottom: 24 };
+                const innerW = w - pad.left - pad.right, innerH = h - pad.top - pad.bottom;
+                if (!bars.length) return '<svg viewBox="0 0 ' + w + ' ' + h + '" class="chart-svg"></svg>';
+                const maxVal = Math.max(...bars.map(b => b.value), 1);
+                const gap = 6;
+                const barH = Math.max(14, (innerH - (bars.length - 1) * gap) / bars.length);
+                let out = '';
+                bars.forEach(function(b, i) {
+                    const y = pad.top + i * (barH + gap);
+                    const barW = (b.value / maxVal) * innerW * 0.88;
+                    out += '<rect x="' + pad.left + '" y="' + y + '" width="' + barW + '" height="' + barH + '" rx="2" fill="' + b.color + '" opacity=".92"/>';
+                    out += '<text x="' + (pad.left - 6) + '" y="' + (y + barH / 2 + 4) + '" class="chart-axis" text-anchor="end">' + esc(b.label) + '</text>';
+                    out += '<text x="' + (pad.left + barW + 6) + '" y="' + (y + barH / 2 + 4) + '" class="chart-axis" text-anchor="start">' + b.value + '%</text>';
+                });
+                return '<svg viewBox="0 0 ' + w + ' ' + h + '" class="chart-svg"><line x1="' + pad.left + '" y1="' + pad.top + '" x2="' + pad.left + '" y2="' + (pad.top + innerH) + '" stroke="var(--border)" stroke-width="1"/><g>' + out + '</g><text x="' + (pad.left - 4) + '" y="' + (pad.top + 10) + '" class="chart-axis" text-anchor="end">' + Math.round(maxVal) + '%</text></svg>';
+            }
+
+            function makeMultiLinePath(w, h, series, pad) {
+                const innerW = w - pad.left - pad.right, innerH = h - pad.top - pad.bottom;
+                const allV = series.reduce((a, s) => a.concat(s.values), []);
+                const mx = Math.max(...allV) * 1.15 || 1;
+                const n = series[0] ? series[0].values.length : 0;
+                const xS = n > 1 ? innerW / (n - 1) : innerW;
+                const paths = series.map(s => {
+                    let p = '';
+                    s.values.forEach((v, i) => {
+                        const x = pad.left + i * xS;
+                        const y = pad.top + innerH - (v / mx) * innerH * 0.9;
+                        p += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1);
+                    });
+                    return `<path d="${p}" fill="none" stroke="${s.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-series="${s.id}"/>`;
+                }).join('');
+                let grid = '';
+                for (let g = 1; g < 4; g++) {
+                    const gy = pad.top + (innerH / 4) * g;
+                    grid += `<line x1="${pad.left}" y1="${gy}" x2="${pad.left + innerW}" y2="${gy}" class="chart-grid"/>`;
+                }
+                for (let g = 1; g < 5; g++) {
+                    const gx = pad.left + (innerW / 5) * g;
+                    grid += `<line x1="${gx}" y1="${pad.top}" x2="${gx}" y2="${pad.top + innerH}" class="chart-grid"/>`;
+                }
+                const maxVal = Math.round(mx);
+                return `<svg viewBox="0 0 ${w} ${h}" class="chart-svg"><g>${grid}</g>${paths}<text x="${pad.left - 4}" y="${pad.top + 10}" class="chart-axis" text-anchor="end">${maxVal}ms</text><text x="${pad.left - 4}" y="${pad.top + innerH + 4}" class="chart-axis" text-anchor="end">0</text></svg>`;
+            }
+
+            let filterState = { category: 'all', status: 'all', timeRange: '30' };
+            let historyCache = {};
+            let lastData = null;
+
             function render(data) {
                 if (!data || !data.summary) { app.innerHTML = '<div class="no-data"><h3>Waiting for Data</h3><p>Push to GitHub and enable Actions, or run locally:</p><p style="margin-top:10px"><code>./run-check.sh</code></p></div>'; return }
-
+                lastData = data;
                 const { summary: sm, services: svcs, categories: cats } = data;
                 const sMap = {}; (svcs || []).forEach(s => sMap[s.id] = s);
                 document.getElementById('timestamp').textContent = sm.last_check ? new Date(sm.last_check).toLocaleString() : '';
 
-                // Compute overall uptime
-                const uptimes = (svcs || []).filter(s => s.uptime_pct != null).map(s => +s.uptime_pct);
-                const overallUp = uptimes.length ? uptimes.reduce((a, b) => a + b, 0) / uptimes.length : 0;
+                const filtered = getFilteredServices(data, filterState);
+                const uptimes = filtered.filter(s => s.uptime_pct != null).map(s => +s.uptime_pct);
+                const overallUp = uptimes.length ? uptimes.reduce((a, b) => a + b, 0) / uptimes.length : (svcs || []).filter(s => s.uptime_pct != null).map(s => +s.uptime_pct).reduce((a, b) => a + b, 0) / Math.max((svcs || []).length, 1);
+                const days = parseInt(filterState.timeRange, 10) || 30;
+                const numPoints = Math.min(days, 60);
 
                 let h = '';
 
-                // === TOP ROW: Uptime History + Service Overview ===
+                // Filter bar
+                const catOptions = (cats || []).map((c, i) => ({ id: String(i), name: c.name }));
+                h += `<div class="graph-filters">
+  <label>Category</label>
+  <select id="filter-cat" aria-label="Filter by category">
+    <option value="all">All categories</option>
+    ${catOptions.map(c => `<option value="${c.id}" ${filterState.category === c.id ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}
+  </select>
+  <label>Status</label>
+  <select id="filter-status" aria-label="Filter by status">
+    <option value="all" ${filterState.status === 'all' ? 'selected' : ''}>All</option>
+    <option value="up" ${filterState.status === 'up' ? 'selected' : ''}>Up</option>
+    <option value="degraded" ${filterState.status === 'degraded' ? 'selected' : ''}>Degraded</option>
+    <option value="down" ${filterState.status === 'down' ? 'selected' : ''}>Down</option>
+  </select>
+  <div class="filter-group">
+    <label>Time range</label>
+    ${['7', '14', '30'].map(d => `<button type="button" class="chip ${filterState.timeRange === d ? 'active' : ''}" data-days="${d}">${d}d</button>`).join('')}
+  </div>
+</div>`;
+
+                // === TOP ROW: Uptime chart (filterable) + Gauge + Service table ===
                 h += `<div class="grid grid-top">`;
 
-                // Left: uptime history chart + gauge
-                h += `<div class="card"><div class="card-title">Long-Term Uptime History<div class="legend"><span><span class="dot" style="background:var(--green)"></span> Up</span><span><span class="dot" style="background:var(--yellow)"></span> Degraded</span><span><span class="dot" style="background:var(--red)"></span> Down</span></div></div>`;
+                const upHist = genFakeHistory(overallUp, numPoints);
+                const xLabels = days === 7 ? ['7d ago', '5d', '3d', '1d', 'Now'] : days === 14 ? ['14d ago', '10d', '6d', '2d', 'Now'] : ['30d ago', '22d', '15d', '7d', 'Now'];
+                h += `<div class="chart-card"><div class="card-title">Uptime % over time (line) — ${filterState.timeRange}d<div class="legend"><span><span class="dot" style="background:var(--green)"></span> Uptime</span></div></div>`;
                 h += makeGauge(overallUp);
-                const upHist = genFakeHistory(overallUp, 30);
-                h += `<div class="chart-container">${makeArea(600, 100, upHist, '#2ecc71')}</div>`;
-                h += `</div>`;
+                h += `<div class="chart-area-wrap" data-chart="uptime" data-values="[${upHist.join(',')}]" data-labels="${esc(xLabels.join(','))}">${makeLineChartOnly(640, 200, upHist, '#2ecc71', { yAxis: true, xAxis: true, labels: xLabels })}</div></div>`;
 
-                // Right: service status table
                 h += `<div class="card"><div class="card-title">Service Status Overview</div><div class="svc-grid"><div class="svc-row header"><div>Service</div><div class="svc-val">Status</div><div class="svc-val">30d Up</div></div>`;
                 (cats || []).forEach(cat => {
                     (cat.service_ids || []).forEach(id => {
@@ -756,21 +1323,26 @@
                 });
                 h += `</div></div></div>`;
 
-                // === MID ROW: Response Time + Heatmap + Incidents ===
+                // === MID ROW: Response time multi-line chart (filterable) + heatmap + incidents ===
                 h += `<div class="grid grid-mid">`;
 
-                // Response time sparklines
-                h += `<div class="card"><div class="card-title">Response Time Trends (Last 24h)</div>`;
-                (svcs || []).slice(0, 8).forEach(s => {
-                    const vals = genFakeHistory(s.response_time_ms || 100, 20);
-                    const color = s.status === 'up' ? '#2ecc71' : s.status === 'down' ? '#e74c3c' : '#f1c40f';
-                    h += `<div class="spark-row"><div class="spark-name">${esc(s.name)}</div><div class="spark-chart">${makeSparkline(200, 28, vals, color)}</div><div class="spark-val">${s.response_time_ms || '—'}ms</div></div>`;
+                const sparkList = filtered.length ? filtered.slice(0, 16) : (svcs || []).slice(0, 16);
+                const responseSeries = sparkList.map((s, i) => ({
+                    id: s.id,
+                    name: s.name,
+                    color: SERIES_COLORS[i % SERIES_COLORS.length],
+                    values: genFakeHistory(s.response_time_ms || 100, 24)
+                }));
+                const pad = { left: 40, right: 16, top: 12, bottom: 24 };
+                h += `<div class="chart-card"><div class="card-title">Response time over time (line) — click legend to toggle</div>`;
+                h += `<div class="chart-area-wrap">${makeMultiLinePath(640, 200, responseSeries, pad)}</div>`;
+                h += `<div class="chart-legend" id="resp-legend">`;
+                responseSeries.forEach(s => {
+                    h += `<div class="chart-legend-item" data-id="${s.id}" title="Click to show/hide"><span class="leg-dot" style="background:${s.color}"></span>${esc(s.name)}</div>`;
                 });
-                h += `</div>`;
+                h += `</div></div>`;
 
-                // Heatmap (30 days)
-                h += `<div class="card"><div class="card-title">Daily Outage Patterns (Last 30 Days)</div>`;
-                h += `<div class="heatmap">`;
+                h += `<div class="card"><div class="card-title">Outage calendar (30d)</div><div class="heatmap">`;
                 ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(d => h += `<div class="heat-label">${d}</div>`);
                 for (let i = 0; i < 35; i++) {
                     let seed = (i * 7 + 3) % 10;
@@ -780,33 +1352,62 @@
                 }
                 h += `</div></div>`;
 
-                // Recent incidents
-                h += `<div class="card"><div class="card-title">Recent Incidents Timeline</div>`;
+                h += `<div class="card"><div class="card-title">Recent Incidents</div>`;
                 const incidents = (svcs || []).filter(s => s.status === 'down' || s.status === 'degraded');
                 if (incidents.length > 0) {
                     incidents.slice(0, 5).forEach(s => {
                         const cls = s.status === 'down' ? '' : 'degraded';
                         h += `<div class="inc-card ${cls}"><div class="inc-title">${esc(s.name)}</div><div class="inc-meta"><span>${timeAgo(s.last_check)}</span><span>${esc(s.message)}</span></div><div class="inc-status ${s.status}">${s.status}</div></div>`;
-                    })
+                    });
                 } else {
-                    h += `<div class="inc-card resolved"><div class="inc-title">No active incidents</div><div class="inc-meta"><span>All systems operational</span></div><div class="inc-status resolved">Resolved</div></div>`
+                    h += `<div class="inc-card resolved"><div class="inc-title">No active incidents</div><div class="inc-meta"><span>All systems operational</span></div><div class="inc-status resolved">Resolved</div></div>`;
                 }
                 h += `</div></div>`;
 
-                // === BOT ROW: Summary Donuts + Category Breakdown ===
-                h += `<div class="grid grid-bot">`;
-
-                // Donuts
-                h += `<div class="card"><div class="card-title">Current Status Summary</div><div class="donut-row">`;
-                const donutData = [{ label: 'Up', val: sm.up || 0, color: 'var(--green)' }, { label: 'Degraded', val: sm.degraded || 0, color: 'var(--yellow)' }, { label: 'Down', val: sm.down || 0, color: 'var(--red)' }, { label: 'Unknown', val: sm.unknown || 0, color: 'var(--text3)' }];
-                const total = sm.total_services || 1;
-                donutData.forEach(d => {
-                    const r = 30, circ = 2 * Math.PI * r, pct = d.val / total, offset = circ * (1 - pct);
-                    h += `<div class="donut-item"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="${r}" fill="none" stroke="var(--border)" stroke-width="6"/><circle cx="40" cy="40" r="${r}" fill="none" stroke="${d.color}" stroke-width="6" stroke-dasharray="${circ}" stroke-dashoffset="${offset}" transform="rotate(-90 40 40)" stroke-linecap="round"/></svg><div class="donut-val">${d.val}</div><div class="donut-label">${d.label}</div></div>`;
+                // === Sparklines (filterable) ===
+                h += `<div class="card"><div class="card-title">Response time by service (filtered)</div><div class="multi-spark-wrap" id="spark-wrap">`;
+                sparkList.forEach((s, i) => {
+                    const vals = genFakeHistory(s.response_time_ms || 100, 20);
+                    const color = s.status === 'up' ? COLORS.up : s.status === 'down' ? COLORS.down : COLORS.degraded;
+                    h += `<div class="multi-spark-row" data-id="${s.id}"><div class="spark-name"><span class="svc-dot ${s.status || 'unknown'}"></span>${esc(s.name)}</div><div class="spark-chart">${makeSparkline(200, 36, vals, color)}</div><div class="spark-val">${s.response_time_ms || '—'}ms</div></div>`;
                 });
                 h += `</div></div>`;
 
-                // Category cards
+                // === BOT ROW: Single donut (proportions) + Bar chart (comparison) + Categories ===
+                h += `<div class="grid grid-bot">`;
+                const donutData = [{ label: 'Up', val: sm.up || 0, color: '#2ecc71' }, { label: 'Degraded', val: sm.degraded || 0, color: '#f1c40f' }, { label: 'Down', val: sm.down || 0, color: '#e74c3c' }, { label: 'Unknown', val: sm.unknown || 0, color: '#5c6a82' }];
+                const total = sm.total_services || 1;
+                let cum = 0;
+                const ringSegments = donutData.map(d => {
+                    const pct = total ? d.val / total : 0;
+                    const seg = { offset: cum, pct, color: d.color, label: d.label, val: d.val };
+                    cum += pct;
+                    return seg;
+                });
+                const r = 38, circ = 2 * Math.PI * r;
+                let ringSvg = `<svg viewBox="0 0 100 100" class="donut-single"><circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--border)" stroke-width="10"/>`;
+                ringSegments.forEach(seg => {
+                    const dash = circ * seg.pct;
+                    const off = circ * (1 - seg.offset);
+                    ringSvg += `<circle cx="50" cy="50" r="${r}" fill="none" stroke="${seg.color}" stroke-width="10" stroke-dasharray="${dash}" stroke-dashoffset="${off}" transform="rotate(-90 50 50)" stroke-linecap="round"/>`;
+                });
+                ringSvg += `<text x="50" y="52" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="700">${total}</text><text x="50" y="64" text-anchor="middle" fill="var(--text3)" font-size="9">services</text></svg>`;
+                h += `<div class="card"><div class="card-title">Status breakdown (donut)</div><div class="donut-single-wrap">${ringSvg}<div class="donut-legend-inline">`;
+                donutData.forEach(d => {
+                    h += `<span class="donut-legend-dot" style="background:${d.color}"></span><span>${d.label}: ${d.val}</span>`;
+                });
+                h += `</div></div></div>`;
+
+                /* Bar chart: comparison — uptime % by category */
+                const barBars = (cats || []).map(cat => {
+                    const ids = cat.service_ids || [];
+                    const catUp = ids.filter(id => sMap[id] && sMap[id].status === 'up').length;
+                    const pct = ids.length ? Math.round(catUp / ids.length * 100) : 0;
+                    const color = pct >= 90 ? '#2ecc71' : pct >= 70 ? '#f1c40f' : '#e74c3c';
+                    return { label: (cat.name || '').slice(0, 18), value: pct, color };
+                }).filter(b => b.label);
+                h += `<div class="card"><div class="card-title">Uptime by category (comparison)</div><div class="bar-chart-wrap">${makeBarChart(320, Math.max(180, barBars.length * 28), barBars)}</div></div>`;
+
                 h += `<div class="card"><div class="card-title">Categories</div>`;
                 (cats || []).forEach(cat => {
                     const ids = cat.service_ids || [];
@@ -818,6 +1419,49 @@
                 h += `</div></div>`;
 
                 app.innerHTML = h;
+
+                // Filter handlers
+                app.querySelector('#filter-cat').addEventListener('change', function() { filterState.category = this.value; render(lastData); });
+                app.querySelector('#filter-status').addEventListener('change', function() { filterState.status = this.value; render(lastData); });
+                app.querySelectorAll('.graph-filters .chip').forEach(btn => {
+                    btn.addEventListener('click', function() { filterState.timeRange = this.dataset.days; render(lastData); });
+                });
+                // Legend toggle: show/hide series in multi-line chart
+                const legend = app.querySelector('#resp-legend');
+                if (legend) {
+                    const chartCards = app.querySelectorAll('.chart-card');
+                    const svg = chartCards[1] && chartCards[1].querySelector('.chart-area-wrap svg');
+                    if (svg) {
+                        legend.querySelectorAll('.chart-legend-item').forEach(function(el) {
+                            el.addEventListener('click', function() {
+                                this.classList.toggle('hidden');
+                                const id = this.dataset.id;
+                                const path = svg.querySelector('path[data-series="' + id + '"]');
+                                if (path) path.style.display = this.classList.contains('hidden') ? 'none' : '';
+                            });
+                        });
+                    }
+                }
+                // Tooltip on uptime chart hover
+                const tooltipEl = document.getElementById('chart-tooltip');
+                const uptimeWrap = app.querySelector('.chart-area-wrap[data-chart="uptime"]');
+                if (tooltipEl && uptimeWrap) {
+                    const vals = (function() { try { return JSON.parse(uptimeWrap.dataset.values || '[]'); } catch(e) { return []; } })();
+                    const labels = (uptimeWrap.dataset.labels || '').split(',').map(function(s) { return s.trim(); });
+                    uptimeWrap.addEventListener('mousemove', function(e) {
+                        const rect = this.getBoundingClientRect();
+                        const x = (e.clientX - rect.left) / rect.width;
+                        const i = Math.min(Math.floor(x * vals.length), vals.length - 1);
+                        if (i >= 0 && vals[i] != null) {
+                            const lbl = labels[Math.floor((i / (vals.length - 1)) * (labels.length - 1))] || '';
+                            tooltipEl.innerHTML = '<strong>' + Number(vals[i]).toFixed(1) + '%</strong>' + (lbl ? ' &middot; ' + lbl : '');
+                            tooltipEl.classList.add('visible');
+                            tooltipEl.style.left = (e.clientX + 12) + 'px';
+                            tooltipEl.style.top = (e.clientY + 8) + 'px';
+                        }
+                    });
+                    uptimeWrap.addEventListener('mouseleave', function() { tooltipEl.classList.remove('visible'); });
+                }
             }
 
             async function fetchData() { try { const r = await fetch(DATA_URL + '?t=' + Date.now()); if (!r.ok) throw 0; render(await r.json()) } catch (e) { app.innerHTML = '<div class="no-data"><h3>Waiting for Data</h3><p>Push to GitHub & enable Actions to start monitoring.</p><p style="margin-top:10px"><code>./run-check.sh</code></p></div>' } }
