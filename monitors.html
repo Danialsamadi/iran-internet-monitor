@@ -716,6 +716,7 @@
 
             function genHistory(base, n) { let seed = base || 100; function r() { seed = (seed * 16807 + 7) % 2147483647; return (seed % 1000) / 1000 } const a = []; for (let i = 0; i < n; i++)a.push(base * (0.2 + r() * 0.8)); a[n - 1] = base; return a }
             function statusColor(s) { return s === 'up' ? 'var(--green)' : s === 'down' ? 'var(--red)' : s === 'degraded' ? 'var(--yellow)' : 'var(--text3)' }
+            function statusColorHex(s) { return s === 'up' ? '#2ecc71' : s === 'down' ? '#e74c3c' : s === 'degraded' ? '#f1c40f' : '#5c6a82' }
 
             function renderPills(svcs) {
                 let h = '<div class="svc-selector">';
@@ -762,7 +763,8 @@
                 const monitorAreaData = vals24b.map(function(y, i) {
                     return { x: nowMs - (nPoints - 1 - i) * (hourMs * chartTimeRange / nPoints), y: Math.round(y) };
                 });
-                h += `<div class="card"><div class="card-title">Response Time History (ms)<div class="legend"><span><span class="ldot" style="background:var(--accent)"></span> Response</span></div></div>`;
+                const chartColor = statusColorHex(svc.status);
+                h += `<div class="card"><div class="card-title">Response Time History (ms)<div class="legend"><span><span class="ldot" style="background:${chartColor}"></span> Response</span></div></div>`;
                 h += `<div class="time-range-chips">`;
                 [12, 24, 48].forEach(hrs => {
                     h += `<button type="button" class="chip ${chartTimeRange === hrs ? 'active' : ''}" data-hours="${hrs}">${hrs}h</button>`;
@@ -822,27 +824,31 @@
                     });
                 });
 
-                // ApexCharts: response time area (github-style)
+                // ApexCharts: response time area — render after DOM update so chart reflects selected service and uses status color
                 if (typeof ApexCharts !== 'undefined') {
+                    var chartData = monitorAreaData;
                     if (window.monitorChart) { try { window.monitorChart.destroy(); } catch(e) {} }
-                    var respEl = document.getElementById('chart-monitor-response');
-                    if (respEl && monitorAreaData.length) {
-                        var opts = {
-                            series: [{ name: 'Response (ms)', data: monitorAreaData }],
-                            chart: { type: 'area', height: 200, toolbar: { show: false }, background: 'transparent' },
-                            colors: ['#25aff4'],
-                            stroke: { width: 1, curve: 'smooth' },
-                            dataLabels: { enabled: false },
-                            fill: { type: 'solid', opacity: 0.2 },
-                            xaxis: { type: 'datetime', labels: { style: { colors: '#5c6a82' } } },
-                            yaxis: { labels: { style: { colors: '#5c6a82' } } },
-                            grid: { borderColor: 'var(--border)', strokeDashArray: 2 },
-                            tooltip: { theme: 'dark' },
-                            theme: { mode: 'dark' }
-                        };
-                        window.monitorChart = new ApexCharts(respEl, opts);
-                        window.monitorChart.render();
-                    }
+                    window.monitorChart = null;
+                    requestAnimationFrame(function() {
+                        var respEl = document.getElementById('chart-monitor-response');
+                        if (respEl && chartData.length) {
+                            var opts = {
+                                series: [{ name: 'Response (ms)', data: chartData }],
+                                chart: { type: 'area', height: 200, toolbar: { show: false }, background: 'transparent' },
+                                colors: [chartColor],
+                                stroke: { width: 1, curve: 'smooth' },
+                                dataLabels: { enabled: false },
+                                fill: { type: 'solid', opacity: 0.2 },
+                                xaxis: { type: 'datetime', labels: { style: { colors: '#5c6a82' } } },
+                                yaxis: { labels: { style: { colors: '#5c6a82' } } },
+                                grid: { borderColor: 'var(--border)', strokeDashArray: 2 },
+                                tooltip: { theme: 'dark' },
+                                theme: { mode: 'dark' }
+                            };
+                            window.monitorChart = new ApexCharts(respEl, opts);
+                            window.monitorChart.render();
+                        }
+                    });
                 }
             }
 
