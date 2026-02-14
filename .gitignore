@@ -1,0 +1,14 @@
+# Build & runtime
+/checker
+*.tmp
+*.bak
+
+# Local / IDE
+.DS_Store
+node_modules/
+
+# Generated (workflow commits these; ignore only for local dev)
+# api/
+# history/
+incidents.log
+_site/

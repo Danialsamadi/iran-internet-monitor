@@ -1,0 +1,79 @@
+# ═══════════════════════════════════════════════════════════════
+# Iran Internet Monitor — Deploy Status Page to GitHub Pages
+# Deploys the static status page site to gh-pages branch
+# ═══════════════════════════════════════════════════════════════
+
+name: "Pages CI"
+
+on:
+  # Deploy on every push to main (triggered by monitor commits)
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'monitors.html'
+      - 'incidents.html'
+      - 'api/**'
+      - 'history/**'
+  # Also run on schedule to keep pages fresh
+  schedule:
+    - cron: "0 */6 * * *"
+  repository_dispatch:
+    types: [deploy_pages]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  deploy:
+    name: "Deploy status page"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT || github.token }}
+
+      - name: Prepare site
+        run: |
+          mkdir -p _site api history _site/api _site/history
+          cp index.html _site/
+          [ -f monitors.html ] && cp monitors.html _site/
+          [ -f incidents.html ] && cp incidents.html _site/
+          [ -d api ] && [ "$(ls -A api 2>/dev/null)" ] && cp -r api/* _site/api/ || true
+          [ -d history ] && [ "$(ls -A history 2>/dev/null)" ] && cp -r history/* _site/history/ || true
+
+          # Create a minimal 404 page
+          cat > _site/404.html << 'EOHTML'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Not Found — Iran Internet Monitor</title>
+            <meta http-equiv="refresh" content="3;url=/">
+            <style>
+              body { font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #f8f9fa; color: #495057; }
+              .msg { text-align: center; }
+              h1 { font-size: 24px; margin-bottom: 8px; }
+              p { font-size: 14px; color: #868e96; }
+              a { color: #2ecc71; }
+            </style>
+          </head>
+          <body><div class="msg"><h1>Page not found</h1><p>Redirecting to <a href="/">status page</a>...</p></div></body>
+          </html>
+          EOHTML
+
+          # Disable Jekyll processing
+          touch _site/.nojekyll
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GH_PAT || github.token }}
+          publish_dir: ./_site
+          force_orphan: false
+          user_name: "Iran Internet Monitor [bot]"
+          user_email: "bot@iran-internet-monitor.github.io"

@@ -1,0 +1,377 @@
+{
+  "name": "Iran Internet Monitor",
+  "description": "Real-time monitoring of Iran's internet connectivity, censorship, and circumvention tools",
+  "owner": "Danialsamadi",
+  "repo": "iran-internet-monitor",
+  "url": "https://Danialsamadi.github.io/iran-internet-monitor",
+  "cron": "*/5 * * * *",
+  "assignees": [],
+  "categories": [
+    {
+      "name": "Outage Detection (IODA)",
+      "icon": "🔴",
+      "services": [
+        {
+          "id": "ioda-bgp",
+          "name": "IODA BGP Visibility",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/country/IR?from=__7D_AGO__&until=__NOW__&datasource=bgp&maxPoints=1",
+          "description": "BGP route visibility for Iran — measures how many Iran prefixes are globally reachable",
+          "interval": 300,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ioda-ping",
+          "name": "IODA Active Probing",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/country/IR?from=__7D_AGO__&until=__NOW__&datasource=ping-slash24&maxPoints=1",
+          "description": "Active ping reachability — how many /24 blocks in Iran respond to pings",
+          "interval": 300,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ioda-merit",
+          "name": "IODA MERIT Telescope",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/country/IR?from=__7D_AGO__&until=__NOW__&datasource=merit-nt&maxPoints=1",
+          "description": "MERIT network telescope — background radiation from Iran IP space",
+          "interval": 300,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ioda-gtr",
+          "name": "IODA Google Traffic",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/country/IR?from=__7D_AGO__&until=__NOW__&datasource=gtr&maxPoints=1",
+          "description": "Google Transparency Report traffic data for Iran",
+          "interval": 300,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ioda-alerts",
+          "name": "IODA Outage Alerts",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/outages/alerts?entityType=country&entityCode=IR&from=__24H_AGO__&until=__NOW__&limit=5",
+          "description": "Active outage alerts detected by IODA for Iran",
+          "interval": 300,
+          "type": "ioda_alerts"
+        },
+        {
+          "id": "ioda-latency",
+          "name": "IODA Latency",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/country/IR?from=__7D_AGO__&until=__NOW__&datasource=ping-slash24-latency&maxPoints=1",
+          "description": "Average latency to Iran /24 blocks",
+          "interval": 600,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ioda-loss",
+          "name": "IODA Packet Loss",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/country/IR?from=__7D_AGO__&until=__NOW__&datasource=ping-slash24-loss&maxPoints=1",
+          "description": "Packet loss rate to Iran /24 blocks",
+          "interval": 600,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        }
+      ]
+    },
+    {
+      "name": "Censorship Detection (OONI)",
+      "icon": "🔒",
+      "services": [
+        {
+          "id": "ooni-web",
+          "name": "Web Censorship",
+          "url": "https://api.ooni.io/api/v1/aggregation?probe_cc=IR&test_name=web_connectivity&since=__7D_AGO_DATE__&until=__TODAY__&axis_x=measurement_start_day",
+          "description": "OONI web connectivity anomaly rate — percentage of tested websites showing censorship",
+          "interval": 900,
+          "type": "ooni_aggregation"
+        },
+        {
+          "id": "ooni-telegram",
+          "name": "Telegram Blocking",
+          "url": "https://api.ooni.io/api/v1/aggregation?probe_cc=IR&test_name=telegram&since=__7D_AGO_DATE__&until=__TODAY__",
+          "description": "Telegram reachability from Iran",
+          "interval": 900,
+          "type": "ooni_aggregation"
+        },
+        {
+          "id": "ooni-whatsapp",
+          "name": "WhatsApp Blocking",
+          "url": "https://api.ooni.io/api/v1/aggregation?probe_cc=IR&test_name=whatsapp&since=__7D_AGO_DATE__&until=__TODAY__",
+          "description": "WhatsApp reachability from Iran",
+          "interval": 900,
+          "type": "ooni_aggregation"
+        },
+        {
+          "id": "ooni-signal",
+          "name": "Signal Blocking",
+          "url": "https://api.ooni.io/api/v1/aggregation?probe_cc=IR&test_name=signal&since=__7D_AGO_DATE__&until=__TODAY__",
+          "description": "Signal messenger reachability from Iran",
+          "interval": 900,
+          "type": "ooni_aggregation"
+        },
+        {
+          "id": "ooni-facebook",
+          "name": "Facebook Blocking",
+          "url": "https://api.ooni.io/api/v1/aggregation?probe_cc=IR&test_name=facebook_messenger&since=__7D_AGO_DATE__&until=__TODAY__",
+          "description": "Facebook Messenger reachability from Iran",
+          "interval": 900,
+          "type": "ooni_aggregation"
+        },
+        {
+          "id": "ooni-psiphon",
+          "name": "Psiphon Reachability",
+          "url": "https://api.ooni.io/api/v1/aggregation?probe_cc=IR&test_name=psiphon&since=__7D_AGO_DATE__&until=__TODAY__",
+          "description": "Psiphon circumvention tool reachability from Iran",
+          "interval": 900,
+          "type": "ooni_aggregation"
+        },
+        {
+          "id": "ooni-tor",
+          "name": "Tor Reachability",
+          "url": "https://api.ooni.io/api/v1/aggregation?probe_cc=IR&test_name=tor&since=__7D_AGO_DATE__&until=__TODAY__",
+          "description": "Tor network reachability from Iran",
+          "interval": 900,
+          "type": "ooni_aggregation"
+        },
+        {
+          "id": "ooni-torsf",
+          "name": "Tor Snowflake",
+          "url": "https://api.ooni.io/api/v1/aggregation?probe_cc=IR&test_name=torsf&since=__7D_AGO_DATE__&until=__TODAY__",
+          "description": "Tor Snowflake bridge reachability from Iran",
+          "interval": 900,
+          "type": "ooni_aggregation"
+        },
+        {
+          "id": "ooni-dpi",
+          "name": "DPI / Middlebox",
+          "url": "https://api.ooni.io/api/v1/aggregation?probe_cc=IR&test_name=http_invalid_request_line&since=__7D_AGO_DATE__&until=__TODAY__",
+          "description": "Deep packet inspection / middlebox detection in Iran",
+          "interval": 1800,
+          "type": "ooni_aggregation"
+        },
+        {
+          "id": "ooni-dns",
+          "name": "DNS Tampering",
+          "url": "https://api.ooni.io/api/v1/aggregation?probe_cc=IR&test_name=dns_consistency&since=__7D_AGO_DATE__&until=__TODAY__",
+          "description": "DNS tampering/poisoning detection in Iran",
+          "interval": 1800,
+          "type": "ooni_aggregation"
+        }
+      ]
+    },
+    {
+      "name": "Network Quality",
+      "icon": "📡",
+      "services": [
+        {
+          "id": "irinter-score",
+          "name": "irinter.net Score",
+          "url": "https://irinter.net/api/data/network-score?from=__24H_AGO__&until=__NOW__",
+          "description": "Iran network quality score (0-100) from irinter.net",
+          "interval": 300,
+          "type": "irinter_score",
+          "threshold_warn": 70,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ripe-probes-up",
+          "name": "RIPE Probes Active",
+          "url": "https://atlas.ripe.net/api/v2/probes/?country_code=IR&status=1&page_size=1",
+          "description": "Number of active RIPE Atlas probes in Iran",
+          "interval": 600,
+          "type": "ripe_probes"
+        },
+        {
+          "id": "ripe-probes-down",
+          "name": "RIPE Probes Disconnected",
+          "url": "https://atlas.ripe.net/api/v2/probes/?country_code=IR&status=2&page_size=1",
+          "description": "Number of disconnected RIPE Atlas probes in Iran",
+          "interval": 600,
+          "type": "ripe_probes"
+        }
+      ]
+    },
+    {
+      "name": "ISP Monitoring (IODA per-ASN)",
+      "icon": "🏢",
+      "services": [
+        {
+          "id": "isp-irancell",
+          "name": "Irancell (AS44244)",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/asn/44244?from=__7D_AGO__&until=__NOW__&datasource=bgp&maxPoints=1",
+          "description": "Irancell mobile operator BGP visibility",
+          "interval": 600,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "isp-mci",
+          "name": "MCI / Hamrah-e-Aval (AS197207)",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/asn/197207?from=__7D_AGO__&until=__NOW__&datasource=bgp&maxPoints=1",
+          "description": "MCI mobile operator BGP visibility",
+          "interval": 600,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "isp-tic",
+          "name": "DCI / TIC (AS12880)",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/asn/12880?from=__7D_AGO__&until=__NOW__&datasource=bgp&maxPoints=1",
+          "description": "Data Communication Iran (TIC backbone) BGP visibility",
+          "interval": 600,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "isp-shatel",
+          "name": "Shatel (AS31549)",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/asn/31549?from=__7D_AGO__&until=__NOW__&datasource=bgp&maxPoints=1",
+          "description": "Shatel ISP BGP visibility",
+          "interval": 600,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "isp-asiatech",
+          "name": "Asiatech (AS43754)",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/asn/43754?from=__7D_AGO__&until=__NOW__&datasource=bgp&maxPoints=1",
+          "description": "Asiatech ISP BGP visibility",
+          "interval": 600,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "isp-mobinnet",
+          "name": "Mobinnet (AS50810)",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/asn/50810?from=__7D_AGO__&until=__NOW__&datasource=bgp&maxPoints=1",
+          "description": "Mobinnet ISP BGP visibility",
+          "interval": 600,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "isp-arvancloud",
+          "name": "ArvanCloud (AS205585)",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/asn/205585?from=__7D_AGO__&until=__NOW__&datasource=bgp&maxPoints=1",
+          "description": "ArvanCloud CDN/hosting BGP visibility",
+          "interval": 600,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "isp-tic-regional",
+          "name": "TIC Regional (AS58224)",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/asn/58224?from=__7D_AGO__&until=__NOW__&datasource=bgp&maxPoints=1",
+          "description": "TIC regional networks BGP visibility",
+          "interval": 600,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "isp-respina",
+          "name": "Respina (AS42337)",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/asn/42337?from=__7D_AGO__&until=__NOW__&datasource=bgp&maxPoints=1",
+          "description": "Respina ISP BGP visibility",
+          "interval": 600,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "isp-pishgaman",
+          "name": "Pishgaman (AS44208)",
+          "url": "https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/asn/44208?from=__7D_AGO__&until=__NOW__&datasource=bgp&maxPoints=1",
+          "description": "Pishgaman ISP BGP visibility",
+          "interval": 600,
+          "type": "ioda_signal",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        }
+      ]
+    },
+    {
+      "name": "Circumvention & Anonymity",
+      "icon": "🛡️",
+      "services": [
+        {
+          "id": "psiphon-conduit",
+          "name": "Psiphon Conduit Stats",
+          "url": "https://stats.psianalytics.live/conduitStats",
+          "description": "Psiphon Conduit station count and daily connections",
+          "interval": 3600,
+          "type": "psiphon_stats"
+        },
+        {
+          "id": "psiphon-global",
+          "name": "Psiphon Global Stats",
+          "url": "https://stats.psianalytics.live/psiphonStats",
+          "description": "Global Psiphon daily unique users and data transferred",
+          "interval": 3600,
+          "type": "psiphon_stats"
+        },
+        {
+          "id": "tor-bridge-users",
+          "name": "Tor Bridge Users (Iran)",
+          "url": "https://metrics.torproject.org/userstats-bridge-country.csv?start=__30D_AGO_DATE__&end=__TODAY__&country=ir",
+          "description": "Estimated daily Tor bridge users from Iran",
+          "interval": 3600,
+          "type": "tor_csv"
+        },
+        {
+          "id": "tor-relay-users",
+          "name": "Tor Relay Users (Iran)",
+          "url": "https://metrics.torproject.org/userstats-relay-country.csv?start=__30D_AGO_DATE__&end=__TODAY__&country=ir",
+          "description": "Estimated daily Tor relay users from Iran",
+          "interval": 3600,
+          "type": "tor_csv"
+        }
+      ]
+    },
+    {
+      "name": "BGP & Routing (RIPEstat)",
+      "icon": "🌐",
+      "services": [
+        {
+          "id": "ripestat-country-asns",
+          "name": "Iran ASN Count",
+          "url": "https://stat.ripe.net/data/country-asns/data.json?resource=IR&lod=1",
+          "description": "Number of ASNs registered in Iran",
+          "interval": 21600,
+          "type": "ripestat"
+        },
+        {
+          "id": "ripestat-tic-prefixes",
+          "name": "TIC Announced Prefixes",
+          "url": "https://stat.ripe.net/data/announced-prefixes/data.json?resource=AS12880",
+          "description": "Number of IP prefixes announced by TIC/DCI backbone",
+          "interval": 3600,
+          "type": "ripestat"
+        },
+        {
+          "id": "ripestat-irancell-visibility",
+          "name": "Irancell Route Visibility",
+          "url": "https://stat.ripe.net/data/visibility/data.json?resource=AS44244",
+          "description": "Global visibility of Irancell routes across RIS peers",
+          "interval": 3600,
+          "type": "ripestat"
+        }
+      ]
+    }
+  ]
+}

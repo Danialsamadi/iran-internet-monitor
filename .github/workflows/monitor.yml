@@ -1,0 +1,134 @@
+# ═══════════════════════════════════════════════════════════════
+# Iran Internet Monitor — Uptime Check
+# Runs every 5 minutes, checks all API endpoints, commits results
+# Inspired by Upptime (https://github.com/upptime/upptime)
+# ═══════════════════════════════════════════════════════════════
+
+name: "Uptime CI"
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  repository_dispatch:
+    types: [uptime]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Force check all services (ignore intervals)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  check:
+    name: "Check endpoint status"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT || github.token }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.21"
+
+      - name: Install jq (for page-data and commit steps)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq jq
+
+      - name: Run checks (Go — parallel)
+        run: |
+          cd check && go build -o ../checker . && cd .. && ./checker
+
+      - name: Process incidents (GitHub Issues)
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT || github.token }}
+        run: |
+          if [ ! -f incidents.log ] || [ ! -s incidents.log ]; then
+            echo "No incidents to process"
+            exit 0
+          fi
+
+          while IFS='|' read -r timestamp id name prev_status new_status message; do
+            [ -z "$id" ] && continue
+
+            if [ "$new_status" = "down" ] || [ "$new_status" = "degraded" ]; then
+              # Check if issue already exists
+              existing=$(gh issue list --label "status:${new_status}" --label "service:${id}" --state open --json number --jq '.[0].number' 2>/dev/null || echo "")
+
+              if [ -z "$existing" ]; then
+                status_emoji="🔴"
+                [ "$new_status" = "degraded" ] && status_emoji="🟡"
+
+                gh issue create \
+                  --title "${status_emoji} ${name} is ${new_status}" \
+                  --body "**Service:** ${name} (\`${id}\`)
+          **Status:** ${prev_status} → **${new_status}**
+          **Time:** ${timestamp}
+          **Details:** ${message}
+
+          ---
+          This issue was automatically created by [Iran Internet Monitor](https://github.com/${{ github.repository }}).
+          It will be closed automatically when the service recovers." \
+                  --label "status:${new_status},service:${id},automated" 2>/dev/null || true
+              else
+                gh issue comment "$existing" \
+                  --body "**Update** (${timestamp}): Status changed to **${new_status}** — ${message}" 2>/dev/null || true
+              fi
+
+            elif [ "$new_status" = "up" ] && [ "$prev_status" != "unknown" ]; then
+              for label in "status:down" "status:degraded"; do
+                issues=$(gh issue list --label "$label" --label "service:${id}" --state open --json number --jq '.[].number' 2>/dev/null || echo "")
+                for issue_num in $issues; do
+                  [ -z "$issue_num" ] && continue
+                  gh issue comment "$issue_num" \
+                    --body "**Resolved** (${timestamp}): ${name} is back to **up** — ${message}" 2>/dev/null || true
+                  gh issue close "$issue_num" \
+                    --comment "✅ Service recovered. Closing automatically." 2>/dev/null || true
+                done
+              done
+            fi
+          done < incidents.log
+
+          > incidents.log
+
+      - name: Generate status page data
+        run: |
+          echo '{"generated":"'"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"'","services":[' > api/page-data.json
+          first=true
+          for f in api/*.json; do
+            fname=$(basename "$f")
+            [ "$fname" = "summary.json" ] && continue
+            [ "$fname" = "page-data.json" ] && continue
+            if $first; then first=false; else echo "," >> api/page-data.json; fi
+            cat "$f" >> api/page-data.json
+          done
+          echo '],' >> api/page-data.json
+          echo '"summary":' >> api/page-data.json
+          cat api/summary.json >> api/page-data.json
+          echo ',"categories":' >> api/page-data.json
+          jq '[.categories[] | {name, icon, service_ids: [.services[].id]}]' config.json >> api/page-data.json
+          echo '}' >> api/page-data.json
+
+      - name: Update README with live status
+        run: |
+          chmod +x scripts/update-readme.sh
+          bash scripts/update-readme.sh
+
+      - name: Commit & push
+        run: |
+          git config user.name "Iran Internet Monitor [bot]"
+          git config user.email "bot@iran-internet-monitor.github.io"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            SUMMARY=$(cat api/summary.json | jq -r '"Status: \(.up) up, \(.degraded) degraded, \(.down) down | Overall: \(.overall_status)"' 2>/dev/null || echo "Check complete")
+            git commit -m "📊 ${SUMMARY}"
+            git push
+          fi
