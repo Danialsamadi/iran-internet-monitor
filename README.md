@@ -27,17 +27,17 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 | 🟥 **Tor Snowflake** | down | 701ms | 0% |
 | 🟥 **Web Censorship** | down | 701ms | 83.3% |
 | 🟥 **WhatsApp Blocking** | down | 616ms | 0% |
-| 🟥 **irinter.net Score** | down | 564ms | 0% |
+| 🟥 **irinter.net Score** | down | 577ms | 0% |
 | 🟨 **Psiphon Reachability** | degraded | 984ms | 0% |
 | 🟩 **ArvanCloud (AS205585)** | up | 532ms | 87.5% |
 | 🟩 **Asiatech (AS43754)** | up | 781ms | 87.5% |
 | 🟩 **DCI / TIC (AS12880)** | up | 603ms | 87.5% |
 | 🟩 **DPI / Middlebox** | up | 645ms | 100% |
-| 🟩 **IODA Active Probing** | up | 715ms | 91.7% |
-| 🟩 **IODA BGP Visibility** | up | 774ms | 91.7% |
-| 🟩 **IODA Google Traffic** | up | 682ms | 91.7% |
-| 🟩 **IODA MERIT Telescope** | up | 721ms | 91.7% |
-| 🟩 **IODA Outage Alerts** | up | 556ms | 100% |
+| 🟩 **IODA Active Probing** | up | 860ms | 92.3% |
+| 🟩 **IODA BGP Visibility** | up | 864ms | 92.3% |
+| 🟩 **IODA Google Traffic** | up | 814ms | 92.3% |
+| 🟩 **IODA MERIT Telescope** | up | 820ms | 92.3% |
+| 🟩 **IODA Outage Alerts** | up | 683ms | 100% |
 | 🟩 **Iran ASN Count** | up | 1493ms | 100% |
 | 🟩 **Irancell (AS44244)** | up | 506ms | 87.5% |
 | 🟩 **Irancell Route Visibility** | up | 4269ms | 100% |
@@ -55,7 +55,7 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 | 🟩 **Tor Relay Users (Iran)** | up | 420ms | 100% |
 <!--END_STATUS_TABLE-->
 
-> Last checked: 2026-02-14T19:35:04Z
+> Last checked: 2026-02-14T19:40:09Z
 > 24 up · 1 degraded · 7 down · 5 unknown
 
 ## ⭐ How it works
