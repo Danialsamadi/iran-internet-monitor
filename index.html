@@ -772,6 +772,11 @@
             min-width: 120px
         }
 
+        .apex-spark-wrap {
+            height: 36px;
+            min-width: 120px
+        }
+
         @media (max-width: 600px) {
             .graph-filters { flex-direction: column; align-items: stretch }
             .graph-filters select { min-width: 100% }
@@ -1378,17 +1383,15 @@
                 }
                 h += `</div></div>`;
 
-                // === Response time by service — ApexCharts area with threshold (negative style) ===
+                // === Response time by service — one small area chart per service (negative/threshold style) ===
                 const RESPONSE_THRESHOLD_MS = 500;
-                const byServiceAreaSeries = responseSeries.map(function(s) {
-                    const data = s.values.map(function(y, i) {
-                        const t = now - (23 - i) * 3600000;
-                        return { x: t, y: Math.round(y) };
-                    });
-                    return { name: s.name, data: data };
+                h += `<div class="card"><div class="card-title">Response time by service (filtered) — green below ${RESPONSE_THRESHOLD_MS}ms, red above</div><div class="multi-spark-wrap" id="response-by-service-wrap">`;
+                responseSeries.forEach(function(s, idx) {
+                    const svc = sparkList[idx];
+                    const status = (svc && svc.status) || 'unknown';
+                    h += `<div class="multi-spark-row"><div class="spark-name"><span class="svc-dot ${status}"></span>${esc(s.name)}</div><div class="spark-chart"><div id="chart-response-svc-${idx}" class="apex-spark-wrap"></div></div><div class="spark-val">${(svc && svc.response_time_ms) || '—'}ms</div></div>`;
                 });
-                h += `<div class="card"><div class="card-title">Response time by service (filtered) — green below ${RESPONSE_THRESHOLD_MS}ms, red above</div>`;
-                h += `<div id="chart-response-by-service" class="apex-chart-wrap"></div></div>`;
+                h += `</div></div>`;
 
                 // === BOT ROW: Status (ApexCharts multiple radialbars) + Bar chart + Categories ===
                 h += `<div class="grid grid-bot">`;
@@ -1501,16 +1504,20 @@
                         chartList.push(respChart);
                     }
 
-                    // Response time by service (filtered) — area with negative/threshold style (https://apexcharts.com/javascript-chart-demos/area-charts/negative/)
-                    var byServiceEl = document.getElementById('chart-response-by-service');
-                    if (byServiceEl && byServiceAreaSeries.length) {
-                        var byServiceOpts = {
-                            series: byServiceAreaSeries,
-                            chart: { type: 'area', height: 220, stacked: false, toolbar: { show: false }, zoom: { enabled: false }, background: 'transparent' },
-                            colors: responseSeries.map(function(s) { return s.color; }),
+                    // Response time by service (filtered) — one small area chart per service (negative/threshold style)
+                    responseSeries.forEach(function(s, idx) {
+                        var el = document.getElementById('chart-response-svc-' + idx);
+                        if (!el) return;
+                        var data = s.values.map(function(y, i) {
+                            var t = now - (23 - i) * 3600000;
+                            return { x: t, y: Math.round(y) };
+                        });
+                        var opts = {
+                            series: [{ name: s.name, data: data }],
+                            chart: { type: 'area', height: 36, toolbar: { show: false }, zoom: { enabled: false }, background: 'transparent', sparkline: { enabled: false } },
                             stroke: { width: 1, curve: 'smooth' },
                             dataLabels: { enabled: false },
-                            fill: { type: 'solid', opacity: 0.2 },
+                            fill: { type: 'solid', opacity: 0.3 },
                             plotOptions: {
                                 line: {
                                     colors: {
@@ -1520,17 +1527,17 @@
                                     }
                                 }
                             },
-                            xaxis: { type: 'datetime', labels: { style: { colors: '#5c6a82' } } },
-                            yaxis: { labels: { style: { colors: '#5c6a82' } } },
-                            grid: { borderColor: 'var(--border)', strokeDashArray: 2 },
-                            legend: { position: 'top', horizontalAlign: 'right', labels: { colors: '#9aa5b8' } },
-                            tooltip: { shared: true, theme: 'dark' },
+                            xaxis: { type: 'datetime', labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false } },
+                            yaxis: { labels: { show: false }, min: 0, max: undefined },
+                            grid: { show: false, padding: { top: 0, right: 0, bottom: 0, left: 0 } },
+                            legend: { show: false },
+                            tooltip: { theme: 'dark', x: { format: 'HH:mm' } },
                             theme: { mode: 'dark' }
                         };
-                        var byServiceChart = new ApexCharts(byServiceEl, byServiceOpts);
-                        byServiceChart.render();
-                        chartList.push(byServiceChart);
-                    }
+                        var ch = new ApexCharts(el, opts);
+                        ch.render();
+                        chartList.push(ch);
+                    });
 
                     window.iranMonitorCharts = chartList;
                 }
