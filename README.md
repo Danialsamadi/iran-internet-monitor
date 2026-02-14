@@ -55,7 +55,7 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 | 🟩 **Web Censorship** | up | 545ms | 71.4% |
 <!--END_STATUS_TABLE-->
 
-> Last checked: 2026-02-14T19:55:58Z
+> Last checked: 2026-02-14T19:57:26Z
 > 25 up · 1 degraded · 6 down · 5 unknown
 
 ## ⭐ How it works
