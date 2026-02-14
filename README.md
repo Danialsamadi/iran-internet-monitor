@@ -55,7 +55,7 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 | 🟩 **Tor Relay Users (Iran)** | up | 420ms | 100% |
 <!--END_STATUS_TABLE-->
 
-> Last checked: 2026-02-14T19:40:09Z
+> Last checked: 2026-02-14T19:43:09Z
 > 24 up · 1 degraded · 7 down · 5 unknown
 
 ## ⭐ How it works
