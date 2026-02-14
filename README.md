@@ -14,38 +14,38 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 <!--START_STATUS_TABLE-->
 | Service | Status | Response | Uptime |
 |---------|--------|----------|--------|
-| 🟩 **IODA Outage Alerts** | up | 654ms | 100% |
-| 🟩 **IODA BGP Visibility** | up | 1094ms | 88.88888888888889% |
-| 🟩 **IODA Google Traffic** | up | 838ms | 88.88888888888889% |
-| ⬜ **IODA Latency** | unknown | 1050ms | 16.666666666666664% |
-| ⬜ **IODA Packet Loss** | unknown | 939ms | 16.666666666666664% |
-| 🟩 **IODA MERIT Telescope** | up | 925ms | 88.88888888888889% |
-| 🟩 **IODA Active Probing** | up | 857ms | 88.88888888888889% |
-| 🟥 **irinter.net Score** | down | 289ms | 0% |
-| 🟩 **ArvanCloud (AS205585)** | up | 1037ms | 83.33333333333334% |
-| 🟩 **Asiatech (AS43754)** | up | 1093ms | 83.33333333333334% |
-| 🟩 **Irancell (AS44244)** | up | 1093ms | 83.33333333333334% |
-| 🟩 **MCI / Hamrah-e-Aval (AS197207)** | up | 1071ms | 83.33333333333334% |
-| 🟩 **Mobinnet (AS50810)** | up | 1092ms | 83.33333333333334% |
-| 🟩 **Pishgaman (AS44208)** | up | 1093ms | 83.33333333333334% |
-| 🟩 **Respina (AS42337)** | up | 892ms | 83.33333333333334% |
-| 🟩 **Shatel (AS31549)** | up | 1099ms | 83.33333333333334% |
-| 🟩 **TIC Regional (AS58224)** | up | 1082ms | 83.33333333333334% |
-| 🟩 **DCI / TIC (AS12880)** | up | 1070ms | 83.33333333333334% |
-| ⬜ **DNS Tampering** | unknown | 163ms | 0% |
-| 🟩 **DPI / Middlebox** | up | 206ms | 100% |
-| 🟥 **Facebook Blocking** | down | 187ms | 0% |
-| 🟨 **Psiphon Reachability** | degraded | 192ms | 0% |
-| 🟥 **Signal Blocking** | down | 519ms | 0% |
-| 🟥 **Telegram Blocking** | down | 179ms | 0% |
-| 🟩 **Tor Reachability** | up | 458ms | 100% |
-| 🟥 **Tor Snowflake** | down | 169ms | 0% |
-| 🟩 **Web Censorship** | up | 420ms | 100% |
-| 🟥 **WhatsApp Blocking** | down | 178ms | 0% |
+| 🟩 **IODA Outage Alerts** | up | 587ms | 100% |
+| 🟩 **IODA BGP Visibility** | up | 816ms | 90% |
+| 🟩 **IODA Google Traffic** | up | 748ms | 90% |
+| ⬜ **IODA Latency** | unknown | 1026ms | 14.285714285714285% |
+| ⬜ **IODA Packet Loss** | unknown | 905ms | 14.285714285714285% |
+| 🟩 **IODA MERIT Telescope** | up | 797ms | 90% |
+| 🟩 **IODA Active Probing** | up | 773ms | 90% |
+| 🟥 **irinter.net Score** | down | 637ms | 0% |
+| 🟩 **ArvanCloud (AS205585)** | up | 503ms | 85.71428571428571% |
+| 🟩 **Asiatech (AS43754)** | up | 584ms | 85.71428571428571% |
+| 🟩 **Irancell (AS44244)** | up | 409ms | 85.71428571428571% |
+| 🟩 **MCI / Hamrah-e-Aval (AS197207)** | up | 828ms | 85.71428571428571% |
+| 🟩 **Mobinnet (AS50810)** | up | 504ms | 85.71428571428571% |
+| 🟩 **Pishgaman (AS44208)** | up | 450ms | 85.71428571428571% |
+| 🟩 **Respina (AS42337)** | up | 469ms | 85.71428571428571% |
+| 🟩 **Shatel (AS31549)** | up | 511ms | 85.71428571428571% |
+| 🟩 **TIC Regional (AS58224)** | up | 507ms | 85.71428571428571% |
+| 🟩 **DCI / TIC (AS12880)** | up | 590ms | 85.71428571428571% |
+| ⬜ **DNS Tampering** | unknown | 730ms | 0% |
+| 🟩 **DPI / Middlebox** | up | 645ms | 100% |
+| 🟥 **Facebook Blocking** | down | 731ms | 0% |
+| 🟨 **Psiphon Reachability** | degraded | 730ms | 0% |
+| 🟥 **Signal Blocking** | down | 645ms | 0% |
+| 🟥 **Telegram Blocking** | down | 654ms | 0% |
+| 🟩 **Tor Reachability** | up | 730ms | 100% |
+| 🟥 **Tor Snowflake** | down | 730ms | 0% |
+| 🟥 **Web Censorship** | down | 730ms | 100% |
+| 🟥 **WhatsApp Blocking** | down | 656ms | 0% |
 | ⬜ **Psiphon Conduit Stats** | unknown | 314ms | 100% |
 | ⬜ **Psiphon Global Stats** | unknown | 340ms | 0% |
-| 🟩 **RIPE Probes Disconnected** | up | 492ms | 100% |
-| 🟩 **RIPE Probes Active** | up | 512ms | 100% |
+| 🟩 **RIPE Probes Disconnected** | up | 482ms | 100% |
+| 🟩 **RIPE Probes Active** | up | 531ms | 100% |
 | 🟩 **Iran ASN Count** | up | 1493ms | 100.00% |
 | 🟩 **Irancell Route Visibility** | up | 4269ms | 100% |
 | 🟩 **TIC Announced Prefixes** | up | 147ms | 100% |
@@ -53,8 +53,8 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 | 🟩 **Tor Relay Users (Iran)** | up | 420ms | 100% |
 <!--END_STATUS_TABLE-->
 
-> Last checked: 2026-02-14T18:57:05Z
-> 25 up · 1 degraded · 6 down · 5 unknown
+> Last checked: 2026-02-14T19:17:10Z
+> 24 up · 1 degraded · 7 down · 5 unknown
 
 ## ⭐ How it works
 
