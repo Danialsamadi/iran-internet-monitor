@@ -1,91 +1,99 @@
-# Iran Internet Monitor
+# [📈 Live Status](https://Danialsamadi.github.io/iran-internet-monitor): 🟥 Major Outage
 
-Real-time monitoring of Iran's internet connectivity, censorship, and circumvention tools. Powered by GitHub Actions — no server required.
+> Real-time monitoring of Iran's internet connectivity, censorship, and circumvention tools.
+> Powered by [GitHub Actions](https://github.com/features/actions) — no server required.
 
-## Live Status
+This repository contains the open-source uptime monitor and status page for Iran's internet infrastructure.
+Data is collected every 5 minutes using GitHub Actions, and results are committed to this repo.
 
-After the first workflow run, this section is replaced with the live status table. See [GitHub Actions](.github/workflows/monitor.yml) and the status page (once [GitHub Pages](.github/workflows/pages.yml) is enabled).
+[![Uptime CI](https://github.com/Danialsamadi/iran-internet-monitor/workflows/Uptime%20CI/badge.svg)](https://github.com/Danialsamadi/iran-internet-monitor/actions?query=workflow%3A%22Uptime+CI%22)
+[![Pages CI](https://github.com/Danialsamadi/iran-internet-monitor/workflows/Pages%20CI/badge.svg)](https://github.com/Danialsamadi/iran-internet-monitor/actions?query=workflow%3A%22Pages+CI%22)
 
-## Quick Start
+## [📈 Live Status](https://Danialsamadi.github.io/iran-internet-monitor): 🟥 Major Outage
 
-**Run locally (requires [Go](https://go.dev/) 1.21+):**
+<!--START_STATUS_TABLE-->
+| Service | Status | Response | Uptime |
+|---------|--------|----------|--------|
+| 🟩 **IODA Outage Alerts** | up | 542ms | 100% |
+| 🟩 **IODA BGP Visibility** | up | 802ms | 80% |
+| 🟩 **IODA Google Traffic** | up | 734ms | 80% |
+| ⬜ **IODA Latency** | unknown | 1008ms | 33.33333333333333% |
+| ⬜ **IODA Packet Loss** | unknown | 784ms | 33.33333333333333% |
+| 🟩 **IODA MERIT Telescope** | up | 688ms | 80% |
+| 🟩 **IODA Active Probing** | up | 698ms | 80% |
+| 🟥 **irinter.net Score** | down | 572ms | 0% |
+| 🟩 **ArvanCloud (AS205585)** | up | 783ms | 66.66666666666666% |
+| 🟩 **Asiatech (AS43754)** | up | 598ms | 66.66666666666666% |
+| 🟩 **Irancell (AS44244)** | up | 788ms | 66.66666666666666% |
+| 🟩 **MCI / Hamrah-e-Aval (AS197207)** | up | 777ms | 66.66666666666666% |
+| 🟩 **Mobinnet (AS50810)** | up | 694ms | 66.66666666666666% |
+| 🟩 **Pishgaman (AS44208)** | up | 809ms | 66.66666666666666% |
+| 🟩 **Respina (AS42337)** | up | 730ms | 66.66666666666666% |
+| 🟩 **Shatel (AS31549)** | up | 805ms | 66.66666666666666% |
+| 🟩 **TIC Regional (AS58224)** | up | 731ms | 66.66666666666666% |
+| 🟩 **DCI / TIC (AS12880)** | up | 789ms | 66.66666666666666% |
+| ⬜ **DNS Tampering** | unknown | 714ms | 0% |
+| 🟩 **DPI / Middlebox** | up | 658ms | 100% |
+| 🟥 **Facebook Blocking** | down | 664ms | 0% |
+| 🟨 **Psiphon Reachability** | degraded | 715ms | 0% |
+| 🟥 **Signal Blocking** | down | 659ms | 0% |
+| 🟥 **Telegram Blocking** | down | 660ms | 0% |
+| 🟩 **Tor Reachability** | up | 713ms | 100% |
+| 🟥 **Tor Snowflake** | down | 717ms | 0% |
+| 🟩 **Web Censorship** | up | 794ms | 100% |
+| 🟥 **WhatsApp Blocking** | down | 716ms | 0% |
+| 🟩 **Psiphon Conduit Stats** | up | 6251ms | 100.00% |
+| ⬜ **Psiphon Global Stats** | unknown | 2802ms | 0.00% |
+| 🟩 **RIPE Probes Disconnected** | up | 607ms | 100% |
+| 🟩 **RIPE Probes Active** | up | 619ms | 100% |
+| 🟩 **Iran ASN Count** | up | 1493ms | 100.00% |
+| 🟩 **Irancell Route Visibility** | up | 7769ms | 100.00% |
+| 🟩 **TIC Announced Prefixes** | up | 21661ms | 100.00% |
+| 🟩 **Tor Bridge Users (Iran)** | up | 4626ms | 100.00% |
+| 🟩 **Tor Relay Users (Iran)** | up | 18377ms | 100.00% |
+<!--END_STATUS_TABLE-->
 
-```bash
-./run-check.sh
-```
+> Last checked: 2026-02-14T18:09:08Z
+> 26 up · 1 degraded · 6 down · 4 unknown
 
----
+## ⭐ How it works
 
-## Push & Deploy
+- **GitHub Actions** checks all endpoints every 5 minutes
+- **Response time** and status are recorded and committed to git
+- **GitHub Issues** are automatically opened/closed for incidents
+- **GitHub Pages** hosts the status page website
+- **History** is tracked in CSV files for long-term trend analysis
 
-### Option A — One-command setup (new repo)
-
-```bash
-bash setup.sh YOUR_GITHUB_USERNAME iran-internet-monitor
-```
-
-Then complete **Step 2** below.
-
-### Option B — Push existing repo
-
-1. **Push to GitHub**
-   ```bash
-   git remote add origin https://github.com/YOUR_USERNAME/iran-internet-monitor.git
-   git branch -M main
-   git push -u origin main
-   ```
-
-2. **Enable GitHub Pages**
-   - Repo → **Settings** → **Pages**
-   - **Source:** Deploy from a branch
-   - **Branch:** `gh-pages` / `/ (root)` → Save
-   - Status page: `https://YOUR_USERNAME.github.io/iran-internet-monitor`
-
-3. **First data run**
-   - **Actions** → **Uptime CI** → **Run workflow** (or wait for the 5‑min schedule)
-   - After it runs, the status page will show data and **Pages CI** will deploy the site.
-
-4. **(Optional) Incident labels**
-   ```bash
-   gh label create "status:down" --color e74c3c --repo YOUR_USERNAME/iran-internet-monitor
-   gh label create "status:degraded" --color f39c12 --repo YOUR_USERNAME/iran-internet-monitor
-   gh label create "automated" --color 6c757d --repo YOUR_USERNAME/iran-internet-monitor
-   ```
-
-## How It Works
-
-- **Uptime CI** (every 5 min): Go checker runs in parallel, hits 37 API endpoints (IODA, OONI, irinter.net, RIPE, Psiphon, Tor Metrics, RIPEstat), writes `api/*.json` and `history/*.csv`, opens/closes GitHub Issues for incidents.
-- **Pages CI**: Builds the status site from `index.html`, `monitors.html`, `incidents.html`, and `api/` → deploys to GitHub Pages.
-- **Status page**: Dark-theme dashboard; reads `api/page-data.json`, auto-refreshes.
-
-## Repository Structure
-
-```
-├── .github/workflows/   # Uptime CI, Pages CI
-├── check/               # Go checker (parallel API checks)
-├── scripts/             # update-readme.sh
-├── api/                 # Status JSON (committed by workflow)
-├── history/             # History CSV (committed by workflow)
-├── config.json          # Services to monitor
-├── index.html           # Main status page
-├── monitors.html        # Monitors view
-├── incidents.html       # Incidents view
-├── run-check.sh         # Run checker locally
-└── setup.sh             # One-command GitHub setup
-```
-
-## Data Sources
+### Data Sources
 
 | Provider | What it measures |
-|----------|------------------|
-| [IODA](https://ioda.inetintel.cc.gatech.edu/) | BGP visibility, active probing, outage alerts |
+|----------|-----------------|
+| [IODA](https://ioda.inetintel.cc.gatech.edu/) | BGP visibility, active probing, outage detection |
 | [OONI](https://ooni.org/) | Censorship, app blocking, DPI detection |
 | [irinter.net](https://irinter.net/) | Iran network quality score |
-| [RIPE Atlas](https://atlas.ripe.net/) | Probe connectivity |
-| [RIPEstat](https://stat.ripe.net/) | BGP analytics |
+| [RIPE Atlas](https://atlas.ripe.net/) | Probe connectivity, routing analytics |
+| [RIPEstat](https://stat.ripe.net/) | BGP analytics, prefix visibility |
 | [Tor Metrics](https://metrics.torproject.org/) | Tor/bridge users from Iran |
 | [Psiphon](https://psiphon.ca/) | Conduit stations, user stats |
 
-## License
+## 📂 Repository Structure
 
-MIT. Data from IODA, OONI, RIPE, Tor Metrics, Psiphon — see [APIs.md](APIs.md) for endpoints.
+```
+├── .github/workflows/     # GitHub Actions workflows
+│   ├── monitor.yml        # Main uptime check (every 5 min)
+│   └── pages.yml          # Deploy status page to GitHub Pages
+├── api/                   # Latest status data (JSON)
+├── history/               # Historical data (CSV)
+├── check/                 # Go checker (parallel API checks)
+├── scripts/
+│   └── update-readme.sh   # README auto-update
+├── run-check.sh           # Run checker (builds & runs Go binary)
+├── config.json            # Service configuration
+├── index.html             # Status page
+└── README.md              # This file (auto-generated)
+```
+
+## 📄 License
+
+Code: [MIT](./LICENSE) · Powered by open-source data from IODA, OONI, RIPE, Tor Metrics, and Psiphon.
+

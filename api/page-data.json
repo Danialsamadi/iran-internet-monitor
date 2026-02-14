@@ -1,408 +1,380 @@
-{"generated":"2026-02-14T16:16:47Z","services":[
+{"generated":"2026-02-14T18:09:10Z","services":[
 {
   "id": "ioda-alerts",
   "name": "IODA Outage Alerts",
   "status": "up",
   "message": "No active outage alerts",
   "value": 0,
-  "response_time_ms": 547,
+  "response_time_ms": 542,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 100,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "ioda-bgp",
   "name": "IODA BGP Visibility",
-  "status": "unknown",
-  "message": "No data available",
-  "value": 0,
-  "response_time_ms": 668,
+  "status": "up",
+  "message": "Healthy — signal at 100% of normal",
+  "value": 99.98672584337424,
+  "response_time_ms": 802,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 80,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "ioda-gtr",
   "name": "IODA Google Traffic",
-  "status": "unknown",
-  "message": "No data available",
-  "value": 0,
-  "response_time_ms": 687,
+  "status": "up",
+  "message": "Healthy — signal at 98% of normal",
+  "value": 98.08860751488669,
+  "response_time_ms": 734,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 80,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "ioda-latency",
   "name": "IODA Latency",
   "status": "unknown",
-  "message": "No data available",
+  "message": "No signal data",
   "value": 0,
-  "response_time_ms": 863,
+  "response_time_ms": 1008,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
+  "uptime_pct": 33.33333333333333,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
   "prev_status": "unknown"
-}
-,
+},
 {
   "id": "ioda-loss",
   "name": "IODA Packet Loss",
   "status": "unknown",
-  "message": "No data available",
+  "message": "No signal data",
   "value": 0,
-  "response_time_ms": 615,
+  "response_time_ms": 784,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
+  "uptime_pct": 33.33333333333333,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
   "prev_status": "unknown"
-}
-,
+},
 {
   "id": "ioda-merit",
   "name": "IODA MERIT Telescope",
-  "status": "unknown",
-  "message": "No data available",
-  "value": 0,
-  "response_time_ms": 912,
+  "status": "up",
+  "message": "Healthy — signal at 91% of normal",
+  "value": 91.0731883002935,
+  "response_time_ms": 688,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 80,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "ioda-ping",
   "name": "IODA Active Probing",
-  "status": "unknown",
-  "message": "No data available",
-  "value": 0,
-  "response_time_ms": 1967,
+  "status": "up",
+  "message": "Healthy — signal at 99% of normal",
+  "value": 99.04861800364678,
+  "response_time_ms": 698,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 80,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "irinter-score",
   "name": "irinter.net Score",
   "status": "down",
   "message": "Poor — network score 0/100",
   "value": 0,
-  "response_time_ms": 855,
+  "response_time_ms": 572,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 0,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "down"
+},
 {
   "id": "isp-arvancloud",
   "name": "ArvanCloud (AS205585)",
-  "status": "unknown",
-  "message": "No data available",
-  "value": 0,
-  "response_time_ms": 877,
+  "status": "up",
+  "message": "Healthy — signal at 100% of normal",
+  "value": 100,
+  "response_time_ms": 783,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 66.66666666666666,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "isp-asiatech",
   "name": "Asiatech (AS43754)",
-  "status": "unknown",
-  "message": "No data available",
-  "value": 0,
-  "response_time_ms": 684,
+  "status": "up",
+  "message": "Healthy — signal at 100% of normal",
+  "value": 100,
+  "response_time_ms": 598,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 66.66666666666666,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "isp-irancell",
   "name": "Irancell (AS44244)",
-  "status": "unknown",
-  "message": "No data available",
-  "value": 0,
-  "response_time_ms": 871,
+  "status": "up",
+  "message": "Healthy — signal at 100% of normal",
+  "value": 100,
+  "response_time_ms": 788,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 66.66666666666666,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "isp-mci",
   "name": "MCI / Hamrah-e-Aval (AS197207)",
-  "status": "unknown",
-  "message": "No data available",
-  "value": 0,
-  "response_time_ms": 902,
+  "status": "up",
+  "message": "Healthy — signal at 100% of normal",
+  "value": 99.68042338020044,
+  "response_time_ms": 777,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 66.66666666666666,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "isp-mobinnet",
   "name": "Mobinnet (AS50810)",
-  "status": "unknown",
-  "message": "No data available",
-  "value": 0,
-  "response_time_ms": 555,
+  "status": "up",
+  "message": "Healthy — signal at 100% of normal",
+  "value": 100,
+  "response_time_ms": 694,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 66.66666666666666,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "isp-pishgaman",
   "name": "Pishgaman (AS44208)",
-  "status": "unknown",
-  "message": "No data available",
-  "value": 0,
-  "response_time_ms": 2568,
+  "status": "up",
+  "message": "Healthy — signal at 100% of normal",
+  "value": 100,
+  "response_time_ms": 809,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 66.66666666666666,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "isp-respina",
   "name": "Respina (AS42337)",
-  "status": "unknown",
-  "message": "No data available",
-  "value": 0,
-  "response_time_ms": 872,
+  "status": "up",
+  "message": "Healthy — signal at 100% of normal",
+  "value": 100,
+  "response_time_ms": 730,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 66.66666666666666,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "isp-shatel",
   "name": "Shatel (AS31549)",
-  "status": "unknown",
-  "message": "No data available",
-  "value": 0,
-  "response_time_ms": 682,
+  "status": "up",
+  "message": "Healthy — signal at 100% of normal",
+  "value": 100,
+  "response_time_ms": 805,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 66.66666666666666,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "isp-tic-regional",
   "name": "TIC Regional (AS58224)",
-  "status": "unknown",
-  "message": "No data available",
-  "value": 0,
-  "response_time_ms": 637,
+  "status": "up",
+  "message": "Healthy — signal at 100% of normal",
+  "value": 99.9752938803325,
+  "response_time_ms": 731,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 66.66666666666666,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "isp-tic",
   "name": "DCI / TIC (AS12880)",
-  "status": "unknown",
-  "message": "No data available",
-  "value": 0,
-  "response_time_ms": 618,
+  "status": "up",
+  "message": "Healthy — signal at 100% of normal",
+  "value": 100,
+  "response_time_ms": 789,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 66.66666666666666,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "ooni-dns",
   "name": "DNS Tampering",
   "status": "unknown",
   "message": "No measurement data",
   "value": 0,
-  "response_time_ms": 1584,
+  "response_time_ms": 714,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
+  "uptime_pct": 0,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
   "prev_status": "unknown"
-}
-,
+},
 {
   "id": "ooni-dpi",
   "name": "DPI / Middlebox",
   "status": "up",
   "message": "Accessible — 12% anomaly rate (1015 OK)",
-  "value": 12,
-  "response_time_ms": 568,
+  "value": 12.045060658578857,
+  "response_time_ms": 658,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 100,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "ooni-facebook",
   "name": "Facebook Blocking",
   "status": "down",
   "message": "Blocked — 90% anomaly rate (1066/1180 tests)",
-  "value": 90,
-  "response_time_ms": 731,
+  "value": 90.33898305084746,
+  "response_time_ms": 664,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 0,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "down"
+},
 {
   "id": "ooni-psiphon",
   "name": "Psiphon Reachability",
   "status": "degraded",
   "message": "Partially blocked — 67% anomaly rate",
-  "value": 67,
-  "response_time_ms": 905,
+  "value": 67.1152228763667,
+  "response_time_ms": 715,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 0,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "degraded"
+},
 {
   "id": "ooni-signal",
   "name": "Signal Blocking",
   "status": "down",
   "message": "Blocked — 92% anomaly rate (1012/1097 tests)",
-  "value": 92,
-  "response_time_ms": 1536,
+  "value": 92.25159525979946,
+  "response_time_ms": 659,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 0,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "down"
+},
 {
   "id": "ooni-telegram",
   "name": "Telegram Blocking",
   "status": "down",
   "message": "Blocked — 97% anomaly rate (1168/1204 tests)",
-  "value": 97,
-  "response_time_ms": 773,
+  "value": 97.00996677740864,
+  "response_time_ms": 660,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 0,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "down"
+},
 {
   "id": "ooni-tor",
   "name": "Tor Reachability",
   "status": "up",
   "message": "Accessible — 23% anomaly rate (892 OK)",
-  "value": 23,
-  "response_time_ms": 704,
+  "value": 23.16968130921619,
+  "response_time_ms": 713,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 100,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "ooni-torsf",
   "name": "Tor Snowflake",
   "status": "down",
   "message": "Blocked — 94% anomaly rate (82/87 tests)",
-  "value": 94,
-  "response_time_ms": 738,
+  "value": 94.25287356321839,
+  "response_time_ms": 717,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 0,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "down"
+},
 {
   "id": "ooni-web",
   "name": "Web Censorship",
   "status": "up",
-  "message": "Accessible — 24% anomaly rate (59551 OK)",
-  "value": 24,
-  "response_time_ms": 1583,
+  "message": "Accessible — 24% anomaly rate (59556 OK)",
+  "value": 23.606977937403798,
+  "response_time_ms": 794,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 100,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "ooni-whatsapp",
   "name": "WhatsApp Blocking",
   "status": "down",
   "message": "Blocked — 97% anomaly rate (1163/1205 tests)",
-  "value": 97,
-  "response_time_ms": 1205,
+  "value": 96.51452282157676,
+  "response_time_ms": 716,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 0,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "down"
+},
 {
   "id": "psiphon-conduit",
   "name": "Psiphon Conduit Stats",
   "status": "up",
   "message": "1517274 active stations",
   "value": 1517274,
-  "response_time_ms": 955,
+  "response_time_ms": 6251,
   "http_code": 200,
   "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
+  "last_check": "2026-02-14T17:25:43Z",
+  "last_check_epoch": 1771089943,
+  "prev_status": "up"
 }
 ,
 {
@@ -411,11 +383,11 @@
   "status": "unknown",
   "message": "Could not parse stats",
   "value": 0,
-  "response_time_ms": 428,
+  "response_time_ms": 2802,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
+  "uptime_pct": 0.00,
+  "last_check": "2026-02-14T17:25:43Z",
+  "last_check_epoch": 1771089943,
   "prev_status": "unknown"
 }
 ,
@@ -423,30 +395,28 @@
   "id": "ripe-probes-down",
   "name": "RIPE Probes Disconnected",
   "status": "up",
-  "message": "61 probes",
-  "value": 61,
-  "response_time_ms": 924,
+  "message": "57 probes",
+  "value": 57,
+  "response_time_ms": 607,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 100,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "ripe-probes-up",
   "name": "RIPE Probes Active",
   "status": "up",
-  "message": "63 probes",
-  "value": 63,
-  "response_time_ms": 851,
+  "message": "67 probes",
+  "value": 67,
+  "response_time_ms": 619,
   "http_code": 200,
-  "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
-}
-,
+  "uptime_pct": 100,
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "prev_status": "up"
+},
 {
   "id": "ripestat-country-asns",
   "name": "Iran ASN Count",
@@ -467,12 +437,12 @@
   "status": "up",
   "message": "Data available",
   "value": 100,
-  "response_time_ms": 4597,
+  "response_time_ms": 7769,
   "http_code": 200,
   "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
+  "last_check": "2026-02-14T17:25:43Z",
+  "last_check_epoch": 1771089943,
+  "prev_status": "up"
 }
 ,
 {
@@ -481,12 +451,12 @@
   "status": "up",
   "message": "Data available",
   "value": 100,
-  "response_time_ms": 1032,
+  "response_time_ms": 21661,
   "http_code": 200,
   "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
+  "last_check": "2026-02-14T17:25:43Z",
+  "last_check_epoch": 1771089943,
+  "prev_status": "up"
 }
 ,
 {
@@ -495,12 +465,12 @@
   "status": "up",
   "message": "85 estimated users",
   "value": 85,
-  "response_time_ms": 972,
+  "response_time_ms": 4626,
   "http_code": 200,
   "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
+  "last_check": "2026-02-14T17:25:43Z",
+  "last_check_epoch": 1771089943,
+  "prev_status": "up"
 }
 ,
 {
@@ -509,27 +479,26 @@
   "status": "up",
   "message": "88 estimated users",
   "value": 88,
-  "response_time_ms": 3261,
+  "response_time_ms": 18377,
   "http_code": 200,
   "uptime_pct": 100.00,
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "prev_status": "unknown"
+  "last_check": "2026-02-14T17:25:43Z",
+  "last_check_epoch": 1771089943,
+  "prev_status": "up"
 }
 ],
 "summary":
 {
-  "overall_status": "major_outage",
-  "last_check": "2026-02-14T16:15:08Z",
-  "last_check_epoch": 1771085708,
-  "total_services": 37,
-  "checked_this_run": 37,
-  "up": 12,
+  "checked_this_run": 30,
   "degraded": 1,
   "down": 6,
-  "unknown": 18
-}
-,"categories":
+  "last_check": "2026-02-14T18:09:08Z",
+  "last_check_epoch": 1771092548,
+  "overall_status": "major_outage",
+  "total_services": 37,
+  "unknown": 4,
+  "up": 26
+},"categories":
 [
   {
     "name": "Outage Detection (IODA)",
