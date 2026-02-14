@@ -16,47 +16,47 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 <!--START_STATUS_TABLE-->
 | Service | Status | Response | Uptime |
 |---------|--------|----------|--------|
-| ⬜ **DNS Tampering** | unknown | 730ms | 0% |
-| ⬜ **IODA Latency** | unknown | 933ms | 12.5% |
-| ⬜ **IODA Packet Loss** | unknown | 787ms | 12.5% |
-| ⬜ **Psiphon Conduit Stats** | unknown | 314ms | 100% |
-| ⬜ **Psiphon Global Stats** | unknown | 340ms | 0% |
-| 🟥 **Facebook Blocking** | down | 692ms | 0% |
-| 🟥 **Signal Blocking** | down | 868ms | 0% |
-| 🟥 **Telegram Blocking** | down | 987ms | 0% |
-| 🟥 **Tor Snowflake** | down | 701ms | 0% |
-| 🟥 **Web Censorship** | down | 701ms | 83.3% |
-| 🟥 **WhatsApp Blocking** | down | 616ms | 0% |
-| 🟥 **irinter.net Score** | down | 577ms | 0% |
-| 🟨 **Psiphon Reachability** | degraded | 984ms | 0% |
-| 🟩 **ArvanCloud (AS205585)** | up | 532ms | 87.5% |
-| 🟩 **Asiatech (AS43754)** | up | 781ms | 87.5% |
-| 🟩 **DCI / TIC (AS12880)** | up | 603ms | 87.5% |
-| 🟩 **DPI / Middlebox** | up | 645ms | 100% |
-| 🟩 **IODA Active Probing** | up | 860ms | 92.3% |
-| 🟩 **IODA BGP Visibility** | up | 864ms | 92.3% |
-| 🟩 **IODA Google Traffic** | up | 814ms | 92.3% |
-| 🟩 **IODA MERIT Telescope** | up | 820ms | 92.3% |
-| 🟩 **IODA Outage Alerts** | up | 683ms | 100% |
+| ⬜ **DNS Tampering** | unknown | 583ms | 0% |
+| ⬜ **IODA Latency** | unknown | 752ms | 11.1% |
+| ⬜ **IODA Packet Loss** | unknown | 610ms | 11.1% |
+| ⬜ **Psiphon Conduit Stats** | unknown | 359ms | 66.7% |
+| ⬜ **Psiphon Global Stats** | unknown | 254ms | 0% |
+| 🟥 **Facebook Blocking** | down | 704ms | 0% |
+| 🟥 **Signal Blocking** | down | 705ms | 0% |
+| 🟥 **Telegram Blocking** | down | 706ms | 0% |
+| 🟥 **Tor Snowflake** | down | 582ms | 0% |
+| 🟥 **WhatsApp Blocking** | down | 763ms | 0% |
+| 🟥 **irinter.net Score** | down | 331ms | 0% |
+| 🟨 **Psiphon Reachability** | degraded | 704ms | 0% |
+| 🟩 **ArvanCloud (AS205585)** | up | 552ms | 88.9% |
+| 🟩 **Asiatech (AS43754)** | up | 606ms | 88.9% |
+| 🟩 **DCI / TIC (AS12880)** | up | 518ms | 88.9% |
+| 🟩 **DPI / Middlebox** | up | 706ms | 100% |
+| 🟩 **IODA Active Probing** | up | 498ms | 92.9% |
+| 🟩 **IODA BGP Visibility** | up | 503ms | 92.9% |
+| 🟩 **IODA Google Traffic** | up | 518ms | 92.9% |
+| 🟩 **IODA MERIT Telescope** | up | 449ms | 92.9% |
+| 🟩 **IODA Outage Alerts** | up | 308ms | 100% |
 | 🟩 **Iran ASN Count** | up | 1493ms | 100% |
-| 🟩 **Irancell (AS44244)** | up | 506ms | 87.5% |
-| 🟩 **Irancell Route Visibility** | up | 4269ms | 100% |
-| 🟩 **MCI / Hamrah-e-Aval (AS197207)** | up | 543ms | 87.5% |
-| 🟩 **Mobinnet (AS50810)** | up | 541ms | 87.5% |
-| 🟩 **Pishgaman (AS44208)** | up | 780ms | 87.5% |
-| 🟩 **RIPE Probes Active** | up | 548ms | 100% |
-| 🟩 **RIPE Probes Disconnected** | up | 501ms | 100% |
-| 🟩 **Respina (AS42337)** | up | 531ms | 87.5% |
-| 🟩 **Shatel (AS31549)** | up | 778ms | 87.5% |
-| 🟩 **TIC Announced Prefixes** | up | 147ms | 100% |
-| 🟩 **TIC Regional (AS58224)** | up | 543ms | 87.5% |
-| 🟩 **Tor Bridge Users (Iran)** | up | 425ms | 100% |
-| 🟩 **Tor Reachability** | up | 694ms | 100% |
-| 🟩 **Tor Relay Users (Iran)** | up | 420ms | 100% |
+| 🟩 **Irancell (AS44244)** | up | 777ms | 88.9% |
+| 🟩 **Irancell Route Visibility** | up | 4401ms | 100% |
+| 🟩 **MCI / Hamrah-e-Aval (AS197207)** | up | 552ms | 88.9% |
+| 🟩 **Mobinnet (AS50810)** | up | 592ms | 88.9% |
+| 🟩 **Pishgaman (AS44208)** | up | 500ms | 88.9% |
+| 🟩 **RIPE Probes Active** | up | 381ms | 100% |
+| 🟩 **RIPE Probes Disconnected** | up | 400ms | 100% |
+| 🟩 **Respina (AS42337)** | up | 534ms | 88.9% |
+| 🟩 **Shatel (AS31549)** | up | 459ms | 88.9% |
+| 🟩 **TIC Announced Prefixes** | up | 175ms | 100% |
+| 🟩 **TIC Regional (AS58224)** | up | 533ms | 88.9% |
+| 🟩 **Tor Bridge Users (Iran)** | up | 552ms | 100% |
+| 🟩 **Tor Reachability** | up | 628ms | 100% |
+| 🟩 **Tor Relay Users (Iran)** | up | 543ms | 100% |
+| 🟩 **Web Censorship** | up | 545ms | 71.4% |
 <!--END_STATUS_TABLE-->
 
-> Last checked: 2026-02-14T19:43:09Z
-> 24 up · 1 degraded · 7 down · 5 unknown
+> Last checked: 2026-02-14T19:55:58Z
+> 25 up · 1 degraded · 6 down · 5 unknown
 
 ## ⭐ How it works
 
