@@ -96,6 +96,8 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 [![Uptime CI](https://github.com/${OWNER}/${REPO}/workflows/Uptime%20CI/badge.svg)](https://github.com/${OWNER}/${REPO}/actions?query=workflow%3A%22Uptime+CI%22)
 [![Pages CI](https://github.com/${OWNER}/${REPO}/workflows/Pages%20CI/badge.svg)](https://github.com/${OWNER}/${REPO}/actions?query=workflow%3A%22Pages+CI%22)
 
+- [Dashboard](${PAGE_URL}/) · [Monitors](${PAGE_URL}/monitors.html) · [Incidents](${PAGE_URL}/incidents.html)
+
 ## [📈 Live Status](${PAGE_URL}): ${emoji} ${label}
 
 <!--START_STATUS_TABLE-->
@@ -138,7 +140,9 @@ $(echo -e "$TABLE")
 │   └── update-readme.sh   # README auto-update
 ├── run-check.sh           # Run checker (builds & runs Go binary)
 ├── config.json            # Service configuration
-├── index.html             # Status page
+├── index.html             # Dashboard (status page)
+├── monitors.html          # Per-service monitors & response history
+├── incidents.html         # Incidents & current status
 └── README.md              # This file (auto-generated)
 \`\`\`
 

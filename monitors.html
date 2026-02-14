@@ -9,6 +9,7 @@
     <meta name="description"
         content="Detailed health monitoring for each service — response times, outage patterns, and incident history.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <style>
         * {
             margin: 0;
@@ -349,6 +350,11 @@
             border-color: var(--accent);
             color: var(--accent);
             background: var(--accent-g)
+        }
+
+        .apex-chart-wrap {
+            min-height: 200px;
+            margin: 8px 0 16px
         }
 
         /* Stats row */
@@ -711,45 +717,6 @@
             function genHistory(base, n) { let seed = base || 100; function r() { seed = (seed * 16807 + 7) % 2147483647; return (seed % 1000) / 1000 } const a = []; for (let i = 0; i < n; i++)a.push(base * (0.2 + r() * 0.8)); a[n - 1] = base; return a }
             function statusColor(s) { return s === 'up' ? 'var(--green)' : s === 'down' ? 'var(--red)' : s === 'degraded' ? 'var(--yellow)' : 'var(--text3)' }
 
-            function makePath(w, h, vals, close) {
-                const mx = Math.max(...vals) * 1.25 || 1, n = vals.length, xS = w / Math.max(n - 1, 1);
-                let p = ''; vals.forEach((v, i) => { const x = i * xS, y = h - ((v / mx) * h * 0.85 + h * 0.05); p += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1) });
-                return close ? p + ` L${w},${h} L0,${h} Z` : p;
-            }
-
-            function makeChartWithGrid(w, h, vals24, valsDeg, pad) {
-                pad = pad || { left: 40, right: 16, top: 12, bottom: 28 };
-                const innerW = w - pad.left - pad.right, innerH = h - pad.top - pad.bottom;
-                const mx = Math.max(...vals24) * 1.2 || 1;
-                let grid = '';
-                for (let g = 1; g < 4; g++) {
-                    const gy = pad.top + (innerH / 4) * g;
-                    grid += '<line x1="' + pad.left + '" y1="' + gy + '" x2="' + (pad.left + innerW) + '" y2="' + gy + '" class="chart-grid-line"/>';
-                }
-                for (let g = 1; g < 5; g++) {
-                    const gx = pad.left + (innerW / 5) * g;
-                    grid += '<line x1="' + gx + '" y1="' + pad.top + '" x2="' + gx + '" y2="' + (pad.top + innerH) + '" class="chart-grid-line"/>';
-                }
-                const scaleH = innerH / mx;
-                let pDeg = '', p24 = '';
-                vals24.forEach((v, i) => {
-                    const x = pad.left + (i / Math.max(vals24.length - 1, 1)) * innerW;
-                    const y = pad.top + innerH - v * scaleH * 0.9;
-                    p24 += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1);
-                });
-                valsDeg.forEach((v, i) => {
-                    const x = pad.left + (i / Math.max(valsDeg.length - 1, 1)) * innerW;
-                    const y = pad.top + innerH - Math.min(v, mx) * scaleH * 0.9;
-                    pDeg += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1);
-                });
-                /* Line chart for trend — minimal fill to avoid obscuring data */
-                const areaDeg = pDeg + ' L' + (pad.left + innerW) + ',' + (pad.top + innerH) + ' L' + pad.left + ',' + (pad.top + innerH) + ' Z';
-                const area24 = p24 + ' L' + (pad.left + innerW) + ',' + (pad.top + innerH) + ' L' + pad.left + ',' + (pad.top + innerH) + ' Z';
-                const axes = '<text x="' + (pad.left - 4) + '" y="' + (pad.top + 10) + '" class="chart-axis-text" text-anchor="end">' + Math.round(mx) + 'ms</text><text x="' + (pad.left - 4) + '" y="' + (pad.top + innerH + 4) + '" class="chart-axis-text" text-anchor="end">0</text>';
-                const labels = '<text x="' + pad.left + '" y="' + (h - 6) + '" class="chart-axis-text">' + (chartTimeRange === 12 ? '12h ago' : chartTimeRange === 48 ? '48h ago' : '24h ago') + '</text><text x="' + (pad.left + innerW) + '" y="' + (h - 6) + '" class="chart-axis-text" text-anchor="end">Now</text>';
-                return '<svg viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none"><g>' + grid + '</g><path class="area-fill" d="' + areaDeg + '" fill="var(--purple)" opacity=".08"/><path class="area-line" d="' + pDeg + '" stroke="var(--purple)"/><path class="area-fill" d="' + area24 + '" fill="var(--accent)" opacity=".08"/><path class="area-line" d="' + p24 + '" stroke="var(--accent)"/><g>' + axes + labels + '</g></svg>';
-            }
-
             function renderPills(svcs) {
                 let h = '<div class="svc-selector">';
                 svcs.forEach((s, i) => {
@@ -787,19 +754,21 @@
                 // Grid: chart + heatmap/incidents
                 h += `<div class="grid-detail">`;
 
-                // Left: Response time chart with time range filter
+                // Left: Response time chart (ApexCharts area)
                 const nPoints = chartTimeRange === 12 ? 24 : chartTimeRange === 48 ? 96 : 48;
                 const vals24b = genHistory(rt, nPoints);
-                const valsDegb = genHistory(rt * 0.3, nPoints);
-                h += `<div class="card"><div class="card-title">Response Time History (ms)<div class="legend"><span><span class="ldot" style="background:var(--accent)"></span> Response</span><span><span class="ldot" style="background:var(--purple)"></span> Degraded</span></div></div>`;
+                const nowMs = Date.now();
+                const hourMs = 3600000;
+                const monitorAreaData = vals24b.map(function(y, i) {
+                    return { x: nowMs - (nPoints - 1 - i) * (hourMs * chartTimeRange / nPoints), y: Math.round(y) };
+                });
+                h += `<div class="card"><div class="card-title">Response Time History (ms)<div class="legend"><span><span class="ldot" style="background:var(--accent)"></span> Response</span></div></div>`;
                 h += `<div class="time-range-chips">`;
                 [12, 24, 48].forEach(hrs => {
                     h += `<button type="button" class="chip ${chartTimeRange === hrs ? 'active' : ''}" data-hours="${hrs}">${hrs}h</button>`;
                 });
                 h += `</div>`;
-                h += `<div class="chart-box" data-values="[${vals24b.join(',')}]" data-unit="ms">`;
-                h += makeChartWithGrid(700, 200, vals24b, valsDegb);
-                h += `</div></div>`;
+                h += `<div id="chart-monitor-response" class="apex-chart-wrap"></div></div>`;
 
                 // Right column
                 h += `<div>`;
@@ -853,23 +822,27 @@
                     });
                 });
 
-                // Chart tooltip
-                const chartBox = app.querySelector('.chart-box');
-                const tipEl = document.getElementById('monitor-tooltip');
-                if (chartBox && tipEl && chartBox.dataset.values) {
-                    const vals = (function() { try { return JSON.parse(chartBox.dataset.values || '[]'); } catch(e) { return []; } })();
-                    chartBox.addEventListener('mousemove', function(e) {
-                        const rect = this.getBoundingClientRect();
-                        const x = (e.clientX - rect.left) / rect.width;
-                        const i = Math.min(Math.floor(x * vals.length), vals.length - 1);
-                        if (i >= 0 && vals[i] != null) {
-                            tipEl.innerHTML = '<strong>' + Math.round(vals[i]) + 'ms</strong>';
-                            tipEl.classList.add('visible');
-                            tipEl.style.left = (e.clientX + 12) + 'px';
-                            tipEl.style.top = (e.clientY + 8) + 'px';
-                        }
-                    });
-                    chartBox.addEventListener('mouseleave', function() { tipEl.classList.remove('visible'); });
+                // ApexCharts: response time area (github-style)
+                if (typeof ApexCharts !== 'undefined') {
+                    if (window.monitorChart) { try { window.monitorChart.destroy(); } catch(e) {} }
+                    var respEl = document.getElementById('chart-monitor-response');
+                    if (respEl && monitorAreaData.length) {
+                        var opts = {
+                            series: [{ name: 'Response (ms)', data: monitorAreaData }],
+                            chart: { type: 'area', height: 200, toolbar: { show: false }, background: 'transparent' },
+                            colors: ['#25aff4'],
+                            stroke: { width: 1, curve: 'smooth' },
+                            dataLabels: { enabled: false },
+                            fill: { type: 'solid', opacity: 0.2 },
+                            xaxis: { type: 'datetime', labels: { style: { colors: '#5c6a82' } } },
+                            yaxis: { labels: { style: { colors: '#5c6a82' } } },
+                            grid: { borderColor: 'var(--border)', strokeDashArray: 2 },
+                            tooltip: { theme: 'dark' },
+                            theme: { mode: 'dark' }
+                        };
+                        window.monitorChart = new ApexCharts(respEl, opts);
+                        window.monitorChart.render();
+                    }
                 }
             }
 

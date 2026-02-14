@@ -9,6 +9,8 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 [![Uptime CI](https://github.com/Danialsamadi/iran-internet-monitor/workflows/Uptime%20CI/badge.svg)](https://github.com/Danialsamadi/iran-internet-monitor/actions?query=workflow%3A%22Uptime+CI%22)
 [![Pages CI](https://github.com/Danialsamadi/iran-internet-monitor/workflows/Pages%20CI/badge.svg)](https://github.com/Danialsamadi/iran-internet-monitor/actions?query=workflow%3A%22Pages+CI%22)
 
+- [Dashboard](https://Danialsamadi.github.io/iran-internet-monitor/) · [Monitors](https://Danialsamadi.github.io/iran-internet-monitor/monitors.html) · [Incidents](https://Danialsamadi.github.io/iran-internet-monitor/incidents.html)
+
 ## [📈 Live Status](https://Danialsamadi.github.io/iran-internet-monitor): 🟥 Major Outage
 
 <!--START_STATUS_TABLE-->
@@ -48,9 +50,19 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 | 🟩 **RIPE Probes Active** | up | 531ms | 100% |
 | 🟩 **Iran ASN Count** | up | 1493ms | 100.00% |
 | 🟩 **Irancell Route Visibility** | up | 4269ms | 100% |
+| 🟩 **MCI / Hamrah-e-Aval (AS197207)** | up | 1071ms | 83.3% |
+| 🟩 **Mobinnet (AS50810)** | up | 1092ms | 83.3% |
+| 🟩 **Pishgaman (AS44208)** | up | 1093ms | 83.3% |
+| 🟩 **RIPE Probes Active** | up | 512ms | 100% |
+| 🟩 **RIPE Probes Disconnected** | up | 492ms | 100% |
+| 🟩 **Respina (AS42337)** | up | 892ms | 83.3% |
+| 🟩 **Shatel (AS31549)** | up | 1099ms | 83.3% |
 | 🟩 **TIC Announced Prefixes** | up | 147ms | 100% |
+| 🟩 **TIC Regional (AS58224)** | up | 1082ms | 83.3% |
 | 🟩 **Tor Bridge Users (Iran)** | up | 425ms | 100% |
+| 🟩 **Tor Reachability** | up | 458ms | 100% |
 | 🟩 **Tor Relay Users (Iran)** | up | 420ms | 100% |
+| 🟩 **Web Censorship** | up | 420ms | 100% |
 <!--END_STATUS_TABLE-->
 
 > Last checked: 2026-02-14T19:24:10Z
@@ -85,15 +97,15 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 ├── api/                   # Latest status data (JSON)
 ├── history/               # Historical data (CSV)
 ├── check/                 # Go checker (parallel API checks)
-├── scripts/
-│   └── update-readme.sh   # README auto-update
+├── scripts/               # update-readme (Go)
 ├── run-check.sh           # Run checker (builds & runs Go binary)
 ├── config.json            # Service configuration
-├── index.html             # Status page
+├── index.html             # Dashboard (status page)
+├── monitors.html          # Per-service monitors & response history
+├── incidents.html         # Incidents & current status
 └── README.md              # This file (auto-generated)
 ```
 
 ## 📄 License
 
 Code: [MIT](./LICENSE) · Powered by open-source data from IODA, OONI, RIPE, Tor Metrics, and Psiphon.
-

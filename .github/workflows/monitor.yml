@@ -117,9 +117,7 @@ jobs:
           echo '}' >> api/page-data.json
 
       - name: Update README with live status
-        run: |
-          chmod +x scripts/update-readme.sh
-          bash scripts/update-readme.sh
+        run: cd scripts && go run .
 
       - name: Commit & push
         run: |
