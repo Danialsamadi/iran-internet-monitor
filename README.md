@@ -21,13 +21,14 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 | ⬜ **IODA Packet Loss** | unknown | 618ms | 10% |
 | ⬜ **Psiphon Conduit Stats** | unknown | 359ms | 66.7% |
 | ⬜ **Psiphon Global Stats** | unknown | 254ms | 0% |
-| 🟥 **Facebook Blocking** | down | 704ms | 0% |
-| 🟥 **Signal Blocking** | down | 705ms | 0% |
-| 🟥 **Telegram Blocking** | down | 706ms | 0% |
-| 🟥 **Tor Snowflake** | down | 582ms | 0% |
-| 🟥 **WhatsApp Blocking** | down | 763ms | 0% |
+| 🟥 **Facebook Blocking** | down | 593ms | 0% |
+| 🟥 **Signal Blocking** | down | 593ms | 0% |
+| 🟥 **Telegram Blocking** | down | 516ms | 0% |
+| 🟥 **Tor Snowflake** | down | 655ms | 0% |
+| 🟥 **Web Censorship** | down | 594ms | 75% |
+| 🟥 **WhatsApp Blocking** | down | 594ms | 0% |
 | 🟥 **irinter.net Score** | down | 509ms | 0% |
-| 🟨 **Psiphon Reachability** | degraded | 704ms | 0% |
+| 🟨 **Psiphon Reachability** | degraded | 594ms | 0% |
 | 🟩 **ArvanCloud (AS205585)** | up | 627ms | 90% |
 | 🟩 **Asiatech (AS43754)** | up | 458ms | 90% |
 | 🟩 **DCI / TIC (AS12880)** | up | 653ms | 90% |
@@ -50,13 +51,12 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 | 🟩 **TIC Announced Prefixes** | up | 175ms | 100% |
 | 🟩 **TIC Regional (AS58224)** | up | 603ms | 90% |
 | 🟩 **Tor Bridge Users (Iran)** | up | 552ms | 100% |
-| 🟩 **Tor Reachability** | up | 628ms | 100% |
+| 🟩 **Tor Reachability** | up | 516ms | 100% |
 | 🟩 **Tor Relay Users (Iran)** | up | 543ms | 100% |
-| 🟩 **Web Censorship** | up | 545ms | 71.4% |
 <!--END_STATUS_TABLE-->
 
-> Last checked: 2026-02-14T20:07:12Z
-> 25 up · 1 degraded · 6 down · 5 unknown
+> Last checked: 2026-02-14T20:11:41Z
+> 24 up · 1 degraded · 7 down · 5 unknown
 
 ## ⭐ How it works
 
