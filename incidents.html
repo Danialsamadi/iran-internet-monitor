@@ -9,6 +9,7 @@
     <meta name="description"
         content="Network incident timeline — current status, affected services, and historical incidents.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <style>
         * {
             margin: 0;
@@ -447,6 +448,16 @@
             color: var(--accent)
         }
 
+        .apex-radial-wrap {
+            min-height: 260px;
+            margin: 8px 0
+        }
+
+        .apex-donut-wrap {
+            min-height: 220px;
+            margin: 8px 0
+        }
+
         /* Sparkline in incident */
         .inc-spark {
             height: 32px;
@@ -640,16 +651,6 @@
             function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML }
             function timeAgo(iso) { if (!iso) return ''; const s = Math.floor((Date.now() - new Date(iso)) / 1e3); if (s < 60) return 'just now'; if (s < 3600) return Math.floor(s / 60) + 'm ago'; if (s < 86400) return Math.floor(s / 3600) + 'h ago'; return Math.floor(s / 86400) + 'd ago' }
 
-            function makeDonut(segments, r, sw) {
-                const circ = 2 * Math.PI * r; let offset = 0, paths = '';
-                segments.forEach(seg => {
-                    const len = circ * seg.pct;
-                    paths += `<circle class="donut-seg" cx="60" cy="60" r="${r}" stroke="${seg.color}" stroke-width="${sw}" stroke-dasharray="${len} ${circ - len}" stroke-dashoffset="${-offset}"/>`;
-                    offset += len;
-                });
-                return `<svg viewBox="0 0 120 120"><circle class="donut-bg" cx="60" cy="60" r="${r}"/>${paths}</svg>`;
-            }
-
             function makeSparkline(w, h, n, seed) {
                 let s = seed; function rr() { s = (s * 16807 + 7) % 2147483647; return (s % 1000) / 1000 }
                 const vals = []; for (let i = 0; i < n; i++)vals.push(rr());
@@ -671,17 +672,16 @@
 
                 let h = '';
 
-                // === Top row: 3 donut cards ===
+                // === Top row: ApexCharts radialbars + donut + count badges ===
                 h += `<div class="grid-3">`;
 
-                // Donut 1: Current Status
                 const pUp = up.length / total, pDeg = degraded.length / total, pDown = down.length / total, pUnk = unknown.length / total;
-                h += `<div class="card"><div class="card-title">Current Status</div><div class="donut-center">`;
-                h += `<div class="donut-wrap">${makeDonut([{ pct: pUp, color: 'var(--green)' }, { pct: pDeg, color: 'var(--yellow)' }, { pct: pDown, color: 'var(--red)' }, { pct: pUnk, color: 'var(--text3)' }], 45, 10)}<div class="donut-pct-center" style="color:var(--green)">${(pUp * 100).toFixed(0)}%</div></div>`;
-                h += `<div class="donut-legend"><div class="donut-legend-item"><span class="dl-dot" style="background:var(--green)"></span>Up ${(pUp * 100).toFixed(0)}%</div><div class="donut-legend-item"><span class="dl-dot" style="background:var(--yellow)"></span>Throttled ${(pDeg * 100).toFixed(0)}%</div><div class="donut-legend-item"><span class="dl-dot" style="background:var(--red)"></span>Down ${(pDown * 100).toFixed(0)}%</div></div>`;
-                h += `</div></div>`;
+                const upPct = Math.round(pUp * 100), degPct = Math.round(pDeg * 100), downPct = Math.round(pDown * 100), unkPct = Math.round(pUnk * 100);
 
-                // Donut 2: Services Affected (by category)
+                // Card 1: Current Status (ApexCharts multiple radialbars)
+                h += `<div class="card"><div class="card-title">Current Status</div><div id="chart-incidents-status-radial" class="apex-radial-wrap"></div></div>`;
+
+                // Card 2: Services Affected (ApexCharts donut)
                 const catAffected = {};
                 cats.forEach(cat => {
                     const ids = cat.service_ids || [];
@@ -690,16 +690,15 @@
                 });
                 const affEntries = Object.entries(catAffected);
                 const totalAff = affEntries.reduce((a, [, v]) => a + v.count, 0);
-                h += `<div class="card"><div class="card-title">Services Affected</div><div class="donut-center">`;
-                const colors2 = ['var(--red)', 'var(--yellow)', 'var(--cyan)', 'var(--purple)'];
-                const segments2 = affEntries.length ? affEntries.map(([name, v], i) => ({ pct: v.count / total, color: colors2[i % 4] })) : [{ pct: 1, color: 'var(--green)' }];
-                h += `<div class="donut-wrap">${makeDonut(segments2, 45, 10)}<div class="donut-pct-center" style="color:var(--text)">${totalAff}</div></div>`;
-                h += `<div class="donut-legend">`;
+                const colors2 = ['#e74c3c', '#f1c40f', '#25aff4', '#9b59b6'];
+                const affectedSeries = affEntries.length ? affEntries.map(function(e) { return e[1].count; }) : [1];
+                const affectedLabels = affEntries.length ? affEntries.map(function(e) { return esc(e[0].split('(')[0].trim()); }) : ['No services affected'];
+                h += `<div class="card"><div class="card-title">Services Affected</div><div id="chart-incidents-affected" class="apex-donut-wrap"></div><div class="donut-legend" id="incidents-affected-legend">`;
                 if (affEntries.length) { affEntries.forEach(([name, v], i) => { h += `<div class="donut-legend-item"><span class="dl-dot" style="background:${colors2[i % 4]}"></span>${esc(name.split('(')[0].trim())} ${Math.round(v.count / total * 100)}%</div>` }) }
                 else { h += `<div class="donut-legend-item"><span class="dl-dot" style="background:var(--green)"></span>No services affected</div>` }
-                h += `</div></div></div>`;
+                h += `</div></div>`;
 
-                // Count card 3: Recent Incidents summary
+                // Card 3: Recent Incidents summary (count badges)
                 h += `<div class="card"><div class="card-title">Recent Incidents</div><div class="donut-center">`;
                 h += `<div class="count-row"><div class="count-badge"><span class="count-num" style="color:var(--red)">${down.length}</span>Critical</div><div class="count-badge"><span class="count-num" style="color:var(--yellow)">${degraded.length}</span>Major</div><div class="count-badge"><span class="count-num" style="color:var(--cyan)">${unknown.length}</span>Minor</div></div>`;
                 h += `<div style="margin-top:16px;font-size:12px;color:var(--text3)">Total services monitored: <strong style="color:var(--text)">${total}</strong></div>`;
@@ -748,6 +747,46 @@
                 h += `</div></div>`; // end grid-2
 
                 app.innerHTML = h;
+
+                // ApexCharts: status radialbars + affected donut
+                if (typeof ApexCharts !== 'undefined') {
+                    if (window.incidentsCharts) { window.incidentsCharts.forEach(function(c) { try { c.destroy(); } catch(e) {} }); window.incidentsCharts = []; }
+                    var list = [];
+
+                    var radialEl = document.getElementById('chart-incidents-status-radial');
+                    if (radialEl) {
+                        var radialOpts = {
+                            series: [upPct, degPct, downPct, unkPct],
+                            chart: { type: 'radialBar', height: 260, background: 'transparent' },
+                            plotOptions: { radialBar: { dataLabels: { name: { fontSize: '11px' }, value: { fontSize: '13px' }, total: { show: true, label: 'Total', formatter: function() { return total + ' services'; } } } } },
+                            labels: ['Up', 'Degraded', 'Down', 'Unknown'],
+                            colors: ['#2ecc71', '#f1c40f', '#e74c3c', '#5c6a82'],
+                            theme: { mode: 'dark' }
+                        };
+                        var c1 = new ApexCharts(radialEl, radialOpts);
+                        c1.render();
+                        list.push(c1);
+                    }
+
+                    var donutEl = document.getElementById('chart-incidents-affected');
+                    if (donutEl) {
+                        var donutOpts = {
+                            series: affectedSeries,
+                            chart: { type: 'donut', height: 220 },
+                            labels: affectedLabels,
+                            colors: affEntries.length ? colors2.slice(0, affEntries.length) : ['#2ecc71'],
+                            legend: { show: false },
+                            dataLabels: { enabled: true },
+                            plotOptions: { pie: { donut: { size: '65%', labels: { show: true, total: { show: true, label: 'Affected', formatter: function(w) { return totalAff; } } } } } },
+                            theme: { mode: 'dark' }
+                        };
+                        var c2 = new ApexCharts(donutEl, donutOpts);
+                        c2.render();
+                        list.push(c2);
+                    }
+
+                    window.incidentsCharts = list;
+                }
             }
 
             async function fetchData() { try { const r = await fetch(DATA_URL + '?t=' + Date.now()); if (!r.ok) throw 0; render(await r.json()) } catch (e) { app.innerHTML = '<div class="no-data"><h3>Waiting for Data</h3><p>Push to GitHub & enable Actions to start monitoring.</p><p style="margin-top:10px"><code>./run-check.sh</code></p></div>' } }
