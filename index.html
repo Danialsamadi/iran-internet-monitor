@@ -9,6 +9,7 @@
     <meta name="description"
         content="Real-time monitoring of Iran's internet connectivity, censorship & circumvention tools.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <style>
         * {
             margin: 0;
@@ -819,6 +820,16 @@
             display: block
         }
 
+        .apex-chart-wrap {
+            min-height: 220px;
+            margin: 8px 0 16px
+        }
+
+        .apex-radial-wrap {
+            min-height: 280px;
+            margin: 8px 0
+        }
+
         /* No-data */
         .no-data {
             text-align: center;
@@ -1307,10 +1318,12 @@
                 h += `<div class="grid grid-top">`;
 
                 const upHist = genFakeHistory(overallUp, numPoints);
-                const xLabels = days === 7 ? ['7d ago', '5d', '3d', '1d', 'Now'] : days === 14 ? ['14d ago', '10d', '6d', '2d', 'Now'] : ['30d ago', '22d', '15d', '7d', 'Now'];
-                h += `<div class="chart-card"><div class="card-title">Uptime % over time (line) — ${filterState.timeRange}d<div class="legend"><span><span class="dot" style="background:var(--green)"></span> Uptime</span></div></div>`;
+                const now = Date.now();
+                const dayMs = 86400 * 1000;
+                const uptimeAreaData = upHist.map(function(y, i) { return { x: now - (numPoints - 1 - i) * dayMs, y: Math.round(y * 10) / 10 }; });
+                h += `<div class="chart-card"><div class="card-title">Uptime % over time — ${filterState.timeRange}d<div class="legend"><span><span class="dot" style="background:var(--green)"></span> Uptime</span></div></div>`;
                 h += makeGauge(overallUp);
-                h += `<div class="chart-area-wrap" data-chart="uptime" data-values="[${upHist.join(',')}]" data-labels="${esc(xLabels.join(','))}">${makeLineChartOnly(640, 200, upHist, '#2ecc71', { yAxis: true, xAxis: true, labels: xLabels })}</div></div>`;
+                h += `<div id="chart-uptime-area" class="apex-chart-wrap"></div></div>`;
 
                 h += `<div class="card"><div class="card-title">Service Status Overview</div><div class="svc-grid"><div class="svc-row header"><div>Service</div><div class="svc-val">Status</div><div class="svc-val">30d Up</div></div>`;
                 (cats || []).forEach(cat => {
@@ -1333,14 +1346,15 @@
                     color: SERIES_COLORS[i % SERIES_COLORS.length],
                     values: genFakeHistory(s.response_time_ms || 100, 24)
                 }));
-                const pad = { left: 40, right: 16, top: 12, bottom: 24 };
-                h += `<div class="chart-card"><div class="card-title">Response time over time (line) — click legend to toggle</div>`;
-                h += `<div class="chart-area-wrap">${makeMultiLinePath(640, 200, responseSeries, pad)}</div>`;
-                h += `<div class="chart-legend" id="resp-legend">`;
-                responseSeries.forEach(s => {
-                    h += `<div class="chart-legend-item" data-id="${s.id}" title="Click to show/hide"><span class="leg-dot" style="background:${s.color}"></span>${esc(s.name)}</div>`;
+                const respAreaSeries = responseSeries.map(function(s) {
+                    const data = s.values.map(function(y, i) {
+                        const t = now - (23 - i) * 3600000;
+                        return { x: t, y: Math.round(y) };
+                    });
+                    return { name: s.name, data: data };
                 });
-                h += `</div></div>`;
+                h += `<div class="chart-card"><div class="card-title">Response time over time — click legend to toggle</div>`;
+                h += `<div id="chart-response-area" class="apex-chart-wrap"></div></div>`;
 
                 h += `<div class="card"><div class="card-title">Outage calendar (30d)</div><div class="heatmap">`;
                 ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(d => h += `<div class="heat-label">${d}</div>`);
@@ -1373,30 +1387,14 @@
                 });
                 h += `</div></div>`;
 
-                // === BOT ROW: Single donut (proportions) + Bar chart (comparison) + Categories ===
+                // === BOT ROW: Status (ApexCharts multiple radialbars) + Bar chart + Categories ===
                 h += `<div class="grid grid-bot">`;
-                const donutData = [{ label: 'Up', val: sm.up || 0, color: '#2ecc71' }, { label: 'Degraded', val: sm.degraded || 0, color: '#f1c40f' }, { label: 'Down', val: sm.down || 0, color: '#e74c3c' }, { label: 'Unknown', val: sm.unknown || 0, color: '#5c6a82' }];
                 const total = sm.total_services || 1;
-                let cum = 0;
-                const ringSegments = donutData.map(d => {
-                    const pct = total ? d.val / total : 0;
-                    const seg = { offset: cum, pct, color: d.color, label: d.label, val: d.val };
-                    cum += pct;
-                    return seg;
-                });
-                const r = 38, circ = 2 * Math.PI * r;
-                let ringSvg = `<svg viewBox="0 0 100 100" class="donut-single"><circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--border)" stroke-width="10"/>`;
-                ringSegments.forEach(seg => {
-                    const dash = circ * seg.pct;
-                    const off = circ * (1 - seg.offset);
-                    ringSvg += `<circle cx="50" cy="50" r="${r}" fill="none" stroke="${seg.color}" stroke-width="10" stroke-dasharray="${dash}" stroke-dashoffset="${off}" transform="rotate(-90 50 50)" stroke-linecap="round"/>`;
-                });
-                ringSvg += `<text x="50" y="52" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="700">${total}</text><text x="50" y="64" text-anchor="middle" fill="var(--text3)" font-size="9">services</text></svg>`;
-                h += `<div class="card"><div class="card-title">Status breakdown (donut)</div><div class="donut-single-wrap">${ringSvg}<div class="donut-legend-inline">`;
-                donutData.forEach(d => {
-                    h += `<span class="donut-legend-dot" style="background:${d.color}"></span><span>${d.label}: ${d.val}</span>`;
-                });
-                h += `</div></div></div>`;
+                const upPct = total ? Math.round((sm.up || 0) / total * 100) : 0;
+                const degPct = total ? Math.round((sm.degraded || 0) / total * 100) : 0;
+                const downPct = total ? Math.round((sm.down || 0) / total * 100) : 0;
+                const unkPct = total ? Math.round((sm.unknown || 0) / total * 100) : 0;
+                h += `<div class="card"><div class="card-title">Status breakdown</div><div id="chart-status-radial" class="apex-radial-wrap"></div></div>`;
 
                 /* Bar chart: comparison — uptime % by category */
                 const barBars = (cats || []).map(cat => {
@@ -1420,48 +1418,95 @@
 
                 app.innerHTML = h;
 
+                // Destroy previous ApexCharts instances
+                if (window.iranMonitorCharts) {
+                    window.iranMonitorCharts.forEach(function(c) { try { c.destroy(); } catch(e) {} });
+                    window.iranMonitorCharts = [];
+                }
+
+                if (typeof ApexCharts !== 'undefined') {
+                    var chartList = [];
+
+                    // Status breakdown — multiple radialbars (https://apexcharts.com/javascript-chart-demos/radialbar-charts/multiple-radialbars/)
+                    var radialEl = document.getElementById('chart-status-radial');
+                    if (radialEl) {
+                        var radialOpts = {
+                            series: [upPct, degPct, downPct, unkPct],
+                            chart: { type: 'radialBar', height: 280 },
+                            plotOptions: {
+                                radialBar: {
+                                    dataLabels: {
+                                        name: { fontSize: '12px' },
+                                        value: { fontSize: '14px' },
+                                        total: {
+                                            show: true,
+                                            label: 'Total',
+                                            formatter: function() { return total + ' services'; }
+                                        }
+                                    }
+                                }
+                            },
+                            labels: ['Up', 'Degraded', 'Down', 'Unknown'],
+                            colors: ['#2ecc71', '#f1c40f', '#e74c3c', '#5c6a82'],
+                            theme: { mode: 'dark' }
+                        };
+                        var radialChart = new ApexCharts(radialEl, radialOpts);
+                        radialChart.render();
+                        chartList.push(radialChart);
+                    }
+
+                    // Uptime over time — area chart github-style (https://apexcharts.com/javascript-chart-demos/area-charts/github-style/)
+                    var uptimeEl = document.getElementById('chart-uptime-area');
+                    if (uptimeEl && uptimeAreaData.length) {
+                        var uptimeOpts = {
+                            series: [{ name: 'Uptime %', data: uptimeAreaData }],
+                            chart: { type: 'area', height: 220, toolbar: { show: false }, background: 'transparent' },
+                            colors: ['#2ecc71'],
+                            stroke: { width: 1, curve: 'smooth' },
+                            dataLabels: { enabled: false },
+                            fill: { type: 'solid', opacity: 0.2 },
+                            xaxis: { type: 'datetime', labels: { style: { colors: '#5c6a82' } } },
+                            yaxis: { min: 0, max: 100, labels: { style: { colors: '#5c6a82' } } },
+                            grid: { borderColor: 'var(--border)', strokeDashArray: 2 },
+                            tooltip: { theme: 'dark' },
+                            theme: { mode: 'dark' }
+                        };
+                        var uptimeChart = new ApexCharts(uptimeEl, uptimeOpts);
+                        uptimeChart.render();
+                        chartList.push(uptimeChart);
+                    }
+
+                    // Response time over time — area multiple series / irregular timeseries (https://apexcharts.com/javascript-chart-demos/area-charts/irregular-timeseries/)
+                    var respEl = document.getElementById('chart-response-area');
+                    if (respEl && respAreaSeries.length) {
+                        var respOpts = {
+                            series: respAreaSeries,
+                            chart: { type: 'area', height: 220, stacked: false, toolbar: { show: false }, zoom: { enabled: false }, background: 'transparent' },
+                            colors: responseSeries.map(function(s) { return s.color; }),
+                            stroke: { width: 1, curve: 'smooth' },
+                            dataLabels: { enabled: false },
+                            fill: { type: 'solid', opacity: 0.15 },
+                            xaxis: { type: 'datetime', labels: { style: { colors: '#5c6a82' } } },
+                            yaxis: { labels: { style: { colors: '#5c6a82' } } },
+                            grid: { borderColor: 'var(--border)', strokeDashArray: 2 },
+                            legend: { position: 'top', horizontalAlign: 'right', labels: { colors: '#9aa5b8' } },
+                            tooltip: { shared: true, theme: 'dark' },
+                            theme: { mode: 'dark' }
+                        };
+                        var respChart = new ApexCharts(respEl, respOpts);
+                        respChart.render();
+                        chartList.push(respChart);
+                    }
+
+                    window.iranMonitorCharts = chartList;
+                }
+
                 // Filter handlers
                 app.querySelector('#filter-cat').addEventListener('change', function() { filterState.category = this.value; render(lastData); });
                 app.querySelector('#filter-status').addEventListener('change', function() { filterState.status = this.value; render(lastData); });
                 app.querySelectorAll('.graph-filters .chip').forEach(btn => {
                     btn.addEventListener('click', function() { filterState.timeRange = this.dataset.days; render(lastData); });
                 });
-                // Legend toggle: show/hide series in multi-line chart
-                const legend = app.querySelector('#resp-legend');
-                if (legend) {
-                    const chartCards = app.querySelectorAll('.chart-card');
-                    const svg = chartCards[1] && chartCards[1].querySelector('.chart-area-wrap svg');
-                    if (svg) {
-                        legend.querySelectorAll('.chart-legend-item').forEach(function(el) {
-                            el.addEventListener('click', function() {
-                                this.classList.toggle('hidden');
-                                const id = this.dataset.id;
-                                const path = svg.querySelector('path[data-series="' + id + '"]');
-                                if (path) path.style.display = this.classList.contains('hidden') ? 'none' : '';
-                            });
-                        });
-                    }
-                }
-                // Tooltip on uptime chart hover
-                const tooltipEl = document.getElementById('chart-tooltip');
-                const uptimeWrap = app.querySelector('.chart-area-wrap[data-chart="uptime"]');
-                if (tooltipEl && uptimeWrap) {
-                    const vals = (function() { try { return JSON.parse(uptimeWrap.dataset.values || '[]'); } catch(e) { return []; } })();
-                    const labels = (uptimeWrap.dataset.labels || '').split(',').map(function(s) { return s.trim(); });
-                    uptimeWrap.addEventListener('mousemove', function(e) {
-                        const rect = this.getBoundingClientRect();
-                        const x = (e.clientX - rect.left) / rect.width;
-                        const i = Math.min(Math.floor(x * vals.length), vals.length - 1);
-                        if (i >= 0 && vals[i] != null) {
-                            const lbl = labels[Math.floor((i / (vals.length - 1)) * (labels.length - 1))] || '';
-                            tooltipEl.innerHTML = '<strong>' + Number(vals[i]).toFixed(1) + '%</strong>' + (lbl ? ' &middot; ' + lbl : '');
-                            tooltipEl.classList.add('visible');
-                            tooltipEl.style.left = (e.clientX + 12) + 'px';
-                            tooltipEl.style.top = (e.clientY + 8) + 'px';
-                        }
-                    });
-                    uptimeWrap.addEventListener('mouseleave', function() { tooltipEl.classList.remove('visible'); });
-                }
             }
 
             async function fetchData() { try { const r = await fetch(DATA_URL + '?t=' + Date.now()); if (!r.ok) throw 0; render(await r.json()) } catch (e) { app.innerHTML = '<div class="no-data"><h3>Waiting for Data</h3><p>Push to GitHub & enable Actions to start monitoring.</p><p style="margin-top:10px"><code>./run-check.sh</code></p></div>' } }
