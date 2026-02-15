@@ -1,13 +1,15 @@
 {
   "id": "ripe-probes-up",
   "name": "RIPE Probes Active",
+  "check_type": "ripe_probes",
   "status": "up",
-  "message": "75 probes",
-  "value": 75,
-  "response_time_ms": 432,
+  "message": "76 probes",
+  "value": 76,
+  "response_time_ms": 570,
+  "jitter_ms": 0,
   "http_code": 200,
   "uptime_pct": 100,
-  "last_check": "2026-02-15T06:08:45Z",
-  "last_check_epoch": 1771135725,
+  "last_check": "2026-02-15T06:24:41Z",
+  "last_check_epoch": 1771136681,
   "prev_status": "up"
 }

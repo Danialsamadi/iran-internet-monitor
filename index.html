@@ -140,8 +140,26 @@
             font-size: 11px;
             color: var(--text3);
             display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2px;
+            line-height: 1.3
+        }
+
+        .nav-ts .clock-row {
+            display: flex;
             align-items: center;
-            gap: 6px
+            gap: 5px
+        }
+
+        .nav-ts .clock-label {
+            color: var(--text3);
+            opacity: .7
+        }
+
+        .nav-ts .clock-val {
+            color: var(--text2);
+            font-variant-numeric: tabular-nums
         }
 
         /* Layout */
@@ -163,22 +181,34 @@
         /* Grid */
         .grid {
             display: grid;
-            gap: 16px
+            gap: 20px
         }
 
         .grid-top {
+            grid-template-columns: 1fr;
+            margin-bottom: 20px
+        }
+
+        .grid-svc-overview {
             grid-template-columns: 1fr 1fr;
-            margin-bottom: 16px
+            gap: 20px;
+            margin-bottom: 20px
         }
 
         .grid-mid {
-            grid-template-columns: 1fr 1fr 1fr;
-            margin-bottom: 16px
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px
         }
 
         .grid-bot {
             grid-template-columns: 1fr 1fr 1fr;
-            margin-bottom: 16px
+            gap: 28px;
+            margin-bottom: 20px
+        }
+
+        .grid-bot > .card {
+            min-width: 0
         }
 
         /* Card */
@@ -188,7 +218,8 @@
             border-radius: var(--r2);
             padding: 20px;
             position: relative;
-            overflow: hidden
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15)
         }
 
         .card::before {
@@ -314,18 +345,72 @@
             stroke-linejoin: round
         }
 
-        /* Service table */
+        /* Service table cards: more breathing room */
+        .card:has(.svc-table-outer) {
+            padding-top: 24px;
+            padding-bottom: 24px
+        }
+
+        /* Service table: header outside scroll so it never hides */
+        .svc-table-outer {
+            border-radius: var(--r);
+            background: var(--border);
+            overflow: hidden;
+            margin-top: 12px;
+            margin-bottom: 4px
+        }
+
+        .svc-table-outer .svc-row.header {
+            border-radius: var(--r) var(--r) 0 0;
+            box-shadow: 0 1px 0 var(--border)
+        }
+
         .svc-grid {
             display: grid;
             gap: 1px;
-            background: var(--border);
-            border-radius: var(--r);
-            overflow: hidden
+            background: var(--border)
         }
+
+        .svc-grid-wrap {
+            max-height: 320px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            border-radius: 0 0 var(--r) var(--r);
+            scrollbar-gutter: stable;
+            padding-bottom: 12px
+        }
+
+        .svc-cat-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            color: var(--text3);
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .svc-cat-header:first-of-type { margin-top: 0 }
+
+        .svc-spark {
+            width: 52px;
+            min-width: 52px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px
+        }
+
+        .svc-spark .apexcharts-canvas { margin: 0 auto }
 
         .svc-row {
             display: grid;
-            grid-template-columns: 1fr 80px 80px;
+            grid-template-columns: 1fr 52px 72px 80px 80px;
             align-items: center;
             padding: 9px 14px;
             background: var(--card);
@@ -377,6 +462,26 @@
 
         .svc-dot.unknown {
             background: var(--text3)
+        }
+
+        .svc-type-badge {
+            font-size: 9px;
+            font-weight: 600;
+            padding: 1px 5px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: .3px;
+            flex-shrink: 0
+        }
+
+        .svc-type-badge.tcp {
+            background: rgba(124, 58, 237, 0.15);
+            color: var(--purple)
+        }
+
+        .svc-type-badge.http {
+            background: rgba(37, 175, 244, 0.1);
+            color: var(--cyan)
         }
 
         .svc-label {
@@ -621,7 +726,8 @@
             border-radius: var(--r2);
             padding: 20px;
             position: relative;
-            overflow: hidden
+            overflow: hidden;
+            margin-bottom: 20px
         }
 
         .chart-card::before {
@@ -777,6 +883,34 @@
             min-width: 120px
         }
 
+        /* Compare response time — up to 4 services, line/area chart */
+        .compare-svc-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 16px;
+            margin-bottom: 16px
+        }
+        .compare-svc-row label {
+            font-size: 11px;
+            color: var(--text2);
+            text-transform: uppercase;
+            letter-spacing: .4px
+        }
+        .compare-svc-row select {
+            min-width: 140px;
+            padding: 6px 10px;
+            border-radius: var(--r);
+            border: 1px solid var(--border);
+            background: var(--bg2);
+            color: var(--text);
+            font-size: 12px
+        }
+        #chart-compare-response {
+            min-height: 260px;
+            margin-top: 8px
+        }
+
         @media (max-width: 600px) {
             .graph-filters { flex-direction: column; align-items: stretch }
             .graph-filters select { min-width: 100% }
@@ -813,6 +947,62 @@
             border-radius: 2px;
             display: inline-block
         }
+
+        .cat-list { padding: 0 }
+        .cat-row {
+            display: grid;
+            grid-template-columns: 10px 1fr auto auto;
+            align-items: center;
+            gap: 10px 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px
+        }
+        .cat-row:last-child { border-bottom: none }
+        .cat-pct-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+        .cat-name { font-weight: 500; color: var(--text); min-width: 0; overflow: hidden; text-overflow: ellipsis }
+        .cat-meta { font-size: 11px; color: var(--text3) }
+        .cat-pct { font-size: 12px; font-weight: 600; min-width: 2.2em; text-align: right }
+
+        .uptime-cat-list { padding: 4px 0 }
+        .uptime-cat-row {
+            display: grid;
+            grid-template-columns: 1fr 120px 72px;
+            align-items: center;
+            gap: 10px 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 12px
+        }
+        .uptime-cat-row:last-child { border-bottom: none }
+        .uptime-cat-label {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text);
+            font-weight: 500
+        }
+        .uptime-cat-bar-wrap {
+            height: 10px;
+            background: var(--bg3);
+            border-radius: 2px;
+            overflow: hidden
+        }
+        .uptime-cat-bar { height: 100%; border-radius: 2px; min-width: 2px; transition: width .2s }
+        .uptime-cat-values {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            font-size: 11px
+        }
+        .uptime-cat-frac { color: var(--text3) }
+        .uptime-cat-pct { font-weight: 600; min-width: 2.2em; text-align: right }
 
         .bar-chart-wrap {
             width: 100%;
@@ -943,8 +1133,9 @@
         .nav.open .nav-toggle span::after { transform: translateY(-8px) rotate(-45deg) }
 
         @media (max-width: 900px) {
-            .grid-top, .grid-mid { grid-template-columns: 1fr }
+            .grid-top, .grid-mid, .grid-svc-overview { grid-template-columns: 1fr }
             .grid-bot { grid-template-columns: 1fr }
+            .uptime-cat-row { grid-template-columns: 1fr 80px 64px }
         }
 
         @media (max-width: 768px) {
@@ -1001,10 +1192,11 @@
             .page-title { font-size: 18px; margin-bottom: 16px }
 
             .svc-row {
-                grid-template-columns: 1fr 70px 60px;
+                grid-template-columns: 1fr 44px 56px 70px 60px;
                 padding: 12px 10px;
                 font-size: 11px
             }
+            .svc-spark { width: 44px; min-width: 44px; height: 24px }
 
             .gauge-outer { width: 160px; height: 160px }
             .gauge-pct { font-size: 32px }
@@ -1028,7 +1220,10 @@
                 <a href="incidents.html">Incidents</a>
                 <a href="https://github.com/Danialsamadi/iran-internet-monitor" target="_blank" rel="noopener">GitHub</a>
             </div>
-            <div class="nav-ts" id="timestamp"></div>
+            <div class="nav-ts" id="nav-clock">
+                <div class="clock-row"><span class="clock-label">Iran</span><span class="clock-val" id="clock-iran">--:--:--</span></div>
+                <div class="clock-row"><span class="clock-label">Local</span><span class="clock-val" id="clock-local">--:--:--</span></div>
+            </div>
         </div>
     </nav>
     <script>document.getElementById('nav').addEventListener('click', function(e) {
@@ -1036,7 +1231,25 @@
             this.classList.toggle('open');
             this.querySelector('.nav-toggle').setAttribute('aria-expanded', this.classList.contains('open'));
         }
-    });</script>
+    });
+    (function() {
+        function pad(n) { return n < 10 ? '0' + n : n; }
+        function tick() {
+            var now = new Date();
+            var iranEl = document.getElementById('clock-iran');
+            var localEl = document.getElementById('clock-local');
+            if (iranEl) {
+                var iran = now.toLocaleString('en-GB', { timeZone: 'Asia/Tehran', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+                var iranDate = now.toLocaleString('en-GB', { timeZone: 'Asia/Tehran', day: '2-digit', month: 'short' });
+                iranEl.textContent = iranDate + ' ' + iran;
+            }
+            if (localEl) {
+                localEl.textContent = pad(now.getDate()) + ' ' + now.toLocaleString('en-GB', { month: 'short' }) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+            }
+        }
+        tick();
+        setInterval(tick, 1000);
+    })();</script>
 
     <div class="wrap">
         <h1 class="page-title">Internet Health Monitor — Iran</h1>
@@ -1092,6 +1305,10 @@
                 let seed = rt || 100; function rnd() { seed = (seed * 16807 + 7) % 2147483647; return (seed % 1000) / 1000 }
                 const a = []; for (let i = 0; i < n; i++)a.push(rt * (0.3 + rnd() * 0.7)); a[n - 1] = rt; return a
             }
+
+            function isTcp(svc) { return svc && (svc.check_type === 'tcp' || (svc.id && svc.id.startsWith('ir-tcp-'))) }
+            function typeBadge(svc) { return isTcp(svc) ? '<span class="svc-type-badge tcp">TCP</span>' : '<span class="svc-type-badge http">HTTP</span>' }
+            function checkLabel(svc) { if (isTcp(svc)) { return svc.http_code === 1 ? 'Connected' : 'Failed' } return svc.http_code ? 'HTTP ' + svc.http_code : '—' }
 
             const COLORS = { up: '#2ecc71', degraded: '#f1c40f', down: '#e74c3c', unknown: '#5c6a82' };
             /* Limited palette for line charts — avoid too many colors */
@@ -1279,16 +1496,19 @@
                 return `<svg viewBox="0 0 ${w} ${h}" class="chart-svg"><g>${grid}</g>${paths}<text x="${pad.left - 4}" y="${pad.top + 10}" class="chart-axis" text-anchor="end">${maxVal}ms</text><text x="${pad.left - 4}" y="${pad.top + innerH + 4}" class="chart-axis" text-anchor="end">0</text></svg>`;
             }
 
-            let filterState = { category: 'all', status: 'all', timeRange: '30' };
+            let filterState = { category: 'all', status: 'all', timeRange: '30', compareSelectedIds: [] };
             let historyCache = {};
             let lastData = null;
+            let lastCompareList = [];
+            let compareChartRef = null;
 
             function render(data) {
                 if (!data || !data.summary) { app.innerHTML = '<div class="no-data"><h3>Waiting for Data</h3><p>Push to GitHub and enable Actions, or run locally:</p><p style="margin-top:10px"><code>./run-check.sh</code></p></div>'; return }
+                try {
                 lastData = data;
                 const { summary: sm, services: svcs, categories: cats } = data;
                 const sMap = {}; (svcs || []).forEach(s => sMap[s.id] = s);
-                document.getElementById('timestamp').textContent = sm.last_check ? new Date(sm.last_check).toLocaleString() : '';
+                // clock is handled by the nav tick script
 
                 const filtered = getFilteredServices(data, filterState);
                 const uptimes = filtered.filter(s => s.uptime_pct != null).map(s => +s.uptime_pct);
@@ -1319,9 +1539,7 @@
   </div>
 </div>`;
 
-                // === TOP ROW: Uptime chart (filterable) + Gauge + Service table ===
-                h += `<div class="grid grid-top">`;
-
+                // === TOP ROW: Uptime chart (full width) ===
                 const upHist = genFakeHistory(overallUp, numPoints);
                 const now = Date.now();
                 const dayMs = 86400 * 1000;
@@ -1330,36 +1548,67 @@
                 h += makeGauge(overallUp);
                 h += `<div id="chart-uptime-area" class="apex-chart-wrap"></div></div>`;
 
-                h += `<div class="card"><div class="card-title">Service Status Overview</div><div class="svc-grid"><div class="svc-row header"><div>Service</div><div class="svc-val">Status</div><div class="svc-val">30d Up</div></div>`;
-                (cats || []).forEach(cat => {
-                    (cat.service_ids || []).forEach(id => {
-                        const s = sMap[id]; if (!s) return;
+                // === SERVICE STATUS: HTTP + API  |  TCP  (side by side) ===
+                const allSvcs = svcs || [];
+                const httpSvcs = allSvcs.filter(s => !isTcp(s));
+                const tcpSvcs = allSvcs.filter(s => isTcp(s));
+                const httpIds = new Set(httpSvcs.map(s => s.id));
+                const inAnyCat = new Set((cats || []).flatMap(c => c.service_ids || []));
+                const httpByCat = (cats || []).map(cat => ({
+                    name: cat.name,
+                    icon: cat.icon,
+                    services: (cat.service_ids || []).filter(id => httpIds.has(id)).map(id => sMap[id]).filter(Boolean)
+                })).filter(g => g.services.length > 0);
+                const httpUncategorized = httpSvcs.filter(s => !inAnyCat.has(s.id));
+
+                h += `<div class="grid grid-svc-overview">`;
+
+                // HTTP & API Services card — grouped by category, scrollable; collect for sparklines
+                var allHttpForSpark = [];
+                h += `<div class="card"><div class="card-title">Service Status — HTTP & API</div><div class="svc-table-outer">`;
+                h += `<div class="svc-row header" style="grid-template-columns:1fr 52px 72px 80px 80px"><div>Service</div><div class="svc-spark" title="Connectivity"></div><div class="svc-val">Response</div><div class="svc-val">Status</div><div class="svc-val">30d Up</div></div>`;
+                h += `<div class="svc-grid-wrap"><div class="svc-grid">`;
+                httpByCat.forEach(grp => {
+                    h += `<div class="svc-cat-header">${esc(grp.name)}</div>`;
+                    grp.services.forEach(s => {
+                        allHttpForSpark.push(s);
                         const up = s.uptime_pct != null ? Number(s.uptime_pct).toFixed(1) : '—';
                         const cls = s.status === 'up' ? 'svc-up' : s.status === 'down' ? 'svc-down' : s.status === 'degraded' ? 'svc-deg' : '';
-                        h += `<div class="svc-row"><div class="svc-name"><span class="svc-dot ${s.status || 'unknown'}"></span><span class="svc-label">${esc(s.name)}</span></div><div class="svc-val ${cls}">${s.status || '?'}</div><div class="svc-val ${cls}">${up}%</div></div>`;
-                    })
-                });
-                h += `</div></div></div>`;
-
-                // === MID ROW: Response time multi-line chart (filterable) + heatmap + incidents ===
-                h += `<div class="grid grid-mid">`;
-
-                const sparkList = filtered.length ? filtered.slice(0, 16) : (svcs || []).slice(0, 16);
-                const responseSeries = sparkList.map((s, i) => ({
-                    id: s.id,
-                    name: s.name,
-                    color: SERIES_COLORS[i % SERIES_COLORS.length],
-                    values: genFakeHistory(s.response_time_ms || 100, 24)
-                }));
-                const respAreaSeries = responseSeries.map(function(s) {
-                    const data = s.values.map(function(y, i) {
-                        const t = now - (23 - i) * 3600000;
-                        return { x: t, y: Math.round(y) };
+                        const rt = s.status === 'down' ? '—' : (s.response_time_ms != null ? s.response_time_ms + ' ms' : '—');
+                        var sid = (s.id || '').replace(/[^a-zA-Z0-9_.-]/g, '_');
+                        h += `<div class="svc-row" style="grid-template-columns:1fr 52px 72px 80px 80px"><div class="svc-name"><span class="svc-dot ${s.status || 'unknown'}"></span><span class="svc-label">${esc(s.name)}</span></div><div class="svc-spark" id="spark-svc-${sid}"></div><div class="svc-val">${rt}</div><div class="svc-val ${cls}">${s.status || '?'}</div><div class="svc-val ${cls}">${up}%</div></div>`;
                     });
-                    return { name: s.name, data: data };
                 });
-                h += `<div class="chart-card"><div class="card-title">Response time over time — click legend to toggle</div>`;
-                h += `<div id="chart-response-area" class="apex-chart-wrap"></div></div>`;
+                if (httpUncategorized.length > 0) {
+                    h += `<div class="svc-cat-header">Other</div>`;
+                    httpUncategorized.forEach(s => {
+                        allHttpForSpark.push(s);
+                        const up = s.uptime_pct != null ? Number(s.uptime_pct).toFixed(1) : '—';
+                        const cls = s.status === 'up' ? 'svc-up' : s.status === 'down' ? 'svc-down' : s.status === 'degraded' ? 'svc-deg' : '';
+                        const rt = s.status === 'down' ? '—' : (s.response_time_ms != null ? s.response_time_ms + ' ms' : '—');
+                        var sid = (s.id || '').replace(/[^a-zA-Z0-9_.-]/g, '_');
+                        h += `<div class="svc-row" style="grid-template-columns:1fr 52px 72px 80px 80px"><div class="svc-name"><span class="svc-dot ${s.status || 'unknown'}"></span><span class="svc-label">${esc(s.name)}</span></div><div class="svc-spark" id="spark-svc-${sid}"></div><div class="svc-val">${rt}</div><div class="svc-val ${cls}">${s.status || '?'}</div><div class="svc-val ${cls}">${up}%</div></div>`;
+                    });
+                }
+                h += `</div></div></div></div>`;
+
+                // TCP Services card — scrollable for consistency
+                h += `<div class="card"><div class="card-title">Service Status — TCP</div><div class="svc-table-outer">`;
+                h += `<div class="svc-row header" style="grid-template-columns:1fr 52px 72px 80px 80px"><div>Service</div><div class="svc-spark" title="Connectivity"></div><div class="svc-val">Response</div><div class="svc-val">Status</div><div class="svc-val">30d Up</div></div>`;
+                h += `<div class="svc-grid-wrap"><div class="svc-grid">`;
+                tcpSvcs.forEach(s => {
+                    const up = s.uptime_pct != null ? Number(s.uptime_pct).toFixed(1) : '—';
+                    const cls = s.status === 'up' ? 'svc-up' : s.status === 'down' ? 'svc-down' : s.status === 'degraded' ? 'svc-deg' : '';
+                    const rt = s.status === 'down' ? '—' : (s.response_time_ms != null ? s.response_time_ms + ' ms' : '—');
+                    var sid = (s.id || '').replace(/[^a-zA-Z0-9_.-]/g, '_');
+                    h += `<div class="svc-row" style="grid-template-columns:1fr 52px 72px 80px 80px"><div class="svc-name"><span class="svc-dot ${s.status || 'unknown'}"></span><span class="svc-label">${esc(s.name)}</span></div><div class="svc-spark" id="spark-svc-${sid}"></div><div class="svc-val">${rt}</div><div class="svc-val ${cls}">${s.status || '?'}</div><div class="svc-val ${cls}">${up}%</div></div>`;
+                });
+                h += `</div></div></div></div>`;
+
+                h += `</div>`;
+
+                // === MID ROW: heatmap + incidents ===
+                h += `<div class="grid grid-mid">`;
 
                 h += `<div class="card"><div class="card-title">Outage calendar (30d)</div><div class="heatmap">`;
                 ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(d => h += `<div class="heat-label">${d}</div>`);
@@ -1383,15 +1632,22 @@
                 }
                 h += `</div></div>`;
 
-                // === Response time by service — one small area chart per service (negative/threshold style) ===
-                const RESPONSE_THRESHOLD_MS = 500;
-                h += `<div class="card"><div class="card-title">Response time by service (filtered) — green below ${RESPONSE_THRESHOLD_MS}ms, red above</div><div class="multi-spark-wrap" id="response-by-service-wrap">`;
-                responseSeries.forEach(function(s, idx) {
-                    const svc = sparkList[idx];
-                    const status = (svc && svc.status) || 'unknown';
-                    h += `<div class="multi-spark-row"><div class="spark-name"><span class="svc-dot ${status}"></span>${esc(s.name)}</div><div class="spark-chart"><div id="chart-response-svc-${idx}" class="apex-spark-wrap"></div></div><div class="spark-val">${(svc && svc.response_time_ms) || '—'}ms</div></div>`;
-                });
-                h += `</div></div>`;
+                // === Compare response time — pick up to 4 services, line/area chart ===
+                const compareList = filtered.length ? filtered : (svcs || []);
+                lastCompareList = compareList;
+                if (!filterState.compareSelectedIds || filterState.compareSelectedIds.length === 0) {
+                    filterState.compareSelectedIds = compareList.slice(0, 4).map(s => s.id);
+                }
+                h += `<div class="card" style="grid-column:1/-1"><div class="card-title">Compare response time — pick up to 4 services</div>`;
+                h += `<div class="compare-svc-row">`;
+                for (let i = 1; i <= 4; i++) {
+                    const sel = (filterState.compareSelectedIds || [])[i - 1] || '';
+                    h += `<label>Service ${i}</label><select id="compare-svc-${i}" class="compare-svc-select" data-slot="${i}">`;
+                    h += `<option value="">— None —</option>`;
+                    compareList.forEach(s => { h += `<option value="${esc(s.id)}" ${s.id === sel ? 'selected' : ''}>${esc(s.name)}</option>`; });
+                    h += `</select>`;
+                }
+                h += `</div><div id="chart-compare-response"></div></div>`;
 
                 // === BOT ROW: Status (ApexCharts multiple radialbars) + Bar chart + Categories ===
                 h += `<div class="grid grid-bot">`;
@@ -1402,23 +1658,27 @@
                 const unkPct = total ? Math.round((sm.unknown || 0) / total * 100) : 0;
                 h += `<div class="card"><div class="card-title">Status breakdown</div><div id="chart-status-radial" class="apex-radial-wrap"></div></div>`;
 
-                /* Bar chart: comparison — uptime % by category */
-                const barBars = (cats || []).map(cat => {
+                /* Uptime by category — HTML bar list: full names, fraction, percentage */
+                const uptimeCatRows = (cats || []).map(cat => {
                     const ids = cat.service_ids || [];
                     const catUp = ids.filter(id => sMap[id] && sMap[id].status === 'up').length;
                     const pct = ids.length ? Math.round(catUp / ids.length * 100) : 0;
                     const color = pct >= 90 ? '#2ecc71' : pct >= 70 ? '#f1c40f' : '#e74c3c';
-                    return { label: (cat.name || '').slice(0, 18), value: pct, color };
-                }).filter(b => b.label);
-                h += `<div class="card"><div class="card-title">Uptime by category (comparison)</div><div class="bar-chart-wrap">${makeBarChart(320, Math.max(180, barBars.length * 28), barBars)}</div></div>`;
+                    return { name: cat.name || '', up: catUp, total: ids.length, pct, color };
+                }).filter(r => r.total > 0);
+                h += `<div class="card"><div class="card-title">Uptime by category</div><div class="uptime-cat-list">`;
+                uptimeCatRows.forEach(r => {
+                    h += `<div class="uptime-cat-row"><div class="uptime-cat-label" title="${esc(r.name)}">${esc(r.name)}</div><div class="uptime-cat-bar-wrap"><div class="uptime-cat-bar" style="width:${r.pct}%;background:${r.color}"></div></div><div class="uptime-cat-values"><span class="uptime-cat-frac">${r.up}/${r.total}</span><span class="uptime-cat-pct" style="color:${r.color}">${r.pct}%</span></div></div>`;
+                });
+                h += `</div></div>`;
 
-                h += `<div class="card"><div class="card-title">Categories</div>`;
+                h += `<div class="card"><div class="card-title">Categories</div><div class="cat-list">`;
                 (cats || []).forEach(cat => {
                     const ids = cat.service_ids || [];
                     const catUp = ids.filter(id => sMap[id] && sMap[id].status === 'up').length;
                     const pct = ids.length ? (catUp / ids.length * 100).toFixed(0) : 0;
                     const color = pct >= 90 ? 'var(--green)' : pct >= 70 ? 'var(--yellow)' : 'var(--red)';
-                    h += `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><div style="display:flex;align-items:center;gap:8px"><span>${cat.icon || '📊'}</span><span style="font-size:13px;font-weight:500">${esc(cat.name)}</span></div><div style="display:flex;align-items:center;gap:10px"><span style="font-size:11px;color:var(--text3)">${catUp}/${ids.length}</span><span style="font-size:12px;font-weight:600;color:${color}">${pct}%</span></div></div>`;
+                    h += `<div class="cat-row"><span class="cat-pct-dot" style="background:${color}"></span><span class="cat-name">${esc(cat.name)}</span><span class="cat-meta">${catUp}/${ids.length}</span><span class="cat-pct" style="color:${color}">${pct}%</span></div>`;
                 });
                 h += `</div></div>`;
 
@@ -1429,6 +1689,7 @@
                     window.iranMonitorCharts.forEach(function(c) { try { c.destroy(); } catch(e) {} });
                     window.iranMonitorCharts = [];
                 }
+                compareChartRef = null;
 
                 if (typeof ApexCharts !== 'undefined') {
                     var chartList = [];
@@ -1482,72 +1743,101 @@
                         chartList.push(uptimeChart);
                     }
 
-                    // Response time over time — area multiple series / irregular timeseries (https://apexcharts.com/javascript-chart-demos/area-charts/irregular-timeseries/)
-                    var respEl = document.getElementById('chart-response-area');
-                    if (respEl && respAreaSeries.length) {
-                        var respOpts = {
-                            series: respAreaSeries,
-                            chart: { type: 'area', height: 220, stacked: false, toolbar: { show: false }, zoom: { enabled: false }, background: 'transparent' },
-                            colors: responseSeries.map(function(s) { return s.color; }),
-                            stroke: { width: 1, curve: 'smooth' },
-                            dataLabels: { enabled: false },
-                            fill: { type: 'solid', opacity: 0.15 },
-                            xaxis: { type: 'datetime', labels: { style: { colors: '#5c6a82' } } },
-                            yaxis: { labels: { style: { colors: '#5c6a82' } } },
-                            grid: { borderColor: 'var(--border)', strokeDashArray: 2 },
-                            legend: { position: 'top', horizontalAlign: 'right', labels: { colors: '#9aa5b8' } },
-                            tooltip: { shared: true, theme: 'dark' },
-                            theme: { mode: 'dark' }
-                        };
-                        var respChart = new ApexCharts(respEl, respOpts);
-                        respChart.render();
-                        chartList.push(respChart);
-                    }
-
-                    // Response time by service (filtered) — one small area chart per service (negative/threshold style)
-                    responseSeries.forEach(function(s, idx) {
-                        var el = document.getElementById('chart-response-svc-' + idx);
+                    // Row sparklines — current value only (no fake history); updates when data is fetched
+                    var allSvcForSpark = allHttpForSpark.concat(tcpSvcs);
+                    allSvcForSpark.forEach(function(svc) {
+                        var sid = (svc.id || '').replace(/[^a-zA-Z0-9_.-]/g, '_');
+                        var el = document.getElementById('spark-svc-' + sid);
                         if (!el) return;
-                        var data = s.values.map(function(y, i) {
-                            var t = now - (23 - i) * 3600000;
-                            return { x: t, y: Math.round(y) };
-                        });
-                        var opts = {
-                            series: [{ name: s.name, data: data }],
-                            chart: { type: 'area', height: 36, toolbar: { show: false }, zoom: { enabled: false }, background: 'transparent', sparkline: { enabled: false } },
-                            stroke: { width: 1, curve: 'smooth' },
-                            dataLabels: { enabled: false },
-                            fill: { type: 'solid', opacity: 0.3 },
-                            plotOptions: {
-                                line: {
-                                    colors: {
-                                        threshold: RESPONSE_THRESHOLD_MS,
-                                        colorAboveThreshold: '#e74c3c',
-                                        colorBelowThreshold: '#2ecc71'
-                                    }
-                                }
-                            },
+                        var rt = svc.status === 'down' ? 0 : (svc.response_time_ms || 0);
+                        var sparkData = [ { x: now - 3600000, y: rt }, { x: now, y: rt } ];
+                        var sparkColor = svc.status === 'up' ? '#2ecc71' : svc.status === 'degraded' ? '#f1c40f' : svc.status === 'down' ? '#e74c3c' : '#5c6a82';
+                        var sparkOpts = {
+                            series: [{ name: 'ms', data: sparkData }],
+                            chart: { type: 'area', height: 28, sparkline: { enabled: true }, toolbar: { show: false }, background: 'transparent' },
+                            stroke: { width: 1, curve: 'stepline' },
+                            fill: { type: 'solid', opacity: 0.25 },
+                            colors: [sparkColor],
                             xaxis: { type: 'datetime', labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false } },
-                            yaxis: { labels: { show: false }, min: 0, max: undefined },
-                            grid: { show: false, padding: { top: 0, right: 0, bottom: 0, left: 0 } },
-                            legend: { show: false },
-                            tooltip: { theme: 'dark', x: { format: 'HH:mm' } },
+                            yaxis: { labels: { show: false }, min: 0 },
+                            grid: { show: false, padding: { top: 2, right: 2, bottom: 2, left: 2 } },
+                            tooltip: { theme: 'dark', y: { formatter: function(v) { return v + ' ms'; } } },
+                            dataLabels: { enabled: false },
                             theme: { mode: 'dark' }
                         };
-                        var ch = new ApexCharts(el, opts);
-                        ch.render();
-                        chartList.push(ch);
+                        var sparkChart = new ApexCharts(el, sparkOpts);
+                        sparkChart.render();
+                        chartList.push(sparkChart);
                     });
+
+                    // Compare response time — line/area chart for up to 4 selected services (https://apexcharts.com/javascript-chart-demos/mixed-charts/line-area/)
+                    try {
+                        function buildCompareSeries() {
+                            var ids = [1, 2, 3, 4].map(function(i) { var el = document.getElementById('compare-svc-' + i); return el ? el.value : ''; }).filter(Boolean);
+                            return ids.map(function(id) {
+                                var svc = (lastCompareList || []).find(function(s) { return s && s.id === id; });
+                                if (!svc) return null;
+                                var vals = genFakeHistory(svc.response_time_ms || 100, 24);
+                                var data = vals.map(function(y, i) {
+                                    var t = now - (23 - i) * 3600000;
+                                    return { x: t, y: Math.round(y) };
+                                });
+                                return { name: (svc.name || svc.id || 'Service'), data: data };
+                            }).filter(Boolean);
+                        }
+                        var compareEl = document.getElementById('chart-compare-response');
+                        if (compareEl) {
+                            var compareSeries = buildCompareSeries();
+                            var fallbackSeries = [{ name: 'No service selected', data: [{ x: now - 86400000, y: 0 }, { x: now, y: 0 }] }];
+                            var seriesToUse = compareSeries.length ? compareSeries : fallbackSeries;
+                            var compareOpts = {
+                                series: seriesToUse,
+                                chart: { type: 'area', height: 260, toolbar: { show: true }, zoom: { enabled: true }, background: 'transparent' },
+                                stroke: { width: 2, curve: 'smooth' },
+                                dataLabels: { enabled: false },
+                                fill: { type: 'solid', opacity: 0.25 },
+                                colors: SERIES_COLORS.slice(0, 4),
+                                xaxis: { type: 'datetime', labels: { style: { colors: '#5c6a82' } } },
+                                yaxis: { min: 0, labels: { style: { colors: '#5c6a82' }, formatter: function(v) { return v + ' ms'; } } },
+                                grid: { borderColor: 'var(--border)', strokeDashArray: 2 },
+                                legend: { position: 'top', horizontalAlign: 'right', labels: { colors: '#5c6a82' } },
+                                tooltip: { theme: 'dark', y: { formatter: function(v) { return v + ' ms'; } }, x: { format: 'dd MMM HH:mm' } },
+                                theme: { mode: 'dark' }
+                            };
+                            compareChartRef = new ApexCharts(compareEl, compareOpts);
+                            compareChartRef.render();
+                            chartList.push(compareChartRef);
+                            [1, 2, 3, 4].forEach(function(i) {
+                                var sel = document.getElementById('compare-svc-' + i);
+                                if (sel) sel.addEventListener('change', function() {
+                                    filterState.compareSelectedIds = [1, 2, 3, 4].map(function(j) {
+                                        var e = document.getElementById('compare-svc-' + j);
+                                        return e ? e.value : '';
+                                    }).filter(Boolean);
+                                    var next = buildCompareSeries();
+                                    if (compareChartRef) compareChartRef.updateOptions({ series: next.length ? next : fallbackSeries });
+                                });
+                            });
+                        }
+                    } catch (compareErr) {
+                        console.warn('Compare chart init failed:', compareErr);
+                    }
 
                     window.iranMonitorCharts = chartList;
                 }
 
-                // Filter handlers
-                app.querySelector('#filter-cat').addEventListener('change', function() { filterState.category = this.value; render(lastData); });
-                app.querySelector('#filter-status').addEventListener('change', function() { filterState.status = this.value; render(lastData); });
+                // Filter handlers (must run so re-render works)
+                var fc = app.querySelector('#filter-cat');
+                var fs = app.querySelector('#filter-status');
+                if (fc) fc.addEventListener('change', function() { filterState.category = this.value; render(lastData); });
+                if (fs) fs.addEventListener('change', function() { filterState.status = this.value; render(lastData); });
                 app.querySelectorAll('.graph-filters .chip').forEach(btn => {
                     btn.addEventListener('click', function() { filterState.timeRange = this.dataset.days; render(lastData); });
                 });
+                } catch (e) {
+                    console.error('Render error:', e);
+                    app.innerHTML = '<div class="no-data"><h3>Error loading dashboard</h3><p>' + (e && e.message ? esc(e.message) : 'Check console for details') + '</p></div>';
+                }
             }
 
             async function fetchData() { try { const r = await fetch(DATA_URL + '?t=' + Date.now()); if (!r.ok) throw 0; render(await r.json()) } catch (e) { app.innerHTML = '<div class="no-data"><h3>Waiting for Data</h3><p>Push to GitHub & enable Actions to start monitoring.</p><p style="margin-top:10px"><code>./run-check.sh</code></p></div>' } }
