@@ -65,7 +65,7 @@ All external APIs, data sources, and endpoints for monitoring Iran's internet he
 
 This feature runs live network tests (`ping`, `curl`, `traceroute`, `mtr`) against ~50 hardcoded Iranian servers (line 11335). No external APIs.
 
-#### Test Server List
+#### Test Server List (88 servers)
 
 | IP | Name | City | ASN | Provider | Domain |
 |----|------|------|-----|----------|--------|
@@ -120,6 +120,43 @@ This feature runs live network tests (`ping`, `curl`, `traceroute`, `mtr`) again
 | 94.74.176.1 | Pishgaman Shiraz | Shiraz | 44208 | Pishgaman | pishgaman.net |
 | 78.39.240.1 | TIC Shiraz | Shiraz | 58224 | TIC | |
 | 185.236.36.1 | Shiraz DC | Shiraz | 48551 | Sindad | |
+| 2.182.96.1 | TIC BandarAbbas | BandarAbbas | 58224 | TIC | |
+| 85.185.161.1 | TIC Yazd | Yazd | 58224 | TIC | |
+| 78.39.246.1 | TIC Kermanshah | Kermanshah | 58224 | TIC | |
+| 85.185.248.1 | TIC Sanandaj | Sanandaj | 58224 | TIC | |
+| 94.182.0.1 | Shatel Ahvaz | Ahvaz | 31549 | Shatel | shatel.ir |
+| 2.187.1.1 | TIC Rasht | Rasht | 58224 | TIC | |
+| 2.185.128.2 | TIC Hamadan | Hamadan | 58224 | TIC | |
+| 2.187.192.1 | TIC Qazvin | Qazvin | 58224 | TIC | |
+| 80.191.161.1 | TIC Kerman | Kerman | 58224 | TIC | |
+| 2.187.32.2 | TIC Urmia | Urmia | 58224 | TIC | |
+| 78.38.168.1 | TIC Arak | Arak | 58224 | TIC | |
+| 80.191.250.2 | TIC Gorgan | Gorgan | 58224 | TIC | |
+| 217.219.166.1 | TIC Sari | Sari | 58224 | TIC | |
+| 80.191.174.1 | TIC Zahedan | Zahedan | 58224 | TIC | |
+| 5.234.192.2 | TIC Zanjan | Zanjan | 58224 | TIC | |
+| 2.183.0.1 | TIC Bushehr | Bushehr | 58224 | TIC | |
+| 2.185.192.1 | TIC Khorramabad | Khorramabad | 58224 | TIC | |
+| 92.42.50.130 | Irancell.ir | Tehran | 44244 | Irancell | irancell.ir |
+| 188.213.72.112 | Mobinnet.ir | Tehran | 50810 | Mobinnet | mobinnet.ir |
+| 80.75.12.17 | Afranet.com | Tehran | 25184 | Afranet | afranet.com |
+| 77.104.74.208 | Respina.net | Tehran | 42337 | Respina | respina.net |
+| 77.36.149.173 | IRIB | Tehran | 42586 | IRIB | irib.ir |
+| 45.157.244.26 | Fars News | Tehran | 62229 | FarsNews | farsnews.ir |
+| 185.53.142.188 | SibApp | Tehran | 51026 | Mobinhost | sibapp.com |
+| 185.126.18.154 | Pishgaman DC | Tehran | 49100 | Pishgaman | pishgaman.net |
+| 85.15.17.13 | Shatel.ir | Tehran | 31549 | Shatel | shatel.ir |
+| 185.98.112.170 | Asiatech.ir | Tehran | 43754 | Asiatech | asiatech.ir |
+| 185.120.222.22 | Myket | Tehran | 43754 | Asiatech | myket.ir |
+| 78.157.43.1 | Electro Net | Tehran | 62442 | Samane-Fanava | |
+| 185.188.104.1 | Digikala DC | Tehran | 43211 | Digikala | digikala.com |
+| 185.188.105.1 | Digikala DC 2 | Tehran | 43211 | Digikala | |
+| 92.114.18.1 | MobinNet DC | Tehran | 47330 | MobinNet | |
+| 185.60.136.1 | Soroush DC | Tehran | 21341 | Soroush-Rasanheh | |
+| 94.74.177.1 | Pishgaman Shiraz 2 | Shiraz | 44208 | Pishgaman | |
+| 185.53.143.1 | Mobinhost DC | Tehran | 51026 | Mobinhost | |
+| 185.236.37.1 | Sindad DC | Shiraz | 48551 | Sindad | |
+| 94.74.179.1 | Pishgaman Shiraz 3 | Shiraz | 44208 | Pishgaman | |
 
 #### Test Types
 

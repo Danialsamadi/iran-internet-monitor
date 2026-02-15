@@ -10,6 +10,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"math"
+	"net"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -47,17 +49,19 @@ type Service struct {
 }
 
 type ServiceResult struct {
-	ID           string  `json:"id"`
-	Name         string  `json:"name"`
-	Status       string  `json:"status"`
-	Message      string  `json:"message"`
-	Value        float64 `json:"value"`
-	ResponseTime int64   `json:"response_time_ms"`
-	HTTPCode     int     `json:"http_code"`
-	UptimePct    float64 `json:"uptime_pct"`
-	LastCheck    string  `json:"last_check"`
-	LastCheckEpoch int64 `json:"last_check_epoch"`
-	PrevStatus   string  `json:"prev_status"`
+	ID             string  `json:"id"`
+	Name           string  `json:"name"`
+	CheckType      string  `json:"check_type"`
+	Status         string  `json:"status"`
+	Message        string  `json:"message"`
+	Value          float64 `json:"value"`
+	ResponseTime   int64   `json:"response_time_ms"`
+	Jitter         int64   `json:"jitter_ms"`
+	HTTPCode       int     `json:"http_code"`
+	UptimePct      float64 `json:"uptime_pct"`
+	LastCheck      string  `json:"last_check"`
+	LastCheckEpoch int64   `json:"last_check_epoch"`
+	PrevStatus     string  `json:"prev_status"`
 }
 
 func expandURL(url string, now time.Time) string {
@@ -393,6 +397,121 @@ func trimHistory(historyPath string) {
 	}
 }
 
+// checkOneTCP performs a TCP connect check to an IP:port address.
+// URL format: "IP:PORT" (e.g. "217.218.155.155:53" or "85.185.161.1:80")
+func checkOneTCP(rootDir, apiDir, historyDir string, s Service, nowUnix int64, nowISO string, sem chan struct{}, wg *sync.WaitGroup, allResults *[]ServiceResult, resultsMu *sync.Mutex) {
+	defer wg.Done()
+	<-sem
+	defer func() { sem <- struct{}{} }()
+
+	addr := s.URL // e.g. "217.218.155.155:53"
+	const pings = 5
+
+	var times []int64
+	var lastErr error
+
+	for i := 0; i < pings; i++ {
+		start := time.Now()
+		conn, err := net.DialTimeout("tcp", addr, 10*time.Second)
+		ms := time.Since(start).Milliseconds()
+		if err != nil {
+			lastErr = err
+		} else {
+			conn.Close()
+			times = append(times, ms)
+		}
+	}
+
+	var status, message string
+	var value float64
+	var elapsed int64
+	var jitterMs int64
+	code := 0
+
+	if len(times) == 0 {
+		// All pings failed
+		status = "down"
+		value = 0
+		errMsg := lastErr.Error()
+		if strings.Contains(errMsg, "timeout") || strings.Contains(errMsg, "deadline") {
+			message = fmt.Sprintf("TCP timeout (%s)", addr)
+		} else if strings.Contains(errMsg, "refused") {
+			message = fmt.Sprintf("Connection refused (%s)", addr)
+		} else if strings.Contains(errMsg, "no route") || strings.Contains(errMsg, "unreachable") {
+			message = fmt.Sprintf("Unreachable (%s)", addr)
+		} else {
+			message = fmt.Sprintf("TCP connect failed: %s", errMsg)
+		}
+	} else {
+		// Compute average ping
+		var sum int64
+		for _, t := range times {
+			sum += t
+		}
+		elapsed = sum / int64(len(times))
+
+		// Compute jitter (mean absolute deviation from average)
+		if len(times) >= 2 {
+			avg := float64(sum) / float64(len(times))
+			var diffSum float64
+			for _, t := range times {
+				diffSum += math.Abs(float64(t) - avg)
+			}
+			jitterMs = int64(math.Round(diffSum / float64(len(times))))
+		}
+
+		code = 1
+		value = 100
+		if len(times) < pings {
+			// Partial success — some pings failed
+			status = "degraded"
+			value = float64(len(times)) / float64(pings) * 100
+			message = fmt.Sprintf("TCP %d/%d ok, avg %dms, jitter %dms (%s)", len(times), pings, elapsed, jitterMs, addr)
+		} else {
+			status = "up"
+			message = fmt.Sprintf("TCP avg %dms, jitter %dms (%s)", elapsed, jitterMs, addr)
+		}
+	}
+
+	prevStatus := readPrevStatus(apiDir, s.ID)
+	historyPath := filepath.Join(historyDir, s.ID+".csv")
+	uptimePct := readUptimePct(historyPath)
+	appendHistory(historyPath, nowISO, status, value, elapsed, code)
+	trimHistory(historyPath)
+
+	result := ServiceResult{
+		ID:             s.ID,
+		Name:           s.Name,
+		CheckType:      "tcp",
+		Status:         status,
+		Message:        message,
+		Value:          value,
+		ResponseTime:   elapsed,
+		Jitter:         jitterMs,
+		HTTPCode:       code,
+		UptimePct:      uptimePct,
+		LastCheck:      nowISO,
+		LastCheckEpoch: nowUnix,
+		PrevStatus:     prevStatus,
+	}
+	resultsMu.Lock()
+	*allResults = append(*allResults, result)
+	resultsMu.Unlock()
+
+	outPath := filepath.Join(apiDir, s.ID+".json")
+	jb, _ := json.MarshalIndent(result, "", "  ")
+	os.WriteFile(outPath, jb, 0644)
+
+	if prevStatus != "unknown" && prevStatus != status {
+		incPath := filepath.Join(rootDir, "incidents.log")
+		f, _ := os.OpenFile(incPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		if f != nil {
+			fmt.Fprintf(f, "%s|%s|%s|%s|%s|%s\n", nowISO, s.ID, s.Name, prevStatus, status, message)
+			f.Close()
+		}
+	}
+}
+
 func checkOne(client *http.Client, rootDir, apiDir, historyDir string, s Service, now time.Time, nowUnix int64, nowISO string, sem chan struct{}, wg *sync.WaitGroup, allResults *[]ServiceResult, resultsMu *sync.Mutex) {
 	defer wg.Done()
 	<-sem
@@ -421,17 +540,18 @@ func checkOne(client *http.Client, rootDir, apiDir, historyDir string, s Service
 	trimHistory(historyPath)
 
 	result := ServiceResult{
-		ID:            s.ID,
-		Name:          s.Name,
-		Status:        status,
-		Message:       message,
-		Value:         value,
-		ResponseTime:  elapsed,
-		HTTPCode:      code,
-		UptimePct:     uptimePct,
-		LastCheck:     nowISO,
+		ID:             s.ID,
+		Name:           s.Name,
+		CheckType:      s.Type,
+		Status:         status,
+		Message:        message,
+		Value:          value,
+		ResponseTime:   elapsed,
+		HTTPCode:       code,
+		UptimePct:      uptimePct,
+		LastCheck:      nowISO,
 		LastCheckEpoch: nowUnix,
-		PrevStatus:   prevStatus,
+		PrevStatus:     prevStatus,
 	}
 	resultsMu.Lock()
 	*allResults = append(*allResults, result)
@@ -521,6 +641,20 @@ func main() {
 			}
 			checked++
 			checkedIDs[s.ID] = true
+			if s.Type == "tcp" {
+				// TCP is run inline in the workflow (nc -zv); load result from api/*.json written by the workflow
+				b, err := os.ReadFile(filepath.Join(apiDir, s.ID+".json"))
+				if err == nil {
+					var tcpResult ServiceResult
+					if json.Unmarshal(b, &tcpResult) == nil {
+						resultsMu.Lock()
+						allResults = append(allResults, tcpResult)
+						resultsMu.Unlock()
+					}
+				}
+				fmt.Printf("  Loaded (TCP from workflow): %s (%s)\n", s.Name, s.ID)
+				continue
+			}
 			fmt.Printf("  Checking: %s (%s)\n", s.Name, s.ID)
 			wg.Add(1)
 			go checkOne(client, rootDir, apiDir, historyDir, s, now, nowUnix, nowISO, sem, &wg, &allResults, &resultsMu)
@@ -594,6 +728,30 @@ func main() {
 	summaryPath := filepath.Join(apiDir, "summary.json")
 	summaryJSON, _ := json.MarshalIndent(summary, "", "  ")
 	os.WriteFile(summaryPath, summaryJSON, 0644)
+
+	// Generate page-data.json (combines services + summary + categories)
+	type catInfo struct {
+		Name       string   `json:"name"`
+		Icon       string   `json:"icon"`
+		ServiceIDs []string `json:"service_ids"`
+	}
+	var cats []catInfo
+	for _, c := range cfg.Categories {
+		ci := catInfo{Name: c.Name, Icon: c.Icon}
+		for _, s := range c.Services {
+			ci.ServiceIDs = append(ci.ServiceIDs, s.ID)
+		}
+		cats = append(cats, ci)
+	}
+	pageData := map[string]interface{}{
+		"generated":  nowISO,
+		"services":   allResults,
+		"summary":    summary,
+		"categories": cats,
+	}
+	pageJSON, _ := json.MarshalIndent(pageData, "", "  ")
+	os.WriteFile(filepath.Join(apiDir, "page-data.json"), pageJSON, 0644)
+	fmt.Printf("  Generated api/page-data.json (%d services)\n", len(allResults))
 
 	fmt.Println("═══════════════════════════════════════════════════════════════")
 	fmt.Printf("  Done: %d/%d checked\n", checked, totalServices)

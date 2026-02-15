@@ -133,17 +133,30 @@
             color: var(--accent)
         }
 
-        .open-src {
-            font-size: 10px;
+        .nav-ts {
+            font-size: 11px;
             color: var(--text3);
             display: flex;
-            align-items: center;
-            gap: 4px
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2px;
+            line-height: 1.3
         }
 
-        .open-src svg {
-            width: 14px;
-            height: 14px
+        .nav-ts .clock-row {
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .nav-ts .clock-label {
+            color: var(--text3);
+            opacity: .7
+        }
+
+        .nav-ts .clock-val {
+            color: var(--text2);
+            font-variant-numeric: tabular-nums
         }
 
         .wrap {
@@ -172,7 +185,7 @@
         /* Grid */
         .grid-3 {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 16px;
             margin-bottom: 20px
         }
@@ -448,6 +461,29 @@
             color: var(--accent)
         }
 
+        .svc-type-badge {
+            font-size: 9px;
+            font-weight: 600;
+            padding: 1px 5px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: .3px;
+            flex-shrink: 0;
+            display: inline-block;
+            margin-left: 6px;
+            vertical-align: middle
+        }
+
+        .svc-type-badge.tcp {
+            background: rgba(124, 58, 237, 0.15);
+            color: var(--purple)
+        }
+
+        .svc-type-badge.http {
+            background: rgba(37, 175, 244, 0.1);
+            color: var(--cyan)
+        }
+
         .apex-radial-wrap {
             min-height: 260px;
             margin: 8px 0
@@ -458,15 +494,34 @@
             margin: 8px 0
         }
 
-        /* Sparkline in incident */
-        .inc-spark {
-            height: 32px;
-            margin-top: 8px
+        .apex-semi-donut-wrap {
+            min-height: 240px;
+            margin: 0 0 4px
         }
 
-        .inc-spark svg {
-            width: 100%;
-            height: 100%
+        .incidents-summary {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px
+        }
+
+        .incidents-summary .total-line {
+            font-size: 12px;
+            color: var(--text3);
+            margin-top: 4px
+        }
+
+        .incidents-summary .total-line strong {
+            color: var(--text)
+        }
+
+        /* Area chart in incident card */
+        .inc-spark {
+            height: 140px;
+            margin-top: 10px;
+            border-radius: var(--r);
+            overflow: hidden
         }
 
         /* Loading / no-data */
@@ -577,7 +632,7 @@
             }
             .nav.open .nav-links { transform: translateY(0); opacity: 1; visibility: visible }
             .nav-links a { padding: 12px 16px; min-height: var(--touch); display: flex; align-items: center; border-radius: var(--r) }
-            .open-src { display: none }
+            .nav-ts { display: none }
             .timeline { padding-left: 20px }
             .timeline::before { left: 5px }
             .tl-dot { left: -18px; width: 10px; height: 10px }
@@ -613,7 +668,10 @@
                 <a href="incidents.html" class="active">Incidents</a>
                 <a href="https://github.com/Danialsamadi/iran-internet-monitor" target="_blank" rel="noopener">GitHub</a>
             </div>
-            <div class="open-src"><svg viewBox="0 0 16 16" fill="var(--text3)" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.42 7.42 0 014 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>Open Source</span></div>
+            <div class="nav-ts" id="nav-clock">
+                <div class="clock-row"><span class="clock-label">Iran</span><span class="clock-val" id="clock-iran">--:--:--</span></div>
+                <div class="clock-row"><span class="clock-label">Local</span><span class="clock-val" id="clock-local">--:--:--</span></div>
+            </div>
         </div>
     </nav>
     <script>document.getElementById('nav').addEventListener('click', function(e) {
@@ -621,7 +679,25 @@
             this.classList.toggle('open');
             this.querySelector('.nav-toggle').setAttribute('aria-expanded', this.classList.contains('open'));
         }
-    });</script>
+    });
+    (function() {
+        function pad(n) { return n < 10 ? '0' + n : n; }
+        function tick() {
+            var now = new Date();
+            var iranEl = document.getElementById('clock-iran');
+            var localEl = document.getElementById('clock-local');
+            if (iranEl) {
+                var iran = now.toLocaleString('en-GB', { timeZone: 'Asia/Tehran', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+                var iranDate = now.toLocaleString('en-GB', { timeZone: 'Asia/Tehran', day: '2-digit', month: 'short' });
+                iranEl.textContent = iranDate + ' ' + iran;
+            }
+            if (localEl) {
+                localEl.textContent = pad(now.getDate()) + ' ' + now.toLocaleString('en-GB', { month: 'short' }) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+            }
+        }
+        tick();
+        setInterval(tick, 1000);
+    })();</script>
 
     <div class="wrap">
         <h1 class="page-title"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2">
@@ -650,13 +726,22 @@
 
             function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML }
             function timeAgo(iso) { if (!iso) return ''; const s = Math.floor((Date.now() - new Date(iso)) / 1e3); if (s < 60) return 'just now'; if (s < 3600) return Math.floor(s / 60) + 'm ago'; if (s < 86400) return Math.floor(s / 3600) + 'h ago'; return Math.floor(s / 86400) + 'd ago' }
+            function isTcp(svc) { return svc && (svc.check_type === 'tcp' || (svc.id && svc.id.startsWith('ir-tcp-'))) }
+            function typeBadge(svc) { return isTcp(svc) ? '<span class="svc-type-badge tcp">TCP</span>' : '<span class="svc-type-badge http">HTTP</span>' }
 
-            function makeSparkline(w, h, n, seed) {
-                let s = seed; function rr() { s = (s * 16807 + 7) % 2147483647; return (s % 1000) / 1000 }
-                const vals = []; for (let i = 0; i < n; i++)vals.push(rr());
-                const mx = Math.max(...vals) * 1.2 || 1;
-                let p = ''; vals.forEach((v, i) => { const x = i * (w / (n - 1)), y = h - ((v / mx) * h * 0.8 + h * 0.1); p += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1) });
-                return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><path d="${p}" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/></svg>`;
+            // Generate simulated response-time data as [{x: timestamp, y: value}]
+            function genChartData(base, n, seed) {
+                var s = seed || 100;
+                function rr() { s = (s * 16807 + 7) % 2147483647; return (s % 1000) / 1000; }
+                var now = Date.now();
+                var interval = 300000; // 5 min intervals
+                var data = [];
+                for (var i = 0; i < n; i++) {
+                    var jitter = base * (0.3 + rr() * 1.4);
+                    data.push({ x: now - (n - 1 - i) * interval, y: Math.round(jitter) });
+                }
+                data[n - 1].y = base; // latest = actual value
+                return data;
             }
 
             function render(data) {
@@ -672,7 +757,7 @@
 
                 let h = '';
 
-                // === Top row: ApexCharts radialbars + donut + count badges ===
+                // === Top row: Current Status + Recent Incidents (semi-donut) ===
                 h += `<div class="grid-3">`;
 
                 const pUp = up.length / total, pDeg = degraded.length / total, pDown = down.length / total, pUnk = unknown.length / total;
@@ -681,27 +766,12 @@
                 // Card 1: Current Status (ApexCharts multiple radialbars)
                 h += `<div class="card"><div class="card-title">Current Status</div><div id="chart-incidents-status-radial" class="apex-radial-wrap"></div></div>`;
 
-                // Card 2: Services Affected (ApexCharts donut)
-                const catAffected = {};
-                cats.forEach(cat => {
-                    const ids = cat.service_ids || [];
-                    const affCount = ids.filter(id => { const s = svcs.find(x => x.id === id); return s && (s.status === 'down' || s.status === 'degraded') }).length;
-                    if (affCount > 0) catAffected[cat.name] = { count: affCount, total: ids.length };
-                });
-                const affEntries = Object.entries(catAffected);
-                const totalAff = affEntries.reduce((a, [, v]) => a + v.count, 0);
-                const colors2 = ['#e74c3c', '#f1c40f', '#25aff4', '#9b59b6'];
-                const affectedSeries = affEntries.length ? affEntries.map(function(e) { return e[1].count; }) : [1];
-                const affectedLabels = affEntries.length ? affEntries.map(function(e) { return esc(e[0].split('(')[0].trim()); }) : ['No services affected'];
-                h += `<div class="card"><div class="card-title">Services Affected</div><div id="chart-incidents-affected" class="apex-donut-wrap"></div><div class="donut-legend" id="incidents-affected-legend">`;
-                if (affEntries.length) { affEntries.forEach(([name, v], i) => { h += `<div class="donut-legend-item"><span class="dl-dot" style="background:${colors2[i % 4]}"></span>${esc(name.split('(')[0].trim())} ${Math.round(v.count / total * 100)}%</div>` }) }
-                else { h += `<div class="donut-legend-item"><span class="dl-dot" style="background:var(--green)"></span>No services affected</div>` }
-                h += `</div></div>`;
-
-                // Card 3: Recent Incidents summary (count badges)
-                h += `<div class="card"><div class="card-title">Recent Incidents</div><div class="donut-center">`;
+                // Card 2: Recent Incidents — semi-donut showing Critical / Major / Minor
+                h += `<div class="card"><div class="card-title">Recent Incidents</div>`;
+                h += `<div class="incidents-summary">`;
+                h += `<div id="chart-incidents-semi-donut" class="apex-semi-donut-wrap"></div>`;
                 h += `<div class="count-row"><div class="count-badge"><span class="count-num" style="color:var(--red)">${down.length}</span>Critical</div><div class="count-badge"><span class="count-num" style="color:var(--yellow)">${degraded.length}</span>Major</div><div class="count-badge"><span class="count-num" style="color:var(--cyan)">${unknown.length}</span>Minor</div></div>`;
-                h += `<div style="margin-top:16px;font-size:12px;color:var(--text3)">Total services monitored: <strong style="color:var(--text)">${total}</strong></div>`;
+                h += `<div class="total-line">Total services monitored: <strong>${total}</strong></div>`;
                 h += `</div></div>`;
                 h += `</div>`; // end grid-3
 
@@ -714,12 +784,13 @@
                     incidents.forEach((svc, i) => {
                         const severity = svc.status === 'down' ? 'critical' : 'major';
                         const boxCls = svc.status === 'degraded' ? 'degraded' : '';
+                        const tcpLabel = isTcp(svc) ? ' (TCP)' : '';
                         h += `<div class="card" style="padding-bottom:14px"><div class="card-title">${svc.last_check ? new Date(svc.last_check).toLocaleString() : ''}</div>`;
-                        h += `<div class="inc-box ${boxCls}"><div class="inc-h">${severity === 'critical' ? 'Critical Outage' : 'Major Degradation'}: ${esc(svc.name)}</div>`;
-                        h += `<div class="inc-affected"><strong>Affected:</strong> ${esc(svc.name)}</div>`;
-                        h += `<div class="inc-detail"><span>⏱ ${timeAgo(svc.last_check)}</span><span>📊 ${esc(svc.message)}</span></div>`;
+                        h += `<div class="inc-box ${boxCls}"><div class="inc-h">${severity === 'critical' ? 'Critical Outage' : 'Major Degradation'}: ${esc(svc.name)}${typeBadge(svc)}</div>`;
+                        h += `<div class="inc-affected"><strong>Affected:</strong> ${esc(svc.name)}${tcpLabel}</div>`;
+                        h += `<div class="inc-detail"><span>${timeAgo(svc.last_check)}</span><span>${esc(svc.message)}</span></div>`;
                         h += `<div style="margin-top:6px"><span class="inc-badge ${svc.status === 'down' ? 'down' : 'degraded'}">Status: ${svc.status === 'down' ? 'Investigating' : 'Monitoring'}</span></div>`;
-                        h += `<div class="inc-spark">${makeSparkline(300, 32, 20, svc.response_time_ms || i * 37 + 11)}</div>`;
+                        h += `<div class="inc-spark" id="inc-chart-${i}"></div>`;
                         h += `</div></div>`;
                     })
                 } else {
@@ -731,14 +802,14 @@
                 h += `<div>`;
                 const changedSvcs = svcs.filter(s => s.prev_status && s.prev_status !== 'unknown' && s.prev_status !== s.status);
                 if (changedSvcs.length > 0) {
-                    changedSvcs.forEach(svc => {
+                    changedSvcs.forEach((svc, j) => {
                         const isResolved = svc.status === 'up';
                         h += `<div class="card"><div class="card-title">${svc.last_check ? new Date(svc.last_check).toLocaleString() : ''}</div>`;
-                        h += `<div class="inc-box ${isResolved ? 'resolved' : 'minor'}"><div class="inc-h">${isResolved ? 'Resolved' : 'Status Change'}: ${esc(svc.name)}</div>`;
+                        h += `<div class="inc-box ${isResolved ? 'resolved' : 'minor'}"><div class="inc-h">${isResolved ? 'Resolved' : 'Status Change'}: ${esc(svc.name)}${typeBadge(svc)}</div>`;
                         h += `<div class="inc-affected"><strong>Change:</strong> ${svc.prev_status} → ${svc.status}</div>`;
-                        h += `<div class="inc-detail"><span>⏱ ${timeAgo(svc.last_check)}</span><span>${esc(svc.message)}</span></div>`;
+                        h += `<div class="inc-detail"><span>${timeAgo(svc.last_check)}</span><span>${esc(svc.message)}</span></div>`;
                         h += `<div style="margin-top:6px"><span class="inc-badge ${isResolved ? 'resolved' : 'investigating'}">${isResolved ? 'Resolved' : 'Updated'}</span></div>`;
-                        h += `<div class="inc-spark">${makeSparkline(300, 32, 20, svc.response_time_ms || 42)}</div>`;
+                        h += `<div class="inc-spark" id="change-chart-${j}"></div>`;
                         h += `</div></div>`;
                     })
                 } else {
@@ -748,11 +819,12 @@
 
                 app.innerHTML = h;
 
-                // ApexCharts: status radialbars + affected donut
+                // ApexCharts rendering
                 if (typeof ApexCharts !== 'undefined') {
                     if (window.incidentsCharts) { window.incidentsCharts.forEach(function(c) { try { c.destroy(); } catch(e) {} }); window.incidentsCharts = []; }
                     var list = [];
 
+                    // Status radialbars
                     var radialEl = document.getElementById('chart-incidents-status-radial');
                     if (radialEl) {
                         var radialOpts = {
@@ -768,22 +840,114 @@
                         list.push(c1);
                     }
 
-                    var donutEl = document.getElementById('chart-incidents-affected');
-                    if (donutEl) {
-                        var donutOpts = {
-                            series: affectedSeries,
-                            chart: { type: 'donut', height: 220 },
-                            labels: affectedLabels,
-                            colors: affEntries.length ? colors2.slice(0, affEntries.length) : ['#2ecc71'],
+                    // Recent Incidents semi-donut
+                    var semiEl = document.getElementById('chart-incidents-semi-donut');
+                    if (semiEl) {
+                        var totalIncidents = down.length + degraded.length + unknown.length;
+                        var semiOpts = {
+                            series: [down.length, degraded.length, unknown.length],
+                            chart: { type: 'donut', height: 240, background: 'transparent' },
+                            labels: ['Critical', 'Major', 'Minor'],
+                            colors: ['#e74c3c', '#f1c40f', '#25aff4'],
                             legend: { show: false },
-                            dataLabels: { enabled: true },
-                            plotOptions: { pie: { donut: { size: '65%', labels: { show: true, total: { show: true, label: 'Affected', formatter: function(w) { return totalAff; } } } } } },
+                            dataLabels: { enabled: false },
+                            plotOptions: {
+                                pie: {
+                                    startAngle: -90,
+                                    endAngle: 90,
+                                    offsetY: 10,
+                                    donut: {
+                                        size: '75%',
+                                        labels: {
+                                            show: true,
+                                            name: { show: true, offsetY: -10, fontSize: '13px', color: '#8c98a4' },
+                                            value: { show: true, offsetY: -2, fontSize: '28px', fontWeight: 700, color: '#e2e8f0',
+                                                formatter: function(val) { return val; }
+                                            },
+                                            total: {
+                                                show: true,
+                                                label: 'Incidents',
+                                                fontSize: '13px',
+                                                color: '#8c98a4',
+                                                formatter: function() { return totalIncidents; }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            grid: { padding: { bottom: -80 } },
+                            responsive: [{ breakpoint: 480, options: { chart: { height: 200 } } }],
+                            stroke: { width: 0 },
+                            tooltip: {
+                                enabled: true,
+                                theme: 'dark',
+                                y: { formatter: function(val) { return val + ' incidents'; } }
+                            },
+                            states: {
+                                hover: { filter: { type: 'lighten', value: 0.15 } },
+                                active: { filter: { type: 'none' } }
+                            },
                             theme: { mode: 'dark' }
                         };
-                        var c2 = new ApexCharts(donutEl, donutOpts);
+                        var c2 = new ApexCharts(semiEl, semiOpts);
                         c2.render();
                         list.push(c2);
                     }
+
+                    // Incident area charts — ApexCharts basic area per incident card
+                    incidents.forEach(function(svc, i) {
+                        var el = document.getElementById('inc-chart-' + i);
+                        if (!el) return;
+                        var color = svc.status === 'down' ? '#e74c3c' : '#f1c40f';
+                        var seriesData = genChartData(svc.response_time_ms || 200, 20, svc.response_time_ms || i * 37 + 11);
+                        var opts = {
+                            series: [{ name: 'Response', data: seriesData }],
+                            chart: { type: 'area', height: 140, toolbar: { show: false }, zoom: { enabled: false }, background: 'transparent' },
+                            colors: [color],
+                            dataLabels: { enabled: false },
+                            stroke: { curve: 'smooth', width: 2 },
+                            fill: {
+                                type: 'gradient',
+                                gradient: { shadeIntensity: 1, opacityFrom: 0.45, opacityTo: 0.05, stops: [0, 90, 100] }
+                            },
+                            xaxis: { type: 'datetime', labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false } },
+                            yaxis: { labels: { style: { colors: '#5c6a82', fontSize: '10px' }, formatter: function(v) { return Math.round(v) + 'ms' } } },
+                            grid: { borderColor: '#1e2d44', strokeDashArray: 3, padding: { left: 4, right: 4 } },
+                            tooltip: { theme: 'dark', x: { format: 'HH:mm' }, y: { formatter: function(v) { return Math.round(v) + ' ms' } } },
+                            theme: { mode: 'dark' }
+                        };
+                        var ch = new ApexCharts(el, opts);
+                        ch.render();
+                        list.push(ch);
+                    });
+
+                    // Status change area charts
+                    changedSvcs.forEach(function(svc, j) {
+                        var el = document.getElementById('change-chart-' + j);
+                        if (!el) return;
+                        var isResolved = svc.status === 'up';
+                        var color = isResolved ? '#2ecc71' : '#25aff4';
+                        var seriesData = genChartData(svc.response_time_ms || 150, 20, svc.response_time_ms || 42);
+                        var opts = {
+                            series: [{ name: 'Response', data: seriesData }],
+                            chart: { type: 'area', height: 140, toolbar: { show: false }, zoom: { enabled: false }, background: 'transparent' },
+                            colors: [color],
+                            dataLabels: { enabled: false },
+                            stroke: { curve: 'smooth', width: 2 },
+                            fill: {
+                                type: 'gradient',
+                                gradient: { shadeIntensity: 1, opacityFrom: 0.45, opacityTo: 0.05, stops: [0, 90, 100] }
+                            },
+                            xaxis: { type: 'datetime', labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false } },
+                            yaxis: { labels: { style: { colors: '#5c6a82', fontSize: '10px' }, formatter: function(v) { return Math.round(v) + 'ms' } } },
+                            grid: { borderColor: '#1e2d44', strokeDashArray: 3, padding: { left: 4, right: 4 } },
+                            tooltip: { theme: 'dark', x: { format: 'HH:mm' }, y: { formatter: function(v) { return Math.round(v) + ' ms' } } },
+                            theme: { mode: 'dark' }
+                        };
+                        var ch = new ApexCharts(el, opts);
+                        ch.render();
+                        list.push(ch);
+                    });
 
                     window.incidentsCharts = list;
                 }

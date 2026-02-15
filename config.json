@@ -372,6 +372,594 @@
           "type": "ripestat"
         }
       ]
+    },
+    {
+      "name": "Iran Direct Connectivity",
+      "icon": "🇮🇷",
+      "services": [
+        {
+          "id": "ir-dns-shecan",
+          "name": "Shecan DNS",
+          "url": "https://shecan.ir/",
+          "description": "Shecan DNS reachability (Tehran)",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-isp-shatel",
+          "name": "Shatel",
+          "url": "https://shatel.ir/",
+          "description": "Shatel ISP reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-isp-asiatech",
+          "name": "Asiatech",
+          "url": "https://asiatech.ir/",
+          "description": "Asiatech ISP reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-isp-irancell",
+          "name": "Irancell",
+          "url": "https://irancell.ir/",
+          "description": "Irancell ISP reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-isp-mobinnet",
+          "name": "Mobinnet",
+          "url": "https://mobinnet.ir/",
+          "description": "Mobinnet ISP reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-isp-respina",
+          "name": "Respina",
+          "url": "https://respina.net/",
+          "description": "Respina ISP reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-service-digikala",
+          "name": "Digikala",
+          "url": "https://digikala.com/",
+          "description": "Digikala e-commerce reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-service-filimo",
+          "name": "Filimo",
+          "url": "https://filimo.com/",
+          "description": "Filimo streaming reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-service-aparat",
+          "name": "Aparat",
+          "url": "https://aparat.com/",
+          "description": "Aparat video reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-service-snapp",
+          "name": "Snapp",
+          "url": "https://snapp.ir/",
+          "description": "Snapp ride-hailing reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-service-tapsi",
+          "name": "Tapsi",
+          "url": "https://tapsi.ir/",
+          "description": "Tapsi ride-hailing reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-service-cafebazaar",
+          "name": "CafeBazaar",
+          "url": "https://cafebazaar.ir/",
+          "description": "CafeBazaar app store reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-messaging-bale",
+          "name": "Bale Messenger",
+          "url": "https://bale.ai/",
+          "description": "Bale Messenger reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-messaging-rubika",
+          "name": "Rubika",
+          "url": "https://rubika.ir/",
+          "description": "Rubika messenger reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-messaging-eitaa",
+          "name": "Eitaa",
+          "url": "https://eitaa.com/",
+          "description": "Eitaa messenger reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-messaging-soroush",
+          "name": "Soroush",
+          "url": "https://splus.ir/",
+          "description": "Soroush messenger reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-bank-pasargad",
+          "name": "Pasargad Bank",
+          "url": "https://bpi.ir/",
+          "description": "Pasargad Bank reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-bank-saman",
+          "name": "Saman Bank",
+          "url": "https://sb24.ir/",
+          "description": "Saman Bank reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-bank-shaparak",
+          "name": "Shaparak",
+          "url": "https://shaparak.ir/",
+          "description": "Shaparak payment network reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-university-sharif",
+          "name": "Sharif University",
+          "url": "https://sharif.edu/",
+          "description": "Sharif University reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-university-amirkabir",
+          "name": "Amirkabir University",
+          "url": "https://aut.ac.ir/",
+          "description": "Amirkabir University reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-university-ipm",
+          "name": "IPM Research",
+          "url": "https://ipm.ir/",
+          "description": "IPM Research Institute reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-cdn-arvancloud",
+          "name": "ArvanCloud",
+          "url": "https://arvancloud.ir/",
+          "description": "ArvanCloud CDN reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        },
+        {
+          "id": "ir-regional-pishgaman-shiraz",
+          "name": "Pishgaman Shiraz",
+          "url": "https://pishgaman.net/",
+          "description": "Pishgaman ISP (Shiraz) reachability",
+          "interval": 300,
+          "type": "http",
+          "threshold_warn": 80,
+          "threshold_crit": 50
+        }
+      ]
+    },
+    {
+      "name": "Iran TCP Connectivity",
+      "icon": "📡",
+      "services": [
+        {
+          "id": "ir-tcp-tic-dns1",
+          "name": "TIC DNS 1",
+          "url": "217.218.155.155:53",
+          "description": "TIC DNS server 1 (Tehran, AS12880) — TCP port 53",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-dns2",
+          "name": "TIC DNS 2",
+          "url": "217.218.127.127:53",
+          "description": "TIC DNS server 2 (Tehran, AS12880) — TCP port 53",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-shecan-dns",
+          "name": "Shecan DNS",
+          "url": "178.22.122.100:53",
+          "description": "Shecan DNS (Tehran, AS43754) — TCP port 53",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-zapisp",
+          "name": "ZapISP",
+          "url": "212.16.74.1:80",
+          "description": "ZapISP gateway (Tehran, AS44889) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-zitel",
+          "name": "Zi-Tel",
+          "url": "31.25.104.1:80",
+          "description": "Zi-Tel gateway (Tehran, AS206065) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-netpitch",
+          "name": "NetPitch",
+          "url": "185.86.180.1:80",
+          "description": "NetPitch / Sindad (Tehran, AS48551) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-noavaran",
+          "name": "Noavaran",
+          "url": "185.213.164.1:80",
+          "description": "Noavaran / GreenWeb (Tehran, AS61173) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-dadehnegar",
+          "name": "DadehNegar",
+          "url": "185.215.228.1:80",
+          "description": "DadehNegar / Respina (Tehran, AS42337) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-electronet",
+          "name": "Electro Net",
+          "url": "78.157.43.1:80",
+          "description": "Electro Net / Samane-Fanava (Tehran, AS62442) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-digikala-dc2",
+          "name": "Digikala DC 2",
+          "url": "185.188.105.1:80",
+          "description": "Digikala data center 2 (Tehran, AS43211) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-mobinnet-dc",
+          "name": "MobinNet DC",
+          "url": "92.114.18.1:80",
+          "description": "MobinNet data center (Tehran, AS47330) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-soroush-dc",
+          "name": "Soroush DC",
+          "url": "185.60.136.1:80",
+          "description": "Soroush data center (Tehran, AS21341) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-mobinhost-dc",
+          "name": "Mobinhost DC",
+          "url": "185.53.143.1:80",
+          "description": "Mobinhost data center (Tehran, AS51026) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-karaj",
+          "name": "TIC Karaj",
+          "url": "78.38.112.1:80",
+          "description": "TIC regional node — Karaj (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-isfahan",
+          "name": "TIC Isfahan",
+          "url": "37.255.0.1:80",
+          "description": "TIC regional node — Isfahan (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-isfahan2",
+          "name": "TIC Isfahan 2",
+          "url": "37.254.0.1:80",
+          "description": "TIC regional node — Isfahan 2 (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-mashhad",
+          "name": "TIC Mashhad",
+          "url": "5.232.0.1:80",
+          "description": "TIC regional node — Mashhad (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-tabriz",
+          "name": "TIC Tabriz",
+          "url": "5.235.0.1:80",
+          "description": "TIC regional node — Tabriz (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-tabriz2",
+          "name": "TIC Tabriz 2",
+          "url": "2.186.32.1:80",
+          "description": "TIC regional node — Tabriz 2 (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-shiraz",
+          "name": "TIC Shiraz",
+          "url": "78.39.240.1:80",
+          "description": "TIC regional node — Shiraz (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-shiraz-dc",
+          "name": "Shiraz DC",
+          "url": "185.236.36.1:80",
+          "description": "Shiraz data center / Sindad (AS48551) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-pishgaman-shiraz2",
+          "name": "Pishgaman Shiraz 2",
+          "url": "94.74.177.1:80",
+          "description": "Pishgaman ISP — Shiraz 2 (AS44208) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-pishgaman-shiraz3",
+          "name": "Pishgaman Shiraz 3",
+          "url": "94.74.179.1:80",
+          "description": "Pishgaman ISP — Shiraz 3 (AS44208) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-sindad-dc",
+          "name": "Sindad DC",
+          "url": "185.236.37.1:80",
+          "description": "Sindad data center — Shiraz (AS48551) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-bandarabbas",
+          "name": "TIC BandarAbbas",
+          "url": "2.182.96.1:80",
+          "description": "TIC regional node — BandarAbbas (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-yazd",
+          "name": "TIC Yazd",
+          "url": "85.185.161.1:80",
+          "description": "TIC regional node — Yazd (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-kermanshah",
+          "name": "TIC Kermanshah",
+          "url": "78.39.246.1:80",
+          "description": "TIC regional node — Kermanshah (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-sanandaj",
+          "name": "TIC Sanandaj",
+          "url": "85.185.248.1:80",
+          "description": "TIC regional node — Sanandaj (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-rasht",
+          "name": "TIC Rasht",
+          "url": "2.187.1.1:80",
+          "description": "TIC regional node — Rasht (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-hamadan",
+          "name": "TIC Hamadan",
+          "url": "2.185.128.2:80",
+          "description": "TIC regional node — Hamadan (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-qazvin",
+          "name": "TIC Qazvin",
+          "url": "2.187.192.1:80",
+          "description": "TIC regional node — Qazvin (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-kerman",
+          "name": "TIC Kerman",
+          "url": "80.191.161.1:80",
+          "description": "TIC regional node — Kerman (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-urmia",
+          "name": "TIC Urmia",
+          "url": "2.187.32.2:80",
+          "description": "TIC regional node — Urmia (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-arak",
+          "name": "TIC Arak",
+          "url": "78.38.168.1:80",
+          "description": "TIC regional node — Arak (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-gorgan",
+          "name": "TIC Gorgan",
+          "url": "80.191.250.2:80",
+          "description": "TIC regional node — Gorgan (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-sari",
+          "name": "TIC Sari",
+          "url": "217.219.166.1:80",
+          "description": "TIC regional node — Sari (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-zahedan",
+          "name": "TIC Zahedan",
+          "url": "80.191.174.1:80",
+          "description": "TIC regional node — Zahedan (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-zanjan",
+          "name": "TIC Zanjan",
+          "url": "5.234.192.2:80",
+          "description": "TIC regional node — Zanjan (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-bushehr",
+          "name": "TIC Bushehr",
+          "url": "2.183.0.1:80",
+          "description": "TIC regional node — Bushehr (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-tic-khorramabad",
+          "name": "TIC Khorramabad",
+          "url": "2.185.192.1:80",
+          "description": "TIC regional node — Khorramabad (AS58224) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-shatel-ahvaz",
+          "name": "Shatel Ahvaz",
+          "url": "94.182.0.1:80",
+          "description": "Shatel ISP — Ahvaz (AS31549) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        },
+        {
+          "id": "ir-tcp-pishgaman-dc",
+          "name": "Pishgaman DC",
+          "url": "185.126.18.154:80",
+          "description": "Pishgaman data center (Tehran, AS49100) — TCP port 80",
+          "interval": 300,
+          "type": "tcp"
+        }
+      ]
     }
   ]
 }

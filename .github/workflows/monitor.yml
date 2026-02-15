@@ -39,9 +39,64 @@ jobs:
           cache-dependency-path: check/go.sum
 
       - name: Install jq (for page-data and commit steps)
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq jq
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq jq netcat-openbsd
 
-      - name: Run checks (Go — parallel)
+      - name: ICMP ping (smoke test)
+        run: |
+          echo "ICMP ping → Google DNS"
+          ping -c 4 -W 8 8.8.8.8 || echo "→ packet loss or high latency (non-fatal)"
+
+      - name: TCP connectivity (inline — nc, no Go)
+        run: |
+          mkdir -p api history
+          now_iso=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          now_epoch=$(date +%s)
+          touch incidents.log
+          tcp_services=$(jq -rc '.categories[].services[] | select(.type == "tcp") | "\(.id)|\(.name)|\(.url)"' config.json)
+          for line in $tcp_services; do
+            IFS='|' read -r id name url <<< "$line"
+            [ -z "$id" ] && continue
+            host="${url%%:*}"
+            port="${url##*:}"
+            start_ms=$(($(date +%s%3N)))
+            if nc -zv -w 8 "$host" "$port" 2>/dev/null; then
+              end_ms=$(($(date +%s%3N)))
+              rt=$((end_ms - start_ms))
+              status="up"
+              value=100
+              code=1
+              msg="TCP OK ${rt}ms ($url)"
+            else
+              rt=0
+              status="down"
+              value=0
+              code=0
+              msg="TCP failed ($url)"
+            fi
+            prev=$(jq -r '.prev_status // .status // "unknown"' api/"$id".json 2>/dev/null || echo "unknown")
+            hist_file="history/${id}.csv"
+            if [ -f "$hist_file" ]; then
+              total=$(wc -l < "$hist_file")
+              up_count=$(awk -F, '$2=="up"' "$hist_file" | wc -l)
+              [ "$total" -gt 0 ] && uptime_pct=$(awk "BEGIN {printf \"%.0f\", 100*$up_count/$total}") || uptime_pct=100
+            else
+              uptime_pct=100
+            fi
+            echo "$now_iso,$status,$value,$rt,$code" >> "$hist_file"
+            jq -n \
+              --arg id "$id" --arg name "$name" --arg status "$status" --arg msg "$msg" \
+              --argjson value $value --argjson rt $rt --argjson code $code \
+              --argjson uptime_pct $uptime_pct --arg prev "$prev" --arg lc "$now_iso" --argjson le "$now_epoch" \
+              '{id:$id, name:$name, check_type:"tcp", status:$status, message:$msg, value:$value, response_time_ms:$rt, jitter_ms:0, http_code:$code, uptime_pct:$uptime_pct, last_check:$lc, last_check_epoch:$le, prev_status:$prev}' \
+              > api/"$id".json
+            if [ "$prev" != "unknown" ] && [ "$prev" != "$status" ]; then
+              echo "${now_iso}|${id}|${name}|${prev}|${status}|${msg}" >> incidents.log
+            fi
+            echo "  TCP $status: $name ($url)"
+          done
+          echo "TCP checks done."
+
+      - name: Run checks (Go — HTTP/API only; TCP done above)
         run: |
           cd check && go build -o ../checker . && cd .. && ./checker
 
