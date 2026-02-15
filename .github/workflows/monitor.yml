@@ -41,12 +41,14 @@ jobs:
       - name: Install jq (for page-data and commit steps)
         run: sudo apt-get update -qq && sudo apt-get install -y -qq jq netcat-openbsd
 
-      - name: ICMP ping (smoke test)
+      # Smoke test: runner can reach internet (Google DNS). Not testing Iran. Non-fatal.
+      - name: ICMP smoke test (runner connectivity)
         run: |
-          echo "ICMP ping → Google DNS"
-          ping -c 4 -W 8 8.8.8.8 || echo "→ packet loss or high latency (non-fatal)"
+          echo "ICMP → 8.8.8.8 (runner connectivity only)"
+          ping -c 2 -W 10 8.8.8.8 || echo "→ packet loss (non-fatal)"
 
-      - name: TCP connectivity (inline — nc, no Go)
+      # TCP: 3 attempts, 12s timeout each. Runs from outside Iran; 1/3 success = up/degraded to avoid false downs.
+      - name: TCP connectivity (inline — nc, retries)
         run: |
           mkdir -p api history
           now_iso=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
@@ -58,20 +60,37 @@ jobs:
             [ -z "$id" ] && continue
             host="${url%%:*}"
             port="${url##*:}"
-            start_ms=$(($(date +%s%3N)))
-            if nc -zv -w 8 "$host" "$port" 2>/dev/null; then
-              end_ms=$(($(date +%s%3N)))
-              rt=$((end_ms - start_ms))
+            ok=0
+            rt_best=999999
+            attempts=3
+            timeout_sec=12
+            for i in $(seq 1 $attempts); do
+              start_ms=$(($(date +%s%3N)))
+              if nc -zv -w $timeout_sec "$host" "$port" 2>/dev/null; then
+                end_ms=$(($(date +%s%3N)))
+                ok=$((ok + 1))
+                this_rt=$((end_ms - start_ms))
+                [ "$this_rt" -lt "$rt_best" ] && rt_best=$this_rt
+              fi
+            done
+            if [ "$ok" -ge 2 ]; then
               status="up"
               value=100
               code=1
-              msg="TCP OK ${rt}ms ($url)"
+              msg="TCP OK ${ok}/${attempts}, ${rt_best}ms ($url)"
+              rt=$rt_best
+            elif [ "$ok" -eq 1 ]; then
+              status="degraded"
+              value=33
+              code=1
+              msg="TCP 1/${attempts} ok, ${rt_best}ms — from outside IR ($url)"
+              rt=$rt_best
             else
-              rt=0
               status="down"
               value=0
               code=0
-              msg="TCP failed ($url)"
+              rt=0
+              msg="TCP failed 0/${attempts} ($url)"
             fi
             prev=$(jq -r '.prev_status // .status // "unknown"' api/"$id".json 2>/dev/null || echo "unknown")
             hist_file="history/${id}.csv"
