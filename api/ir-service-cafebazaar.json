@@ -2,14 +2,14 @@
   "id": "ir-service-cafebazaar",
   "name": "CafeBazaar",
   "check_type": "http",
-  "status": "up",
-  "message": "HTTP 200",
-  "value": 100,
-  "response_time_ms": 4159,
+  "status": "down",
+  "message": "Connection failed (timeout or unreachable)",
+  "value": 0,
+  "response_time_ms": 1643,
   "jitter_ms": 0,
   "http_code": 200,
-  "uptime_pct": 65.21739130434783,
-  "last_check": "2026-02-17T13:47:32Z",
-  "last_check_epoch": 1771336052,
-  "prev_status": "down"
+  "uptime_pct": 65.71428571428571,
+  "last_check": "2026-02-17T14:36:54Z",
+  "last_check_epoch": 1771339014,
+  "prev_status": "up"
 }
