@@ -2,14 +2,14 @@
   "id": "ooni-psiphon",
   "name": "Psiphon Reachability",
   "check_type": "ooni_aggregation",
-  "status": "unknown",
-  "message": "No measurement data",
-  "value": 0,
-  "response_time_ms": 653,
+  "status": "degraded",
+  "message": "Partially blocked — 66% anomaly rate",
+  "value": 65.50185873605948,
+  "response_time_ms": 684,
   "jitter_ms": 0,
-  "http_code": 500,
+  "http_code": 200,
   "uptime_pct": 0,
-  "last_check": "2026-02-19T13:41:13Z",
-  "last_check_epoch": 1771508473,
-  "prev_status": "degraded"
+  "last_check": "2026-02-19T14:36:02Z",
+  "last_check_epoch": 1771511762,
+  "prev_status": "unknown"
 }
