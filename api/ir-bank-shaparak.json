@@ -2,14 +2,14 @@
   "id": "ir-bank-shaparak",
   "name": "Shaparak",
   "check_type": "http",
-  "status": "up",
-  "message": "HTTP 200",
-  "value": 100,
-  "response_time_ms": 3788,
+  "status": "down",
+  "message": "Connection failed (timeout or unreachable)",
+  "value": 0,
+  "response_time_ms": 25001,
   "jitter_ms": 0,
-  "http_code": 200,
-  "uptime_pct": 93.11926605504587,
-  "last_check": "2026-02-22T05:42:40Z",
-  "last_check_epoch": 1771738960,
-  "prev_status": "down"
+  "http_code": 0,
+  "uptime_pct": 93.15068493150685,
+  "last_check": "2026-02-22T06:29:56Z",
+  "last_check_epoch": 1771741796,
+  "prev_status": "up"
 }
