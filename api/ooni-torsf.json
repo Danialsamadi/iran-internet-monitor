@@ -2,14 +2,14 @@
   "id": "ooni-torsf",
   "name": "Tor Snowflake",
   "check_type": "ooni_aggregation",
-  "status": "unknown",
-  "message": "No measurement data",
-  "value": 0,
-  "response_time_ms": 644,
+  "status": "down",
+  "message": "Blocked — 96% anomaly rate (112/117 tests)",
+  "value": 95.72649572649573,
+  "response_time_ms": 776,
   "jitter_ms": 0,
-  "http_code": 429,
+  "http_code": 200,
   "uptime_pct": 0,
-  "last_check": "2026-02-23T12:32:01Z",
-  "last_check_epoch": 1771849921,
-  "prev_status": "down"
+  "last_check": "2026-02-23T13:51:57Z",
+  "last_check_epoch": 1771854717,
+  "prev_status": "unknown"
 }
