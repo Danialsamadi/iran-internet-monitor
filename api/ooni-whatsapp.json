@@ -3,13 +3,13 @@
   "name": "WhatsApp Blocking",
   "check_type": "ooni_aggregation",
   "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
-  "value": 0,
-  "response_time_ms": 25002,
+  "message": "Blocked — 90% anomaly rate (1246/1388 tests)",
+  "value": 89.76945244956772,
+  "response_time_ms": 5795,
   "jitter_ms": 0,
-  "http_code": 0,
+  "http_code": 200,
   "uptime_pct": 0,
-  "last_check": "2026-02-24T03:34:58Z",
-  "last_check_epoch": 1771904098,
-  "prev_status": "unknown"
+  "last_check": "2026-02-24T05:12:29Z",
+  "last_check_epoch": 1771909949,
+  "prev_status": "down"
 }

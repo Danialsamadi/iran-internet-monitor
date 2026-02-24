@@ -2,14 +2,14 @@
   "id": "ir-isp-respina",
   "name": "Respina",
   "check_type": "http",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
-  "value": 0,
-  "response_time_ms": 25000,
+  "status": "up",
+  "message": "HTTP 200",
+  "value": 100,
+  "response_time_ms": 1506,
   "jitter_ms": 0,
-  "http_code": 0,
-  "uptime_pct": 100,
-  "last_check": "2026-02-24T03:34:58Z",
-  "last_check_epoch": 1771904098,
-  "prev_status": "up"
+  "http_code": 200,
+  "uptime_pct": 99.64788732394366,
+  "last_check": "2026-02-24T05:12:29Z",
+  "last_check_epoch": 1771909949,
+  "prev_status": "down"
 }
