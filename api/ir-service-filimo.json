@@ -2,14 +2,14 @@
   "id": "ir-service-filimo",
   "name": "Filimo",
   "check_type": "http",
-  "status": "up",
-  "message": "HTTP 200",
-  "value": 100,
-  "response_time_ms": 1582,
+  "status": "down",
+  "message": "Connection failed (timeout or unreachable)",
+  "value": 0,
+  "response_time_ms": 1700,
   "jitter_ms": 0,
   "http_code": 200,
-  "uptime_pct": 12.835820895522387,
-  "last_check": "2026-02-26T05:39:39Z",
-  "last_check_epoch": 1772084379,
-  "prev_status": "down"
+  "uptime_pct": 13.095238095238097,
+  "last_check": "2026-02-26T06:39:03Z",
+  "last_check_epoch": 1772087943,
+  "prev_status": "up"
 }
