@@ -2,14 +2,14 @@
   "id": "ooni-facebook",
   "name": "Facebook Blocking",
   "check_type": "ooni_aggregation",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
-  "value": 0,
-  "response_time_ms": 506,
+  "status": "degraded",
+  "message": "Partially blocked — 65% anomaly rate",
+  "value": 65.05190311418684,
+  "response_time_ms": 712,
   "jitter_ms": 0,
   "http_code": 200,
   "uptime_pct": 0,
-  "last_check": "2026-03-06T21:42:36Z",
-  "last_check_epoch": 1772833356,
-  "prev_status": "degraded"
+  "last_check": "2026-03-06T22:00:31Z",
+  "last_check_epoch": 1772834431,
+  "prev_status": "down"
 }
