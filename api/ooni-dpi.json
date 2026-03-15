@@ -2,14 +2,14 @@
   "id": "ooni-dpi",
   "name": "DPI / Middlebox",
   "check_type": "ooni_aggregation",
-  "status": "unknown",
-  "message": "No measurement data",
-  "value": 0,
-  "response_time_ms": 10445,
+  "status": "degraded",
+  "message": "Partially blocked — 50% anomaly rate",
+  "value": 50,
+  "response_time_ms": 713,
   "jitter_ms": 0,
-  "http_code": 504,
-  "uptime_pct": 78.48275862068965,
-  "last_check": "2026-03-15T17:42:59Z",
-  "last_check_epoch": 1773596579,
-  "prev_status": "down"
+  "http_code": 200,
+  "uptime_pct": 78.37465564738292,
+  "last_check": "2026-03-15T18:52:53Z",
+  "last_check_epoch": 1773600773,
+  "prev_status": "unknown"
 }
