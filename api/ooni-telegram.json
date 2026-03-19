@@ -2,14 +2,14 @@
   "id": "ooni-telegram",
   "name": "Telegram Blocking",
   "check_type": "ooni_aggregation",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
-  "value": 0,
-  "response_time_ms": 720,
+  "status": "up",
+  "message": "Accessible — 5% anomaly rate (105 OK)",
+  "value": 5.405405405405405,
+  "response_time_ms": 819,
   "jitter_ms": 0,
   "http_code": 200,
-  "uptime_pct": 32.22891566265061,
-  "last_check": "2026-03-19T12:06:43Z",
-  "last_check_epoch": 1773922003,
-  "prev_status": "up"
+  "uptime_pct": 32.19658976930793,
+  "last_check": "2026-03-19T13:42:25Z",
+  "last_check_epoch": 1773927745,
+  "prev_status": "down"
 }
