@@ -2,14 +2,14 @@
   "id": "ir-messaging-bale",
   "name": "Bale Messenger",
   "check_type": "http",
-  "status": "up",
-  "message": "HTTP 200",
-  "value": 100,
-  "response_time_ms": 998,
+  "status": "down",
+  "message": "Connection failed (timeout or unreachable)",
+  "value": 0,
+  "response_time_ms": 624,
   "jitter_ms": 0,
   "http_code": 200,
-  "uptime_pct": 28.63595302619693,
-  "last_check": "2026-03-21T07:52:21Z",
-  "last_check_epoch": 1774079541,
-  "prev_status": "down"
+  "uptime_pct": 28.700361010830328,
+  "last_check": "2026-03-21T08:04:55Z",
+  "last_check_epoch": 1774080295,
+  "prev_status": "up"
 }
