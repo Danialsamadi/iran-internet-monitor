@@ -2,14 +2,14 @@
   "id": "ioda-bgp",
   "name": "IODA BGP Visibility",
   "check_type": "ioda_signal",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
-  "value": 0,
-  "response_time_ms": 25003,
+  "status": "up",
+  "message": "Healthy — signal at 100% of normal",
+  "value": 100,
+  "response_time_ms": 393,
   "jitter_ms": 0,
-  "http_code": 0,
-  "uptime_pct": 99.9146757679181,
-  "last_check": "2026-03-22T10:59:11Z",
-  "last_check_epoch": 1774177151,
-  "prev_status": "up"
+  "http_code": 200,
+  "uptime_pct": 99.82949701619779,
+  "last_check": "2026-03-22T11:24:29Z",
+  "last_check_epoch": 1774178669,
+  "prev_status": "down"
 }
