@@ -2,14 +2,14 @@
   "id": "ooni-psiphon",
   "name": "Psiphon Reachability",
   "check_type": "ooni_aggregation",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
-  "value": 0,
-  "response_time_ms": 568,
+  "status": "up",
+  "message": "Accessible — 4% anomaly rate (43 OK)",
+  "value": 4.444444444444445,
+  "response_time_ms": 555,
   "jitter_ms": 0,
   "http_code": 200,
-  "uptime_pct": 49.16067146282973,
-  "last_check": "2026-03-28T11:23:29Z",
-  "last_check_epoch": 1774697009,
-  "prev_status": "up"
+  "uptime_pct": 49.12140575079872,
+  "last_check": "2026-03-28T11:50:21Z",
+  "last_check_epoch": 1774698621,
+  "prev_status": "down"
 }
