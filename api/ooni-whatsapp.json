@@ -2,14 +2,14 @@
   "id": "ooni-whatsapp",
   "name": "WhatsApp Blocking",
   "check_type": "ooni_aggregation",
-  "status": "degraded",
-  "message": "Partially blocked — 39% anomaly rate",
-  "value": 38.88888888888889,
-  "response_time_ms": 515,
+  "status": "unknown",
+  "message": "No measurement data",
+  "value": 0,
+  "response_time_ms": 10593,
   "jitter_ms": 0,
-  "http_code": 200,
-  "uptime_pct": 50,
-  "last_check": "2026-04-04T11:18:25Z",
-  "last_check_epoch": 1775301505,
-  "prev_status": "down"
+  "http_code": 504,
+  "uptime_pct": 49.96510816468947,
+  "last_check": "2026-04-04T11:48:42Z",
+  "last_check_epoch": 1775303322,
+  "prev_status": "degraded"
 }
