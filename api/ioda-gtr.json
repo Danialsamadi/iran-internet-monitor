@@ -2,14 +2,14 @@
   "id": "ioda-gtr",
   "name": "IODA Google Traffic",
   "check_type": "ioda_signal",
-  "status": "degraded",
-  "message": "Degraded — signal at 51% of normal",
-  "value": 50.78439590513707,
-  "response_time_ms": 623,
+  "status": "down",
+  "message": "Critical — signal at 42% of normal",
+  "value": 41.76075152206458,
+  "response_time_ms": 500,
   "jitter_ms": 0,
   "http_code": 200,
-  "uptime_pct": 56.73194614443084,
-  "last_check": "2026-04-09T03:25:42Z",
-  "last_check_epoch": 1775705142,
-  "prev_status": "up"
+  "uptime_pct": 56.69724770642202,
+  "last_check": "2026-04-09T05:28:01Z",
+  "last_check_epoch": 1775712481,
+  "prev_status": "degraded"
 }
