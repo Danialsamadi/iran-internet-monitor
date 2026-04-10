@@ -2,14 +2,14 @@
   "id": "ooni-signal",
   "name": "Signal Blocking",
   "check_type": "ooni_aggregation",
-  "status": "unknown",
-  "message": "No measurement data",
-  "value": 0,
-  "response_time_ms": 280,
+  "status": "degraded",
+  "message": "Partially blocked — 54% anomaly rate",
+  "value": 53.57142857142857,
+  "response_time_ms": 3606,
   "jitter_ms": 0,
-  "http_code": 400,
-  "uptime_pct": 41.07594936708861,
-  "last_check": "2026-04-10T16:35:27Z",
-  "last_check_epoch": 1775838927,
-  "prev_status": "degraded"
+  "http_code": 200,
+  "uptime_pct": 41.04996837444656,
+  "last_check": "2026-04-10T17:31:04Z",
+  "last_check_epoch": 1775842264,
+  "prev_status": "unknown"
 }

@@ -2,14 +2,14 @@
   "id": "ooni-telegram",
   "name": "Telegram Blocking",
   "check_type": "ooni_aggregation",
-  "status": "unknown",
-  "message": "No measurement data",
-  "value": 0,
-  "response_time_ms": 181,
+  "status": "degraded",
+  "message": "Partially blocked — 40% anomaly rate",
+  "value": 40,
+  "response_time_ms": 827,
   "jitter_ms": 0,
-  "http_code": 400,
-  "uptime_pct": 54.11392405063291,
-  "last_check": "2026-04-10T16:35:27Z",
-  "last_check_epoch": 1775838927,
-  "prev_status": "degraded"
+  "http_code": 200,
+  "uptime_pct": 54.079696394686906,
+  "last_check": "2026-04-10T17:31:04Z",
+  "last_check_epoch": 1775842264,
+  "prev_status": "unknown"
 }
