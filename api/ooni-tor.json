@@ -2,14 +2,14 @@
   "id": "ooni-tor",
   "name": "Tor Reachability",
   "check_type": "ooni_aggregation",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
-  "value": 0,
-  "response_time_ms": 539,
+  "status": "up",
+  "message": "Accessible — 15% anomaly rate (33 OK)",
+  "value": 15.384615384615385,
+  "response_time_ms": 906,
   "jitter_ms": 0,
   "http_code": 200,
-  "uptime_pct": 89.53271028037383,
-  "last_check": "2026-04-11T14:12:36Z",
-  "last_check_epoch": 1775916756,
-  "prev_status": "up"
+  "uptime_pct": 89.47696139476962,
+  "last_check": "2026-04-11T14:57:26Z",
+  "last_check_epoch": 1775919446,
+  "prev_status": "down"
 }
