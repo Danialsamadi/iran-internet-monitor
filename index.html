@@ -1218,6 +1218,7 @@
                 <a href="index.html" class="active">Dashboard</a>
                 <a href="monitors.html">Monitors</a>
                 <a href="incidents.html">Incidents</a>
+                <a href="bgp-monitor.html">BGP Monitor</a>
                 <a href="https://github.com/Danialsamadi/iran-internet-monitor" target="_blank" rel="noopener">GitHub</a>
             </div>
             <div class="nav-ts" id="nav-clock">
@@ -1272,7 +1273,9 @@
     <script>
         (function () {
             'use strict';
-            const DATA_URL = 'api/page-data.json', REFRESH = 300000, app = document.getElementById('app');
+            // Cloudflare Worker: use /api/page-data.json (Worker route on same host) or set IRAN_MONITOR_API_BASE / data-api-base
+            const API_BASE = (typeof IRAN_MONITOR_API_BASE !== 'undefined' ? IRAN_MONITOR_API_BASE : '') || (document.documentElement.dataset?.apiBase || '');
+            const DATA_URL = API_BASE ? (API_BASE.replace(/\/$/, '') + '/api/page-data.json') : '/api/page-data.json', REFRESH = 300000, app = document.getElementById('app');
 
             function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML }
             function timeAgo(iso) { if (!iso) return ''; const s = Math.floor((Date.now() - new Date(iso)) / 1e3); if (s < 60) return 'just now'; if (s < 3600) return Math.floor(s / 60) + 'm ago'; if (s < 86400) return Math.floor(s / 3600) + 'h ago'; return Math.floor(s / 86400) + 'd ago' }
