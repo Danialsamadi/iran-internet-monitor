@@ -2,14 +2,14 @@
   "id": "ooni-signal",
   "name": "Signal Blocking",
   "check_type": "ooni_aggregation",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
-  "value": 0,
-  "response_time_ms": 467,
+  "status": "degraded",
+  "message": "Partially blocked — 44% anomaly rate",
+  "value": 44.44444444444444,
+  "response_time_ms": 589,
   "jitter_ms": 0,
   "http_code": 200,
-  "uptime_pct": 34.63180362860192,
-  "last_check": "2026-04-24T17:39:10Z",
-  "last_check_epoch": 1777052350,
-  "prev_status": "degraded"
+  "uptime_pct": 34.61333333333334,
+  "last_check": "2026-04-24T18:29:18Z",
+  "last_check_epoch": 1777055358,
+  "prev_status": "down"
 }
