@@ -2,14 +2,14 @@
   "id": "ioda-gtr",
   "name": "IODA Google Traffic",
   "check_type": "ioda_signal",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
-  "value": 0,
-  "response_time_ms": 25000,
+  "status": "up",
+  "message": "Healthy — signal at 88% of normal",
+  "value": 88.37124494980114,
+  "response_time_ms": 634,
   "jitter_ms": 0,
-  "http_code": 0,
-  "uptime_pct": 62.244897959183675,
-  "last_check": "2026-04-24T19:30:43Z",
-  "last_check_epoch": 1777059043,
-  "prev_status": "up"
+  "http_code": 200,
+  "uptime_pct": 62.21315655277919,
+  "last_check": "2026-04-24T20:10:41Z",
+  "last_check_epoch": 1777061441,
+  "prev_status": "down"
 }
