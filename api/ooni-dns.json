@@ -2,14 +2,14 @@
   "id": "ooni-dns",
   "name": "DNS Tampering",
   "check_type": "ooni_aggregation",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
+  "status": "unknown",
+  "message": "No measurement data",
   "value": 0,
-  "response_time_ms": 542,
+  "response_time_ms": 210,
   "jitter_ms": 0,
-  "http_code": 200,
+  "http_code": 404,
   "uptime_pct": 0,
-  "last_check": "2026-04-27T04:01:29Z",
-  "last_check_epoch": 1777262489,
-  "prev_status": "unknown"
+  "last_check": "2026-04-27T06:32:39Z",
+  "last_check_epoch": 1777271559,
+  "prev_status": "down"
 }
