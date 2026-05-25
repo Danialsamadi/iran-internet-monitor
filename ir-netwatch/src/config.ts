@@ -11,6 +11,7 @@ export interface ServiceConfig {
 export interface CategoryConfig {
   name: string;
   icon: string;
+  cat_id: string;
   services: ServiceConfig[];
 }
 
@@ -18,6 +19,7 @@ export const CATEGORIES: CategoryConfig[] = [
   {
     name: 'Outage Detection (IODA)',
     icon: '🔴',
+    cat_id: 'IODA',
     services: [
       { id: 'ioda-bgp', name: 'IODA BGP Visibility', url: 'https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/country/IR?from=__7D_AGO__&until=__NOW__&datasource=bgp&maxPoints=1', type: 'ioda_signal', interval: 300, threshold_warn: 80, threshold_crit: 50 },
       { id: 'ioda-ping', name: 'IODA Active Probing', url: 'https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/country/IR?from=__7D_AGO__&until=__NOW__&datasource=ping-slash24&maxPoints=1', type: 'ioda_signal', interval: 300, threshold_warn: 80, threshold_crit: 50 },
@@ -31,6 +33,7 @@ export const CATEGORIES: CategoryConfig[] = [
   {
     name: 'Censorship Detection (OONI)',
     icon: '🔒',
+    cat_id: 'OONI',
     services: [
       { id: 'ooni-web', name: 'Web Censorship', url: 'https://api.ooni.io/api/v1/aggregation?probe_cc=IR&test_name=web_connectivity&since=__7D_AGO_DATE__&until=__TODAY__&axis_x=measurement_start_day', type: 'ooni_aggregation', interval: 900 },
       { id: 'ooni-telegram', name: 'Telegram Blocking', url: 'https://api.ooni.io/api/v1/aggregation?probe_cc=IR&test_name=telegram&since=__7D_AGO_DATE__&until=__TODAY__', type: 'ooni_aggregation', interval: 900 },
@@ -47,6 +50,7 @@ export const CATEGORIES: CategoryConfig[] = [
   {
     name: 'Network Quality',
     icon: '📡',
+    cat_id: 'NET',
     services: [
       { id: 'irinter-score', name: 'irinter.net Score', url: 'https://irinter.net/api/data/network-score?from=__24H_AGO__&until=__NOW__', type: 'irinter_score', interval: 300, threshold_warn: 70, threshold_crit: 50 },
       { id: 'ripe-probes-up', name: 'RIPE Probes Active', url: 'https://atlas.ripe.net/api/v2/probes/?country_code=IR&status=1&page_size=1', type: 'ripe_probes', interval: 600 },
@@ -56,6 +60,7 @@ export const CATEGORIES: CategoryConfig[] = [
   {
     name: 'ISP Monitoring (IODA per-ASN)',
     icon: '🏢',
+    cat_id: 'ISP',
     services: [
       { id: 'isp-irancell', name: 'Irancell (AS44244)', url: 'https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/asn/44244?from=__7D_AGO__&until=__NOW__&datasource=bgp&maxPoints=1', type: 'ioda_signal', interval: 600, threshold_warn: 80, threshold_crit: 50 },
       { id: 'isp-mci', name: 'MCI / Hamrah-e-Aval (AS197207)', url: 'https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/asn/197207?from=__7D_AGO__&until=__NOW__&datasource=bgp&maxPoints=1', type: 'ioda_signal', interval: 600, threshold_warn: 80, threshold_crit: 50 },
@@ -72,6 +77,7 @@ export const CATEGORIES: CategoryConfig[] = [
   {
     name: 'Circumvention & Anonymity',
     icon: '🛡️',
+    cat_id: 'VPN',
     services: [
       { id: 'psiphon-conduit', name: 'Psiphon Conduit Stats', url: 'https://stats.psianalytics.live/conduitStats', type: 'psiphon_stats', interval: 3600 },
       { id: 'psiphon-global', name: 'Psiphon Global Stats', url: 'https://stats.psianalytics.live/psiphonStats', type: 'psiphon_stats', interval: 3600 },
@@ -82,6 +88,7 @@ export const CATEGORIES: CategoryConfig[] = [
   {
     name: 'BGP & Routing (RIPEstat)',
     icon: '🌐',
+    cat_id: 'BGP',
     services: [
       { id: 'ripestat-country-asns', name: 'Iran ASN Count', url: 'https://stat.ripe.net/data/country-asns/data.json?resource=IR&lod=1', type: 'ripestat', interval: 21600 },
       { id: 'ripestat-tic-prefixes', name: 'TIC Announced Prefixes', url: 'https://stat.ripe.net/data/announced-prefixes/data.json?resource=AS12880', type: 'ripestat', interval: 3600 },
@@ -91,6 +98,7 @@ export const CATEGORIES: CategoryConfig[] = [
   {
     name: 'Iran Direct Connectivity',
     icon: '🇮🇷',
+    cat_id: 'IR',
     services: [
       { id: 'ir-dns-shecan', name: 'Shecan DNS', url: 'https://shecan.ir/', type: 'http', interval: 300 },
       { id: 'ir-isp-shatel', name: 'Shatel', url: 'https://shatel.ir/', type: 'http', interval: 300 },

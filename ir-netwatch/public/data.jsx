@@ -1,10 +1,13 @@
 // data.jsx — endpoint catalog + API fetch. No mock data.
 
 const CATEGORIES = {
-  ISP: { id: 'ISP', en: 'ISPs', fa: 'سرویس‌دهنده‌ها', short: 'ISP' },
-  GOV: { id: 'GOV', en: 'Government & Registry', fa: 'دولتی و ثبت دامنه', short: 'GOV' },
-  DOM: { id: 'DOM', en: 'Domestic platforms', fa: 'پلتفرم‌های داخلی', short: 'DOM' },
-  INT: { id: 'INT', en: 'International benchmarks', fa: 'معیارهای بین‌المللی', short: 'INT' },
+  IODA: { id: 'IODA', en: 'Outage Detection',     fa: 'تشخیص قطعی',      short: 'IODA' },
+  OONI: { id: 'OONI', en: 'Censorship Detection', fa: 'سانسور‌سنجی',      short: 'OONI' },
+  NET:  { id: 'NET',  en: 'Network Quality',       fa: 'کیفیت شبکه',       short: 'NET'  },
+  ISP:  { id: 'ISP',  en: 'ISP Monitoring',        fa: 'سرویس‌دهنده‌ها',   short: 'ISP'  },
+  VPN:  { id: 'VPN',  en: 'Circumvention',         fa: 'ابزارهای عبور',    short: 'VPN'  },
+  BGP:  { id: 'BGP',  en: 'BGP & Routing',         fa: 'مسیریابی BGP',     short: 'BGP'  },
+  IR:   { id: 'IR',   en: 'Iran Direct',           fa: 'دسترسی مستقیم',    short: 'IR'   },
 };
 
 function summarize(dataset) {

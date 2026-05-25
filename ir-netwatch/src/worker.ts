@@ -70,6 +70,11 @@ async function runChecks(env: Env): Promise<void> {
     } catch { /* corrupt KV entry — start fresh */ }
   }
 
+  const serviceIdToCat = new Map<string, string>();
+  for (const cat of CATEGORIES) {
+    for (const s of cat.services) serviceIdToCat.set(s.id, cat.cat_id);
+  }
+
   const allServices = CATEGORIES.flatMap(c => c.services);
 
   const toCheck = allServices.filter(s => {
@@ -110,6 +115,7 @@ async function runChecks(env: Env): Promise<void> {
           last_check_epoch: nowUnix,
           prev_status: prevStatus,
           history: historyCSVToDayEntries(newHist, now),
+          cat: serviceIdToCat.get(s.id) ?? 'OTHER',
         };
 
         await env.IR_NETWATCH.put(`status:${s.id}`, JSON.stringify(result));

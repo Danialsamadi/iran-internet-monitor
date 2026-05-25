@@ -29,6 +29,7 @@ export interface DayEntry {
 
 export interface ServiceWithHistory extends ServiceResult {
   history: DayEntry[];
+  cat: string;
 }
 
 export interface Summary {
