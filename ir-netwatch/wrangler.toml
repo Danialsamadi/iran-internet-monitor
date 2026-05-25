@@ -1,0 +1,14 @@
+name = "ir-netwatch"
+main = "src/worker.ts"
+compatibility_date = "2025-01-01"
+
+[assets]
+directory = "./public"
+
+[[kv_namespaces]]
+binding = "IR_NETWATCH"
+id = "deca33105bb746cf8f1b6799f4db63f4"
+preview_id = "68274a72656f4470a1379b6b514a0fa4"
+
+[triggers]
+crons = ["*/5 * * * *"]
