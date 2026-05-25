@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark" data-density="comfy" data-anim="on">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IR-NETWATCH · Iran Internet Status</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles-2.css" />
+<link rel="stylesheet" href="styles-3.css" />
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="data.jsx"></script>
+<script type="text/babel" src="i18n.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+<script type="text/babel" src="detail.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "theme": "dark",
+  "lang": "en",
+  "density": "comfy",
+  "animation": true,
+  "accent": "violet"
+}/*EDITMODE-END*/;
+
+const ACCENT_MAP = {
+  cyan:   'oklch(0.78 0.13 195)',
+  amber:  'oklch(0.78 0.15 75)',
+  green:  'oklch(0.72 0.14 150)',
+  violet: 'oklch(0.72 0.16 295)',
+};
+const ACCENT_LIGHT = {
+  cyan:   'oklch(0.55 0.12 195)',
+  amber:  'oklch(0.55 0.16 75)',
+  green:  'oklch(0.50 0.13 150)',
+  violet: 'oklch(0.50 0.16 295)',
+};
+const ACCENT_HEX = { cyan: '#22c1d9', green: '#28a96b', amber: '#d99c2b', violet: '#8b6df0' };
+const HEX_TO_ACCENT = { '#22c1d9': 'cyan', '#28a96b': 'green', '#d99c2b': 'amber', '#8b6df0': 'violet' };
+
+const LOADING_SCENARIO = {
+  label: { en: 'Connecting to monitor…', fa: 'در حال اتصال…' },
+  summary: { en: 'Fetching latest data from Cloudflare edge.', fa: 'دریافت آخرین داده‌ها…' },
+};
+const ERROR_SCENARIO = {
+  label: { en: 'API unreachable', fa: 'خطا در اتصال به API' },
+  summary: { en: 'Could not fetch status data. Retrying in 30s.', fa: 'خطا در دریافت داده. تلاش مجدد در ۳۰ ثانیه.' },
+};
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const [route, setRoute] = React.useState({ name: 'status' });
+  const [pageData, setPageData] = React.useState(null);
+  const [loadError, setLoadError] = React.useState(false);
+
+  React.useEffect(() => {
+    document.documentElement.dataset.theme = t.theme;
+    document.documentElement.dataset.density = t.density;
+    document.documentElement.dataset.anim = t.animation ? 'on' : 'off';
+    document.documentElement.dir = t.lang === 'fa' ? 'rtl' : 'ltr';
+    document.documentElement.lang = t.lang === 'fa' ? 'fa' : 'en';
+    const accentVal = (t.theme === 'light' ? ACCENT_LIGHT : ACCENT_MAP)[t.accent] || ACCENT_MAP.violet;
+    document.documentElement.style.setProperty('--accent', accentVal);
+  }, [t.theme, t.density, t.animation, t.lang, t.accent]);
+
+  React.useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      try {
+        const data = await fetchStatus();
+        if (!cancelled) { setPageData(data); setLoadError(false); }
+      } catch {
+        if (!cancelled) setLoadError(true);
+      }
+    }
+    load();
+    const id = setInterval(load, 30000);
+    return () => { cancelled = true; clearInterval(id); };
+  }, []);
+
+  const dataset = pageData?.services ?? [];
+  const scenarioObj = loadError
+    ? ERROR_SCENARIO
+    : !pageData
+    ? LOADING_SCENARIO
+    : buildScenarioFromSummary(pageData.summary);
+
+  const openDetail = (id) => setRoute({ name: 'detail', id });
+  const back = () => setRoute({ name: 'status' });
+  const ep = route.name === 'detail' ? dataset.find(d => d.id === route.id) : null;
+  const tt = useT(t.lang);
+
+  return (
+    <div className="shell">
+      <Header
+        lang={t.lang} setLang={(v) => setTweak('lang', v)}
+        theme={t.theme} setTheme={(v) => setTweak('theme', v)}
+        route={route} setRoute={setRoute}
+        polling={!!pageData && !loadError}
+      />
+
+      <main style={{flex:1, paddingBottom:40}}>
+        {route.name === 'status' && (
+          <StatusBoard dataset={dataset} scenarioObj={scenarioObj} lang={t.lang} openDetail={openDetail} />
+        )}
+        {route.name === 'detail' && ep && (
+          <DetailScreen ep={ep} lang={t.lang} onBack={back} />
+        )}
+        {route.name === 'history' && (
+          <HistoryMatrix dataset={dataset} lang={t.lang} openDetail={openDetail} />
+        )}
+        {route.name === 'about' && (
+          <AboutScreen lang={t.lang} />
+        )}
+      </main>
+
+      <footer className="footer">
+        <div className="viewport" style={{display:'flex',justifyContent:'space-between',width:'100%',padding:0}}>
+          <span>{tt('open_source_note')}</span>
+          <span>
+            <a href="https://github.com/Danialsamadi/iran-internet-monitor" target="_blank" rel="noopener">github.com/ir-netwatch</a>
+            &nbsp;·&nbsp;
+            <a href="#" onClick={(e)=>e.preventDefault()}>{tt('notify_telegram')}</a>
+          </span>
+        </div>
+      </footer>
+
+      <TweaksPanel title="Settings">
+        <TweakSection label="Appearance">
+          <TweakRadio label="Theme" value={t.theme} onChange={(v) => setTweak('theme', v)}
+            options={[{value:'dark',label:'Dark'},{value:'light',label:'Light'}]} />
+          <TweakRadio label="Density" value={t.density} onChange={(v) => setTweak('density', v)}
+            options={[{value:'compact',label:'Compact'},{value:'comfy',label:'Comfy'}]} />
+          <TweakColor label="Accent" value={ACCENT_HEX[t.accent]||'#8b6df0'}
+            onChange={(hex) => setTweak('accent', HEX_TO_ACCENT[hex]||'violet')}
+            options={['#22c1d9','#28a96b','#d99c2b','#8b6df0']} />
+          <TweakToggle label="Animations" value={t.animation} onChange={(v) => setTweak('animation', v)} />
+        </TweakSection>
+        <TweakSection label="Language">
+          <TweakRadio label="Locale" value={t.lang} onChange={(v) => setTweak('lang', v)}
+            options={[{value:'en',label:'EN'},{value:'fa',label:'فا (RTL)'}]} />
+        </TweakSection>
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
