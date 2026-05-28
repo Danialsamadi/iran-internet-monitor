@@ -2,14 +2,14 @@
   "id": "ir-service-tapsi",
   "name": "Tapsi",
   "check_type": "http",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
-  "value": 0,
-  "response_time_ms": 10077,
+  "status": "up",
+  "message": "HTTP 200",
+  "value": 100,
+  "response_time_ms": 13367,
   "jitter_ms": 0,
-  "http_code": 0,
-  "uptime_pct": 0.7828594973217964,
-  "last_check": "2026-05-28T17:02:10Z",
-  "last_check_epoch": 1779987730,
-  "prev_status": "up"
+  "http_code": 200,
+  "uptime_pct": 0.7825370675453047,
+  "last_check": "2026-05-28T19:41:28Z",
+  "last_check_epoch": 1779997288,
+  "prev_status": "down"
 }
