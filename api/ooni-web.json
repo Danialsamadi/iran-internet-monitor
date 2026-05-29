@@ -2,14 +2,14 @@
   "id": "ooni-web",
   "name": "Web Censorship",
   "check_type": "ooni_aggregation",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
-  "value": 0,
-  "response_time_ms": 763,
+  "status": "degraded",
+  "message": "Partially blocked — 38% anomaly rate",
+  "value": 38.1086323957323,
+  "response_time_ms": 1010,
   "jitter_ms": 0,
   "http_code": 200,
-  "uptime_pct": 68.32980972515857,
-  "last_check": "2026-05-29T08:33:48Z",
-  "last_check_epoch": 1780043628,
-  "prev_status": "degraded"
+  "uptime_pct": 68.30092983939137,
+  "last_check": "2026-05-29T11:52:58Z",
+  "last_check_epoch": 1780055578,
+  "prev_status": "down"
 }
