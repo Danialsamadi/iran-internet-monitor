@@ -16,9 +16,9 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 <!--START_STATUS_TABLE-->
 | Service | Status | Response | Uptime |
 |---------|--------|----------|--------|
-| ⬜ **DNS Tampering** | unknown | 668ms | 0% |
-| ⬜ **IODA Latency** | unknown | 745ms | 0.0% |
-| ⬜ **IODA Packet Loss** | unknown | 591ms | 0.0% |
+| ⬜ **DNS Tampering** | unknown | 344ms | 0% |
+| ⬜ **IODA Latency** | unknown | 640ms | 0.0% |
+| ⬜ **IODA Packet Loss** | unknown | 479ms | 0.0% |
 | ⬜ **Psiphon Conduit Stats** | unknown | 95ms | 1.5% |
 | ⬜ **Psiphon Global Stats** | unknown | 297ms | 0% |
 | 🟥 **178.22.122.100:53** | down | 0ms | 0% |
@@ -47,33 +47,32 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 | 🟥 **94.74.177.1:80** | down | 0ms | 0% |
 | 🟥 **94.74.179.1:80** | down | 0ms | 0% |
 | 🟥 **Amirkabir University** | down | 25000ms | 11.7% |
-| 🟥 **Aparat** | down | 800ms | 16.3% |
-| 🟥 **Asiatech** | down | 25000ms | 15.9% |
-| 🟥 **CafeBazaar** | down | 581ms | 13.2% |
+| 🟥 **Aparat** | down | 827ms | 16.3% |
+| 🟥 **Asiatech** | down | 25007ms | 15.9% |
 | 🟥 **DadehNegar** | down | 0ms | 0% |
 | 🟥 **Digikala** | down | 0ms | 0% |
 | 🟥 **Electro** | down | 0ms | 0% |
-| 🟥 **Filimo** | down | 25000ms | 2.1% |
+| 🟥 **Filimo** | down | 25007ms | 2.1% |
 | 🟥 **IPM Research** | down | 25000ms | 0.2% |
-| 🟥 **Irancell** | down | 25008ms | 16.1% |
+| 🟥 **Irancell** | down | 25009ms | 16.1% |
 | 🟥 **MobinNet** | down | 0ms | 0% |
 | 🟥 **Mobinhost** | down | 0ms | 0% |
 | 🟥 **NetPitch** | down | 0ms | 0% |
-| 🟥 **Pasargad Bank** | down | 6207ms | 0% |
-| 🟥 **Pishgaman Shiraz** | down | 838ms | 0.4% |
+| 🟥 **Pasargad Bank** | down | 6715ms | 0% |
+| 🟥 **Pishgaman Shiraz** | down | 928ms | 0.4% |
 | 🟥 **Pishgaman** | down | 0ms | 0% |
 | 🟥 **Pishgaman** | down | 0ms | 0% |
 | 🟥 **Pishgaman** | down | 0ms | 0% |
-| 🟥 **Sharif University** | down | 580ms | 9.6% |
+| 🟥 **Sharif University** | down | 4087ms | 9.6% |
 | 🟥 **Shatel** | down | 0ms | 0% |
-| 🟥 **Shecan DNS** | down | 5380ms | 0.3% |
+| 🟥 **Shecan DNS** | down | 2335ms | 0.3% |
 | 🟥 **Shecan** | down | 0ms | 0% |
 | 🟥 **Shiraz** | down | 0ms | 0% |
-| 🟥 **Signal Blocking** | down | 685ms | 27.2% |
+| 🟥 **Signal Blocking** | down | 687ms | 27.2% |
 | 🟥 **Sindad** | down | 0ms | 0% |
-| 🟥 **Snapp** | down | 447ms | 0% |
+| 🟥 **Snapp** | down | 899ms | 0% |
 | 🟥 **Soroush** | down | 0ms | 0% |
-| 🟥 **Soroush** | down | 1096ms | 2.6% |
+| 🟥 **Soroush** | down | 924ms | 2.6% |
 | 🟥 **TIC** | down | 0ms | 0% |
 | 🟥 **TIC** | down | 0ms | 0% |
 | 🟥 **TIC** | down | 0ms | 0% |
@@ -99,58 +98,59 @@ Data is collected every 5 minutes using GitHub Actions, and results are committe
 | 🟥 **TIC** | down | 0ms | 0% |
 | 🟥 **TIC** | down | 0ms | 0% |
 | 🟥 **TIC** | down | 0ms | 0% |
-| 🟥 **Telegram Blocking** | down | 653ms | 46.4% |
-| 🟥 **Tor Snowflake** | down | 670ms | 0% |
+| 🟥 **Telegram Blocking** | down | 687ms | 46.4% |
+| 🟥 **Tor Snowflake** | down | 686ms | 0% |
 | 🟥 **Unknown** | down | 0ms | 0% |
 | 🟥 **Unknown** | down | 0ms | 0% |
 | 🟥 **Unknown** | down | 0ms | 0% |
-| 🟥 **WhatsApp Blocking** | down | 745ms | 50.5% |
+| 🟥 **WhatsApp Blocking** | down | 688ms | 50.5% |
 | 🟥 **ZapISP** | down | 0ms | 0% |
 | 🟥 **Zi-Tel** | down | 0ms | 0% |
-| 🟨 **Facebook Blocking** | degraded | 662ms | 46.8% |
-| 🟨 **Psiphon Reachability** | degraded | 690ms | 45.4% |
-| 🟨 **Web Censorship** | degraded | 677ms | 67.8% |
-| 🟨 **irinter.net Score** | degraded | 434ms | 0% |
-| 🟩 **ArvanCloud (AS205585)** | up | 460ms | 99.8% |
-| 🟩 **ArvanCloud** | up | 5541ms | 99.1% |
-| 🟩 **Asiatech (AS43754)** | up | 482ms | 99.8% |
-| 🟩 **Bale Messenger** | up | 4935ms | 28.7% |
-| 🟩 **DCI / TIC (AS12880)** | up | 477ms | 99.8% |
-| 🟩 **DPI / Middlebox** | up | 652ms | 85.5% |
-| 🟩 **Digikala** | up | 1302ms | 17.1% |
-| 🟩 **Eitaa** | up | 776ms | 30.8% |
-| 🟩 **IODA Active Probing** | up | 517ms | 83.9% |
-| 🟩 **IODA BGP Visibility** | up | 488ms | 99.8% |
-| 🟩 **IODA Google Traffic** | up | 479ms | 63.0% |
-| 🟩 **IODA MERIT Telescope** | up | 443ms | 64.7% |
-| 🟩 **IODA Outage Alerts** | up | 169ms | 83.1% |
+| 🟨 **Facebook Blocking** | degraded | 690ms | 46.7% |
+| 🟨 **Psiphon Reachability** | degraded | 688ms | 45.4% |
+| 🟨 **Web Censorship** | degraded | 779ms | 67.7% |
+| 🟨 **irinter.net Score** | degraded | 422ms | 0% |
+| 🟩 **ArvanCloud (AS205585)** | up | 311ms | 99.8% |
+| 🟩 **ArvanCloud** | up | 4945ms | 99.1% |
+| 🟩 **Asiatech (AS43754)** | up | 324ms | 99.8% |
+| 🟩 **Bale Messenger** | up | 777ms | 28.8% |
+| 🟩 **CafeBazaar** | up | 622ms | 13.2% |
+| 🟩 **DCI / TIC (AS12880)** | up | 335ms | 99.8% |
+| 🟩 **DPI / Middlebox** | up | 689ms | 85.5% |
+| 🟩 **Digikala** | up | 1463ms | 17.1% |
+| 🟩 **Eitaa** | up | 770ms | 30.8% |
+| 🟩 **IODA Active Probing** | up | 393ms | 83.9% |
+| 🟩 **IODA BGP Visibility** | up | 478ms | 99.8% |
+| 🟩 **IODA Google Traffic** | up | 511ms | 63.0% |
+| 🟩 **IODA MERIT Telescope** | up | 339ms | 64.7% |
+| 🟩 **IODA Outage Alerts** | up | 189ms | 83.1% |
 | 🟩 **Iran ASN Count** | up | 522ms | 99.2% |
-| 🟩 **Irancell (AS44244)** | up | 466ms | 99.8% |
+| 🟩 **Irancell (AS44244)** | up | 477ms | 99.8% |
 | 🟩 **Irancell Route Visibility** | up | 509ms | 99.3% |
-| 🟩 **MCI / Hamrah-e-Aval (AS197207)** | up | 336ms | 99.8% |
-| 🟩 **Mobinnet (AS50810)** | up | 434ms | 99.8% |
-| 🟩 **Mobinnet** | up | 1038ms | 17.6% |
-| 🟩 **Noavaran** | up | 169ms | 5% |
-| 🟩 **Pishgaman (AS44208)** | up | 452ms | 99.8% |
-| 🟩 **RIPE Probes Active** | up | 369ms | 99.8% |
-| 🟩 **RIPE Probes Disconnected** | up | 302ms | 99.8% |
-| 🟩 **Respina (AS42337)** | up | 526ms | 99.8% |
-| 🟩 **Respina** | up | 1276ms | 18.1% |
-| 🟩 **Rubika** | up | 1185ms | 84.1% |
-| 🟩 **Saman Bank** | up | 3328ms | 17.0% |
-| 🟩 **Shaparak** | up | 4923ms | 16.0% |
-| 🟩 **Shatel (AS31549)** | up | 278ms | 99.8% |
-| 🟩 **Shatel** | up | 2246ms | 18.1% |
+| 🟩 **MCI / Hamrah-e-Aval (AS197207)** | up | 517ms | 99.8% |
+| 🟩 **Mobinnet (AS50810)** | up | 348ms | 99.8% |
+| 🟩 **Mobinnet** | up | 1031ms | 17.6% |
+| 🟩 **Noavaran** | up | 164ms | 5% |
+| 🟩 **Pishgaman (AS44208)** | up | 332ms | 99.8% |
+| 🟩 **RIPE Probes Active** | up | 331ms | 99.8% |
+| 🟩 **RIPE Probes Disconnected** | up | 341ms | 99.8% |
+| 🟩 **Respina (AS42337)** | up | 346ms | 99.8% |
+| 🟩 **Respina** | up | 1379ms | 18.1% |
+| 🟩 **Rubika** | up | 1192ms | 84.1% |
+| 🟩 **Saman Bank** | up | 3352ms | 17.0% |
+| 🟩 **Shaparak** | up | 965ms | 16.1% |
+| 🟩 **Shatel (AS31549)** | up | 510ms | 99.8% |
+| 🟩 **Shatel** | up | 2274ms | 18.1% |
 | 🟩 **TIC Announced Prefixes** | up | 314ms | 99.4% |
-| 🟩 **TIC Regional (AS58224)** | up | 337ms | 99.8% |
-| 🟩 **Tapsi** | up | 13299ms | 1.8% |
+| 🟩 **TIC Regional (AS58224)** | up | 341ms | 99.8% |
+| 🟩 **Tapsi** | up | 15667ms | 1.8% |
 | 🟩 **Tor Bridge Users (Iran)** | up | 329ms | 99.4% |
-| 🟩 **Tor Reachability** | up | 745ms | 89.7% |
+| 🟩 **Tor Reachability** | up | 690ms | 89.7% |
 | 🟩 **Tor Relay Users (Iran)** | up | 332ms | 99.3% |
 <!--END_STATUS_TABLE-->
 
-> Last checked: 2026-05-30T21:58:43Z
-> 36 up · 4 degraded · 58 down · 5 unknown
+> Last checked: 2026-05-30T22:58:04Z
+> 37 up · 4 degraded · 57 down · 5 unknown
 
 ## ⭐ How it works
 
