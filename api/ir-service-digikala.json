@@ -2,14 +2,14 @@
   "id": "ir-service-digikala",
   "name": "Digikala",
   "check_type": "http",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
-  "value": 0,
-  "response_time_ms": 957,
+  "status": "up",
+  "message": "HTTP 200",
+  "value": 100,
+  "response_time_ms": 1385,
   "jitter_ms": 0,
-  "http_code": 403,
-  "uptime_pct": 17.618469015795867,
-  "last_check": "2026-05-31T23:46:11Z",
-  "last_check_epoch": 1780271171,
-  "prev_status": "up"
+  "http_code": 200,
+  "uptime_pct": 17.611336032388664,
+  "last_check": "2026-06-01T02:04:14Z",
+  "last_check_epoch": 1780279454,
+  "prev_status": "down"
 }
