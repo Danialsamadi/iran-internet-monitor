@@ -2,14 +2,14 @@
   "id": "ir-bank-saman",
   "name": "Saman Bank",
   "check_type": "http",
-  "status": "up",
-  "message": "HTTP 200",
-  "value": 100,
-  "response_time_ms": 8478,
+  "status": "down",
+  "message": "Connection failed (timeout or unreachable)",
+  "value": 0,
+  "response_time_ms": 25000,
   "jitter_ms": 0,
-  "http_code": 200,
-  "uptime_pct": 25.374732334047106,
-  "last_check": "2026-07-04T15:16:46Z",
-  "last_check_epoch": 1783178206,
-  "prev_status": "down"
+  "http_code": 0,
+  "uptime_pct": 25.40135569033179,
+  "last_check": "2026-07-04T16:18:06Z",
+  "last_check_epoch": 1783181886,
+  "prev_status": "up"
 }
