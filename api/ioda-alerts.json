@@ -2,14 +2,14 @@
   "id": "ioda-alerts",
   "name": "IODA Outage Alerts",
   "check_type": "ioda_alerts",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
+  "status": "up",
+  "message": "No active outage alerts",
   "value": 0,
-  "response_time_ms": 25007,
+  "response_time_ms": 220,
   "jitter_ms": 0,
-  "http_code": 0,
-  "uptime_pct": 84.97029010835372,
-  "last_check": "2026-07-08T00:16:04Z",
-  "last_check_epoch": 1783469764,
-  "prev_status": "up"
+  "http_code": 200,
+  "uptime_pct": 84.94060097833682,
+  "last_check": "2026-07-08T03:47:49Z",
+  "last_check_epoch": 1783482469,
+  "prev_status": "down"
 }
