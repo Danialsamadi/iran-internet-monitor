@@ -2,14 +2,14 @@
   "id": "ripe-probes-up",
   "name": "RIPE Probes Active",
   "check_type": "ripe_probes",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
-  "value": 0,
-  "response_time_ms": 25007,
+  "status": "up",
+  "message": "46 probes",
+  "value": 46,
+  "response_time_ms": 399,
   "jitter_ms": 0,
-  "http_code": 0,
-  "uptime_pct": 99.86371379897786,
-  "last_check": "2026-07-14T19:41:12Z",
-  "last_check_epoch": 1784058072,
-  "prev_status": "up"
+  "http_code": 200,
+  "uptime_pct": 99.82970027247956,
+  "last_check": "2026-07-14T20:44:03Z",
+  "last_check_epoch": 1784061843,
+  "prev_status": "down"
 }
