@@ -2,14 +2,14 @@
   "id": "isp-irancell",
   "name": "Irancell (AS44244)",
   "check_type": "ioda_signal",
-  "status": "down",
-  "message": "Connection failed (timeout or unreachable)",
-  "value": 0,
-  "response_time_ms": 25000,
+  "status": "up",
+  "message": "Healthy — signal at 100% of normal",
+  "value": 100,
+  "response_time_ms": 521,
   "jitter_ms": 0,
-  "http_code": 0,
-  "uptime_pct": 99.83760961351088,
-  "last_check": "2026-07-24T09:11:53Z",
-  "last_check_epoch": 1784884313,
-  "prev_status": "up"
+  "http_code": 200,
+  "uptime_pct": 99.8051948051948,
+  "last_check": "2026-07-24T11:12:45Z",
+  "last_check_epoch": 1784891565,
+  "prev_status": "down"
 }
