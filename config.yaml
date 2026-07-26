@@ -1,0 +1,91 @@
+# Iran Internet Monitor — service configuration.
+#
+# To add a service: pick the category (or add a new one), append an entry:
+#   - id: unique-slug            # stable key used in history.jsonl
+#     name: Human Name
+#     name_fa: نام فارسی         # optional, shown on the Persian page
+#     type: http | dns | tcp
+#     target: URL (http) / resolver ip:53 (dns) / host:port (tcp)
+#     query: domain              # dns only, what to resolve (default google.com)
+# That's it — the checker, storage and status page all key off this file.
+
+check:
+  timeout_seconds: 15
+  concurrency: 20
+  degraded_ms: 3000     # slower than this = "degraded"
+
+ollama:
+  enabled: true
+  host: http://localhost:11434
+  model: hermes3        # or nous-hermes2
+  timeout_seconds: 180
+
+git:
+  push: true
+  remote: origin
+  branch: main
+
+categories:
+  - name: ISP endpoints
+    name_fa: نقاط پایانی ارائه‌دهندگان
+    services:
+      - { id: tic-gw-1,        name: "TIC gateway 2.187.1.1",     type: tcp, target: "2.187.1.1:80" }
+      - { id: tic-gw-2,        name: "TIC gateway 78.38.112.1",   type: tcp, target: "78.38.112.1:80" }
+      - { id: irancell-gw,     name: "Irancell 5.232.0.1",        type: tcp, target: "5.232.0.1:80" }
+      - { id: asiatech-gw,     name: "Asiatech 94.182.0.1",       type: tcp, target: "94.182.0.1:80" }
+      - { id: shatel-web,      name: Shatel,     name_fa: شاتل,     type: http, target: "https://www.shatel.ir" }
+      - { id: respina-web,     name: Respina,    name_fa: رسپینا,   type: http, target: "https://www.respina.net" }
+      - { id: mobinnet-web,    name: Mobinnet,   name_fa: مبین‌نت,  type: http, target: "https://www.mobinnet.ir" }
+      - { id: irancell-web,    name: Irancell,   name_fa: ایرانسل,  type: http, target: "https://irancell.ir" }
+      - { id: asiatech-web,    name: Asiatech,   name_fa: آسیاتک,   type: http, target: "https://www.asiatech.ir" }
+
+  - name: DNS resolvers
+    name_fa: سرورهای DNS
+    services:
+      - { id: dns-shecan,      name: "Shecan DNS",  type: dns, target: "178.22.122.100:53", query: digikala.com }
+      - { id: dns-tic,         name: "TIC DNS",     type: dns, target: "217.218.155.155:53", query: irna.ir }
+      - { id: dns-electro,     name: "Electro DNS", type: dns, target: "78.157.42.100:53",  query: aparat.com }
+
+  - name: Domestic services
+    name_fa: سرویس‌های داخلی
+    services:
+      - { id: digikala,        name: Digikala,      name_fa: دیجی‌کالا,   type: http, target: "https://www.digikala.com" }
+      - { id: snapp,           name: Snapp,         name_fa: اسنپ,        type: http, target: "https://snapp.ir" }
+      - { id: tapsi,           name: Tapsi,         name_fa: تپسی,        type: http, target: "https://tapsi.ir" }
+      - { id: aparat,          name: Aparat,        name_fa: آپارات,      type: http, target: "https://www.aparat.com" }
+      - { id: filimo,          name: Filimo,        name_fa: فیلیمو,      type: http, target: "https://www.filimo.com" }
+      - { id: cafebazaar,      name: CafeBazaar,    name_fa: کافه‌بازار,  type: http, target: "https://cafebazaar.ir" }
+      - { id: rubika,          name: Rubika,        name_fa: روبیکا,      type: http, target: "https://rubika.ir" }
+      - { id: eitaa,           name: Eitaa,         name_fa: ایتا,        type: http, target: "https://eitaa.com" }
+      - { id: balad,           name: Balad,         name_fa: بلد,         type: http, target: "https://balad.ir" }
+      - { id: bank-saman,      name: "Saman Bank",  name_fa: بانک سامان,  type: http, target: "https://www.sb24.ir" }
+      - { id: shaparak,        name: Shaparak,      name_fa: شاپرک,       type: http, target: "https://www.shaparak.ir" }
+      - { id: irna,            name: "IRNA News",   name_fa: ایرنا,       type: http, target: "https://www.irna.ir" }
+
+  - name: Foreign platforms
+    name_fa: پلتفرم‌های خارجی
+    services:
+      - { id: google,          name: Google,        type: http, target: "https://www.google.com" }
+      - { id: cloudflare,      name: Cloudflare,    type: http, target: "https://www.cloudflare.com" }
+      - { id: telegram-web,    name: "Telegram Web",   type: http, target: "https://web.telegram.org" }
+      - { id: whatsapp-web,    name: "WhatsApp Web",   type: http, target: "https://web.whatsapp.com" }
+      - { id: instagram,       name: Instagram,     type: http, target: "https://www.instagram.com" }
+      - { id: youtube,         name: YouTube,       type: http, target: "https://www.youtube.com" }
+      - { id: wikipedia,       name: Wikipedia,     type: http, target: "https://fa.wikipedia.org" }
+      - { id: github,          name: GitHub,        type: http, target: "https://github.com" }
+
+  - name: Circumvention
+    name_fa: ابزارهای عبور
+    services:
+      - { id: tor-check,       name: "Tor Project",       type: http, target: "https://check.torproject.org" }
+      - { id: tor-bridgedb,    name: "Tor BridgeDB",      type: http, target: "https://bridges.torproject.org" }
+      - { id: snowflake,       name: "Snowflake broker",  type: http, target: "https://snowflake-broker.torproject.net" }
+      - { id: psiphon,         name: Psiphon,             type: http, target: "https://psiphon.ca" }
+
+  - name: Observatories
+    name_fa: رصدخانه‌ها
+    services:
+      - { id: ioda-api,        name: "IODA signals (IR)", type: http, target: "https://api.ioda.inetintel.cc.gatech.edu/v2/entities/query?entityType=country&entityCode=IR" }
+      - { id: ooni-api,        name: "OONI measurements (IR)", type: http, target: "https://api.ooni.io/api/v1/measurements?probe_cc=IR&limit=1" }
+      - { id: ripestat,        name: "RIPEstat (AS12880)", type: http, target: "https://stat.ripe.net/data/routing-status/data.json?resource=AS12880" }
+      - { id: tor-metrics,     name: "Tor Metrics",       type: http, target: "https://metrics.torproject.org" }

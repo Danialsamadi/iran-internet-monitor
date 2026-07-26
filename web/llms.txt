@@ -1,0 +1,21 @@
+# IranNet Monitor
+
+> Independent, bilingual (English/فارسی) observatory of Iran's internet
+> connectivity, censorship, and circumvention tools. A Go monitor on a VPS
+> probes ~40 endpoints (HTTP, DNS, TCP) every 5 minutes from outside Iran,
+> a local Hermes LLM analyzes each pass, and the raw archive is public.
+
+Statuses: up, degraded (slow), down. Overall: operational, degraded,
+partial_outage (>=10% down), major_outage (>=1/3 down). Single outside
+vantage: this measures reachability from abroad, not the in-country view.
+
+## Data
+
+- [latest.json](/data/latest.json): full latest pass — timestamp, overall, counts, one flat record per check (service_id, category, type, target, status, latency_ms, error)
+- [site.json](/data/site.json): pre-aggregated — per-service 24 h half-hour cells and uptime, 30-day downtime hours, down-events by Tehran hour, latest LLM analysis
+- [history.jsonl](/data/history.jsonl): append-only archive, one self-describing JSON line per check
+- [analysis/latest.json](/data/analysis/latest.json): latest LLM reading — overall_status, severity, suspected_causes, affected_services, public_summary, insight, recommendation
+
+## Source
+
+- [GitHub repository](https://github.com/Danialsamadi/iran-internet-monitor): Go monitor, config, and this page

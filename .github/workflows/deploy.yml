@@ -1,0 +1,44 @@
+# Deploys the status page to Cloudflare Pages whenever the VPS cron pushes
+# fresh data (or the page/config changes). The site is static: web/ plus the
+# committed data/ directory.
+name: Deploy status page
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "web/**"
+      - "data/latest.json"
+      - "data/site.json"
+      - "data/analysis/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true # only the newest data pass matters
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble site
+        run: |
+          mkdir -p dist/data/analysis
+          cp web/* dist/
+          cp data/latest.json data/site.json dist/data/ 2>/dev/null || true
+          cp data/analysis/latest.json dist/data/analysis/ 2>/dev/null || true
+          # the archive is linked from the page; skip it if it has grown huge
+          [ -f data/history.jsonl ] && [ "$(wc -c < data/history.jsonl)" -lt 26214400 ] \
+            && cp data/history.jsonl dist/data/ || true
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=iran-internet-monitor
