@@ -520,6 +520,22 @@ function about() {
     ["Circumvention", "Tor, Snowflake, Psiphon endpoints", "نقاط Tor و Snowflake و Psiphon"],
     ["Observatories", "IODA · OONI · RIPEstat · Tor Metrics", "رصدخانه‌های جهانی"]
   ];
+  const REFERENCES = [
+    ["IODA (Georgia Tech)", "Comparative shutdown analysis 2019/2022/2025/2026", "تحلیل مقایسه‌ای قطعی‌ها"],
+    ["Miaan Group / ASL19 / IODA", "Stealth blackout report (June 2025, Jan 2026)", "گزارش قطعی مخفی"],
+    ["OONI", "DPI blocking of Instagram, protocol whitelisting", "بلاک DPI اینستاگرام، وایت‌لیست پروتکل"],
+    ["Internet Society Pulse", "Live shutdown tracking", "پیگیری لحظه‌ای قطعی‌ها"],
+    ["Filterwatch", "Best ongoing Persian monitoring; tiered-access report", "بهترین پایش فارسی؛ گزارش اینترنت گزینشی"],
+    ["ARTICLE 19", "Tightening the Net series", "سری تنیقه شدن تور"],
+    ["Freedom House", "Freedom on the Net – Iran", "آزادی در اینترنت ایران"],
+    ["Chatham House", "Digital-isolation shift analysis", "تحلیل تغییر به سوی انزوا"],
+    ["Schneier on Security", "Two-tiered \"white SIM\" model", "مدل دو لایه وایت سیم"],
+    ["Bock et al., USENIX FOCI '20", "Reverse-engineering Iran's protocol whitelister", "معکوس‌مهندسی وایت‌لیست پروتکل"],
+    ["arXiv 2507.14183", "Stealth blackout — TTL-limited tracing to localize filter hop", "قطعی مخفی — ردیابی با TTL محدود"],
+    ["arXiv 2603.28753", "Jan 2026 shutdown: public data, methods, circumvention", "قطعی ژانویه ۲۰۲۶: داده، روش، عبور"],
+    ["NetBlocks, Cloudflare Radar, Google Transparency Report", "Live traffic cross-reference", "مرجع متقاطع ترافیک زنده"],
+    ["Access Now #KeepItOn", "Global shutdown tracking", "پیگیری جهانی قطعی‌ها"]
+  ];
   return `
   <div class="pad grid2w" style="padding-top:30px;padding-bottom:40px;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:start">
     <div>
@@ -540,6 +556,12 @@ function about() {
         <div style="display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:13.5px;border-bottom:1px solid rgba(32,30,29,.07)">
           <span style="font-weight:600">${s[0]}</span>
           <span style="color:rgba(32,30,29,.65);text-align:end">${t(s[1], s[2])}</span>
+        </div>`).join("")}
+      <h5 style="margin:22px 0 10px;font-size:10px;letter-spacing:.16em;text-transform:uppercase">${t("Cross-references & research","مراجع متقاطع و تحقیقات")}</h5>
+      ${REFERENCES.map(r => `
+        <div style="display:flex;justify-content:space-between;gap:14px;padding:6px 0;font-size:12px;border-bottom:1px solid rgba(32,30,29,.04)">
+          <span style="font-weight:600">${esc(r[0])}</span>
+          <span style="color:rgba(32,30,29,.65);text-align:end">${t(r[1], r[2])}</span>
         </div>`).join("")}
       <div style="display:flex;gap:6px;align-items:center;margin-top:22px">
         <i style="width:15px;height:15px;background:${UP};display:inline-block"></i>
