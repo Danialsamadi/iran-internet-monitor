@@ -72,4 +72,29 @@
   "public_summary": "Iran's internet shows a stable, degraded baseline consistent with normal censorship operations. All foreign platforms (Google, Telegram, YouTube, Instagram, WhatsApp, GitHub, Wikipedia) and circumvention tools (Tor, Snowflake, Psiphon) remain fully accessible. All four major ISP gateways block external probes; only ~4% of Iranian IP ranges respond from outside. Domestic services (Digikala, Tapsi, Filimo, CafeBazaar, Rubika, Eitaa, IRNA) function normally. Asiatech remains the worst-affected ISP with gateway, web, and IP ranges all impaired.",
   "insight": "Nine consecutive passes show an identical fingerprint: zero ISP gateways reachable, ~3.8% IP range reachability, all foreign platforms and circumvention tools fully up, domestic services operating normally — this is Iran's stable external-facing baseline under routine censorship, not an outage event.",
   "recommendation": "Treat this nine-pass fingerprint as the confirmed operational baseline. Alert only on deviations: foreign platform outage, domestic service cascade failure, or circumvention tool degradation. Request IODA traffic volume data for TIC (AS12880) to establish a volume baseline for future anomaly detection."
+}{
+  "overall_status": "degraded",
+  "severity": "minor",
+  "suspected_causes": [
+    "sustained inbound filtering at all ISP gateways (TIC, Irancell, Asiatech) blocking external probes",
+    "persistent anti-monitoring posture: ~3.8% Iranian IP range reachability from outside (13 of 345 ranges)",
+    "Asiatech-specific compound impairment: gateway timeout + web portal timeout + IP ranges dark (worst-affected ISP)",
+    "Electro anti-filter DNS resolver persistently unreachable (possible targeted pressure on circumvention DNS)",
+    "domestic payment layer: Shaparak unreachable, Saman Bank degraded but stable"
+  ],
+  "affected_services": [
+    "All ISP management gateways (TIC x2, Irancell, Asiatech) — inbound TCP uniformly blocked",
+    "332 of 345 Iranian IP ranges unreachable from outside — MCI, Irancell, Shatel completely dark externally",
+    "Asiatech — gateway, web portal, and IP ranges all impaired (worst-affected ISP)",
+    "Electro DNS resolver — unreachable (persistent across all passes)",
+    "Snapp ride-hailing — redirect loop (persistent)",
+    "Shaparak payment gateway — unreachable (persistent)",
+    "Saman Bank — degraded (~3035ms, stable)",
+    "Aparat — degraded (~10727ms)",
+    "Balad — degraded (~5459ms)",
+    "Respina ISP web — degraded (~4045ms)"
+  ],
+  "public_summary": "Iran's internet shows a stable, degraded baseline consistent with normal censorship operations. All foreign platforms (Google, Telegram, YouTube, Instagram, WhatsApp, GitHub, Wikipedia) and circumvention tools (Tor, Snowflake, Psiphon) remain fully accessible. All four major ISP gateways block external probes; only ~4% of Iranian IP ranges respond from outside. Domestic services (Digikala, Tapsi, Filimo, CafeBazaar, Rubika, Eitaa, IRNA) function normally. Asiatech remains the worst-affected ISP with gateway, web, and IP ranges all impaired.",
+  "insight": "Nine consecutive passes show an identical fingerprint: zero ISP gateways reachable, ~3.8% IP range reachability, all foreign platforms and circumvention tools fully up, domestic services operating normally — this is Iran's stable external-facing baseline under routine censorship, not an outage event.",
+  "recommendation": "Treat this nine-pass fingerprint as the confirmed operational baseline. Alert only on deviations: foreign platform outage, domestic service cascade failure, or circumvention tool degradation. Request IODA traffic volume data for TIC (AS12880) to establish a volume baseline for future anomaly detection."
 }
