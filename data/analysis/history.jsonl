@@ -415,4 +415,46 @@
   "insight_fa": "هر چهار دروازه بین‌المللی ISP از بیرون down در حالی که ۳۱ از ۴۰ نقطه پایانی up هستند، فیلترینگ در لایه دروازه (معماری استاندارد سانسور) را تأیید می‌کند، نه خرابی زیرساختی — خدمات داخلی کار می‌کنند، سایت‌های خارجی از بیرون کار می‌کنند، ابزارهای عبور سالم‌اند.",
   "recommendation": "Cross-reference with IODA/Filterwatch/OONI for inside-Iran measurements to confirm domestic user-facing confirmation gateway filtering vs internal user impact; monitor IP range reachability cadence for tiered-access shifts.",
   "recommendation_fa": "مرجع متقاطع با IODA/فیلترواچ/OONI برای سنجش‌های درونی-ایران تا تأیید فیلترینگ دروازه در برابر تأثیر کاربر درونی؛ مانیتورिंग کادنس رسیدگی محدوده IP برای ردیابی تغییرات دسترسی سطحی."
+}{
+  "overall_status": "partial_outage",
+  "severity": "major",
+  "suspected_causes": [
+    "active filtering at international gateway layer (TIC, Irancell, Asiatech gateways blocking external probes)",
+    "standard censorship posture: domestic services reachable internally, foreign platforms filtered internally but accessible from outside",
+    "IP range reachability extremely low (3.8%) — only limited operator ranges permit external probes"
+  ],
+  "suspected_causes_fa": [
+    "فیلترینگ فعال در لایه درگاه‌های بین‌المللی (دروازه‌های تیک، ایرانسل، آسیاتک مسدودکننده پرعب‌های خارجی)",
+    "معماری سانسور استاندارد: خدمات داخلی درونی دسترس، پلتفرم‌های خارجی داخلی فیلتره‌شده اما از بیرون قابل‌دسترس",
+    "رسیدگی محدوده‌های IP بسیار پایین (۳.۸٪) — تنها محدوده‌های محدود اپراتورها پرعب خارجی را مجاز می‌دانند"
+  ],
+  "affected_services": [
+    "TIC gateway 2.187.1.1 (connection refused)",
+    "TIC gateway 78.38.112.1 (timeout)",
+    "Irancell gateway 5.232.0.1 (timeout)",
+    "Asiatech gateway 94.182.0.1 (timeout)",
+    "Asiatech web portal (timeout)",
+    "Electro DNS 78.157.42.100 (timeout)",
+    "Snapp (redirect loop)",
+    "Shaparak payment gateway (timeout)",
+    "Saman Bank (degraded, 3049ms latency)"
+  ],
+  "affected_services_fa": [
+    "دروازه تیک ۲.۱۸۷.۱.۱ (رد اتصال)",
+    "دروازه تیک ۷۸.۳۸.۱۱۲.۱ (تایم‌اوت)",
+    "دروازه ایرانسل ۵.۲۳۲.۰.۱ (تایم‌اوت)",
+    "دروازه آسیاتک ۹۴.۱۸۲.۰.۱ (تایم‌اوت)",
+    "پورتال وب آسیاتک (تایم‌اوت)",
+    "دی‌ان‌اس الکترو ۷۸.۱۵۷.۴۲.۱۰۰ (تایم‌اوت)",
+    "اسنپ (حلقه ریدایرکت)",
+    "شاپرک دروازه پرداخت (تایم‌اوت)",
+    "بانک سامان (تخریب، تأخیر ۳۰۴۹میلی‌ثانیه)"
+  ],
+  "public_summary": "Iran's international gateways (TIC, Irancell, Asiatech) are blocking external probes while domestic services remain accessible internally. Foreign platforms and circumvention tools are reachable from outside Iran but filtered for domestic users. This is the standard censorship posture — not an infrastructure outage.",
+  "public_summary_fa": "دروازه‌های بین‌المللی ایران (تیک، ایرانسل، آسیاتک) پرعب‌های خارجی را مسدود می‌کنند در حالی که خدمات داخلی درونی دسترس‌پذیرند. پلتفرم‌های خارجی و ابزارهای عبور از بیرون ایران قابل‌دسترس‌اند اما برای کاربران داخلی فیلتره شده‌اند. این pós چرگی استاندارد سانسور است — نه قطعی زیرساختی.",
+  "insight": "All four major ISP international gateways down externally while 31/40 endpoints up confirms active gateway-layer filtering (standard censorship posture), not infrastructure failure — domestic services work, foreign sites work from outside, circumvention tools healthy.",
+  "insight_fa": "هر چهار دروازه بین‌المللی ISP از بیرون down در حالی که ۳۱ از ۴۰ نقطه پایانی up هستند، فیلترینگ در لایه دروازه (معماری استاندارد سانسور) را تأیید می‌کند، نه خرابی زیرساختی — خدمات داخلی کار می‌کنند، سایت‌های خارجی از بیرون کار می‌کنند، ابزارهای عبور سالم‌اند.",
+  "recommendation": "Cross-reference with IODA/Filterwatch/OONI for inside-Iran measurements to confirm domestic user-facing confirmation gateway filtering vs internal user impact; monitor IP range reachability cadence for tiered-access shifts.",
+  "recommendation_fa": "مرجع متقاطع با IODA/فیلترواچ/OONI برای سنجش‌های درونی-ایران تا تأیید فیلترینگ دروازه در برابر تأثیر کاربر درونی؛ مانیتورिंग کادنس رسیدگی محدوده IP برای ردیابی تغییرات دسترسی سطحی."
 }
+{  "overall_status": "partial_outage",  "severity": "major",  "suspected_causes": [    "active filtering at international gateway layer (TIC, Irancell, Asiatech gateways blocking external probes)",    "standard censorship posture: domestic services reachable internally, foreign platforms filtered internally but accessible from outside",    "IP range reachability extremely low (3.8%) — only limited operator ranges permit external probes"  ],  "suspected_causes_fa": [    "فیلترینگ فعال در لایه درگاه‌های بین‌المللی (دروازه‌های تیک، ایرانسل، آسیاتک مسدودکننده پرعب‌های خارجی)",    "معماری سانسور استاندارد: خدمات داخلی درونی دسترس، پلتفرم‌های خارجی داخلی فیلتره‌شده اما از بیرون قابل‌دسترس",    "رسیدگی محدوده‌های IP بسیار پایین (۳.۸٪) — تنها محدوده‌های محدود اپراتورها پرعب خارجی را مجاز می‌دانند"  ],  "affected_services": [    "TIC gateway 2.187.1.1 (connection refused)",    "TIC gateway 78.38.112.1 (timeout)",    "Irancell gateway 5.232.0.1 (timeout)",    "Asiatech gateway 94.182.0.1 (timeout)",    "Asiatech web portal (timeout)",    "Electro DNS 78.157.42.100 (timeout)",    "Snapp (redirect loop)",    "Shaparak payment gateway (timeout)",    "Saman Bank (degraded, 3049ms latency)"  ],  "affected_services_fa": [    "دروازه تیک ۲.۱۸۷.۱.۱ (رد اتصال)",    "دروازه تیک ۷۸.۳۸.۱۱۲.۱ (تایم‌اوت)",    "دروازه ایرانسل ۵.۲۳۲.۰.۱ (تایم‌اوت)",    "دروازه آسیاتک ۹۴.۱۸۲.۰.۱ (تایم‌اوت)",    "پورتال وب آسیاتک (تایم‌اوت)",    "دی‌ان‌اس الکترو ۷۸.۱۵۷.۴۲.۱۰۰ (تایم‌اوت)",    "اسنپ (حلقه ریدایرکت)",    "شاپرک دروازه پرداخت (تایم‌اوت)",    "بانک سامان (تخریب، تأخیر ۳۰۴۹میلی‌ثانیه)"  ],  "public_summary": "Iran's international gateways (TIC, Irancell, Asiatech) are blocking external probes while domestic services remain accessible internally. Foreign platforms and circumvention tools are reachable from outside Iran but filtered for domestic users. This is the standard censorship posture — not an infrastructure outage.",  "public_summary_fa": "دروازه‌های بین‌المللی ایران (تیک، ایرانسل، آسیاتک) پرعب‌های خارجی را مسدود می‌کنند در حالی که خدمات داخلی درونی دسترس‌پذیرند. پلتفرم‌های خارجی و ابزارهای عبور از بیرون ایران قابل‌دسترس‌اند اما برای کاربران داخلی فیلتره شده‌اند. این pós چرگی استاندارد سانسور است — نه قطعی زیرساختی.",  "insight": "All four major ISP international gateways down externally while 31/40 endpoints up confirms active gateway-layer filtering (standard censorship posture), not infrastructure failure — domestic services work, foreign sites work from outside, circumvention tools healthy.",  "insight_fa": "هر چهار دروازه بین‌المللی ISP از بیرون down در حالی که ۳۱ از ۴۰ نقطه پایانی up هستند، فیلترینگ در لایه دروازه (معماری استاندارد سانسور) را تأیید می‌کند، نه خرابی زیرساختی — خدمات داخلی کار می‌کنند، سایت‌های خارجی از بیرون کار می‌کنند، ابزارهای عبور سالم‌اند.",  "recommendation": "Cross-reference with IODA/Filterwatch/OONI for inside-Iran measurements to confirm domestic user-facing confirmation gateway filtering vs internal user impact; monitor IP range reachability cadence for tiered-access shifts.",  "recommendation_fa": "مرجع متقاطع با IODA/فیلترواچ/OONI برای سنجش‌های درونی-ایران تا تأیید فیلترینگ دروازه در برابر تأثیر کاربر درونی؛ مانیتورिंग کادنس رسیدگی محدوده IP برای ردیابی تغییرات دسترسی سطحی."}
