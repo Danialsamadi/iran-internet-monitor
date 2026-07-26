@@ -575,9 +575,79 @@ setInterval(() => { state.now = Date.now(); if (state.site) render(); }, 30000);
 
 if (location.hash && PAGES.some(p => p[0] === location.hash.slice(1))) state.page = location.hash.slice(1);
 
+/* ── WebMCP (Chrome 149+ origin trial): expose the monitor to AI agents ── */
+function registerWebMCP() {
+  const mc = document.modelContext || navigator.modelContext;
+  if (!mc?.registerTool) return;
+  const j = v => JSON.stringify(v);
+  const tools = [
+    {
+      name: "get_status",
+      description: "Current overall status of Iran's internet as measured by this monitor: verdict, up/degraded/down counts, median latency and pass timestamp (UTC).",
+      inputSchema: { type: "object", properties: {} },
+      annotations: { readOnlyHint: true },
+      execute: async () => j({
+        ts: state.site.ts, overall: state.site.overall,
+        counts: state.site.counts, median_latency_ms: state.site.median_ms
+      })
+    },
+    {
+      name: "get_endpoints",
+      description: "Monitored endpoints with status, latency and 24h uptime. Optionally filter by category name or status (up/degraded/down).",
+      inputSchema: {
+        type: "object",
+        properties: {
+          category: { type: "string", description: "exact or partial category name, e.g. 'Circumvention'" },
+          status: { type: "string", enum: ["up", "degraded", "down"] }
+        }
+      },
+      annotations: { readOnlyHint: true },
+      execute: async ({ category, status }) => j(
+        state.site.categories
+          .filter(c => !category || c.name.toLowerCase().includes(category.toLowerCase()))
+          .flatMap(c => c.services
+            .filter(sv => !status || sv.status === status)
+            .map(sv => ({ category: c.name, name: sv.name, kind: sv.kind, status: sv.status, latency_ms: sv.latency_ms, uptime_24h_pct: +(sv.uptime24 || 0).toFixed(1) })))
+      )
+    },
+    {
+      name: "get_networks",
+      description: "Per-operator reachability of labeled Iranian IP ranges (one representative IP per registered allocation, TCP :80): ranges, addresses covered, reachable share, median latency.",
+      inputSchema: { type: "object", properties: {} },
+      annotations: { readOnlyHint: true },
+      execute: async () => j(state.site.networks || { error: "no IP-range data in the latest pass" })
+    },
+    {
+      name: "get_analysis",
+      description: "Latest LLM (Hermes via Ollama) analysis of the monitoring data: severity, suspected causes, affected services, public summary, insight and recommendation.",
+      inputSchema: { type: "object", properties: {} },
+      annotations: { readOnlyHint: true },
+      execute: async () => j(state.site.analysis || { error: "no analysis generated yet" })
+    },
+    {
+      name: "show_page",
+      description: "Navigate the status page UI to a section and optionally switch language.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          page: { type: "string", enum: PAGES.map(p => p[0]) },
+          lang: { type: "string", enum: ["en", "fa"] }
+        },
+        required: ["page"]
+      },
+      execute: async ({ page, lang }) => {
+        state.page = page; if (lang) state.lang = lang;
+        location.hash = page; render();
+        return `Showing ${page}` + (lang ? ` in ${lang}` : "");
+      }
+    }
+  ];
+  for (const t of tools) Promise.resolve(mc.registerTool(t)).catch(() => {});
+}
+
 fetch("data/site.json", { cache: "no-store" })
   .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
-  .then(site => { state.site = site; render(); })
+  .then(site => { state.site = site; render(); registerWebMCP(); })
   .catch(err => { $("#loading").textContent = "Could not load data/site.json — " + err.message; });
 })();
 </script>
