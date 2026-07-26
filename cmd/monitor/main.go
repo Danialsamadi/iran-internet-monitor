@@ -91,6 +91,8 @@ func runPass(repoDir string, skipLLM, skipGit bool) error {
 			Model:   cfg.Ollama.Model,
 			Timeout: time.Duration(cfg.Ollama.TimeoutSeconds) * time.Second,
 			DataDir: store.Dir,
+			// prompt.md at the repo root overrides the built-in system prompt
+			PromptFile: filepath.Join(repoDir, "prompt.md"),
 		}
 		if analysis, err = an.Run(ctx, latest, networks); err != nil {
 			log.Printf("analysis skipped: %v", err)

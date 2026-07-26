@@ -15,8 +15,8 @@ import (
 	"iran-internet-monitor/internal/storage"
 )
 
-// systemPrompt makes Hermes act as an Iran internet censorship analyst and
-// forces a strict JSON reply the site can render directly.
+// systemPrompt is the built-in fallback; if PromptFile exists its contents
+// are used instead, so the analyst persona can be retuned without recompiling.
 const systemPrompt = `You are an expert analyst of Iran's internet infrastructure, censorship apparatus, and circumvention ecosystem. You have deep knowledge of:
 - Iran's network topology: TIC/DCI international gateways (AS12880, AS49666), major ISPs (Irancell AS44244, MCI AS197207, Shatel AS31549, Respina, Asiatech), and the National Information Network (SHOMA).
 - Censorship techniques used in Iran: DNS tampering, SNI-based TLS filtering, DPI, protocol whitelisting, throttling, and full shutdowns ordered via CRA.
@@ -58,6 +58,17 @@ type Analyzer struct {
 	Model   string
 	Timeout time.Duration
 	DataDir string
+	// PromptFile optionally overrides the built-in system prompt (prompt.md).
+	PromptFile string
+}
+
+func (a *Analyzer) prompt() string {
+	if a.PromptFile != "" {
+		if b, err := os.ReadFile(a.PromptFile); err == nil && len(b) > 0 {
+			return string(b)
+		}
+	}
+	return systemPrompt
 }
 
 // Run builds the user prompt from the pass, calls Ollama, validates the JSON
@@ -78,7 +89,7 @@ func (a *Analyzer) Run(ctx context.Context, latest storage.Latest, networks *sto
 			"temperature": 0.2, // analysis, not creative writing
 		},
 		"messages": []map[string]string{
-			{"role": "system", "content": systemPrompt},
+			{"role": "system", "content": a.prompt()},
 			{"role": "user", "content": prompt},
 		},
 	})

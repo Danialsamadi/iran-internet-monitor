@@ -65,6 +65,41 @@ last good analysis. The model returns strict JSON (`format: json`):
 overall status, severity, suspected causes, affected services, a public
 summary, one insight, and one recommendation.
 
+## How the Hermes analysis works — and how to change it
+
+Every pass, the monitor sends Hermes ONE user message containing compact
+JSON: `pass_time_utc`, `overall`, `counts`, `per_category` status counts,
+`failing_endpoints` in full (name, category, status, latency, error),
+`ip_ranges` per-operator reachability (when the range sweep ran), and
+`previous_analysis` (its own last reading, for continuity). It must answer
+with strict JSON (`format: json` is enforced by Ollama):
+
+| key | meaning |
+|---|---|
+| `overall_status` | operational / degraded / partial_outage / major_outage |
+| `severity` | none / minor / major / critical |
+| `suspected_causes` | most likely first |
+| `affected_services` | impaired names/groups |
+| `public_summary` | 2–3 sentences shown on the status page |
+| `insight` | one analytical sentence (the italic quote on the page) |
+| `recommendation` | one concrete next step |
+
+The reply is validated, saved to `data/analysis/latest.json`, archived in
+`data/analysis/history.jsonl`, and embedded in `site.json` for the page.
+
+To change things:
+
+- **The analyst persona / instructions** — edit `prompt.md` at the repo
+  root. It is read fresh on every pass; no rebuild needed. Keep the final
+  "Reply with ONLY a JSON object" block and the exact keys, or the reply
+  will fail validation. Delete `prompt.md` to fall back to the built-in copy.
+- **The model** — `ollama.model` in `config.yaml` (`hermes3`,
+  `nous-hermes2`, or any Ollama model that follows JSON instructions).
+- **What data Hermes sees** — `buildPrompt()` in
+  `internal/analyzer/analyzer.go`.
+- **The output schema** — the `Analysis` struct in the same file (the page
+  reads the same keys in `web/index.html`).
+
 ## Cloudflare Pages deploy
 
 1. Create a Pages project named `iran-internet-monitor` (Direct Upload).
