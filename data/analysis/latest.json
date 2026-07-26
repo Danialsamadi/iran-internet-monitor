@@ -1,0 +1,21 @@
+{
+  "overall_status": "degraded",
+  "severity": "minor",
+  "suspected_causes": [
+    "Asiatech ISP experiencing connectivity issues (gateway and web portal both unreachable)",
+    "Anti-filter DNS resolvers under pressure — Shecan DNS degraded at 5.2s, Electro DNS completely unreachable",
+    "TIC gateway probe-blocking (foreign platforms all reachable, so gateways are passing traffic despite probe failures)",
+    "Shaparak payment gateway unreachable from external vantage (may be geo-restriction or intermittent)"
+  ],
+  "affected_services": [
+    "Asiatech ISP (gateway + web portal down)",
+    "Shecan DNS resolver (severely degraded, 5.2s response)",
+    "Electro DNS resolver (completely unreachable)",
+    "Shaparak payment network (unreachable from external probe)",
+    "Saman Bank web (degraded, 3.1s)",
+    "Respina ISP web (degraded, 3.6s)"
+  ],
+  "public_summary": "Iran's internet backbone is largely operational. Asiatech ISP is experiencing notable connectivity issues with both its gateway and web portal unreachable. Anti-filter DNS resolvers Shecan and Electro are degraded or down, which may affect circumvention tool performance for end users. All major foreign platforms (Google, Telegram, YouTube, Instagram, WhatsApp) and domestic services (Digikala, Aparat, IRNA, etc.) remain accessible. Circumvention infrastructure (Tor, Psiphon, Snowflake) endpoints are healthy.",
+  "insight": "The combination of ISP-specific Asiatech failure with degraded anti-filter DNS resolvers (Shecan, Electro) while TIC's own DNS and the foreign platform ecosystem remain healthy suggests localized infrastructure stress at Asiatech and possible targeted throttling of popular circumvention DNS resolvers, rather than a national-level shutdown or policy-driven filtering event.",
+  "recommendation": "Monitor Asiatech and anti-filter DNS resolver performance over the next 2-4 hours to determine if this is transient congestion or a sustained targeted action. Watch for IODA/OONI signals showing traffic volume drops specific to Asiatech IP ranges (AS44244) that would confirm an ISP-level outage versus probe-blocking."
+}
