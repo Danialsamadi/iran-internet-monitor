@@ -1,14 +1,14 @@
 {
-  "ts": "2026-07-26T14:31:51Z",
+  "ts": "2026-07-26T15:01:53Z",
   "overall_status": "partial_outage",
   "severity": "major",
   "suspected_causes": [
-    "Sustained inbound probe filtering at international gateway level: all 4 ISP gateway TCP probes (TIC x2, Irancell, Asiatech) remain blocked — identical across consecutive passes confirming intentional policy filtering not transient failure",
-    "IP range reachability stable at 3.2% (11/345 Iranian ranges responding from outside) — deliberate anti-monitoring posture persisting as established baseline across all passes this session",
-    "Asiatech compound failure continues across all dimensions: gateway, web portal, and IP ranges all impaired — worst-affected ISP across entire monitoring session",
-    "Electro anti-filter DNS resolver unreachable again (persistent across all passes) — possible targeted pressure on circumvention-adjacent DNS infrastructure",
-    "Domestic payment layer stable at degraded baseline: Saman Bank 3196ms (flat vs 3188ms last pass, effectively unchanged from 3442ms and 3962ms earlier — now settled in 3.1-3.2s range suggesting normal load plateau)",
-    "Respina ISP web degraded at 4241ms — worsening from 3.6s in an earlier pass, may indicate growing congestion or resource constraints on that network"
+    "Sustained inbound probe filtering at international gateway level: all 4 ISP gateway TCP probes (TIC x2, Irancell, Asiatech) blocked — consistent across all passes this session confirming intentional policy filtering, not transient failure",
+    "334 of 345 Iranian IP ranges unreachable from outside (~3.2% reachability) — deliberate anti-monitoring posture holding as established baseline",
+    "Asiatech compound failure persists across gateway (94.182.0.1 timeout), web portal (deadline exceeded), making it worst-affected ISP",
+    "Electro anti-filter DNS resolver (78.157.42.100) unreachable again — persistent across all passes, possible targeted pressure on circumvention-adjacent DNS infrastructure",
+    "Domestic payment layer slightly improving: Saman Bank down to 3014ms from 3196ms last pass; Shaparak still unreachable (deadline exceeded)",
+    "Respina ISP web improving: 3220ms from 4241ms — congestion clearing"
   ],
   "affected_services": [
     "All ISP management gateways (TIC x2, Irancell, Asiatech) — TCP probes uniformly blocked",
@@ -17,10 +17,10 @@
     "Electro DNS resolver — unreachable (persistent across all passes)",
     "Snapp ride-hailing — redirect loop (persistent)",
     "Shaparak payment gateway — unreachable (persistent)",
-    "Saman Bank — degraded (3196ms, stable)",
-    "Respina ISP — degraded (4241ms, slight worsening)"
+    "Saman Bank — degraded (3014ms, improving from 3196ms)",
+    "Respina ISP — degraded (3220ms, improving from 4241ms)"
   ],
-  "public_summary": "Iran's internet remains in partial outage with no material change from the last pass 20 minutes ago. All foreign platforms (Google, Telegram, YouTube, Instagram, WhatsApp, GitHub) and most domestic services (Digikala, Aparat, Tapsi, Filimo, CafeBazaar, Rubika, Eitaa, IRNA) remain accessible. All ISP management gateways continue to block inbound probes, Iranian IP range reachability from outside holds at approximately 3.2%, and circumvention tools (Tor, Snowflake, Psiphon) remain healthy. Domestic payment infrastructure (Saman Bank, Shaparak) continues to show elevated latency or complete unreachability.",
-  "insight": "The fifth consecutive pass with an identical fingerprint — zero ISP gateways reachable, ~3.2% IP range reachability, all foreign platforms working, all circumvention tools accessible — solidifies this as Iran's confirmed anti-monitoring baseline rather than any active disruption; the only dynamic element is Saman Bank latency settling into a stable 3.1-3.2s plateau after earlier fluctuations, and Respina showing mild degradation, both consistent with normal domestic network load.",
-  "recommendation": "This is a confirmed stable baseline — four consecutive passes show the same pattern. Flag this as the reference fingerprint and reduce analysis intensity on routine checks. Focus future effort on detection of deviation: any foreign platform outage, domestic service cascade, or circumvention tool failure would be the actual alert trigger. Consider requesting IODA traffic volume data for TIC (AS12880) to establish a baseline volume profile for comparison during future incidents."
+  "public_summary": "Iran's internet remains in partial outage with the same stable fingerprint observed across all monitoring passes today. All foreign platforms (Google, Telegram, YouTube, Instagram, WhatsApp, GitHub) and most domestic services (Digikala, Aparat, Tapsi, Filimo, CafeBazaar, Rubika, Eitaa, IRNA) remain fully accessible. All ISP management gateways continue to block inbound probes, Iranian IP range reachability from outside holds at approximately 3.2%, and circumvention tools (Tor, Snowflake, Psiphon) remain healthy. Domestic payment infrastructure shows slight improvement — Saman Bank latency dropped to 3014ms from 3196ms.",
+  "insight": "This pass extends the stable baseline to six consecutive observations with an identical fingerprint: zero ISP gateways reachable, ~3.2% IP range reachability, all foreign platforms working, all circumvention tools accessible — the only movement is domestic latency improving slightly (Respina 4241ms to 3220ms, Saman Bank 3196ms to 3014ms), which reads as normal load fluctuation rather than any structural change.",
+  "recommendation": "This is a confirmed stable baseline across six passes. Future monitoring should focus exclusively on deviation detection: foreign platform outage, domestic service cascade, or circumvention tool failure would be the real alert triggers. Request IODA traffic volume data for TIC (AS12880) to build a baseline volume profile for comparison during future incidents."
 }
