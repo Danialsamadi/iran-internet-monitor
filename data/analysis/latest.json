@@ -2,37 +2,45 @@
   "overall_status": "partial_outage",
   "severity": "major",
   "suspected_causes": [
-    "Policy filtering at international gateway layer -- all 4 ISP gateways (TICx2, Irancell, Asiatech) TCP refused/timeout from external vantage while BGP routes intact via observatories -- classic selective internet posture",
-    "Targeted DNS pressure on anti-censorship infrastructure -- Electro DNS timeout while Shecan/TIC DNS operational -- selective pressure on circumvention-enabling resolvers",
-    "Protocol whitelist enforcement at national gateway -- only DNS/HTTP/HTTPS probes reach 4.3% of IP ranges (46/1068); UDP/ICMP/SSH/VPN silently dropped per Bock et al. FOCI'20 whitelister model",
-    "Domestic service latency elevated -- Respina 3.2s degraded, Irancell/Shatel/Mobinnet 1.3-1.5s latency; Snapp recovered from redirect loop -- suggests application-layer shaping or NIN routing congestion, not broad failure"
+    "Policy filtering at international gateway layer -- all 4 ISP gateways (TICx2, Irancell, Asiatech) TCP refused/timeout from external vantage while BGP routes intact via observatories -- classic selective internet posture persisting across passes",
+    "Targeted DNS pressure on anti-censorship infrastructure -- Electro DNS timeout while Shecan/TIC DNS operational -- selective pressure on circumvention-enabling resolvers consistent with prior passes",
+    "Protocol whitelist enforcement at national gateway -- only DNS/HTTP/HTTPS probes reach 4.3% of IP ranges (46/1068); UDP/ICMP/SSH/VPN silently dropped per Bock et al. FOCI'20 whitelister model -- signature of stealth blackout architecture",
+    "Escalating domestic service degradation on MCI/Respina path -- Respina latency worsened from 3.2s to 4.8s degraded, Snapp new redirect loop failure, Saman Bank 2.9s latency -- suggests application-layer shaping or NIN routing congestion intensifying on specific ASN paths, not uniform gateway pressure",
+    "Asiatech dual failure (gateway timeout + web timeout) -- possible ISP-specific technical issue compounding national filtering layer; warrants cross-reference with IODA/RIPEstat for AS49666 path anomalies"
   ],
   "suspected_causes_fa": [
-    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی -- تمام ۴ گیت‌وی ISP (TIC دوگانه، ایرانسل، آسیاتک) TCP رد/تایم‌اوت از بیرون در حالی که مسیرهای BGP سالم -- پروفایل کلاسیک \"اینترنت گزینشی\"",
-    "فشار انتخابی بر زیرساخت DNS ضدفیلترینگ -- الکترو تایم‌اوت در حالی که شکان/TIC سالم -- هدف‌گیری مفسر بر رزولورهای فعال‌کننده عبور",
-    "اجبار وایت‌لیست پروتکل در گیت‌وی ملی -- فقط پرب‌های DNS/HTTP/HTTPS به ۴.۳٪ بازه‌های IP (۴۶ از ۱۰۶۸) می‌رسند؛ UDP/ICMP/SSH/VPN به‌سکوت دراپ شده -- مدل وایت‌لیستر بک و همکاران FOCI'۲۰",
-    "لتیفیت بالا در سرویس داخلی -- رسپینا ۳.۲ ثانیه تخریب، ایرانسل/شاتل/مبین‌نت ۱.۳-۱.۵ ثانیه؛ اسنپ از حلقه ریدایرکت بازیابی -- نشان‌دهنده شکل‌دهی لایه‌برنامه یا شلوغی مسیریابی نین، نه خرابی گسترده"
+    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی -- تمام ۴ گیت‌وی ISP (TIC دوگانه، ایرانسل، آسیاتک) TCP رد/تایم‌اوت از بیرون در حالی که مسیرهای BGP سالم -- پروفایل کلاسیک \"اینترنت گزینشی\" در چند دور پبیوسته",
+    "فشار انتخابی بر زیرساخت DNS ضدفیلترینگ -- الکترو تایم‌اوت در حالی که شکان/TIC سالم -- هدف‌گیری مفسر بر رزولورهای فعال‌کننده عبور، مطابق با روندهای پیشین",
+    "اجبار وایت‌لیست پروتکل در گیت‌وی ملی -- فقط پرب‌های DNS/HTTP/HTTPS به ۴.۳٪ بازه‌های IP (۴۶ از ۱۰۶۸) می‌رسند؛ UDP/ICMP/SSH/VPN به‌سکوت دراپ شده -- مدل وایت‌لیست بک و همکاران FOCI'۲۰، امضای معماری قطعی مخفی",
+    "تشدید تخریب سرویس داخلی در مسیر MCI/رسپینا -- لتیفیت رسپینا از ۳.۲ ثانیه به ۴.۸ ثانیه جهش، اسنپ حلقه ریدایرکت جدید، بانک سامان ۲.۹ ثانیه -- نشان‌دهنده کنترل لایه‌برنامه مخصوص‌ASN یا شلوغی مسیریابی نین در مسیرهای خاص، نه فشار یکنواخت گیت‌وی مرکزی",
+    "دوگانه قطع آسیاتک (گیت‌وی تایم‌اوت + وب تایم‌اوت) -- احتمالا مسئله فنی مخصوص ISP بر لایه فیلترینگ ملی سوار شده؛ نیازمند تقاطع‌بینی IODA/RIPEstat برای مسیرهای AS49666"
   ],
   "affected_services": [
     "TIC gateways (2.187.1.1 connection refused, 78.38.112.1 timeout)",
     "Irancell gateway (5.232.0.1 timeout)",
     "Asiatech gateway (94.182.0.1 timeout) + web timeout",
     "Electro DNS (78.157.42.100 timeout)",
-    "Respina web (degraded, 3.2s latency)",
-    "Asiatech web (timeout)"
+    "Respina web (degraded, 4.8s latency, worsened from 3.2s)",
+    "Asiatech web (timeout)",
+    "Snapp (down, redirect loop -- new regression from previous pass)",
+    "Shaparak payment gateway (down, timeout)",
+    "Saman Bank (up but degraded, 2.9s latency)"
   ],
   "affected_services_fa": [
     "گیت‌وی‌های TIC (۲.۱۸۷.۱.۱ رد اتصال، ۷۸.۳۸.۱۱۲.۱ تایم‌اوت)",
     "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱ تایم‌اوت)",
     "گیت‌وی آسیاتک (۹۴.۱۸۲.۰.۱ تایم‌اوت) + وب تایم‌اوت",
     "DNS الکترو (۷۸.۱۵۷.۴۲.۱۰۰ تایم‌اوت)",
-    "وب رسپینا (تخریب، ۳.۲ ثانیه لتیفیت)",
-    "وب آسیاتک (تایم‌اوت)"
+    "وب رسپینا (تخریب، ۴.۸ ثانیه لتیفیت، بدتر از ۳.۲ ثانیه پیشین)",
+    "وب آسیاتک (تایم‌اوت)",
+    "اسنپ (نا‌دسترس، حلقه ریدایرکت -- رگرسیون جدید نسبت به دور قبل)",
+    "گیت‌وی پرداخت شپارک (نا‌دسترس، تایم‌اوت)",
+    "بانک سامان (دست‌رسی‌پذیر اما تخریب، ۲.۹ ثانیه لتیفیت)"
   ],
-  "public_summary": "Iran remains in selective internet posture: all major ISP gateways blocked externally while BGP routes intact, only 4.3% of IP ranges reachable via permitted protocols (DNS/HTTP/HTTPS). Electro DNS targeted while Shecan/TIC operational. Domestic services elevated latency (Respina 3.2s); Snapp recovered. Consistent with stealth filtering documented June 2025 and Jan 2026.",
-  "public_summary_fa": "ایران در پروفایل \"اینترنت گزینشی\" باقی مانده: تمام گیت‌وی‌های اصلی ISP از بیرون مسدود، BGP سالم، تنها ۴.۳٪ بازه‌های IP از طریق پروتکل‌های مجاز (DNS/HTTP/HTTPS) دست‌رسی‌پذیر. DNS الکترو هدف قرار گرفته در حالی که شکان/TIC سالم. سرویس داخلی لتیفیت بالا (رسپینا ۳.۲ ثانیه)؛ اسنپ بازیابی. هم‌سو با فیلترینگ مخفی ثبت‌شده ژوئن ۲۰۲۵ و ژانویه ۲۰۲۶.",
-  "insight": "Snapp's recovery from redirect loop while Respina latency spiked to 3.2s suggests ISP-specific application-layer shaping rather than uniform national gateway pressure -- MCI/Respina path may be traversing a more congested or heavily inspected NIN segment than Irancell/Mobinnet paths.",
-  "insight_fa": "بازیابی اسنپ از حلقه ریدایرکت در حالی که لتیفیت رسپینا به ۳.۲ ثانیه جهش کرده، نشان‌دهنده کنترل لایه‌برنامه مخصوص‌ISP است، نه فشار یکنواخت گیت‌وی ملی -- مسیر MCI/رسپینا احتمالاً از مقطعی پرتراکم‌تر یا باینسپکشن‌ سنگین‌ترِ نین می‌گذرد نسبت به مسیرهای ایرانسل/مبین‌نت.",
-  "recommendation": "Cross-reference MCI/Respina IP ranges in the 46/1068 reachable ranges vs Irancell/Mobinnet ranges to confirm whether elevated domestic latency correlates with specific ASN paths through provincial IXPs (TBZIX/SHIX/AHWIX) rather than central gateway.",
-  "recommendation_fa": "بازه‌های IP متصل MCI/رسپینا در ۴۶ بازه دست‌رسی‌پذیر از ۱۰۶۸ را با بازه‌های ایرانسل/مبین‌نت تقاطع دهید تا تأیید کنید لتیفیت داخلی با مسیرهای ASN خاص از IXP‌های استانی (TBZIX/SHIX/AHWIX) هم‌ارز است، نه گیت‌وی مرکزی."
+  "public_summary": "Iran remains in selective internet posture: all major ISP gateways blocked externally while BGP routes intact, only 4.3% of IP ranges reachable via permitted protocols. Electro DNS targeted while Shecan/TIC operational. Domestic degradation escalating -- Respina latency worsened to 4.8s, Snapp new redirect loop failure, Saman Bank high latency. Consistent with stealth blackout pattern documented June 2025 and Jan 2026, now showing ISP-specific escalation on MCI/Respina path.",
+  "public_summary_fa": "ایران در پروفایل \"اینترنت گزینشی\" باقی مانده: تمام گیت‌وی‌های اصلی ISP از بیرون مسدود، BGP سالم، تنها ۴.۳٪ بازه‌های IP از طریق پروتکل‌های مجاز (DNS/HTTP/HTTPS) دست‌رسی‌پذیر. DNS الکترو هدف قرار گرفته در حالی که شکان/TIC سالم. تخریب داخلی تشدید یافته -- لتیفیت رسپینا به ۴.۸ ثانیه بدتر شده، اسنپ حلقه ریدایرکت جدید، بانک سامان لتیفیت بالا. هم‌سو با الگوی قطعی مخفی ثبت‌شده ژوئن ۲۰۲۵ و ژانویه ۲۰۲۶، اکنون با تشدید مخصوص-ISP در مسیر MCI/رسپینا.",
+  "insight": "Respina latency spike to 4.8s combined with Snapp redirect loop and Saman Bank 2.9s -- all on MCI/Respina infrastructure -- while Irancell/Mobinnet paths remain ~1.3-1.6s strongly suggests application-layer QoS discrimination or provincial IXP congestion (TBZIX/SHIX) on specific ASN paths rather than uniform national gateway pressure.",
+  "insight_fa": "جهش لتیفیت رسپینا به ۴.۸ ثانیه در هم‌زمان با حلقه ریدایرکت اسنپ و لتیفیت ۲.۹ ثانیه بانک سامان -- همه در زیرساخت MCI/رسپینا -- در حالی که مسیرهای ایرانسل/مبین‌نت در ۱.۳-۱.۶ ثانیه باقی مانده‌اند، قویاً نشان‌دهنده تفکیک کیفیت‌سرویس لایه‌برنامه یا شلوغی IXP‌های استانی (TBZIX/SHIX) در مسیرهای ASN خاص است، نه فشار یکنواخت گیت‌وی ملی.",
+  "recommendation": "Cross-reference MCI/Respina AS197207 IP ranges in the 46/1068 externally reachable ranges vs Irancell AS44244/Mobinnet ranges; correlate with RIPEstat RIS data for TBZIX/SHIX/AHWIX path latency anomalies to confirm whether domestic degradation correlates with specific provincial IXP transit segments.",
+  "recommendation_fa": "بازه‌های IP متصل MCI/رسپینا (AS197207) در ۴۶ بازه دست‌رسی‌پذیر خارجی از ۱۰۶۸ را با بازه‌های ایرانسل (AS44244) و مبین‌نت تقاطع دهید؛ با داده‌های RIPEstat RIS برای ناهنجاری‌های لتیفیت TBZIX/SHIX/AHWIX همبستگی دهید تا تأیید کنید تخریب داخلی با مقاطع ترنزیت IXP‌های استانی خاص هم‌ارز است."
 }
