@@ -3,7 +3,6 @@
 package config
 
 import (
-	"encoding/csv"
 	"fmt"
 	"net/netip"
 	"os"
@@ -63,21 +62,18 @@ type IPRange struct {
 
 // LoadRanges parses the labeled IP-ranges CSV. Rows with an unparsable IP
 // are skipped; an empty organization becomes "Unlabeled".
+// ponytail: plain SplitN, not encoding/csv — the source data has stray quotes
+// (`"Pirooz Leen" LLC`) that make a real CSV reader silently swallow the
+// following rows, and unquoted commas (`CO.,LTD`) that only the "rest of
+// line is the org" rule handles.
 func LoadRanges(path string) ([]IPRange, error) {
-	f, err := os.Open(path)
+	b, err := os.ReadFile(path)
 	if err != nil {
 		return nil, fmt.Errorf("read ip ranges: %w", err)
 	}
-	defer f.Close()
-	rd := csv.NewReader(f)
-	rd.FieldsPerRecord = -1
-	rd.LazyQuotes = true // labels like `"Pirooz Leen" LLC` are not RFC-quoted
-	rows, err := rd.ReadAll()
-	if err != nil {
-		return nil, fmt.Errorf("parse ip ranges: %w", err)
-	}
 	var out []IPRange
-	for _, row := range rows {
+	for line := range strings.SplitSeq(string(b), "\n") {
+		row := strings.SplitN(line, ",", 5)
 		if len(row) < 5 {
 			continue
 		}
@@ -86,7 +82,7 @@ func LoadRanges(path string) ([]IPRange, error) {
 		if err1 != nil || err2 != nil {
 			continue
 		}
-		org := strings.Trim(strings.TrimSpace(row[4]), `"`)
+		org := strings.TrimSpace(strings.ReplaceAll(row[4], `"`, ""))
 		if org == "" {
 			org = "Unlabeled"
 		}

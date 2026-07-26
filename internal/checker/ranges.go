@@ -22,8 +22,10 @@ type RangeResult struct {
 }
 
 // RunRanges probes one representative IP per labeled range concurrently.
-// ponytail: fixed :80 probe and concurrency 64 — enough for ~400 ranges
-// inside a 5-minute cadence; make them config knobs if the CSV grows.
+// ponytail: fixed :80 probe, concurrency 128, 5s per-probe timeout — a blocked
+// range that won't SYN-ACK in 5s won't in 15s either, and ~1070 mostly-blocked
+// ranges finish in ~45s (vs ~250s at 64/15s). 128 stays under macOS's default
+// 256-fd soft limit; make these config knobs if the CSV grows past ~4000.
 //
 // Before sweeping, it dials TEST-NET-1 (192.0.2.1:80), which no real network
 // routes: if that "connects", something on the path intercepts TCP :80
@@ -37,7 +39,7 @@ func (c *Checker) RunRanges(ctx context.Context, ranges []config.IPRange) ([]Ran
 		return nil, fmt.Errorf("vantage intercepts TCP :80 (TEST-NET-1 answered) — range results would be meaningless")
 	}
 	results := make([]RangeResult, len(ranges))
-	sem := make(chan struct{}, 64)
+	sem := make(chan struct{}, 128)
 	var wg sync.WaitGroup
 	for i, r := range ranges {
 		wg.Add(1)
@@ -52,7 +54,7 @@ func (c *Checker) RunRanges(ctx context.Context, ranges []config.IPRange) ([]Ran
 				Org:       r.Org,
 				Count:     r.Count,
 			}
-			dctx, cancel := context.WithTimeout(ctx, c.timeout)
+			dctx, cancel := context.WithTimeout(ctx, 5*time.Second)
 			defer cancel()
 			startT := time.Now()
 			d := net.Dialer{}
