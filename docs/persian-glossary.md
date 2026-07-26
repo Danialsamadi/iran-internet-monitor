@@ -8,8 +8,8 @@ Comprehensive English → Persian glossary for network infrastructure, censorshi
 
 | English Term | Persian Term | Transliteration | Notes |
 |--------------|--------------|-----------------|-------|
-| International gateway | دروازه بین‌المللی | darvāze-ye beyn-ol-melali | TIC/DCI |
-| National gateway | دروازه ملی | darvāze-ye melli | NIN |
+| International gateway | **گیت‌وی بین‌المللی** / دروازه بین‌المللی | *gateway-e beyn-ol-melali* | TIC/DCI |
+| National gateway | **گیت‌وی ملی** / دروازه ملی | *gateway-e melli* | NIN |
 | International bandwidth | پهنای باند بین‌المللی | pahnā-ye bānd-e beyn-ol-melali | — |
 | Domestic traffic | ترافیک داخلی | terāfik-e dākheli | Inside NIN |
 | International traffic | ترافیک بین‌المللی | terāfik-e beyn-ol-melali | Crosses gateways |
