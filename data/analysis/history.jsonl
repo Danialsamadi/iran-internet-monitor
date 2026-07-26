@@ -28,4 +28,25 @@
   "public_summary": "Iran's internet shows a stable, degraded baseline consistent with normal censorship operations. All foreign platforms (Google, Telegram, YouTube, Instagram, WhatsApp, GitHub, Wikipedia) and circumvention tools (Tor, Snowflake, Psiphon) remain fully accessible. All four major ISP gateways block external probes; only ~3% of Iranian IP ranges respond from outside. Domestic services (Digikala, Aparat, Tapsi, Filimo, CafeBazaar, Rubika, Eitaa, IRNA) function normally. Asiatech remains the worst-affected ISP with gateway, web, and IP ranges all impaired.",
   "insight": "Seven consecutive passes show an identical fingerprint: zero ISP gateways reachable, ~3.2% IP range reachability, all foreign platforms and circumvention tools fully up, domestic services operating normally — this is Iran's stable external-facing baseline under routine censorship, not an outage event.",
   "recommendation": "Treat this seven-pass fingerprint as the new operational baseline. Alert only on deviations: foreign platform outage, domestic service cascade failure, or circumvention tool degradation. Request IODA traffic volume data for TIC (AS12880) to establish a volume baseline for future anomaly detection."
+}{
+  "overall_status": "partial_outage",
+  "severity": "major",
+  "suspected_causes": [
+    "TIC international gateways under active filtering or blocking — both TCP probes to AS12880 gateways (2.187.1.1 and 78.38.112.1) are down, with one returning 'connection refused' (active rejection) and one timing out (likely blackholed)",
+    "Irancell gateway (5.232.0.1) also refusing connections — suggests coordinated gateway filtering across multiple operators",
+    "Asiatech experiencing broader infrastructure issues — both TCP gateway and web portal are down, with the web portal timing out",
+    "Electro DNS resolver unreachable — likely part of the same filtering wave affecting alternative DNS infrastructure"
+  ],
+  "affected_services": [
+    "TIC international gateways (both down)",
+    "Irancell gateway (down)",
+    "Asiatech gateway and web portal (both down)",
+    "Electro DNS resolver (down)",
+    "Snapp (redirect loop — possible WAF or DDoS protection issue)",
+    "Shaparak payment gateway (context deadline exceeded)",
+    "Saman Bank (degraded, 3s latency)"
+  ],
+  "public_summary": "Significant internet degradation detected in Iran as of 15:20 UTC on July 26, 2026. Multiple international gateways operated by TIC and major ISPs are actively blocking or refusing connections. Domestic services including Snapp and Shaparak payment gateway are also affected. Foreign platforms (Telegram, WhatsApp, Instagram, YouTube) remain accessible from our vantage point outside Iran, suggesting the filtering is targeted at specific infrastructure rather than a full shutdown.",
+  "insight": "The pattern of 'connection refused' on some gateways combined with timeouts on others suggests a coordinated filtering campaign rather than random infrastructure failure — the 'refused' responses indicate active intervention at the application layer, while the timeouts suggest BGP-level blackholing or deep packet injection.",
+  "recommendation": "Increase monitoring frequency to 5-minute intervals during this active filtering period. Cross-reference with IODA and OONI data to determine if this is a targeted crackdown or broader infrastructure instability. Pay particular attention to whether circumvention tools (Tor, Psiphon, Snowflake) continue to function as they may be the next target."
 }
