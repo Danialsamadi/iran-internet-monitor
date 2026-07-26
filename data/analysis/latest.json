@@ -2,43 +2,45 @@
   "overall_status": "degraded",
   "severity": "minor",
   "suspected_causes": [
-    "11th consecutive identical pass confirms established baseline: all 4 ISP gateway TCP probes (TIC x2, Irancell, Asiatech) uniformly blocked from outside — policy filtering at international gateway layer, not infrastructure failure",
-    "IP range reachability stable at ~3.8% (13/345 ranges responding from outside) — deliberate anti-monitoring posture; only educational, government, and select cloud operators permit external probes",
-    "Asiatech compound failure persists across all dimensions: gateway timeout, web portal timeout, IP ranges dark — worst-affected ISP across all 11 monitoring passes",
-    "Electro anti-filter DNS resolver unreachable (11th consecutive pass) — persistent pressure on circumvention-adjacent DNS infrastructure",
-    "Domestic payment/service layer at stable degraded baseline: Shaparak timeout, Snapp redirect loop, Saman Bank ~3008ms — operational patterns, not acute events",
-    "RIPEstat observatory recovered to healthy latency (495ms vs 9790ms previous pass) — transient measurement-path issue resolved"
+    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ درگاه ISP (TIC دوگانه، ایرانسل، آسیاتک) TCP رد/تایم‌اوت — خرابی زیرساختی نیست، فیلترینگ فعال",
+    "موقعیت ضد پایش مداوم — فقط ۳.۸٪ بازه IP (۱۳/۳۴۵) از خارج پاسخگو — اپراتورهای آموزشی/دولتی/ابری مجاز، ترافیک عمومی فیلتر",
+    "اختلال ترکیبی آسیاتک در تمام ابعاد — درگاه تایم‌اوت، وب تایم‌اوت، بازه‌های IP تاریک — بدترین ISP در ۱۲ دور پایش",
+    "DNS ضدسانسور الکترو نا‌دسترس (دوازدهمین دور متوالی) و شکن تخریب‌یافته ۵۲۲۰ms — فشار مداوم بر زیرساخت‌های DNS هم‌مرز با ابزارهای عبور",
+    "پورتال وب رسپینا تخریب‌یافته ۳۴۳۴ms و بانک سامان ۳۹۳۸ms — الگوهای عملیاتی پایدار، نه رویدادهای حاد"
   ],
   "suspected_causes_fa": [
-    "یازدهمین دور متوالی و یکسان، خط پایه مستحکم را تأیید می‌کند: کاوش‌های TCP روی ۴ درگاه ISP (TIC ×۲، ایرانسل، آسیاتک) به‌صورت یکپارچه از بیرون مسدود شده‌اند — **فیلترینگ سیاستی در لایه درگاه بین‌المللی**، نه خرابی زیرساخت.",
-    "دسترسی‌پذیری بازه IP ثابت روی ~۳.۸٪ (۱۳ از ۳۴۵ بازه پاسخ‌گو از بیرون) — **موقعیت‌گیری عمدی ضدپایش** (anti-monitoring posture)؛ تنها اپراتورهای آموزشی، دولتی و برخی ارائه‌دهندگان منتخب ابری به کاوشگرهای خارجی اجازه دسترسی می‌دهند.",
-    "آسیاتک در تمام ابعاد مختل است: تایم‌اوت درگاه، تایم‌اوت پورتال وب، بازه‌های IP تاریک — **بدترین ISP در ۱۱ دور پایش متوالی**.",
-    "DNS ضدسانسور الکترو (Electro) غیرقابل دسترس (یازدهمین دور متوالی) — **فشار مداوم بر زیرساخت‌های DNS هم‌مرز با ابزارهای عبور**.",
-    "لایه پرداخت/خدمات داخلی در خط پایه مختلِ پایدار: تایم‌اوت شاپرک، حلقه ریدایرکت اسنپ، بانک سامان ~۳۰۰۸ms — **الگوهای عملیاتی**، نه رویدادهای حاد.",
-    "رصدخانه RIPEstat به تاخیر سالم (۴۹۵ms در برابر ۹۷۹۰ms در دور قبل) بازگردانده شده — مسئله گذرا مسیر پایش حل شده است."
+    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ درگاه ISP (TIC دوگانه، ایرانسل، آسیاتک) TCP رد/تایم‌اوت — خرابی زیرساختی نیست، فیلترینگ فعال",
+    "موقعیت ضد پایش مداوم — فقط ۳.۸٪ بازه IP (۱۳/۳۴۵) از خارج پاسخگو — اپراتورهای آموزشی/دولتی/ابری مجاز، ترافیک عمومی فیلتر",
+    "اختلال ترکیبی آسیاتک در تمام ابعاد — درگاه تایم‌اوت، وب تایم‌اوت، بازه‌های IP تاریک — بدترین ISP در ۱۲ دور پایش",
+    "DNS ضدسانسور الکترو نا‌دسترس (دوازدهمین دور متوالی) و شکن تخریب‌یافته ۵۲۲۰ms — فشار مداوم بر زیرساخت‌های DNS هم‌مرز با ابزارهای عبور",
+    "پورتال وب رسپینا تخریب‌یافته ۳۴۳۴ms و بانک سامان ۳۹۳۸ms — الگوهای عملیاتی پایدار، نه رویدادهای حاد"
   ],
   "affected_services": [
-    "All ISP management gateways (TIC 2.187.1.1 connection refused, TIC 78.38.112.1 timeout, Irancell 5.232.0.1 timeout, Asiatech 94.182.0.1 timeout) — TCP probes uniformly blocked",
-    "Asiatech ISP — all 3 dimensions impaired: gateway timeout, web portal timeout, IP ranges dark (worst operator, 11 consecutive passes)",
-    "332 of 345 Iranian IP ranges unreachable from external vantage — MCI (AS197207), Irancell (AS44244), Shatel (AS31549) remain dark",
-    "Electro anti-filter DNS resolver — unreachable (11th consecutive pass)",
-    "Snapp ride-hailing — redirect loop (persistent across all passes)",
-    "Shaparak payment gateway — timeout (persistent)",
-    "Saman Bank — degraded at 3008ms (stable baseline)"
+    "All ISP management gateways (TIC x2, Irancell, Asiatech) — inbound TCP uniformly blocked",
+    "Asiatech — all 3 dimensions impaired: gateway timeout, web timeout, IP ranges dark",
+    "332 of 345 Iranian IP ranges unreachable from outside — MCI, Irancell, Shatel dark",
+    "Electro DNS — unreachable (12th consecutive pass)",
+    "Shecan DNS — degraded at 5220ms",
+    "Respina web portal — degraded at 3434ms",
+    "Snapp — redirect loop",
+    "Shaparak — timeout",
+    "Saman Bank — degraded at ~3938ms"
   ],
   "affected_services_fa": [
-    "تمام درگاه‌های مدیریتی ISPها: TIC 2.187.1.1 (رد اتصال)، TIC 78.38.112.1 (تایم‌اوت)، ایرانسل 5.232.0.1 (تایم‌اوت)، آسیاتک 94.182.0.1 (تایم‌اوت) — **پرب‌های TCP یکپارچه مسدود**.",
-    "آسیاتک (ISP): اختلال در هر ۳ بُعد — درگاه، پورتال وب، بازه‌های IP (بدترین اپراتور، ۱۱ دور متوالی).",
-    "۳۳۲ از ۳۴۵ بازه IP ایران از دیدگاه خارجی نا‌دسترس — **MCI (AS197207)**، **ایرانسل (AS44244)**، **شاتل (AS31549)** همچنان تاریک.",
-    "DNS ضدسانسور الکترو — غیرقابل دسترس (۱۱ دور متوالی).",
-    "اسنپ (Snapp) — حلقه ریدایرکت (مستمر در تمام دورها).",
-    "شاپرک درگاه پرداخت — تایم‌اوت (مستمر).",
-    "بانک سامان — تخریب ۳۰۰۸ms (خط پایه پایدار)."
+    "دروازه‌های ISP: TIC 2.187.1.1 (رد اتصال)، TIC 78.38.112.1 (تایم‌اوت)، ایرانسل 5.232.0.1 (تایم‌اوت)، آسیاتک 94.182.0.1 (تایم‌اوت)",
+    "آسیاتک — ۳ بعد مختل: درگاه، وب، بازه‌های IP",
+    "۳۳۲ از ۳۴۵ بازه IP نا‌دسترس — MCI، ایرانسل، شاتل تاریک",
+    "الکترو DNS — نا‌دسترس (دوازدهمین دور متوالی)",
+    "شکن DNS — تخریب‌یافته (۵۲۲۰ms)",
+    "رسپینا وب — تخریب‌یافته (۳۴۳۴ms)",
+    "اسنپ — حلقه ریدایرکت",
+    "شاپرک — تایم‌اوت",
+    "بانک سامان — تخریب‌یافته (~۳۹۳۸ms)"
   ],
-  "public_summary": "Iran's internet shows a stable, degraded baseline consistent with routine 'selective internet' censorship operations. All foreign platforms (Google, Telegram, YouTube, Instagram, WhatsApp, GitHub, Wikipedia) and circumvention tools (Tor, Snowflake, Psiphon) remain fully accessible from outside. All four major ISP gateways block external probes; only ~4% of Iranian IP ranges respond externally — consistent with the tiered-access model where enterprise/gov SIMs get open access while public traffic is filtered. Domestic services (Digikala, Aparat, Tapsi, Filimo, CafeBazaar, Rubika, Eitaa, IRNA) function normally. Asiatech remains the worst-affected ISP.",
-  "public_summary_fa": "اینترنت ایران یک مبنای پایدار و مختل نشان می‌دهد که با عملیات عادی سانسور «اینترنت گزینشی» سازگار است. تمام پلتفرم‌های خارجی (گوگل، تلگرام، یوتیوب، اینستاگرام، واتساپ، گیت‌هاب، ویکی‌پدیا) و ابزارهای عبور (تور، اسنوفلک، سایفون) از خارج کاملاً در دسترس هستند. تمام چهار دروازه اصلی ارائه‌دهندگان پرب‌های خارجی را مسدود می‌کنند؛ فقط حدود ۴٪ بازه‌های IP ایرانی از خارج پاسخ می‌دهند — سازگار با مدل دسترسی لایه‌ای که در آن SIMهای سازمانی/دولتی دسترسی باز دارند در حالی که ترافیک عمومی فیلتر می‌شود. سرویس‌های داخلی (دیجی‌کالا، آپارات، تپسی، فیلیمو، کافه‌بازار، روبیکا، ایتا، ایرنا) به‌طور عادی کار می‌کنند. آسیاتک همچنان بدترین ارائه‌دهنده متأثر است.",
-  "insight": "Eleven consecutive identical passes over ~110 minutes is definitive proof this is not a transient event but the permanent 'selective internet' architecture: foreign platforms and circumvention tools permitted, ISP gateways and management interfaces blocked from external view, and ~96% of IP space dark to outside probes — the dual-network censorship design documented by Filterwatch, Schneier, and the Miaan Group operating exactly as described.",
-  "insight_fa": "یازده دور پایش متوالی و یکسان در ~۱۱۰ دقیقه، اثبات قاطع است که این یک رویداد گذرا نیست، بلکه معماری دائمی «اینترنت گزینشی» است: پلتفرم‌های خارجی و ابزارهای عبور مجازند، درگاه‌های ISP و رابط‌های مدیریتی از دید خارجی مسدود شده‌اند، و ~۹۶٪ فضای IP برای پرب‌های خارجی تاریک است — این همان **طراحی سانسور شبکه دوگانه** (dual-network censorship design) مستند شده توسط **Filterwatch، شنیر (Schneier)، و Miaan Group** است که دقیقاً همان‌گونه که توصیف شده، در حال اجرا است.",
-  "recommendation": "Maintain current 10-min cadence. With 11 identical passes establishing stable baseline, consider reducing to 15-min or 20-min intervals during non-event periods to conserve resources. Alert thresholds: any foreign platform degradation, circumvention tool failure, domestic service failure rate exceeding 15%, or IP range reachability shift beyond 5 percentage points. No escalation needed.",
-  "recommendation_fa": "کادنس ۱۰‌دقیقه‌ای فعلی را حفظ کنید. با ۱۱ دور یکسان که خط پایه پایدار را برقرار کرده‌اند، در دورهای بدون رویداد می‌توان فواصل را به ۱۵ یا ۲۰ دقیقه افزایش داد تا منابع حفظ شوند. آستانه‌های هشدار: هر افت کیفیت در پلتفرم‌های خارجی، خرابی ابزارهای عبور، نرخ خرابی سرویس‌های داخلی فراتر از ۱۵٪، یا جابجایی دسترسی‌پذیری بازه IP بیش از ۵ واحد درصد. نیازی به ارتقای سطح (escalation) نیست."
+  "public_summary": "اینترنت ایران در حالت «اینترنت گزینشی» پایدار است. تمام پلتفرم‌های خارجی (گوگل، تلگرام، یوتیوب، گیت‌هاب) و ابزارهای عبور (تور، اسنوفلک، سایفون) از خارج کاملاً در دسترس‌اند. تمام درگاه‌های اصلی ISP از خارج مسدودند؛ فقط ۳.۸٪ بازه‌های IP پاسخ می‌دهند — سازگار با مدل دسترسی لایه‌ای که در آن SIMهای سازمانی/دولتی اینترنت باز دارند. آسیاتک بدترین اپراتور است.",
+  "public_summary_fa": "اینترنت ایران در حالت «اینترنت گزینشی» پایدار است. تمام پلتفرم‌های خارجی (گوگل، تلگرام، یوتیوب، گیت‌هاب) و ابزارهای عبور (تور، اسنوفلک، سایفون) از خارج کاملاً در دسترس‌اند. تمام درگاه‌های اصلی ISP از خارج مسدودند؛ فقط ۳.۸٪ بازه‌های IP پاسخ می‌دهند — سازگار با مدل دسترسی لایه‌ای که در آن SIMهای سازمانی/دولتی اینترنت باز دارند. آسیاتک بدترین اپراتور است.",
+  "insight": "دوازده دور متوالی اثر انگشت یکسان (صفر درگاه دسترس‌پذیر، ۳-۴٪ بازه IP، همه پلتفرم‌های خارجی و ابزارهای عبور بالا، سرویس‌های داخلی عادی) معماری «اینترنت گزینشی» را به‌عنوان مبنای عملیاتی ثابت تأیید می‌کند — نه رویداد قطعی، بلکه طراحی سانسور شبکه دوگانه که Filterwatch، Schneier، و گروه میآن مستند کرده‌اند.",
+  "insight_fa": "دوازده دور متوالی اثر انگشت یکسان (صفر درگاه دسترس‌پذیر، ۳-۴٪ بازه IP، همه پلتفرم‌های خارجی و ابزارهای عبور بالا، سرویس‌های داخلی عادی) معماری «اینترنت گزینشی» را به‌عنوان مبنای عملیاتی ثابت تأیید می‌کند — نه رویداد قطعی، بلکه طراحی سانسور شبکه دوگانه که Filterwatch، Schneier، و گروه میآن مستند کرده‌اند.",
+  "recommendation": "کادنس ۱۰ دقیقه حفظ شود. با ۱۲ دور یکسان در دوره‌های بدون رویداد به ۱۵ یا ۲۰ دقیقه افزایش یابد. آستانه هشدار: پلتفرم خارجی، ابزار عبور، سرویس داخلی >۱۵٪، بازه IP >۵٪. روند تاخیر رسپینا و شکن پایش شود.",
+  "recommendation_fa": "کادنس ۱۰ دقیقه‌ای حفظ شود. با ۱۲ دور یکسان که خط پایه ثابت می‌سازند، در دوره‌های بدون رویداد خاص، فواصل زمانی به ۱۵ یا ۲۰ دقیقه افزایش یابد. آستانه‌های هشدار: هر افت کیفیت پلتفرم خارجی، خرابی ابزار عبور، نرخ خرابی سرویس داخلی بیش از ۱۵٪، یا تغییر دسترس‌پذیری بازه IP بیش از ۵٪. پایش روند تاخیر رسپینا و سلامت API RIPEstat به‌عنوان سیگنال‌های زودرس نوظهور اضافه شود."
 }
