@@ -4,6 +4,51 @@ Comprehensive English → Persian glossary for network infrastructure, censorshi
 
 ---
 
+## Translation Principles (Golden Rules)
+
+**1. Embrace Pinglish/Finglish for everyday jargon** — Iranian IT professionals use transliterated English terms. Write them as they sound in Persian letters:
+- Ping → **پینگ** (not «پیام احتسابی»)
+- Latency / RTT → **لیتنسی** (not «تأخیر» alone)
+- Router → **روتر**
+- Gateway → **گیت‌وی** (not «دروازه»)
+- Loop → **لوپ**
+- Throughput → **ثروپوت** or **دبی**
+- Jitter → **جیتتر**
+
+**2. Keep acronyms in English alphabet** — Do not transliterate standard networking acronyms:
+- QoS → **QoS** (not «کیو او اس»)
+- ASN → **ASN**
+- IXP → **IXP**
+- BGP → **BGP**
+- TCP/UDP → **TCP** / **UDP**
+- TLS/SSL → **TLS** / **SSL**
+- SNI → **SNI**
+- DNS/HTTP/HTTPS → **DNS** / **HTTP** / **HTTPS**
+
+**3. Use established industry translations for concepts** — Some terms have standard Persian equivalents:
+- Congestion → **تراکم** (not «شلوغی»)
+- Infrastructure → **زیرساخت**
+- Application-layer → **لایه اپلیکیشن** (not «لایه کاربرد»)
+- Packet loss → **پکت‑لاس** (Pinglish) or **از دست رفتن بسته**
+- Throughput → **ثروپوت** or **دبی**
+
+**4. Maintain Persian SOV syntax** — Verb at the end, even with mixed English terms:
+> "Respina latency spike to 3.8s suggests QoS discrimination"  
+> → «افزایش لیتنسی رسپینا به ۳.۸ ثانیه نشان‌دهنده تبعیض QoS است»
+
+**5. Vendor/ISP names** — Company names in Persian script; node codes in English:
+- MCI → **همراه اول**
+- Irancell → **ایرانسل**
+- Mobinnet → **مبین‌نت**
+- TBZIX / SHIX / AHWIX → **TBZIX / SHIX / AHWIX** (keep English)
+
+**6. Don't over-translate error messages** — Keep exact English strings in quotes, explain in Persian:
+> "connection refused" → **«connection refused» (رد اتصال)**
+
+**7. Server-room coffee test** — Read aloud. If it sounds like two sysadmins talking in a Tehran server room, it's right.
+
+---
+
 ## 📡 Network Infrastructure / زیرساخت شبکه
 
 | English Term | Persian Term | Transliteration | Notes |

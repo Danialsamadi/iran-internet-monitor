@@ -4,6 +4,33 @@ This file defines the exact Persian style, terminology, and structure for all an
 
 ---
 
+## Translation Principles (Golden Rules for Persian Output)
+
+**1. Pinglish/Finglish for daily jargon** — Network admins say `لیتنسی`, `روتر`, `گیت‌وی`, `لوپ`, `پکت`, `تایم‌اوت`, `ریدایرکت`, `هندشیک`. Do NOT invent pure Persian dictionary translations.
+
+**2. Keep acronyms in English** — `QoS`, `ASN`, `IXP`, `BGP`, `TCP`, `DNS`, `SNI`, `TLS`, `RTT`, `SSH`, `VPN`. Never transliterate them.
+
+**3. Established translations for concepts**:
+- Congestion → تراکم
+- Infrastructure → زیرساخت
+- Application-layer → لایه اپلیکیشن
+- Packet loss → پکت-لاس (or از دست رفتن بسته)
+- QoS discrimination → تبعیض QoS
+- Routing → روتینگ
+- Switching → سوییچینگ
+
+**4. SOV syntax** — Verb at the end, even with mixed English/Persian:  
+«افزایش لیتنسی رسپینا به ۳.۸ ثانیه نشان‌دهنده تبعیض QoS است»
+
+**5. Vendor/ISP names** — همراه اول، ایرانسل، مبین‌نت in Persian script; TBZIX/SHIX/AHWIX in English.
+
+**6. Error messages** — Keep exact English string in quotes + Persian explanation:  
+«خطای "connection refused" (رد اتصال) دریافت شد»
+
+**7. Server-room coffee test** — Read aloud. If it doesn't sound like two sysadmins in Tehran, rewrite it.
+
+---
+
 ## 1. Terminology Mapping (Mandatory)
 
 | English | Persian | Notes |
@@ -16,6 +43,20 @@ This file defines the exact Persian style, terminology, and structure for all an
 | timeout / timed out | تایم‌اوت | |
 | unreachable | نا‌دسترس | |
 | redirect loop | حلقه ریدایرکت | |
+| latency / RTT | لیتنسی | Pinglish, not «تأخیر» alone |
+| router | روتر | Pinglish, not «مسیریاب» |
+| gateway | گیت‌وی | Pinglish, not «دروازه» |
+| loop | لوپ | Pinglish |
+| packet | پکت | Pinglish, not «بسته» alone |
+| packet loss | پکت-لاس | Pinglish |
+| throughput | ثروپوت / دبی | Pinglish |
+| jitter | جیتتر | Pinglish |
+| congestion | تراکم | standard industry translation |
+| infrastructure | زیرساخت | standard |
+| application-layer | لایه اپلیکیشن | not «لایه کاربرد» |
+| QoS discrimination | تبعیض QoS | keep QoS in English |
+| routing | روتینگ | Pinglish |
+| switching | سوییچینگ | Pinglish |
 | circumvention tools | ابزار عبور | Tor, Snowflake, Psiphon (سایفون), VPNs |
 | filtering / censorship | فیلترینگ | use for active policy filtering |
 | degradation / degraded | تخریب / تخریب‌یافته | latency increase, partial failure |
@@ -30,13 +71,39 @@ This file defines the exact Persian style, terminology, and structure for all an
 | tiered access / selective internet | اینترنت گزینشی / دسترسی لایه‌ای | "white SIM" model |
 | escalation | ارتقای سطح | |
 | cadence | کادنس / فواصل زمانی | |
-| gateway | گیت‌وی | industry standard |
 | Deep Packet Inspection (DPI) | DPI / بازرسی عمیق بسته | |
 | protocol whitelisting | وایت‌لیست پروتکل | |
 | DNS poisoning / spoofing | مسموم‌سازی DNS | |
 | block page IP | آی‌پی صفحه بلاک | 10.10.34.34 |
 | SHAHKAR / HAMTA | شاهکار / همتا | identity databases for tiered access |
-| NIN / SHOMA | NIN / شُما | National Information Network |
+| LCT (Islamic Revolution Telecommunication Complex) | مجتمع مخابرات انقلاب اسلامی (LCT) | Tehran, 70-80% intl traffic terminates here |
+| ASBR (Autonomous System Border Router) | ASBR / روتر مرزی سامانه خودمختار | TIC gateway enforcement |
+| IRU (Indefeasible Rights of Use) | حق استفاده غیرقابل فسخ (IRU) | bandwidth procurement |
+| SIAM (Integrated System to Query Telecom Customer Info) | SIAM / سامانه یکپارچه پرس‌وجوی اطلاعات مشترکین | device-level surveillance |
+| SHAHKAR / HAMTA / Sana / Hoda / Samava | شاهکار / همتا / سنا / هدا / سموا | national identity databases |
+| Stable Communication Network (SCN) | شبکه ارتباطات پایدار (SCN) | USSD *10*327*4#, 40K T/GB |
+| Pro Internet | اینترنت پرو (Pro Internet) | specialized SIM, tiered pricing |
+| Service Blocked Ratio (SBR) | SBR / نسبت سرویس‌های مسدود | OONI/IODA active probing metric |
+| Great Firewall of Iran (GFI) | دیوار آتش ایران (GFI) | |
+| Provincial IXP | IXP استانی | TBZIX, SHIX, AHWIX |
+| CDICC (Committee to Determine Instances of Criminal Content) | کمیته تشخیص مصادیق محتوای مجرمانه | |
+| ParsGate NGFW | پارس‌گیت (NGFW) | Amnafzar firewall at chokepoints |
+| block page IP triplet | تاپلِ IP صفحه‌بلاک | 10.10.34.34/35/36 |
+| TTL-limited tracing | ردیابی محدود-TTL | localizes filtering hop (arXiv 2507.14183) |
+| protocol mimicry / evasion | تقلید پروتکل / دور زدن | VLESS/Trojan inside TLS |
+| WebTunnel | وب‌تونل | Tor disguised as HTTPS |
+| Snowflake (WebRTC) | اسنوفلک (WebRTC) | volunteer browser proxies |
+| digital apartheid | آپارتاید دیجیتال | tiered access model |
+| identity-based digital repression | سرکوب دیجیتال مبتنی بر هویت | SHAHKAR/SIAM integration |
+| IMSI catcher |{IMSI}کتشر / bắt IMSI | 2G downgrade at protest zones |
+| Septam CCTV mandate | الزام سپتام (دوربین‌های نظارتی) | business cameras → police DB |
+| ALPR | ALPR / خواندگان خودکار پلاک | hijab enforcement |
+| OpSec (Operational Security) | آپ‌سک / امنیت عملیات | hardened browsers, PWA, work profiles |
+| Shelter / Insular (Android sandbox) | شلتر / اینسولار ( sandbox اندروید) | isolate domestic apps |
+| Charming Kitten (APT35) | چرمینگ کیتن (APT35) | state-sponsored RAT-2Ac2 spyware |
+| RAT-2Ac2 | RAT-2Ac2 | modular Remote Access Trojan |
+| SplinterCon | اسپلینترکان | censorship-resistance conference |
+| Starlink | استارلینک | >100K units in Iran (2025) |
 | **DNS poisoning / spoofing** | **مسموم‌سازی DNS / اسپوفینگ DNS** | fake IPs (e.g., 10.10.34.34) |
 | **SHAHKAR / HAMTA identity databases** | **پایگاه‌های هویتی شاهکار/همتا** | user-tier enforcement |
 | **block page IP (10.10.34.34)** | **IP صفحه بلاک (۱۰.۱۰.۳۴.۳۴)** | injected block page target |
