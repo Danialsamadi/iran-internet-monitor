@@ -6,9 +6,9 @@ This file defines the exact Persian style, terminology, and structure for all an
 
 ## Translation Principles (Golden Rules for Persian Output)
 
-**1. Pinglish/Finglish for daily jargon** — Network admins say `لیتنسی`, `روتر`, `گیت‌وی`, `لوپ`, `پکت`, `تایم‌اوت`, `ریدایرکت`, `هندشیک`. Do NOT invent pure Persian dictionary translations.
+**1. Pinglish/Finglish for daily jargon** — Network admins say `لیتنسی` (casual) / `تاخیر` (formal), `روتر`, `گیت‌وی`, `لوپ`, `سوئیچ`, `فایروال`, `پکت`, `تایم‌اوت`, `ریدایرکت`, `هندشیک`, `پکت-لاس`, `جیتتر`, `ثروپوت` (casual) / `توان عملیاتی` (formal), `ریست کانکشن`. Do NOT invent pure Persian dictionary translations.
 
-**2. Keep acronyms in English** — `QoS`, `ASN`, `IXP`, `BGP`, `TCP`, `DNS`, `SNI`, `TLS`, `RTT`, `SSH`, `VPN`. Never transliterate them.
+**2. Keep acronyms in English** — `QoS`, `ASN`, `IXP`, `BGP`, `TCP`, `UDP`, `DNS`, `SNI`, `TLS`, `RTT`, `SSH`, `VPN`, `VLAN`. Never transliterate them.
 
 **3. Established translations for concepts**:
 - Congestion → تراکم
@@ -43,14 +43,17 @@ This file defines the exact Persian style, terminology, and structure for all an
 | timeout / timed out | تایم‌اوت | |
 | unreachable | نا‌دسترس | |
 | redirect loop | حلقه ریدایرکت | |
-| latency / RTT | لیتنسی | Pinglish, not «تأخیر» alone |
+| latency / RTT | لیتنسی (casual) / تاخیر (formal) | Pinglish preferred in daily analysis |
 | router | روتر | Pinglish, not «مسیریاب» |
 | gateway | گیت‌وی | Pinglish, not «دروازه» |
 | loop | لوپ | Pinglish |
 | packet | پکت | Pinglish, not «بسته» alone |
 | packet loss | پکت-لاس | Pinglish |
-| throughput | ثروپوت / دبی | Pinglish |
+| throughput | ثروپوت (casual) / توان عملیاتی (formal) / دبی | Pinglish |
 | jitter | جیتتر | Pinglish |
+| switch | سوئیچ | Pinglish, not «تعویض‌کننده» |
+| firewall | فایروال | Pinglish, not «دیوار آتش» alone |
+| connection reset | ریست کانکشن | Pinglish |
 | congestion | تراکم | standard industry translation |
 | infrastructure | زیرساخت | standard |
 | application-layer | لایه اپلیکیشن | not «لایه کاربرد» |

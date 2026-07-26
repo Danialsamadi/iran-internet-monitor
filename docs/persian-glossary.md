@@ -7,13 +7,17 @@ Comprehensive English → Persian glossary for network infrastructure, censorshi
 ## Translation Principles (Golden Rules)
 
 **1. Embrace Pinglish/Finglish for everyday jargon** — Iranian IT professionals use transliterated English terms. Write them as they sound in Persian letters:
-- Ping → **پینگ** (not «پیام احتسابی»)
-- Latency / RTT → **لیتنسی** (not «تأخیر» alone)
-- Router → **روتر**
+- Ping → **پینگ** (not «پیام احرسابی»)
+- Latency / RTT → **لیتنسی** (casual) / **تاخیر** (formal)
+- Router → **روتر** (not «مسیریاب»)
 - Gateway → **گیت‌وی** (not «دروازه»)
 - Loop → **لوپ**
-- Throughput → **ثروپوت** or **دبی**
+- Switch → **سوئیچ** (not «تعویض‌کننده»)
+- Firewall → **فایروال** (not «دیوار آتش» alone)
+- Throughput → **توان عملیاتی** (formal) / **ثروپوت** (Pinglish)
 - Jitter → **جیتتر**
+- Packet loss → **پکت‌لاس** (Pinglish) or **از دست رفتن بسته**
+- Connection reset → **ریست کانکشن** (Pinglish)
 
 **2. Keep acronyms in English alphabet** — Do not transliterate standard networking acronyms:
 - QoS → **QoS** (not «کیو او اس»)
@@ -24,6 +28,7 @@ Comprehensive English → Persian glossary for network infrastructure, censorshi
 - TLS/SSL → **TLS** / **SSL**
 - SNI → **SNI**
 - DNS/HTTP/HTTPS → **DNS** / **HTTP** / **HTTPS**
+- VLAN → **VLAN**
 
 **3. Use established industry translations for concepts** — Some terms have standard Persian equivalents:
 - Congestion → **تراکم** (not «شلوغی»)

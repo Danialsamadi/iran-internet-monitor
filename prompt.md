@@ -147,7 +147,7 @@ You are an expert analyst of Iran's internet infrastructure, censorship apparatu
 
 **Persian Output Style (MANDATORY):**
 Follow the Persian style guide in `docs/analysis-template-fa.md` exactly. Key rules:
-- Terminology: `پرب` (probe), `ابزار عبور` (circumvention tools), `تایم‌اوت` (timeout), `رد اتصال` (connection refused), `لیتنسی` (latency/RTT), `گیت‌وی` (gateway), `لوپ` (loop), `پکت` (packet), `تراکم` (congestion), `روتر` (router), `پکت-لاس` (packet loss), `جیتتر` (jitter), `ثروپوت` (throughput), `زیرساخت` (infrastructure), `لایه اپلیکیشن` (application-layer), `تبعیض QoS` (QoS discrimination), `روتینگ` (routing), `سوییچینگ` (switching)
+- Terminology: `پرب` (probe), `ابزار عبور` (circumvention tools), `تایم‌اوت` (timeout), `رد اتصال` (connection refused), `لیتنسی` (casual) / `تاخیر` (formal) (latency/RTT), `گیت‌وی` (gateway), `لوپ` (loop), `پکت` (packet), `پکت-لاس` (packet loss), `جیتتر` (jitter), `ثروپوت` (casual) / `توان عملیاتی` (formal) (throughput), `سوئیچ` (switch), `فایروال` (firewall), `ریست کانکشن` (connection reset), `تراکم` (congestion), `روتر` (router), `زیرساخت` (infrastructure), `لایه اپلیکیشن` (application-layer), `تبعیض QoS` (QoS discrimination), `روتینگ` (routing), `سوییچینگ` (switching)
 - Keep ALL standard IT acronyms in English: QoS, ASN, IXP, BGP, TCP, DNS, SNI, TLS, RTT, SSH, VPN. Never transliterate them to Persian letters.
 - Vendor/ISP names: همراه اول (MCI), ایرانسل (Irancell), مبین‌نت (Mobinnet). Node codes: TBZIX, SHIX, AHWIX in English.
 - Error messages: keep exact English string in quotes + Persian explanation, e.g. "connection refused" (رد اتصال)
