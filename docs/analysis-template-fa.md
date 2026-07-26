@@ -30,6 +30,19 @@ This file defines the exact Persian style, terminology, and structure for all an
 | tiered access / selective internet | اینترنت گزینشی / دسترسی لایه‌ای | "white SIM" model |
 | escalation | ارتقای سطح | |
 | cadence | کادنس / فواصل زمانی | |
+| gateway | گیت‌وی | industry standard |
+| Deep Packet Inspection (DPI) | DPI / بازرسی عمیق بسته | |
+| protocol whitelisting | وایت‌لیست پروتکل | |
+| DNS poisoning / spoofing | مسموم‌سازی DNS | |
+| block page IP | آی‌پی صفحه بلاک | 10.10.34.34 |
+| SHAHKAR / HAMTA | شاهکار / همتا | identity databases for tiered access |
+| NIN / SHOMA | NIN / شُما | National Information Network |
+| **DNS poisoning / spoofing** | **مسموم‌سازی DNS / اسپوفینگ DNS** | fake IPs (e.g., 10.10.34.34) |
+| **SHAHKAR / HAMTA identity databases** | **پایگاه‌های هویتی شاهکار/همتا** | user-tier enforcement |
+| **block page IP (10.10.34.34)** | **IP صفحه بلاک (۱۰.۱۰.۳۴.۳۴)** | injected block page target |
+| **stealth blackout (2025+ model)** | **قطعی مخفی (مدل ۲۰۲۵+)** | BGP intact + centralized filtering |
+| **SNI spoofing** | **اسپیوفینگ SNI** | evasion technique |
+| **active probing** | **پروبینگ فعال** | censors testing bridge/VPN IPs |
 
 ---
 
