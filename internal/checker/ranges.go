@@ -22,10 +22,10 @@ type RangeResult struct {
 }
 
 // RunRanges probes one representative IP per labeled range concurrently.
-// ponytail: fixed :80 probe, concurrency 128, 5s per-probe timeout — a blocked
+// ponytail: fixed :80 probe, 128 workers, 5s per-probe timeout — a blocked
 // range that won't SYN-ACK in 5s won't in 15s either, and ~1070 mostly-blocked
-// ranges finish in ~45s (vs ~250s at 64/15s). 128 stays under macOS's default
-// 256-fd soft limit; make these config knobs if the CSV grows past ~4000.
+// ranges finish in ~45s. 128 stays under macOS's default 256-fd soft limit and
+// costs ~1MB of stacks; make these config knobs if the CSV grows past ~4000.
 //
 // Before sweeping, it dials TEST-NET-1 (192.0.2.1:80), which no real network
 // routes: if that "connects", something on the path intercepts TCP :80
@@ -39,36 +39,41 @@ func (c *Checker) RunRanges(ctx context.Context, ranges []config.IPRange) ([]Ran
 		return nil, fmt.Errorf("vantage intercepts TCP :80 (TEST-NET-1 answered) — range results would be meaningless")
 	}
 	results := make([]RangeResult, len(ranges))
-	sem := make(chan struct{}, 128)
+	idx := make(chan int)
 	var wg sync.WaitGroup
-	for i, r := range ranges {
+	for w := 0; w < 128; w++ { // fixed pool, not goroutine-per-range: flat ~128 stacks however big the CSV
 		wg.Add(1)
-		go func(i int, r config.IPRange) {
+		go func() {
 			defer wg.Done()
-			sem <- struct{}{}
-			defer func() { <-sem }()
-			probe := r.Start.Next() // start is the network address; .1 answers most often
-			res := RangeResult{
-				Timestamp: time.Now().UTC().Format(time.RFC3339),
-				ProbeIP:   probe.String(),
-				Org:       r.Org,
-				Count:     r.Count,
+			for i := range idx {
+				r := ranges[i]
+				probe := r.Start.Next() // start is the network address; .1 answers most often
+				res := RangeResult{
+					Timestamp: time.Now().UTC().Format(time.RFC3339),
+					ProbeIP:   probe.String(),
+					Org:       r.Org,
+					Count:     r.Count,
+				}
+				dctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+				startT := time.Now()
+				d := net.Dialer{}
+				conn, err := d.DialContext(dctx, "tcp", net.JoinHostPort(probe.String(), "80"))
+				cancel()
+				if err != nil {
+					res.Status = "down"
+				} else {
+					conn.Close()
+					res.Status = "up"
+					res.LatencyMS = time.Since(startT).Milliseconds()
+				}
+				results[i] = res
 			}
-			dctx, cancel := context.WithTimeout(ctx, 5*time.Second)
-			defer cancel()
-			startT := time.Now()
-			d := net.Dialer{}
-			conn, err := d.DialContext(dctx, "tcp", net.JoinHostPort(probe.String(), "80"))
-			if err != nil {
-				res.Status = "down"
-			} else {
-				conn.Close()
-				res.Status = "up"
-				res.LatencyMS = time.Since(startT).Milliseconds()
-			}
-			results[i] = res
-		}(i, r)
+		}()
 	}
+	for i := range ranges {
+		idx <- i
+	}
+	close(idx)
 	wg.Wait()
 	return results, nil
 }
