@@ -3,40 +3,24 @@
   "severity": "minor",
   "suspected_causes": [
     "sustained inbound filtering at all ISP gateways (TIC, Irancell, Asiatech) blocking external probes",
-    "persistent anti-monitoring posture: ~3.2% Iranian IP range reachability from outside (11 of 345 ranges)",
+    "persistent anti-monitoring posture: ~3.8% Iranian IP range reachability from outside (13 of 345 ranges)",
     "Asiatech-specific compound impairment: gateway timeout + web portal timeout + IP ranges dark (worst-affected ISP)",
     "Electro anti-filter DNS resolver persistently unreachable (possible targeted pressure on circumvention DNS)",
     "domestic payment layer: Shaparak unreachable, Saman Bank degraded but stable"
   ],
-  "suspected_causes_fa": [
-    "فیلتر مداوم ورودی در تمام دروازه‌های ارائه‌دهندگان (TIC، ایرانسل، آسیاتک) که پروب‌های خارجی را مسدود می‌کند",
-    "وضعیت ضد پایش مداوم: دسترسی حدود ۳.۲٪ از بازه‌های IP ایرانی از خارج (۱۱ از ۳۴۵ بازه)",
-    "اختلال ترکیبی ویژه آسیاتک: تایم‌اوت دروازه + تایم‌اوت پورتال وب + تاریکی بازه‌های IP (آسیاتک بدترین ارائه‌دهنده)",
-    "سرور DNS ضد فیلتر الکترو نا‌دسترس به‌صورت مداوم (احتمال فشار هدفمند بر DNS عبور)",
-    "لایه پرداخت داخلی: شاپرک نا‌دسترس، بانک سامان کند اما پایدار"
-  ],
   "affected_services": [
     "All ISP management gateways (TIC x2, Irancell, Asiatech) — inbound TCP uniformly blocked",
-    "334 of 345 Iranian IP ranges unreachable from outside — MCI, Irancell, Shatel completely dark externally",
+    "332 of 345 Iranian IP ranges unreachable from outside — MCI, Irancell, Shatel completely dark externally",
     "Asiatech — gateway, web portal, and IP ranges all impaired (worst-affected ISP)",
     "Electro DNS resolver — unreachable (persistent across all passes)",
     "Snapp ride-hailing — redirect loop (persistent)",
     "Shaparak payment gateway — unreachable (persistent)",
-    "Saman Bank — degraded (~3338ms, stable)"
+    "Saman Bank — degraded (~3035ms, stable)",
+    "Aparat — degraded (~10727ms)",
+    "Balad — degraded (~5459ms)",
+    "Respina ISP web — degraded (~4045ms)"
   ],
-  "affected_services_fa": [
-    "تمام دروازه‌های مدیریت ارائه‌دهندگان (TIC × ۲، ایرانسل، آسیاتک) — TCP ورودی یکسان مسدود شده",
-    "۳۳۴ از ۳۴۵ بازه IP ایرانی از خارج نا‌دسترس — MCI، ایرانسل، شاتل به‌طور کامل در خارج تاریک",
-    "آسیاتک — دروازه، پورتال وب و بازه‌های IP همه مختل (بدترین ارائه‌دهنده)",
-    "سرور DNS الکترو — نا‌دسترس (مداوم در تمام دورها)",
-    "اسنپ — حلقه ریدایرکت (مداوم)",
-    "شاپرک درگاه پرداخت — نا‌دسترس (مداوم)",
-    "بانک سامان — کند (~۳۳۳۸ میلی‌ثانیه، پایدار)"
-  ],
-  "public_summary": "Iran's internet shows a stable, degraded baseline consistent with normal censorship operations. All foreign platforms (Google, Telegram, YouTube, Instagram, WhatsApp, GitHub, Wikipedia) and circumvention tools (Tor, Snowflake, Psiphon) remain fully accessible. All four major ISP gateways block external probes; only ~3% of Iranian IP ranges respond from outside. Domestic services (Digikala, Aparat, Tapsi, Filimo, CafeBazaar, Rubika, Eitaa, IRNA) function normally. Asiatech remains the worst-affected ISP with gateway, web, and IP ranges all impaired.",
-  "public_summary_fa": "اینترنت ایران یک مبنای پایدار و مختل نشان می‌دهد که با عملیات عادی سانسور سازگار است. تمام پلتفرم‌های خارجی (گوگل، تلگرام، یوتیوب، اینستاگرام، واتساپ، گیت‌هاب، ویکی‌پدیا) و ابزارهای عبور (تور، اسنوفلک، پسیفون) کاملاً در دسترس هستند. تمام چهار دروازه اصلی ارائه‌دهندگان پروب‌های خارجی را مسدود می‌کنند؛ فقط حدود ۳٪ از بازه‌های IP ایرانی از خارج پاسخ می‌دهند. سرویس‌های داخلی (دیجی‌کالا، آپارات، تپسی، فیلیمو، کافه‌بازار، روبیکا، ایتا، ایرنا) به‌طور عادی کار می‌کنند. آسیاتک همچنان بدترین ارائه‌دهنده متأثر است.",
-  "insight": "Eight consecutive passes show an identical fingerprint: zero ISP gateways reachable, ~3.2% IP range reachability, all foreign platforms and circumvention tools fully up, domestic services operating normally — this is Iran's stable external-facing baseline under routine censorship, not an outage event.",
-  "insight_fa": "هشت دور متوالی اثر انگشت یکسانی نشان می‌دهند: صفر دروازه ارائه‌دهنده نا‌دسترس، حدود ۳.۲٪ دسترسی بازه IP، تمام پلتفرم‌های خارجی و ابزارهای عبور کاملاً فعال، سرویس‌های داخلی به‌طور عادی کار می‌کنند — این مبنای پایدار خارجی ایران تحت سانسور عادی است، نه رویداد قطعی.",
-  "recommendation": "Treat this eight-pass fingerprint as the confirmed operational baseline. Alert only on deviations: foreign platform outage, domestic service cascade failure, or circumvention tool degradation. Request IODA traffic volume data for TIC (AS12880) to establish a volume baseline for future anomaly detection.",
-  "recommendation_fa": "این اثر انگشت هشت دوری را به‌عنوان مبنای عملیاتی تأیید شده در نظر بگیرید. فقط در صورت انحراف هشدار دهید: قطعی پلت فرم خارجی، شکست زنجیره‌ای سرویس داخلی، یا کاهش عملکرد ابزارهای عبور. داده حجم ترافیک IODA برای TIC (AS12880) را درخواست کنید تا مبنای حجمی برای تشخیص ناهنجاری آینده ایجاد شود."
+  "public_summary": "Iran's internet shows a stable, degraded baseline consistent with normal censorship operations. All foreign platforms (Google, Telegram, YouTube, Instagram, WhatsApp, GitHub, Wikipedia) and circumvention tools (Tor, Snowflake, Psiphon) remain fully accessible. All four major ISP gateways block external probes; only ~4% of Iranian IP ranges respond from outside. Domestic services (Digikala, Tapsi, Filimo, CafeBazaar, Rubika, Eitaa, IRNA) function normally. Asiatech remains the worst-affected ISP with gateway, web, and IP ranges all impaired.",
+  "insight": "Nine consecutive passes show an identical fingerprint: zero ISP gateways reachable, ~3.8% IP range reachability, all foreign platforms and circumvention tools fully up, domestic services operating normally — this is Iran's stable external-facing baseline under routine censorship, not an outage event.",
+  "recommendation": "Treat this nine-pass fingerprint as the confirmed operational baseline. Alert only on deviations: foreign platform outage, domestic service cascade failure, or circumvention tool degradation. Request IODA traffic volume data for TIC (AS12880) to establish a volume baseline for future anomaly detection."
 }
