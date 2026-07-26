@@ -420,6 +420,12 @@ function analysis() {
   const an = state.site.analysis;
   if (!an) return `<div class="pad" style="padding-block:40px"><p class="muted">${t("No analysis has been generated yet. The next pass with Ollama available will produce one.","هنوز تحلیلی تولید نشده است. اولین دور با اولاما تحلیل خواهد ساخت.")}</p></div>`;
   const sev = (an.severity || "").toUpperCase();
+  const isFa = state.lang === "fa";
+  const causes = isFa ? (an.suspected_causes_fa || an.suspected_causes || []) : (an.suspected_causes || []);
+  const services = isFa ? (an.affected_services_fa || an.affected_services || []) : (an.affected_services || []);
+  const summary = isFa ? (an.public_summary_fa || an.public_summary || "") : (an.public_summary || "");
+  const insight = isFa ? (an.insight_fa || an.insight || "") : (an.insight || "");
+  const recommendation = isFa ? (an.recommendation_fa || an.recommendation || "") : (an.recommendation || "");
   return `
   <div class="pad grid2w" style="padding-top:30px;padding-bottom:40px;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:start">
     <div>
@@ -431,26 +437,26 @@ function analysis() {
           <div style="display:flex;align-items:baseline;gap:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(32,30,29,.65)">
             <span style="font-variant-numeric:tabular-nums">${fmtTime(an.ts || state.site.ts)}</span><span>${esc(sev)}</span>
           </div>
-          <div style="font-size:19px;line-height:1.3;margin-top:5px">${esc((an.suspected_causes || [])[0] || t("Analysis","تحلیل"))}</div>
-          <p style="font-size:14px;line-height:1.6;margin:7px 0 0;max-width:58ch;text-wrap:pretty">${esc(an.public_summary)}</p>
+          <div style="font-size:19px;line-height:1.3;margin-top:5px">${esc((causes)[0] || t("Analysis","تحلیل"))}</div>
+          <p style="font-size:14px;line-height:1.6;margin:7px 0 0;max-width:58ch;text-wrap:pretty">${esc(summary)}</p>
         </div>
       </div>
-      ${(an.suspected_causes || []).length > 1 ? `
+      ${(causes).length > 1 ? `
       <h5 style="margin:20px 0 8px;font-size:10px;letter-spacing:.16em;text-transform:uppercase">${t("Suspected causes","علل احتمالی")}</h5>
       <ul style="margin:0;padding-inline-start:18px;font-size:14px;line-height:1.7">
-        ${an.suspected_causes.map(c => `<li>${esc(c)}</li>`).join("")}
+        ${causes.map(c => `<li>${esc(c)}</li>`).join("")}
       </ul>` : ""}
-      ${(an.affected_services || []).length ? `
+      ${(services).length ? `
       <h5 style="margin:20px 0 8px;font-size:10px;letter-spacing:.16em;text-transform:uppercase">${t("Affected services","سرویس‌های متأثر")}</h5>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">${an.affected_services.map(s => `<span class="tag tag-neutral">${esc(s)}</span>`).join("")}</div>` : ""}
+      <div style="display:flex;flex-wrap:wrap;gap:6px">${services.map(s => `<span class="tag tag-neutral">${esc(s)}</span>`).join("")}</div>` : ""}
     </div>
     <div>
       <div style="background:var(--color-surface);padding:20px;border-radius:2px">
         <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-2-700)">${t("Severity","شدت")}: ${esc(sev)}</div>
-        <p style="font-size:20px;line-height:1.45;font-style:italic;margin:10px 0 0;text-wrap:pretty">${esc(an.insight || "")}</p>
+        <p style="font-size:20px;line-height:1.45;font-style:italic;margin:10px 0 0;text-wrap:pretty">${esc(insight)}</p>
       </div>
       <h5 style="margin:26px 0 8px;font-size:10px;letter-spacing:.16em;text-transform:uppercase">${t("Recommendation","پیشنهاد")}</h5>
-      <p style="font-size:14px;line-height:1.6;margin:0;text-wrap:pretty">${esc(an.recommendation || "")}</p>
+      <p style="font-size:14px;line-height:1.6;margin:0;text-wrap:pretty">${esc(recommendation)}</p>
       <a class="btn btn-secondary" href="data/analysis/latest.json" style="margin-top:20px;font-size:12.5px;width:100%">${t("Open raw analysis JSON","مشاهده تحلیل خام")}</a>
     </div>
   </div>`;
