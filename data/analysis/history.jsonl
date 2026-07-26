@@ -193,4 +193,49 @@
   "insight_fa": "هجدهمین پاس پایش متوالی در ~۱۸۰ دقیقه اثربصمتِ یکسانی نشان می‌دهد: صفر دروازه ISP قابل‌دسترس، ~۳.۸٪ دسترس‌پذیری بازه IP، تمام پلتفرم‌های خارجی و ابزارهای عبور بالا، خدمات داخلی عادی — این خط پایه‌ی پایدارِ رویِ خارجی ایران تحت معماری اینترنتِ گزینشی است، نه رویداد قطعی. ماندگاریِ پایین بودن DNS الکترو در حالی که شکن بالا است، نشان‌دهنده فشار هدفمند بر زیرساخت خاص عبور است، نه شکست گسترده‌ی زیرساختی.",
   "recommendation": "Maintain current monitoring cadence; no escalation warranted. Cross-reference with IODA/OONI/Filterwatch for independent confirmation of stable baseline. Watch for any deviation in foreign platform reachability or circumvention tool health as early indicator of policy escalation. Electro DNS persistent failure warrants specific tracking as a canary for targeted anti-circumvention pressure.",
   "recommendation_fa": "کادنس پایش را حفظ کنید؛ ارتقای سطح ضروری نیست. با IODA/OONI/فیلتر‌واچ برای تأیید خط پایه پایدار تقاطع‌یابی کنید. هر انحرافی در دسترس‌پذیری پلتفرم‌های خارجی یا سلامت ابزارهای عبور را به‌عنوان نشانه‌ی پیشینِ تشدید سیاست رصد کنید. شکست مداوم DNS الکترو به‌عنوان ک ناری برای رصد فشار ضد عبور هدفمند پیگیری شود."
+}{
+  "overall_status": "partial_outage",
+  "severity": "minor",
+  "suspected_causes": [
+    "sustained inbound filtering at all major ISP gateways (TIC x2, Irancell, Asiatech) — TCP connections refused or timed out, consistent with active DPI/SNI filtering at the international gateway layer per IODA's comparative shutdown analysis (Bock et al. FOCI'20, arXiv 2603.28753)",
+    "persistent anti-monitoring posture: only ~4.2% of labeled Iranian IP ranges (43 of 1035) reachable from outside — consistent with the 'selective internet' (اینترنت گزینشی) pattern documented by Filterwatch (March 2026), where enterprise/gov SIMs get open internet while general public traffic is filtered at the gateway",
+    "Asiatech compound impairment: gateway timeout + web portal timeout + IP ranges dark — worst-affected ISP across all dimensions, suggesting infrastructure degradation or targeted pressure on this smaller operator",
+    "Electro DNS resolver persistently unreachable across all 19 passes — targeted pressure on anti-censorship DNS infrastructure (Shecan remains operational, Electro down across all passes)",
+    "Mobinnet web portal degraded (~3.8s latency, stable) — possible ISP-specific degradation or upstream congestion on domestic path",
+    "Snapp redirect loop (10 redirects then stopped) — potential application-layer misconfiguration or deliberate throttling of ride-hailing platform",
+    "Shaparak payment gateway timeout — financial infrastructure timeout may indicate targeted filtering or upstream congestion on payment processing path"
+  ],
+  "suspected_causes_fa": [
+    "فیلتر مداوم ورودی در تمام دروازه‌های اصلی ارائه‌دهندگان (TIC دوگانه، ایرانسل، آسیاتک) — TCP رد یا تایم‌اوت می‌شوند، سازگار با فیلتر فعال DPI/SNI در لایه دروازه بین‌المللی",
+    "وضعیت ضد پایش مداوم: تنها حدود ۴.۲٪ بازه‌های IP برچسب‌گذاری شده ایرانی (۴۳ از ۱۰۳۵) از خارج قابل‌دسترس — سازگار با الگوی «اینترنت گزینشی» (فیلتر واچ، مارس ۲۰۲۶) که در آن SIMهای سازمانی/دولتی اینترنت باز دارند در حالی که ترافیک عمومی فیلتر می‌شود",
+    "اختلال ترکیبی آسیاتک: تایم‌اوت دروازه + تایم‌اوت پورتال وب + تاریکی بازه‌های IP — بدترین ارائه‌دهنده در تمام ابعاد، احتمالاً تخریب زیرساخت یا فشار هدفمند بر این اپراتور کوچک‌تر",
+    "سرور DNS الکترو به‌صورت مداوم نا‌دسترس — احتمالاً فشار هدفمند بر زیرساخت DNS ضد سانسور (شکن بالا، الکترو پایین) در ۱۹ پاس متوالی",
+    "پورتال وب موبین‌نت تخریب شده (~۳.۸ ثانیه، پایدار) — احتمالاً اختلال خاص ISP یا تورم از یک دست در مسیر داخلی",
+    "حلقه ریدایرکت اسنپ (۱۰ ریدایرکت سپس توقف) — احتمالاً پیکربندی اشتباه لایه‌ی کاربرد یا تدارک‌کاری هدفمند پلتفرم درخواست‌کار",
+    "تایم‌اوت دروازه پرداخت شاپرک — زیرساخت مالی تایم‌اوت می‌کند، نشان‌دهنده فیلترینگ هدفمند یا تورم در مسیر پردازش پرداخت"
+  ],
+  "affected_services": [
+    "All ISP management gateways (TIC x2, Irancell, Asiatech) — inbound TCP uniformly blocked",
+    "992 of 1035 Iranian IP ranges unreachable from outside — MCI, Irancell, Shatel ranges completely dark externally",
+    "Asiatech — gateway, web portal, and IP ranges all impaired (worst-affected ISP)",
+    "Electro DNS resolver — unreachable (persistent across all 19 passes)",
+    "Mobinnet web portal — degraded (~3.8s latency, stable)",
+    "Snapp ride-hailing platform — redirect loop (10 redirects then aborted)",
+    "Shaparak payment gateway — timeout"
+  ],
+  "affected_services_fa": [
+    "تمام دروازه‌های مدیریت ISP (TIC دوگانه، ایرانسل، آسیاتک) — TCP ورودی به‌صورت یکنواخت مسدود",
+    "۹۹۲ از ۱۰۳۵ بازه IP ایرانی از خارج نا‌دسترس — بازه‌های مخابرات ایران، ایرانسل، شاتل به‌صورت کامل تاریک",
+    "آسیاتک — دروازه، پورتال وب، و بازه‌های IP همگی دچار اختلال (بدترین ISP)",
+    "DNS الکترو — نا‌دسترس (مداوم در تمام ۱۹ پاس)",
+    "پورتال وب موبین‌نت — تخریب شده (~۳.۸ ثانیه، پایدار)",
+    "پلتفرم درخواست‌کار اسنپ — حلقه ریدایرکت (۱۰ ریدایرکت سپس متوقف)",
+    "دروازه پرداخت شاپرک — تایم‌اوت"
+  ],
+  "public_summary": "Iran's internet shows a stable, degraded baseline consistent with routine censorship operations for the 19th consecutive monitoring pass (~190 minutes). All foreign platforms (Google, Telegram, YouTube, Instagram, WhatsApp, GitHub, Wikipedia) and circumvention tools (Tor, Snowflake, Psiphon) remain fully accessible from external vantage. All four major ISP gateways block external probes; only ~4.2% of Iranian IP ranges respond from outside. Domestic services (Digikala, Aparat, Tapsi, Filimo, CafeBazaar, Rubika, Eitaa, IRNA) function normally. Asiatech remains the worst-affected ISP with gateway, web, and IP ranges all impaired. This identical fingerprint persists across all passes — this is Iran's stable external-facing baseline under selective-internet architecture, not an outage event.",
+  "public_summary_fa": "اینترنت ایران برای نوزدهمین پاس پایش متوالی (~۱۹۰ دقیقه) خط پایه‌ی پایداریِ تخریب‌شده را نشان می‌دهد که با عملیات سانسورِ روتین سازگار است. تمام پلتفرم‌های خارجی (گوگل، تلگرام، یوتیوب، اینستاگرام، واتس‌اپ، گیت‌هاب، ویکی‌پدیا) و ابزارهای عبور (تور، اسنوفلک، سایفون) به‌صورت کامل قابل‌دسترس‌اند. تمام چهار دروازه‌ی اصلی ISP پروب‌های خارجی را مسدود می‌کنند؛ تنها ~۴.۲٪ بازه‌های IP ایرانی از خارج پاسخ می‌دهند. خدمات داخلی (دیجی‌کالا، آپارات، تپسی، فیلمو، کافه‌بازار، روبیکا، ایتا، ایرنا) به‌صورت عادی کار می‌کنند. آسیاتک بدترین ISP با دروازه، وب، و بازه‌های IP همگی در حالت اختلال باقی مانده است. این اثربصمتِ یکسان در تمام پاس‌ها باقی مانده — این خط پایه‌ی پایدار رویِ خارجی ایران تحت معماری اینترنتِ گزینشی است، نه رویداد قطعی.",
+  "insight": "Nineteen consecutive monitoring passes over ~190 minutes show an identical fingerprint: zero ISP gateways reachable, ~4.2% IP range reachability, all foreign platforms and circumvention tools fully up, domestic services operating normally — this is Iran's stable external-facing baseline under routine selective-internet architecture, not an outage event. The persistence of Electro DNS being down while Shecan remains up suggests targeted pressure on specific circumvention infrastructure rather than broad infrastructure failure.",
+  "insight_fa": "نوزدهمین پاس پایش متوالی در ~۱۹۰ دقیقه اثربصمتِ یکسانی نشان می‌دهد: صفر دروازه ISP قابل‌دسترس، ~۴.۲٪ دسترس‌پذیری بازه IP، تمام پلتفرم‌های خارجی و ابزارهای عبور بالا، خدمات داخلی عادی — این خط پایه‌ی پایدارِ رویِ خارجی ایران تحت معماری اینترنتِ گزینشی است، نه رویداد قطعی. ماندگاریِ پایین بودن DNS الکترو در حالی که شکن بالا است، نشان‌دهنده فشار هدفمند بر زیرساخت خاص عبور است، نه شکست گسترده‌ی زیرساختی.",
+  "recommendation": "Maintain current monitoring cadence; no escalation warranted. Cross-reference with IODA/OONI/Filterwatch for independent confirmation of stable baseline. Watch for any deviation in foreign platform reachability or circumvention tool health as early indicator of policy escalation. Electro DNS persistent failure warrants specific tracking as a canary for targeted anti-circumvention pressure. Snapp redirect loop and Shaparak timeout merit one-off internal probe to distinguish application misconfiguration from deliberate throttling.",
+  "recommendation_fa": "کادنس پایش را حفظ کنید؛ ارتقای سطح ضروری نیست. با IODA/OONI/فیلتر‌واچ برای تأیید خط پایه پایدار تقاطع‌یابی کنید. هر انحرافی در دسترس‌پذیری پلتفرم‌های خارجی یا سلامت ابزارهای عبور را به‌عنوان نشانه‌ی پیشینِ تشدید سیاست رصد کنید. شکست مداوم DNS الکترو به‌عنوان ک ناری برای رصد فشار ضد عبور هدفمند پیگیری شود. حلقه ریدایرکت اسنپ و تایم‌اوت شاپرک заслуظ بررسی یک‌باره داخلی برای تمایز پیکربندی اشتباه از تدارک‌کاری هدفمند می‌باشد."
 }
