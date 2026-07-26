@@ -3,8 +3,11 @@
 package config
 
 import (
+	"encoding/csv"
 	"fmt"
+	"net/netip"
 	"os"
+	"strings"
 
 	"gopkg.in/yaml.v3"
 )
@@ -43,7 +46,58 @@ type Config struct {
 		Remote string `yaml:"remote"`
 		Branch string `yaml:"branch"`
 	} `yaml:"git"`
-	Categories []Category `yaml:"categories"`
+	// IPRangesCSV points to a CSV of labeled Iranian IP ranges
+	// (start_ip,end_ip,count,date,organization). One representative IP per
+	// range is probed each pass. Empty = feature off.
+	IPRangesCSV string     `yaml:"ip_ranges_csv"`
+	Categories  []Category `yaml:"categories"`
+}
+
+// IPRange is one labeled allocation from the ranges CSV.
+type IPRange struct {
+	Start netip.Addr
+	End   netip.Addr
+	Count int64
+	Org   string
+}
+
+// LoadRanges parses the labeled IP-ranges CSV. Rows with an unparsable IP
+// are skipped; an empty organization becomes "Unlabeled".
+func LoadRanges(path string) ([]IPRange, error) {
+	f, err := os.Open(path)
+	if err != nil {
+		return nil, fmt.Errorf("read ip ranges: %w", err)
+	}
+	defer f.Close()
+	rd := csv.NewReader(f)
+	rd.FieldsPerRecord = -1
+	rd.LazyQuotes = true // labels like `"Pirooz Leen" LLC` are not RFC-quoted
+	rows, err := rd.ReadAll()
+	if err != nil {
+		return nil, fmt.Errorf("parse ip ranges: %w", err)
+	}
+	var out []IPRange
+	for _, row := range rows {
+		if len(row) < 5 {
+			continue
+		}
+		start, err1 := netip.ParseAddr(strings.TrimSpace(row[0]))
+		end, err2 := netip.ParseAddr(strings.TrimSpace(row[1]))
+		if err1 != nil || err2 != nil {
+			continue
+		}
+		org := strings.Trim(strings.TrimSpace(row[4]), `"`)
+		if org == "" {
+			org = "Unlabeled"
+		}
+		var count int64
+		fmt.Sscanf(strings.TrimSpace(row[2]), "%d", &count)
+		out = append(out, IPRange{Start: start, End: end, Count: count, Org: org})
+	}
+	if len(out) == 0 {
+		return nil, fmt.Errorf("ip ranges: no valid rows in %s", path)
+	}
+	return out, nil
 }
 
 // Load reads and validates config.yaml, applying defaults.

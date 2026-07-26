@@ -62,8 +62,8 @@ type Analyzer struct {
 
 // Run builds the user prompt from the pass, calls Ollama, validates the JSON
 // and persists it to data/analysis/. Returns the raw JSON for site.json.
-func (a *Analyzer) Run(ctx context.Context, latest storage.Latest) (json.RawMessage, error) {
-	prompt, err := a.buildPrompt(latest)
+func (a *Analyzer) Run(ctx context.Context, latest storage.Latest, networks *storage.Networks) (json.RawMessage, error) {
+	prompt, err := a.buildPrompt(latest, networks)
 	if err != nil {
 		return nil, err
 	}
@@ -136,7 +136,7 @@ func (a *Analyzer) Run(ctx context.Context, latest storage.Latest) (json.RawMess
 
 // buildPrompt gives the model the pass summary, the failures in full, and the
 // previous analysis for continuity — compact enough for an 8B model.
-func (a *Analyzer) buildPrompt(latest storage.Latest) (string, error) {
+func (a *Analyzer) buildPrompt(latest storage.Latest, networks *storage.Networks) (string, error) {
 	type slim struct {
 		Name     string `json:"name"`
 		Category string `json:"category"`
@@ -161,6 +161,15 @@ func (a *Analyzer) buildPrompt(latest storage.Latest) (string, error) {
 		"counts":            latest.Counts,
 		"per_category":      byCat,
 		"failing_endpoints": failures,
+	}
+	if networks != nil {
+		// per-operator reachability of the labeled Iranian IP ranges — lets the
+		// model tell an ISP-specific shutdown from a national one
+		payload["ip_ranges"] = map[string]any{
+			"ranges_probed": networks.RangesTotal,
+			"ranges_up":     networks.RangesUp,
+			"operators":     networks.Orgs,
+		}
 	}
 	if prev, err := os.ReadFile(filepath.Join(a.DataDir, "analysis", "latest.json")); err == nil {
 		payload["previous_analysis"] = json.RawMessage(prev)

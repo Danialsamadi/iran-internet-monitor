@@ -160,11 +160,12 @@ type Site struct {
 	HourHist   []int           `json:"hour_hist"` // down-events by Tehran hour of day, 30-day window
 	Analysis   json.RawMessage `json:"analysis,omitempty"`
 	MedianMS   int64           `json:"median_ms"`
+	Networks   *Networks       `json:"networks,omitempty"`
 }
 
 // BuildSite reads history.jsonl and produces data/site.json. Analysis is the
-// latest LLM output (may be nil).
-func (s *Store) BuildSite(cfg *config.Config, latest Latest, analysis json.RawMessage) error {
+// latest LLM output and networks the labeled-range pass (either may be nil).
+func (s *Store) BuildSite(cfg *config.Config, latest Latest, analysis json.RawMessage, networks *Networks) error {
 	now := time.Now().UTC()
 	hist, err := s.readHistory(now.AddDate(0, 0, -30))
 	if err != nil {
@@ -176,6 +177,7 @@ func (s *Store) BuildSite(cfg *config.Config, latest Latest, analysis json.RawMe
 		Counts:    latest.Counts,
 		Analysis:  analysis,
 		MedianMS:  medianLatency(latest.Results),
+		Networks:  networks,
 	}
 
 	latestBy := map[string]checker.Result{}

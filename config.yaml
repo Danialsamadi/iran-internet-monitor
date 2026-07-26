@@ -25,6 +25,11 @@ git:
   remote: origin
   branch: main
 
+# Labeled Iranian IP allocations (start_ip,end_ip,count,date,organization).
+# One representative IP per range is TCP-probed on :80 each pass and the
+# results are aggregated per operator (data/networks.json, Networks page).
+ip_ranges_csv: ir.csv
+
 categories:
   - name: ISP endpoints
     name_fa: نقاط پایانی ارائه‌دهندگان

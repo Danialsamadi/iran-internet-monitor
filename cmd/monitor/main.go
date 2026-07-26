@@ -44,14 +44,40 @@ func runPass(repoDir string, skipLLM, skipGit bool) error {
 	}
 	ctx := context.Background()
 
-	// 1. concurrent checks
+	// 1. concurrent checks — the labeled IP-range sweep runs alongside the
+	// service checks; both are network-bound.
 	chk := checker.New(cfg.Check.TimeoutSeconds, cfg.Check.DegradedMS)
+	var rangeResults []checker.RangeResult
+	rangesDone := make(chan struct{})
+	go func() {
+		defer close(rangesDone)
+		if cfg.IPRangesCSV == "" {
+			return
+		}
+		ranges, err := config.LoadRanges(filepath.Join(repoDir, cfg.IPRangesCSV))
+		if err != nil {
+			log.Printf("ip ranges skipped: %v", err)
+			return
+		}
+		if rangeResults, err = chk.RunRanges(ctx, ranges); err != nil {
+			log.Printf("ip ranges skipped: %v", err)
+		}
+	}()
 	results := chk.RunAll(ctx, cfg.Categories, cfg.Check.Concurrency)
+	<-rangesDone
 
 	// 2. persist the pass
 	latest, err := store.SavePass(results)
 	if err != nil {
 		return fmt.Errorf("save pass: %w", err)
+	}
+	var networks *storage.Networks
+	if len(rangeResults) > 0 {
+		if networks, err = store.SaveNetworks(latest.Timestamp, rangeResults); err != nil {
+			return fmt.Errorf("save networks: %w", err)
+		}
+		log.Printf("probed %d labeled ranges — %d up across %d operators",
+			networks.RangesTotal, networks.RangesUp, len(networks.Orgs))
 	}
 	log.Printf("checked %d endpoints in %s — up:%d degraded:%d down:%d overall:%s",
 		len(results), time.Since(start).Round(time.Millisecond),
@@ -66,7 +92,7 @@ func runPass(repoDir string, skipLLM, skipGit bool) error {
 			Timeout: time.Duration(cfg.Ollama.TimeoutSeconds) * time.Second,
 			DataDir: store.Dir,
 		}
-		if analysis, err = an.Run(ctx, latest); err != nil {
+		if analysis, err = an.Run(ctx, latest, networks); err != nil {
 			log.Printf("analysis skipped: %v", err)
 			analysis = nil
 		} else {
@@ -81,7 +107,7 @@ func runPass(repoDir string, skipLLM, skipGit bool) error {
 	}
 
 	// 4. regenerate the aggregated site payload
-	if err := store.BuildSite(cfg, latest, analysis); err != nil {
+	if err := store.BuildSite(cfg, latest, analysis, networks); err != nil {
 		return fmt.Errorf("build site.json: %w", err)
 	}
 

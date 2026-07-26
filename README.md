@@ -25,9 +25,10 @@ internal/storage/       JSONL/JSON persistence + 24 h / 30-day aggregation
 internal/analyzer/      Ollama chat call to Hermes with a censorship-expert prompt
 internal/git/           stage data/, commit with pass summary, push
 internal/config/        config.yaml loading + validation
-web/index.html          the status page (Overview · Endpoints · History · Analysis · About)
+web/index.html          the status page (Overview · Endpoints · Networks · History · Analysis · About)
 data/                   everything the monitor writes; committed on every pass
 config.yaml             the single place services are defined
+ir.csv                  labeled Iranian IP allocations (start,end,count,date,org)
 .github/workflows/deploy.yml   Cloudflare Pages deploy on data push
 ```
 
@@ -87,6 +88,19 @@ Append one entry to the right category in `config.yaml`:
 That's the whole change — checker, storage, analysis and the page all pick
 it up on the next pass. `dns` checks take a resolver in `target`
 (`ip:53`) and an optional `query:` domain; `tcp` checks take `host:port`.
+
+## Labeled IP ranges (ir.csv)
+
+`ir.csv` lists registered Iranian IP allocations with their operator label.
+Each pass TCP-probes one representative address per range on port 80 and
+aggregates reachability per operator into `data/networks.json` (one summary
+line per pass is appended to `data/networks_history.jsonl`); the Networks
+page renders it. Swap or extend the CSV and the next pass picks it up —
+the path is `ip_ranges_csv` in config.yaml.
+
+Guard: before sweeping, the checker dials TEST-NET-1 (192.0.2.1:80). If it
+"connects", the vantage intercepts TCP :80 (VPN/transparent proxy) and the
+sweep is skipped instead of publishing fake reachability.
 
 ## Data formats
 

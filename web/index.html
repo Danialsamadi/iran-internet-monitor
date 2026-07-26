@@ -151,6 +151,7 @@ const VERDICTS = {
 const PAGES = [
   ["overview", "Overview", "نمای کلی"],
   ["endpoints", "Endpoints", "نقاط پایانی"],
+  ["networks", "Networks", "شبکه‌ها"],
   ["history", "History", "تاریخچه"],
   ["analysis", "Analysis", "تحلیل"],
   ["about", "About", "درباره"]
@@ -454,6 +455,55 @@ function analysis() {
   </div>`;
 }
 
+function networks() {
+  const nw = state.site.networks;
+  if (!nw) return `<div class="pad" style="padding-block:40px"><p class="muted">${t("No IP-range data yet — the next pass will probe the labeled ranges.","هنوز داده بازه‌های IP موجود نیست — دور بعدی بازه‌ها را بررسی می‌کند.")}</p></div>`;
+  const pct = Math.round(nw.ranges_up * 100 / Math.max(1, nw.ranges_total));
+  const barColor = p => p >= 66 ? UP : p >= 33 ? DEG : DOWN;
+  const totalIPs = nw.orgs.reduce((a, o) => a + o.ips, 0);
+  return `
+  <div class="pad" style="padding-top:30px;padding-bottom:40px">
+    <div class="grid2" style="display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start;margin-bottom:30px">
+      <div>
+        <h3 style="margin:0 0 4px">${t("Labeled Iranian IP ranges","بازه‌های IP برچسب‌گذاری‌شده ایران")}</h3>
+        <p style="font-size:13.5px;color:rgba(32,30,29,.65);margin:0;max-width:60ch">
+          ${t(`One representative address per registered allocation, TCP-probed on port 80 from outside Iran each pass — ${num(nw.ranges_total)} ranges covering ${num(totalIPs.toLocaleString("en-US"))} addresses, grouped by operator.`,
+               `از هر تخصیص ثبت‌شده یک نشانی نماینده، هر دور از خارج ایران روی درگاه ۸۰ بررسی می‌شود — ${num(nw.ranges_total)} بازه شامل ${num(totalIPs.toLocaleString("en-US"))} نشانی، به تفکیک اپراتور.`)}
+        </p>
+      </div>
+      <div>
+        ${plateText(num(pct) + "%", "cmyk-num", "font-size:56px;font-weight:600")}
+        <div style="margin-top:22px;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600">
+          ${t("of ranges answering","بازه‌های پاسخ‌گو")}
+        </div>
+      </div>
+    </div>
+    <div style="overflow-x:auto">
+    <table class="table">
+      <thead><tr>
+        <th>${t("Operator","اپراتور")}</th>
+        <th style="text-align:end">${t("Ranges","بازه‌ها")}</th>
+        <th style="text-align:end">${t("Addresses","نشانی‌ها")}</th>
+        <th style="text-align:end">${t("Reachable","در دسترس")}</th>
+        <th style="width:26%">${t("Share reachable","سهم در دسترس")}</th>
+        <th style="text-align:end">${t("Median latency","تأخیر میانه")}</th>
+      </tr></thead>
+      <tbody>
+        ${nw.orgs.map(o => `
+          <tr>
+            <td style="max-width:340px"><span style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(o.org)}</span></td>
+            <td style="text-align:end;font-variant-numeric:tabular-nums">${num(o.ranges)}</td>
+            <td style="text-align:end;font-variant-numeric:tabular-nums">${num(o.ips.toLocaleString("en-US"))}</td>
+            <td style="text-align:end;font-variant-numeric:tabular-nums">${num(o.up)}/${num(o.ranges)}</td>
+            <td><div style="height:11px;background:var(--color-surface)"><i style="display:block;height:100%;width:${o.pct.toFixed(0)}%;background:${barColor(o.pct)}"></i></div></td>
+            <td style="text-align:end;font-variant-numeric:tabular-nums">${o.median_ms ? num(o.median_ms) + " ms" : "—"}</td>
+          </tr>`).join("")}
+      </tbody>
+    </table>
+    </div>
+  </div>`;
+}
+
 function about() {
   const SOURCES = [
     ["ISP endpoints", "TCP/HTTP reachability of Iranian ISPs", "دسترس‌پذیری ارائه‌دهندگان ایرانی"],
@@ -501,7 +551,7 @@ function render() {
   document.documentElement.dir = state.lang === "fa" ? "rtl" : "ltr";
   document.documentElement.lang = state.lang;
   const app = $("#app");
-  const pages = { overview, endpoints, history, analysis, about };
+  const pages = { overview, endpoints, networks, history, analysis, about };
   app.setAttribute("aria-busy", "false");
   app.innerHTML = masthead() + pages[state.page]();
   app.querySelectorAll("[data-page]").forEach(b =>

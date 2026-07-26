@@ -11,6 +11,7 @@ on:
       - "data/latest.json"
       - "data/site.json"
       - "data/analysis/**"
+      - "data/networks.json"
       - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
@@ -30,7 +31,7 @@ jobs:
         run: |
           mkdir -p dist/data/analysis
           cp web/* dist/
-          cp data/latest.json data/site.json dist/data/ 2>/dev/null || true
+          cp data/latest.json data/site.json data/networks.json dist/data/ 2>/dev/null || true
           cp data/analysis/latest.json dist/data/analysis/ 2>/dev/null || true
           # the archive is linked from the page; skip it if it has grown huge
           [ -f data/history.jsonl ] && [ "$(wc -c < data/history.jsonl)" -lt 26214400 ] \
