@@ -37,9 +37,17 @@ jobs:
           [ -f data/history.jsonl ] && [ "$(wc -c < data/history.jsonl)" -lt 26214400 ] \
             && cp data/history.jsonl dist/data/ || true
 
+      - name: Ensure Pages project exists
+        uses: cloudflare/wrangler-action@v3
+        continue-on-error: true # already-exists is the normal case
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages project create iran-internet-monitor --production-branch=main
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=iran-internet-monitor
+          command: pages deploy dist --project-name=iran-internet-monitor --commit-dirty=true
