@@ -248,7 +248,7 @@ function overview() {
   const nDown = all.filter(s => s.status === "down").length;
   const an = site.analysis;
   const lede = an?.public_summary
-    ? esc(an.public_summary)
+    ? esc(state.lang === "fa" ? (an.public_summary_fa || an.public_summary) : an.public_summary)
     : t(`${nDown} of ${all.length} monitored endpoints failed to answer on the ${fmtTime(site.ts)} UTC pass.`,
         `در بررسی ساعت ${fmtTime(site.ts)} به وقت جهانی، ${num(nDown)} نقطه از ${num(all.length)} نقطه پایش‌شده پاسخ ندادند.`);
   const downSvcs = all.filter(s => s.status === "down").slice(0, 4);
