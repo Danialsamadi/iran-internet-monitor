@@ -1,21 +1,24 @@
 {
-  "overall_status": "degraded",
-  "severity": "minor",
+  "ts": "2026-07-26T14:01:54Z",
+  "overall_status": "partial_outage",
+  "severity": "major",
   "suspected_causes": [
-    "Asiatech ISP experiencing connectivity issues (gateway and web portal both unreachable)",
-    "Anti-filter DNS resolvers under pressure — Shecan DNS degraded at 5.2s, Electro DNS completely unreachable",
-    "TIC gateway probe-blocking (foreign platforms all reachable, so gateways are passing traffic despite probe failures)",
-    "Shaparak payment gateway unreachable from external vantage (may be geo-restriction or intermittent)"
+    "Sustained inbound probe filtering at international gateway level: all 4 ISP gateway TCP probes (TIC x2, Irancell, Asiatech) remain blocked — identical to consecutive prior passes, confirming intentional policy filtering not transient failure",
+    "IP range reachability stable at 3.2% (11/345 Iranian ranges responding from outside) — deliberate anti-monitoring posture persisting as established baseline",
+    "Asiatech compound failure continues: gateway, web portal, and IP ranges all impaired — worst-affected ISP across all observed passes",
+    "Electro DNS resolver unreachable again (persistent across passes) — possible targeted pressure on circumvention-adjacent DNS infrastructure",
+    "Domestic payment/service layer shows minor fluctuation: Saman Bank improved slightly (3442ms vs 3962ms previously) but still degraded; Snapp redirect loop and Shaparak timeout persist unchanged"
   ],
   "affected_services": [
-    "Asiatech ISP (gateway + web portal down)",
-    "Shecan DNS resolver (severely degraded, 5.2s response)",
-    "Electro DNS resolver (completely unreachable)",
-    "Shaparak payment network (unreachable from external probe)",
-    "Saman Bank web (degraded, 3.1s)",
-    "Respina ISP web (degraded, 3.6s)"
+    "All ISP management gateways (TIC x2, Irancell, Asiatech) — TCP probes uniformly blocked",
+    "334 of 345 Iranian IP ranges unreachable from outside — MCI (AS197207), Irancell (AS44244), Shatel (AS31549) completely dark",
+    "Asiatech — web portal, gateway, and IP ranges all impaired",
+    "Electro DNS resolver — unreachable (persistent across passes)",
+    "Snapp ride-hailing — redirect loop (persistent)",
+    "Shaparak payment gateway — unreachable (persistent)",
+    "Saman Bank — degraded response (3442ms, slight improvement from 3962ms)"
   ],
-  "public_summary": "Iran's internet backbone is largely operational. Asiatech ISP is experiencing notable connectivity issues with both its gateway and web portal unreachable. Anti-filter DNS resolvers Shecan and Electro are degraded or down, which may affect circumvention tool performance for end users. All major foreign platforms (Google, Telegram, YouTube, Instagram, WhatsApp) and domestic services (Digikala, Aparat, IRNA, etc.) remain accessible. Circumvention infrastructure (Tor, Psiphon, Snowflake) endpoints are healthy.",
-  "insight": "The combination of ISP-specific Asiatech failure with degraded anti-filter DNS resolvers (Shecan, Electro) while TIC's own DNS and the foreign platform ecosystem remain healthy suggests localized infrastructure stress at Asiatech and possible targeted throttling of popular circumvention DNS resolvers, rather than a national-level shutdown or policy-driven filtering event.",
-  "recommendation": "Monitor Asiatech and anti-filter DNS resolver performance over the next 2-4 hours to determine if this is transient congestion or a sustained targeted action. Watch for IODA/OONI signals showing traffic volume drops specific to Asiatech IP ranges (AS44244) that would confirm an ISP-level outage versus probe-blocking."
+  "public_summary": "Iran's internet remains in partial outage with no material change since the last pass 20 minutes ago. All foreign platforms (Google, Telegram, YouTube, Instagram, WhatsApp, GitHub) and most domestic services (Digikala, Aparat, Tapsi, Filimo, CafeBazaar) remain accessible. All ISP management gateways continue to block inbound probes, and Iranian IP range reachability from outside holds at approximately 3.2%. Circumvention tools (Tor, Snowflake, Psiphon) remain accessible. Saman Bank shows slight latency improvement but remains degraded.",
+  "insight": "The near-identical fingerprint across consecutive passes — zero ISP gateways reachable, 3.2% IP range reachability, all foreign platforms working, all circumvention tools accessible — confirms this is Iran's sustained anti-monitoring posture rather than any transient disruption; the network edge remains intentionally opaque to external probes while user-facing traffic flows normally, and the only micro-change (Saman Bank latency dropping ~500ms) suggests routine load fluctuation rather than a policy shift.",
+  "recommendation": "This stable pattern across multiple passes represents a confirmed operational baseline for Iran's anti-monitoring infrastructure. Shift monitoring focus to detection of deviation: a sudden improvement in IP range reachability or gateway responsiveness could signal a policy relaxation, while any foreign platform outage would indicate escalation into user-facing censorship. Cross-reference with IODA traffic volume trends for TIC (AS12880) and consider adding a traceroute probe to distinguish between routing-level blocking and application-layer filtering at the gateways."
 }
