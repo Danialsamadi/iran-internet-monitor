@@ -3,43 +3,40 @@
   "severity": "major",
   "suspected_causes": [
     "Policy filtering at international gateway layer -- all 4 major ISP gateways (TIC x2, Irancell, Asiatech) TCP refused/timeout from external vantage while BGP routes intact via observatories -- classic selective internet posture persisting across passes",
-    "Protocol whitelist enforcement at national gateway -- only DNS/HTTP/HTTPS probes reach 4.3% of IP ranges (46/1068); UDP/ICMP/SSH/VPN silently dropped per Bock et al. FOCI'20 whitelister model -- signature of stealth blackout architecture",
-    "Targeted DNS pressure on anti-censorship infrastructure -- Electro DNS timeout while Shecan/TIC DNS operational but Shecan now degraded (5.2s) -- selective pressure on circumvention-enabling resolvers consistent with prior passes",
+    "Protocol whitelist enforcement at national gateway -- only DNS/HTTP/HTTPS probes reach 4.2% of IP ranges (45/1068); UDP/ICMP/SSH/VPN silently dropped per Bock et al. FOCI'20 whitelister model -- signature of stealth blackout architecture",
+    "Targeted DNS pressure on anti-censorship infrastructure -- Electro DNS timeout while Shecan/TIC DNS operational; Shecan dramatically improved from 5.2s to 0.2s since prior pass -- indicates dynamic QoS manipulation on circumvention-enabling resolvers rather than static blocking",
     "Asiatech dual failure (gateway timeout + web timeout) -- possible ISP-specific technical issue compounding national filtering layer; warrants cross-reference with IODA/RIPEstat for AS49666 path anomalies",
-    "Dramatically shifting domestic QoS discrimination by ASN -- Respina/Irancell/CafeBazaar latency sharply improved while Snapp/Shaparak/Shecan degraded, across distinct ASN paths (AS197207, AS44244, AS49666, AS31549) with foreign platforms fast -- indicates per-ASN application-layer shaping or provincial IXP congestion, not uniform gateway pressure"
+    "Domestic QoS discrimination by ASN persists -- Respina 2.4s, Irancell web 1.7s, CafeBazaar 0.9s remain fast while Snapp redirect loop, Shaparak timeout, Saman Bank 3.4s degraded across distinct ASN paths (AS197207, AS44244, AS49666, AS31549) with foreign platforms fast -- indicates per-ASN application-layer shaping or provincial IXP congestion, not uniform gateway pressure"
   ],
   "suspected_causes_fa": [
-    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی -- تمام ۴ گیت‌وی ISP اصلی (TIC دوگانه، ایرانسل، آسیاتک) TCP رد/تایم‌اوت از بیرون در حالی که مسیرهای BGP سالم -- پروفایل کلاسیک \"اینترنت گزینشی\" در چند دور پبیوسته",
-    "اجبار وایت‌لیست پروتکل در گیت‌وی ملی -- فقط پرب‌های DNS/HTTP/HTTPS به ۴.۳٪ بازه‌های IP (۴۶ از ۱۰۶۸) می‌رسند؛ UDP/ICMP/SSH/VPN به‌سکوت دراپ شده -- مدل وایت‌لیست بک و همکاران FOCI'۲۰، امضای معماری قطعی مخفی",
-    "فشار انتخابی بر زیرساخت DNS ضدفیلترینگ -- الکترو تایم‌اوت در حالی که شکان/TIC سالم اما شکان اکنون تخریب (۵.۲ ثانیه) -- هدف‌گیری مفسر بر رزولورهای فعال‌کننده عبور، مطابق با روندهای پیشین",
+    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی -- تمام ۴ گیت‌وی ISP اصلی (TIC دوگانه، ایرانسل، آسیاتک) TCP رد/تایم‌اوت از بیرون در حالی که مسیرهای BGP سالم -- پروفایل کلاسیک \"اینترنت گزینشی\" در چند دور پیاپی",
+    "اجبار وایت‌لیست پروتکل در گیت‌وی ملی -- فقط پرب‌های DNS/HTTP/HTTPS به ۴.۲٪ بازه‌های IP (۴۵ از ۱۰۶۸) می‌رسند؛ UDP/ICMP/SSH/VPN به‌سکوت دراپ شده -- مدل وایت‌لیست بک و همکاران FOCI'۲۰، امضای معماری قطعی مخفی",
+    "فشار انتخابی بر زیرساخت DNS ضدفیلترینگ -- الکترو تایم‌اوت در حالی که شکان/TIC سالم؛ شکان از ۵.۲ ثانیه به ۰.۲ ثانیه جهش بهبود -- نشان‌دهنده دستکاری پویای QoS بر رزولورهای فعال‌کننده عبور، نه مسدودسازی استاتیک",
     "دوگانه قطع آسیاتک (گیت‌وی تایم‌اوت + وب تایم‌اوت) -- احتمالا مسئله فنی مخصوص ISP بر لایه فیلترینگ ملی سوار شده؛ نیازمند تقاطع‌بینی IODA/RIPEstat برای مسیرهای AS49666",
-    "تغییر شدید QoS داخلی به تفکیک ASN -- رسپینا/ایرانسل/کافه‌بازار جهش بهبود، در حالی که اسنپ/شپارک/شکان تخریب، بر مسیرهای ASN متمایز (AS197207، AS44244، AS49666، AS31549) با پلتفرم‌های خارجی سریع -- نشان‌دهنده شکل‌دهی لایه‌برنامه مخصوص-ASN یا شلوغی IXP‌های استانی، نه فشار یکنواخت گیت‌وی مرکزی"
+    "تفکیک QoS داخلی به تفکیک ASN تداوم دارد -- رسپینا ۲.۴ ثانیه، وب ایرانسل ۱.۷ ثانیه، کافه‌بازار ۰.۹ ثانیه سریع در حالی که اسنپ حلقه ریدایرکت، شپارک تایم‌اوت، بانک سامان ۳.۴ ثانیه تخریب، بر مسیرهای ASN متمایز در حالی که پلتفرم‌های خارجی سریع -- نشان‌دهنده شکل‌دهی لایه‌برنامه مخصوص-ASN یا شلوغی IXP‌های استانی، نه فشار یکنواخت گیت‌وی مرکزی"
   ],
   "affected_services": [
     "TIC gateways (2.187.1.1 connection refused, 78.38.112.1 timeout)",
     "Irancell gateway (5.232.0.1 timeout)",
     "Asiatech gateway (94.182.0.1 timeout) + web timeout",
     "Electro DNS (78.157.42.100 timeout)",
-    "Shecan DNS (degraded, 5.2s latency)",
-    "Snapp (down, redirect loop -- regression from prior pass)",
+    "Snapp (down, redirect loop -- persistent regression)",
     "Shaparak payment gateway (down, timeout)",
-    "Saman Bank (degraded, 3.0s latency)"
+    "Saman Bank (degraded, 3.4s latency)"
   ],
   "affected_services_fa": [
     "گیت‌وی‌های TIC (۲.۱۸۷.۱.۱ رد اتصال، ۷۸.۳۸.۱۱۲.۱ تایم‌اوت)",
     "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱ تایم‌اوت)",
     "گیت‌وی آسیاتک (۹۴.۱۸۲.۰.۱ تایم‌اوت) + وب تایم‌اوت",
     "DNS الکترو (۷۸.۱۵۷.۴۲.۱۰۰ تایم‌اوت)",
-    "DNS شکان (تخریب، ۵.۲ ثانیه لتیفیت)",
-    "اسنپ (نا‌دسترس، حلقه ریدایرکت -- رگرسیون از دور پیشین)",
+    "اسنپ (نا‌دسترس، حلقه ریدایرکت -- رگرسیون تداوم)",
     "گیت‌وی پرداخت شپارک (نا‌دسترس، تایم‌اوت)",
-    "بانک سامان (دست‌رسی‌پذیر اما تخریب، ۳.۰ ثانیه)"
+    "بانک سامان (دست‌رسی‌پذیر اما تخریب، ۳.۴ ثانیه)"
   ],
-  "public_summary": "Iran remains in selective internet posture: all major ISP gateways blocked externally while BGP routes intact, only 4.3% of IP ranges reachable via permitted protocols. Electro DNS targeted while Shecan/TIC DNS operational but Shecan now degraded (5.2s). Domestic QoS shifting dramatically -- Respina improved to 2.4s, Irancell web 1.4s, CafeBazaar 0.8s -- but Snapp reverted to redirect loop, Shaparak down, Shecan 5.2s, Saman Bank 3.0s. Foreign platforms all fast (Google 53ms, GitHub 99ms). Consistent with stealth blackout pattern documented June 2025 and Jan 2026, now with Asiatech-specific escalation and per-ASN domestic QoS discrimination.",
-  "public_summary_fa": "ایران در پروفایل \"اینترنت گزینشی\" باقی مانده: تمام گیت‌وی‌های اصلی ISP از بیرون مسدود، BGP سالم، تنها ۴.۲٪ بازه‌های IP از طریق پروتکل‌های مجاز (DNS/HTTP/HTTPS) دست‌رسی‌پذیر. DNS الکترو هدف قرار گرفته در حالی که شکان/TIC سالم اما شکان اکنون تخریب (۵.۲ ثانیه). تخریب داخلی در حال جابجایی -- رسپینا به ۲.۴ ثانیه بهبود، وب ایرانسل ۱.۴ ثانیه، کافه‌بازار چشمگیر به ۰.۸ ثانیه -- اما اسنپ به حلقه ریدایرکت رگرسیو، شپارک نا‌دسترس، شکان ۵.۲ ثانیه، بانک سامان ۳.۰ ثانیه. پلتفرم‌های خارجی همه سریع (گوگل ۵۳ms، گیت‌هاب ۹۹ms). هم‌سو با الگوی قطعی مخفی ثبت‌شده ژوئن ۲۰۲۵ و ژانویه ۲۰۲۶، اکنون با تشدید مخصوص-ISP بر آسیاتک و تفکیک QoS داخلی به تفکیک ASN.",
-  "insight": "Asiatech dual gateway+web failure combined with dramatically shifting domestic QoS -- Respina/Irancell/CafeBazaar all improved sharply while Snapp/Shaparak/Shecan degraded -- across different ASN paths (AS49666, AS197207, AS44244, AS31549) while foreign platforms remain fast, confirms per-ASN application-layer shaping or provincial IXP congestion rather than uniform national gateway pressure.",
-  "insight_fa": "دوگانه قطع گیت‌وی+وب آسیاتک (AS49666) در هم‌زمان با جهش کیفیت داخلی متغیر -- رسپینا/ایرانسل/کافه‌بازار به شدت بهبود، در حالی که اسنپ/شپارک/شکان تخریب -- بر مسیرهای ASN متمایز در حالی که پلتفرم‌های خارجی سریعند، قویاً تأیید می‌کند شکل‌دهی لایه‌برنامه به تفکیک ASN یا شلوغی IXP‌های استانی است، نه فشار یکنواخت گیت‌وی ملی.",
-  "recommendation": "Cross-reference the 45/1068 externally reachable IP ranges by ASN (MCI/Respina AS197207 vs Irancell AS44244 vs Asiatech AS49666 vs Shatel AS31549) and correlate with RIPEstat RIS path latency data for TBZIX/SHIX/AHWIX to confirm whether domestic QoS shifts correlate with specific provincial IXP transit segments.",
-  "recommendation_fa": "بازه‌های ۴۵/۱۰۶۸ دست‌رسی‌پذیر خارجی را به تفکیک ASN (MCI/رسپینا AS197207 در برابر ایرانسل AS44244 در برابر آسیاتک AS49666 در برابر شاتل AS31549) تقاطع دهید و با داده‌های مسیر RIPEstat RIS برای TBZIX/SHIX/AHWIX همبستگی دهید تا تأیید شود تغییرات QoS داخلی با مقاطع ترنزیت IXP‌های استانی خاص هم‌ارز است.",
-  "ts": "2026-07-26T22:41:25Z"
+  "public_summary": "Iran remains in selective internet posture: all major ISP gateways blocked externally while BGP routes intact, only 4.2% of IP ranges reachable via permitted protocols. Electro DNS targeted while Shecan/TIC DNS operational -- Shecan dramatically improved from 5.2s to 0.2s since prior pass, indicating dynamic QoS manipulation. Domestic QoS discrimination persists -- Respina 2.4s, Irancell 1.7s, CafeBazaar 0.9s fast but Snapp redirect loop, Shaparak down, Saman Bank 3.4s degraded. Foreign platforms all fast (Google 56ms, GitHub 102ms). Consistent with stealth blackout pattern documented June 2025 and Jan 2026, now with Asiatech-specific escalation and dynamic per-ASN domestic QoS shifts.",
+  "public_summary_fa": "ایران در پروفایل \"اینترنت گزینشی\" باقی مانده: تمام گیت‌وی‌های اصلی ISP از بیرون مسدود، BGP سالم، تنها ۴.۲٪ بازه‌های IP از طریق پروتکل‌های مجاز (DNS/HTTP/HTTPS) دست‌رسی‌پذیر. DNS الکترو هدف قرار گرفته در حالی که شکان/TIC سالم -- شکان از ۵.۲ ثانیه به ۰.۲ ثانیه جهش بهبود، نشان‌دهنده دستکاری پویای QoS. تفکیک QoS داخلی تداوم -- رسپینا ۲.۴ ثانیه، ایرانسل ۱.۷ ثانیه، کافه‌بازار ۰.۹ ثانیه سریع اما اسنپ حلقه ریدایرکت، شپارک نا‌دسترس، بانک سامان ۳.۴ ثانیه تخریب. پلتفرم‌های خارجی همه سریع (گوگل ۵۶ms، گیت‌هاب ۱۰۲ms). هم‌سو با الگوی قطعی مخفی ثبت‌شده ژوئن ۲۰۲۵ و ژانویه ۲۰۲۶، اکنون با تشدید مخصوص-ISP بر آسیاتک و جهش‌های پویای QoS داخلی به تفکیک ASN.",
+  "insight": "Shecan DNS latency collapsing from 5.2s to 0.2s in a single 10-minute interval while Electro DNS remains blocked and all major ISP gateways stay filtered confirms active, dynamic QoS manipulation at the national gateway layer -- not static policy but real-time traffic shaping on circumvention infrastructure.",
+  "insight_fa": "سقوط لتیفیت شکان از ۵.۲ ثانیه به ۰.۲ ثانیه در یک بازه ۱۰‌دقیقه‌ای در حالی که الکترو مسدود مانده و تمام گیت‌وی‌های ISP اصلی فیلتر شده، قویاً تأیید می‌کند دستکاری QoS فعال و پویا در لایه گیت‌وی ملی -- نه سیاست استاتیک بلکه شکل‌دهی ترافیک در لحظه بر زیرساخت عبور.",
+  "recommendation": "Correlate the 45/1068 externally reachable IP ranges by ASN (MCI/Respina AS197207 vs Irancell AS44244 vs Asiatech AS49666 vs Shatel AS31549) with RIPEstat RIS path latency data for TBZIX/SHIX/AHWIX provincial IXPs, and cross-reference with Filterwatch's tiered-access reports to confirm whether Shecan's latency collapse correlates with specific SHAHKAR/HAMTA tier activation windows.",
+  "recommendation_fa": "بازه‌های ۴۵/۱۰۶۸ دست‌رسی‌پذیر خارجی را به تفکیک ASN (MCI/رسپینا AS197207 در برابر ایرانسل AS44244 در برابر آسیاتک AS49666 در برابر شاتل AS31549) با داده‌های مسیر RIPEstat RIS برای IXP‌های استانی TBZIX/SHIX/AHWIX و گزارش‌های Filterwatch برای دسترسی درجه‌بندی‌شده تقاطع دهید تا تأیید شود جهش لتیفیت شکان با پنجره‌های فعال‌سازی درجات SHAHKAR/همتا هم‌ارز است."
 }
