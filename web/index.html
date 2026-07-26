@@ -39,16 +39,17 @@ a:hover { color: var(--color-accent-700); }
 ::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
 [dir="rtl"] body, [dir="rtl"] { font-family: Vazirmatn, var(--font-body); }
 [dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3,[dir="rtl"] h4,[dir="rtl"] h5 { font-family: Vazirmatn, var(--font-heading); }
+[dir="rtl"] p, [dir="rtl"] li, [dir="rtl"] span, [dir="rtl"] div, [dir="rtl"] td, [dir="rtl"] th, [dir="rtl"] button, [dir="rtl"] label, [dir="rtl"] input { font-family: Vazirmatn; }
 
 .tag { display: inline-flex; align-items: center; font-size: 11px; letter-spacing: .02em; padding: 3px 10px; border-radius: 2px; }
 .tag-accent { background: var(--color-accent-100); color: var(--color-accent-800); }
 .tag-accent-2 { background: var(--color-accent-2-100); color: var(--color-accent-2-800); }
 .tag-neutral { background: var(--color-neutral-100); color: var(--color-neutral-800); }
-.input { width: 100%; min-height: 36px; padding: 6px 10px; font: inherit; font-size: 14px; color: var(--color-text);
+.input { width: 100%; min-height: 36px; padding: 6px 10px; font-size: 14px; color: var(--color-text);
   caret-color: var(--color-accent); background: var(--color-surface); border: 1px solid var(--color-divider); border-radius: 2px; }
 .input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; text-decoration: none;
-  font-family: inherit; font-weight: 600; font-size: 14px; line-height: 1.2; color: var(--color-text);
+  font-weight: 600; font-size: 14px; line-height: 1.2; color: var(--color-text);
   background: transparent; border: 1px solid transparent; padding: 10px 18px; border-radius: 2px; }
 .btn-secondary { border-color: var(--color-divider); }
 .btn-secondary:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
@@ -67,6 +68,10 @@ a:hover { color: var(--color-accent-700); }
 /* CMYK plate headline / numerals — three misregistered process plates whose
    multiply overlap prints the dark core; the .paper span carries the text
    for assistive tech, the plates are aria-hidden repeats. */
+[dir="rtl"] .cmyk-num,
+[dir="rtl"] .cmyk-head { font-family: Vazirmatn, var(--font-body); }
+[dir="ltr"] .cmyk-num,
+[dir="ltr"] .cmyk-head { font-family: var(--font-body); }
 .cmyk-head { position: relative; }
 .cmyk-head .paper { color: var(--color-bg);
   text-shadow: 0.027em 0.0185em 0 var(--color-bg), -0.0245em -0.0175em 0 var(--color-bg); }
@@ -91,14 +96,14 @@ a:hover { color: var(--color-accent-700); }
 .muted { color: rgba(32,30,29,.65); }
 .kicker { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--color-accent-700); }
 .h-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(32,30,29,.65); margin-bottom: 8px; }
-.navbtn { background: none; border: 0; cursor: pointer; font-family: inherit; font-weight: 600; font-size: 14px;
+.navbtn { background: none; border: 0; cursor: pointer; font-weight: 600; font-size: 14px;
   padding: 6px 2px; border-bottom: 2px solid transparent; color: var(--color-text); }
 .navbtn[aria-current="page"] { border-color: var(--color-accent); color: var(--color-accent-800); }
 .cellrow { display: grid; grid-template-columns: repeat(48, 1fr); gap: 1.5px; height: 14px; }
 .cellrow i, .bars i { display: block; }
 .dot { width: 9px; height: 9px; flex: none; display: inline-block; }
 .catbtn { display: flex; width: 100%; justify-content: flex-start; gap: 8px; font-size: 12.5px; text-align: start;
-  padding: 5px 7px; border-radius: 2px; border: 0; background: none; cursor: pointer; font-family: inherit; color: var(--color-text); }
+  padding: 5px 7px; border-radius: 2px; border: 0; background: none; cursor: pointer; color: var(--color-text); }
 .catbtn[aria-current="true"] { background: var(--color-accent-100); color: var(--color-accent-800); }
 .lang-row { max-width: 1180px; margin: 20px auto 0; display: flex; align-items: center; gap: 14px; font-size: 13px; padding-inline: 4px; }
 @media (max-width: 900px) {
