@@ -724,4 +724,45 @@
   "insight_fa": "یازده پاس پایش متوالی اثربصمتِ یکسانی نشان می‌دهند: صفر دروازه ISP قابل‌دسترس، ~۳.۸٪ دسترس‌پذیری بازه IP، تمام پلتفرم‌های خارجی و ابزارهای عبور بالا، خدمات داخلی عادی — این خط پایه‌ی پایدارِ رویِ خارجی ایران تحت سانسورِ روتین است، نه رویداد قطعی.",
   "recommendation": "Maintain current monitoring cadence; no escalation warranted. Cross-reference with IODA/OONI/Filterwatch for independent confirmation of stable baseline. Watch for any deviation in foreign platform reachability or circumvention tool health as early indicator of policy escalation.",
   "recommendation_fa": "کادنس پایش را حفظ کنید؛ ارتقای سطح ضروری نیست. با IODA/OONI/فیلتر‌واچ برای تأیید خط پایه پایدار تقاطع‌یابی کنید. هر انحرافی در دسترس‌پذیری پلتفرم‌های خارجی یا سلامت ابزارهای عبور را به‌عنوان نشانه‌ی پیشینِ تشدید سیاست رصد کنید."
+}{
+  "overall_status": "partial_outage",
+  "severity": "minor",
+  "suspected_causes": [
+    "sustained inbound filtering at all major ISP gateways (TIC x2, Irancell, Asiatech) — TCP connections refused or timed out, consistent with active DPI/SNI filtering at the international gateway layer as documented by IODA's comparative shutdown analysis",
+    "persistent anti-monitoring posture: only ~3.8% of labeled Iranian IP ranges (13 of 345) reachable from outside — consistent with the 'selective internet' pattern identified by Filterwatch (March 2026), where enterprise/gov SIMs get open internet while general public traffic is filtered",
+    "Asiatech compound impairment: gateway timeout + web portal timeout + IP ranges dark — worst-affected ISP, possibly indicating infrastructure degradation or targeted pressure on this smaller operator",
+    "Electro DNS resolver persistently unreachable — likely targeted pressure on anti-censorship DNS infrastructure (Shecan remains operational, Electro down)",
+    "domestic payment layer degradation: Shaparak payment gateway down, Saman Bank degraded (~3.3s latency) — possible NIN-side issue or targeted financial infrastructure pressure"
+  ],
+  "suspected_causes_fa": [
+    "فیلتر مداوم ورودی در تمام دروازه‌های اصلی ارائه‌دهندگان (TIC دوگانه، ایرانسل، آسیاتک) — TCP رد یا تایم‌اوت می‌شوند، سازگار با فیلتر فعال DPI/SNI در لایه دروازه بین‌المللی",
+    "وضعیت ضد پایش مداوم: تنها حدود ۳.۸٪ بازه‌های IP برچسب‌گذاری شده ایرانی (۱۳ از ۳۴۵) از خارج قابل دسترس — سازگار با الگوی «اینترنت گزینشی» (فیلتر واچ، مارس ۲۰۲۶) که در آن SIMهای سازمانی/دولتی اینترنت باز دارند در حالی که ترافیک عمومی فیلتر می‌شود",
+    "اختلال ترکیبی آسیاتک: تایم‌اوت دروازه + تایم‌اوت پورتال وب + تاریکی بازه‌های IP — بدترین ارائه‌دهنده در تمام ابعاد، احتمالاً تخریب زیرساخت یا فشار هدفمند بر این اپراتور کوچک‌تر",
+    "سرور DNS الکترو به‌صورت مداوم نا‌دسترس — احتمالاً فشار هدفمند بر زیرساخت DNS ضد سانسور (شکن بالا، الکترو پایین)",
+    "کاهش لایه پرداخت داخلی: درگاه شاپرک قطع، بانک سامان کند (~۳.۳ ثانیه) — ممکن است مسئله سمت NIN یا فشار هدفمند بر زیرساخت مالی"
+  ],
+  "affected_services": [
+    "All ISP management gateways (TIC x2, Irancell, Asiatech) — inbound TCP uniformly blocked",
+    "332 of 345 Iranian IP ranges unreachable from outside — MCI, Irancell, Shatel ranges completely dark externally",
+    "Asiatech — gateway, web portal, and IP ranges all impaired (worst-affected ISP)",
+    "Electro DNS resolver — unreachable (persistent across all passes)",
+    "Snapp ride-hailing — redirect loop (persistent)",
+    "Shaparak payment gateway — unreachable (persistent)",
+    "Saman Bank — degraded (~3338ms, stable)"
+  ],
+  "affected_services_fa": [
+    "تمام دروازه‌های مدیریت ISP (TIC دوگانه، ایرانسل، آسیاتک) — TCP ورودی به‌صورت یکنواخت مسدود",
+    "۳۳۲ از ۳۴۵ بازه IP ایرانی از خارج نا‌دسترس — بازه‌های مخابرات ایران، ایرانسل، شاتل به‌صورت کامل تاریک",
+    "آسیاتک — دروازه، پورتال وب، و بازه‌های IP همگی دچار اختلال (بدترین ISP)",
+    "DNS الکترو — نا‌دسترس (مداوم در تمام پاس‌ها)",
+    "اسنپ — حلقه ریدایرکت (مداوم)",
+    "درگاه پرداخت شاپرک — نا‌دسترس (مداوم)",
+    "بانک سامان — تخریب شده (~۳۳۳۸ میلی‌ثانیه، پایدار)"
+  ],
+  "public_summary": "Iran's internet shows a stable, degraded baseline consistent with normal censorship operations. All foreign platforms (Google, Telegram, YouTube, Instagram, WhatsApp, GitHub, Wikipedia) and circumvention tools (Tor, Snowflake, Psiphon) remain fully accessible. All four major ISP gateways block external probes; only ~3.8% of Iranian IP ranges respond from outside. Domestic services (Digikala, Aparat, Tapsi, Filimo, CafeBazaar, Rubika, Eitaa, IRNA) function normally. Asiatech remains the worst-affected ISP with gateway, web, and IP ranges all impaired.",
+  "public_summary_fa": "اینترنت ایران خط پایه‌ی پایداریِ تخریب‌شده را نشان می‌دهد که با عملیات سانسورِ روتین سازگار است. تمام پلتفرم‌های خارجی (گوگل، تلگرام، یوتیوب، اینستاگرام، واتس‌اپ، گیت‌هاب، ویکی‌پدیا) و ابزارهای عبور (تور، اسنوفلک، سایفون) به‌صورت کامل قابل‌دسترس‌اند. تمام چهار دروازه‌ی اصلی ISP پروب‌های خارجی را مسدود می‌کنند؛ تنها ~۳.۸٪ بازه‌های IP ایرانی از خارج پاسخ می‌دهند. خدمات داخلی (دیجی‌کالا، آپارات، تپسی، فیلمو، کافه‌بازار، روبیکا، ایتا، ایرنا) به‌صورت عادی کار می‌کنند. آسیاتک بدترین ISP با دروازه، وب، و بازه‌های IP همگی در حالت اختلال باقی مانده است.",
+  "insight": "Twelve consecutive monitoring passes show an identical fingerprint: zero ISP gateways reachable, ~3.8% IP range reachability, all foreign platforms and circumvention tools fully up, domestic services operating normally — this is Iran's stable external-facing baseline under routine censorship, not an outage event.",
+  "insight_fa": "دوازده پاس پایش متوالی اثربصمتِ یکسانی نشان می‌دهند: صفر دروازه ISP قابل‌دسترس، ~۳.۸٪ دسترس‌پذیری بازه IP، تمام پلتفرم‌های خارجی و ابزارهای عبور بالا، خدمات داخلی عادی — این خط پایه‌ی پایدارِ رویِ خارجی ایران تحت سانسورِ روتین است، نه رویداد قطعی.",
+  "recommendation": "Maintain current monitoring cadence; no escalation warranted. Cross-reference with IODA/OONI/Filterwatch for independent confirmation of stable baseline. Watch for any deviation in foreign platform reachability or circumvention tool health as early indicator of policy escalation.",
+  "recommendation_fa": "کادنس پایش را حفظ کنید؛ ارتقای سطح ضروری نیست. با IODA/OONI/فیلتر‌واچ برای تأیید خط پایه پایدار تقاطع‌یابی کنید. هر انحرافی در دسترس‌پذیری پلتفرم‌های خارجی یا سلامت ابزارهای عبور را به‌عنوان نشانه‌ی پیشینِ تشدید سیاست رصد کنید."
 }
