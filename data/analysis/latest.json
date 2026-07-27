@@ -1,53 +1,52 @@
 {
-  "ts": "2026-07-27T07:02:06Z",
   "overall_status": "partial_outage",
   "severity": "major",
   "suspected_causes": [
     "All 4 major ISP international gateways (TIC x2, Irancell, Asiatech) remain externally unreachable while BGP routes hold — confirmed sustained stealth blackout posture with centralized DPI + protocol whitelist at national gateway layer, consistent with Bock et al. FOCI'20 whitelister architecture",
-    "Irancell gateway (5.232.0.1) STABILIZED at i/o timeout (silent DROP) — previously oscillated between DROP/REJECT across multiple passes; convergence on DROP state indicates DPI appliance cluster failover nodes have synchronized rule tables or entered steady-state enforcement mode",
-    "TIC gateway 2.187.1.1 returns 'connection refused' (active REJECT) while TIC gateway 78.38.112.1 returns i/o timeout (silent DROP) — asymmetric behavior at two TIC nodes suggests either different firmware versions on gateway appliances or geographically differentiated filtering rules",
+    "Irancell gateway (5.232.0.1) STABILIZED at i/o timeout (silent DROP) across consecutive passes — convergence on DROP state confirms DPI appliance cluster has synchronized rule tables and entered steady-state enforcement mode",
+    "TIC gateway 2.187.1.1 returns 'connection refused' (active REJECT) while TIC gateway 78.38.112.1 returns i/o timeout (silent DROP) — asymmetric behavior at two TIC nodes suggests different firmware versions on gateway appliances or geographically differentiated filtering rules",
     "Protocol whitelist enforcement stable at 4.3% — 46 of 1,068 labeled IP ranges reachable across 78 operators (unchanged from previous pass); UDP/ICMP/SSH/VPN silently dropped at gateway per IRBlock (Tai et al.) USENIX Security '25",
-    "Electro DNS (78.157.42.100) persistently timing out while Shecan (178.22.122.100, 227ms) and TIC DNS (217.218.155.155, 312ms) remain operational — sustained targeted suppression of anti-censorship DNS resolver infrastructure",
+    "Electro DNS (78.157.42.100) persistently timing out while Shecan (178.22.122.100, 227ms) and TIC DNS (217.218.155.155, 230ms) remain operational — sustained targeted suppression of anti-censorship DNS resolver infrastructure",
     "Asiatech dual failure persists — gateway (94.182.0.1 timeout) + web portal (www.asiatech.ir deadline exceeded) both down across consecutive passes — ISP-specific isolation, likely CRA directive or sustained infrastructure degradation",
     "Snapp (snapp.ir) remains in redirect-loop error state (stopped after 10 redirects) — unchanged across all observed passes; persistent DPI rule-state fluctuation across multiple enforcement nodes or application-layer misconfiguration on NIN-routed traffic",
     "Shaparak payment gateway (www.shaparak.ir) deadline-exceeded timeout persists — domestic payment infrastructure degradation or targeted application-layer filtering at NIN layer",
-    "Saman Bank (sb24.ir) latency IMPROVED to 3,190ms (was 3,434ms, 3,477ms prior) — continued monotonic four-pass regression; marginal recovery may indicate transient NIN congestion easing rather than structural degradation",
+    "Saman Bank (sb24.ir) latency DEGRADED to 3,514ms (was 3,190ms prior) — reversal of prior four-pass improvement trend; suggests transient NIN congestion re-emerging rather than structural recovery",
     "Foreign platforms (Google, Telegram, Instagram, YouTube, WhatsApp, Wikipedia, GitHub) all reachable from outside — confirms filtering is directional (inbound to Iran blocked, outbound from Iran allowed) not BGP withdrawal"
   ],
   "suspected_causes_fa": [
     "چهار گیت‌وی اصلی بین‌المللی ISP (TIC دوگانه، ایرانسل، آسیاتک) از بیرون نا reachable در حالی که مسیرهای BGP سالم باقی مانده — تأیید وضعیت خاموشی پنهان پایدار با DPI متمرکز + وایت‌لیست پروتکل در لایه گیت‌وی ملی، مطابق مدل وایت‌لیستر Bock et al. FOCI'20",
-    "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱) در حالت سکوت DROP تثبیت شد — قبلاً بین DROP و REJECT نوسان داشت؛ همگرایی روی DROP نشان‌دهنده هماهنگی گره‌های DPI یا ورود به حالت اجرای پایدار است",
+    "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱) در حالت سکوت DROP تثبیت شده در passes متوالی — همگرایی روی DROP نشان‌دهنده هماهنگی گره‌های DPI و ورود به حالت اجرای پایدار است",
     "گیت‌وی TIC یک (۲.۱۸۷.۱.۱) 'connection refused' (REJECT فعال) برمی‌گرداند در حالی که گیت‌وی TIC دو (۷۸.۳۸.۱۱۲.۱) تایم‌اوت سکوت (DROP) برمی‌گرداند — رفتار نامتقارن بین دو گره TIC نشان‌دهنده نسخه‌های مختلف firmware یا قوانین فیلترینگ متفاوت جغرافیایی است",
     "اجبار وایت‌لیست پروتکل پایدار در ۴.۳٪ — فقط ۴۶ از ۱۰۶۸ بازه IP قابل دسترسی از بیرون در ۷۸ اپراتور (بدون تغییر)؛ UDP/ICMP/SSH/VPN در لایه گیت‌وی به‌سکوت دراپ شده مطابق IRBlock (Tai et al.) USENIX Security '۲۵",
-    "DNS الکترو (۷۸.۱۵۷.۴۲.۱۰۰) همچنان تایم‌اوت دارد در حالی که شکان (۲۲۷ms) و TIC DNS (۳۱۲ms) سالم هستند — سرکوب هدفمند پایدار زیرساخت رزولور DNS ضدفیلترینگ",
+    "DNS الکترو (۷۸.۱۵۷.۴۲.۱۰۰) همچنان تایم‌اوت دارد در حالی که شکان (۲۲۷ms) و TIC DNS (۲۳۰ms) سالم هستند — سرکوب هدفمند پایدار زیرساخت رزولور DNS ضدفیلترینگ",
     "شکست دوگانه آسیاتک ادامه دارد — گیت‌وی (تایم‌اوت) + پورتال وب (خطای ددلاین) هر دو پایین — انزوای ISP-اختصاصی احتمالاً دستور CRA یا تخریب زیرساختی پایدار",
     "اسنپ (snapp.ir) همچنان در وضعیت حلقه ریدایرکت (۱۰ ریدایرکت) — بدون تغییر در تمام passes مشاهده‌شده؛ نوسان قانون DPI یا پیکربندی لایه‌برنامه روی ترافیک مسیریابی‌شده NIN",
     "پرداخت شاپرک (www.shaparak.ir) تایم‌اوت ددلاین — تخریب زیرساخت پرداخت داخلی یا فیلترینگ لایه‌برنامه در لایه NIN",
-    "تأخیر بانک سامان (sb24.ir) بهبود یافت به ۳,۱۹۰ms (قبلی ۳,۴۳۴ms و ۳,۴۷۷ms) — بهبود تدریجی در چهار pass متوالی؛ احتمالاً کاهش تراکم موقتی NIN نه تخریب ساختاری",
+    "تأخیر بانک سامان (sb24.ir) بدتر شده به ۳,۵۱۴ms (قبلی ۳,۱۹۰ms) — برگشت روند بهبود چهارpassی پیشین؛ احتمالاً تراکم موقتی NIN دوباره بروز کرده نه بازیابی ساختاری",
     "پلتفرم‌های خارجی (گوگل، تلگرام، اینستاگرام، یوتیوب، واتساپ، ویکیپدیا، گیت‌هاب) همگی از بیرون قابل دسترسی — تأیید می‌کند فیلترینگ جهت‌دار است (ورودی به ایران مسدود، خروجی ایران مجاز)"
   ],
   "affected_services": [
     "TIC gateways (2.187.1.1 connection refused, 78.38.112.1 timeout)",
-    "Irancell gateway (5.232.0.1 timeout — converged to DROP)",
+    "Irancell gateway (5.232.0.1 timeout — converged to stable DROP)",
     "Asiatech gateway (94.182.0.1 timeout) + web portal (www.asiatech.ir deadline exceeded)",
     "Electro DNS (78.157.42.100 timeout)",
     "Snapp (snapp.ir redirect loop, 10 redirects)",
     "Shaparak payment gateway (www.shaparak.ir timeout)",
-    "Saman Bank (sb24.ir degraded, 3.2s latency — improving)"
+    "Saman Bank (sb24.ir degraded, 3.5s latency — regressing)"
   ],
   "affected_services_fa": [
     "گیت‌وی‌های TIC (۲.۱۸۷.۱.۱ رد اتصال، ۷۸.۳۸.۱۱۲.۱ تایم‌اوت)",
-    "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱ تایم‌اوت — تثبیت‌شده روی DROP)",
+    "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱ تایم‌اوت — تثبیت‌شده روی DROP پایدار)",
     "گیت‌وی آسیاتک (۹۴.۱۸۲.۰.۱ تایم‌اوت) + پورتال وب (deadlined)",
     "DNS الکترو (۷۸.۱۵۷.۴۲.۱۰۰ تایم‌اوت)",
     "اسنپ (حلقه ریدایرکت، ۱۰ ریدایرکت)",
     "شاپرک درگاه پرداخت (تایم‌اوت)",
-    "بانک سامان (کاهش عملکرد، ۳.۲ ثانیه تأخیر — در حال بهبود)"
+    "بانک سامان (کاهش عملکرد، ۳.۵ ثانیه تأخیر — رگرسیو)"
   ],
-  "public_summary": "Iran remains in a sustained stealth blackout posture: all four major ISP international gateways are externally unreachable while BGP routes hold and domestic services function normally. The protocol whitelist continues to allow only ~4.3% of IP ranges to respond externally, consistent with centralized DPI filtering at the national gateway layer. The Irancell gateway has converged to a stable DROP state after previous oscillation, and the Saman Bank latency continues its slow four-pass improvement (now 3.2s).",
-  "public_summary_fa": "ایران همچنان در وضعیت خاموشی پنهان پایدار قرار دارد: تمام چهار گیت‌وی بین‌المللی ISP از بیرون نا reachable هستند در حالی که مسیرهای BGP سالم باقی مانده و سرویس‌های داخلی عادی کار می‌کنند. وایت‌لیست پروتکل همچنان فقط حدود ۴.۳٪ بازه‌های IP را از بیرون پاسخگو نگه می‌دارد، مطابق فیلترینگ DPI متمرکز در لایه گیت‌وی ملی. گیت‌وی ایرانسل پس از نوسان قبلی روی حالت DROP تثبیت شده و تأخیر بانک سامان بهبود تدریجی چهارpass‌ای را ادامه داده (اکنون ۳.۲ ثانیه).",
-  "insight": "The convergence of the Irancell gateway from oscillation to stable DROP across successive passes suggests the DPI appliance cluster has completed a rule-table synchronization cycle — this is the fingerprint of a maturing, centrally-coordinated filtering infrastructure that no longer requires per-node experimentation.",
-  "insight_fa": "همگرایی گیت‌وی ایرانسل از نوسان به حالت DROP پایدار در passes متوالی نشان می‌دهد خوشه DPI چرخه هماهنگ‌سازی جدول قوانین را تکمیل کرده — این اثر انگشت زیرساخت فیلترینگ متمرکز در حال بلوغ است که دیگر به آزمایش per-node نیاز ندارد.",
-  "recommendation": "Monitor for regime activity indicators (military mobilization, political tensions, scheduled protests) that would correlate with maintained or escalated filtering; the stable DROP convergence suggests authorities have achieved their desired filtering baseline and may further tighten if trigger events occur.",
-  "recommendation_fa": "شاخص‌های فعالیت حکومتی (بسیج نظامی، تنش‌های سیاسی، تظاهرات برنامه‌ریزی‌شده) را رصد کنید که با حفظ یا تشدید فیلترینگ همبسته باشند؛ همگرایی DROP پایدار نشان می‌دهد مقامات به سطح فیلترینگ مطلوب خود رسیده‌اند و در صورت وقوع رویداد محرک ممکن است بیشتر سخت‌گیری کنند."
+  "public_summary": "Iran remains in a sustained stealth blackout posture: all four major ISP international gateways are externally unreachable while BGP routes hold and domestic services function normally. The protocol whitelist continues to allow only ~4.3% of IP ranges to respond externally, consistent with centralized DPI filtering at the national gateway layer. The Irancell gateway has stabilized in a DROP state after prior oscillation, and Saman Bank latency has regressed (now 3.5s), ending its prior improvement trend.",
+  "public_summary_fa": "ایران همچنان در وضعیت خاموشی پنهان پایدار قرار دارد: تمام چهار گیت‌وی بین‌المللی ISP از بیرون نا reachable هستند در حالی که مسیرهای BGP سالم باقی مانده و سرویس‌های داخلی عادی کار می‌کنند. وایت‌لیست پروتکل همچنان فقط حدود ۴.۳٪ بازه‌های IP را از بیرون پاسخگو نگه می‌دارد، مطابق فیلترینگ DPI متمرکز در لایه گیت‌وی ملی. گیت‌وی ایرانسل پس از نوسان قبلی روی حالت DROP تثبیت شده و تأخیر بانک سامان به ۳.۵ ثانیه رگرسیو شده، روند بهبود پیشین را متوقف کرده است.",
+  "insight": "The system has reached a stable filtering equilibrium: all four major gateways externally dark, protocol whitelist frozen at ~4.3%, and domestic services operating at elevated latency — this is the 'selective internet posture' (Jan 2026 pattern) institutionalized as steady state, not a transient event.",
+  "insight_fa": "سیستم به تعادل فیلترینگ پایدار رسیده: چهار گیت‌وی اصلی از بیرون تاریک، وایت‌لیست پروتکل روی ۴.۳٪ یخ‌زده، و سرویس‌های داخلی با تأخیر بالا فعال — این «موقعیت اینترنت انتخابی» (الگوی ژانویه ۲۰۲۶) به عنوان حالت عادی تثبیت شده، نه رویداد گذرا.",
+  "recommendation": "Monitor for regime activity indicators (military mobilization, political tensions, scheduled protests) that would correlate with maintained or escalated filtering; the stable equilibrium suggests authorities have achieved their filtering baseline and may tighten further only if trigger events occur.",
+  "recommendation_fa": "شاخص‌های فعالیت حکومتی (بسیج نظامی، تنش‌های سیاسی، تظاهرات برنامه‌ریزی‌شده) را رصد کنید که با حفظ یا تشدید فیلترینگ همبسته باشند؛ تعادل پایدار نشان می‌دهد مقامات به خط پایه فیلترینگ مطلوب خود رسیده‌اند و تنها در صورت وقوع رویداد محرک ممکن است بیشتر سخت‌گیری کنند."
 }
