@@ -296,12 +296,12 @@ function overview() {
   const lat = latHistogram();
   const headline = HEADLINE_IDS.map(id => all.find(s => s.id === id)).filter(Boolean);
   return `
-  <div class="pad grid2" style="padding-top:30px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start">
-    <div>
-      <h2 class="verdict" style="font-size:62px;margin:0">${plateText(t(ven, vfa), "cmyk-head", "line-height:.95;letter-spacing:-.035em;display:inline-block")}</h2>
-      <p style="font-size:17px;line-height:1.55;margin:18px 0 0;max-width:48ch;text-wrap:pretty">${lede}</p>
-    </div>
-    <div class="grid4" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px 16px">
+  <div class="pad" style="padding-top:30px">
+    <h2 class="verdict" style="font-size:62px;margin:0">${plateText(t(ven, vfa), "cmyk-head", "line-height:.95;letter-spacing:-.035em;display:inline-block")}</h2>
+  </div>
+  <div class="pad grid2" style="display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start">
+    <p style="font-size:17px;line-height:1.55;margin:18px 0 0;max-width:48ch;text-wrap:pretty">${lede}</p>
+    <div class="grid4" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px 16px;margin-top:18px">
       ${tallies().map(tl => `
         <div>
           ${plateText(num(tl[3]), "cmyk-num", "font-size:50px")}
