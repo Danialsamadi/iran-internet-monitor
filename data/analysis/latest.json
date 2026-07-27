@@ -14,6 +14,18 @@
     "Saman Bank (sb24.ir) latency at 3,298ms (degraded) — remains above 3-second operational threshold; NIN routing anomaly or application-layer interference persisting from prior pass (was 3,130ms — marginal worsening)",
     "All circumvention tools (Tor, Tor BridgeDB, Snowflake, Psiphon) and all foreign platforms (Google, Cloudflare, Telegram, WhatsApp, Instagram, YouTube, Wikipedia, GitHub) fully accessible from external vantage — selective internet architecture permits whitelisted foreign services while blocking general IP space"
   ],
+  "suspected_causes_fa": [
+    "تمام ۴ گیت‌وی بین‌المللی ISP بزرگ (TIC دوگانه، ایرانسل، آسیاتک) از پراب‌های خارجی غیرقابل‌دسترس در حالی که مسیرهای BGP سالم‌اند — حالت سکوتِ پنهان (stealth blackout) با فیلترینگ سیاستی متمرکز DPI + وایت‌لیست پروتکل در لایه گیت‌وی ملی، همساز با معماری وایت‌لیستر بک و همکاران FOCI‌۲۰",
+    "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱) از timeout (DROPِ خاموش) دوباره به connection refused (RST فعال) برگشت — عبور قبلی حالت DROP داشت پس از REJECT؛ این بازگشت دوم به REJECT نوسانِ پایدارِ حالت قانون در خوشه دستگاه DPI با نودهای failover عدم‌همگام را تأیید می‌کند",
+    "اعمال وایت‌لیست پروتکل در ۴.۲٪ تثبیت — ۴۵ از ۱۰۶۸ رنج IP برچسب‌گذاری‌شده در ۷۸ اپراتور قابل‌دسترس (تغییر نسبت به عبور قبلی اندک); UDP/ICMP/SSH/VPN در گیت‌وی به‌سکوت دراپ شده — طبق IRBlock (تای و همکاران) USENIX Security ۲۵",
+    "DNS الکترو (۷۸.۱۵۷.۴۲.۱۰۰) به‌صورت پایدار تایم‌اوت در حالی که شکن (۱۷۸.۲۲.۱۲۲.۱۰۰، ۲۲۵ms) و DNS مخابرات (۲۱۷.۲۱۸.۱۵۵.۱۵۵، ۲۲۸ms) سریع‌اند — سرکوب هدفمند پایدار زیرساخت DNS ضدفیلترینگ",
+    "شکست دوگانه آسیاتک تداوم دارد — گیت‌وی (۹۴.۱۸۲.۰.۱ تایم‌اوت) + پورتال وب (www.asiatech.ir deadline exceeded) هر دو در عبورهای متوالی down — انزوای ISP‌محدوده محتمل دستور CRA یا تخریب زیرساختی پایدار",
+    "اسنپ (snapp.ir) در حالت redirect-loop (متوقف بعد از ۱۰ redirect) باقی مانده — در همه عبورهای مشاهده‌شده ثابت؛ نوسانِ پایدارِ حالت قانون DPI در نودهای چندگانه اجرا",
+    "گیت‌وی پرداخت شاپرک (www.shaparak.ir) تایم‌اوت deadline-exceeded تداوم دارد — تخریب زیرساخت پرداخت داخلی یا فیلترینگ لایه‌برنامه هدفمند",
+    "پورتال وب شاتل (www.shatel.ir) لیتنسی از ۵۸۵۰ms به ۱۲۹۷ms بهبود یافت — پریدنِ گذرا تراکم یا تنزل اولویت QoS بود، اکنون به بازه عادی بازده",
+    "بانک سامان (sb24.ir) لیتنسی ۳۲۹۸ms (تخریب) — همچنان فراتر از آستانه ۳ ثانیه عملیات؛ تخریب مسیریابی نین یا تداخل لایه‌برنامه از عبور قبلی تداوم دارد (۳۱۳۰ms — تخریبِ جزئی)",
+    "همه ابزارهای عبور (تور، BridgeDB، اسنوفلیک، سایفون) و همه پلتفرم‌های خارجی (گوگل، کلادفلر، تلگرام، واتساپ، اینستاگرام، یوتیوب، ویکی‌پدیا، گیت‌هاب) از پراب خارجی کاملاً قابل‌دسترس — معماری اینترنتِ انتخابی سرویس‌های وایت‌لیست‌شده خارجی را اجازه می‌دهد در حالی که فضای IP عمومی بلاک می‌ماند"
+  ],
   "affected_services": [
     "TIC gateway 2.187.1.1 (connection refused) — persistent across all passes",
     "TIC gateway 78.38.112.1 (timeout) — persistent",
@@ -25,6 +37,18 @@
     "Shatel www.shatel.ir (recovered, 1,297ms latency) — was 5,850ms previous pass, transient spike resolved",
     "Saman Bank sb24.ir (degraded, 3,298ms latency) — remains above 3s threshold, marginal worsening from 3,130ms",
     "~95.8% of probed IP ranges unreachable — whitelist enforcement stable at ~4.2% (45/1068), 78 operators"
+  ],
+  "affected_services_fa": [
+    "گیت‌وی TIC ۲.۱۸۷.۱.۱ (connection refused) — در همه عبورها پایدار",
+    "گیت‌وی TIC ۷۸.۳۸.۱۱۲.۱ (timeout) — پایدار",
+    "گیت‌وی ایرانسل ۵.۲۳۲.۰.۱ (connection refused) — از timeout به REJECT برگشت؛ نوسان حالت قانون خوشه دستگاه DPI در چند گذار تأیید شد",
+    "گیت‌وی آسیاتک ۹۴.۱۸۲.۰.۱ (timeout) + پورتال وب www.asiatech.ir (deadline exceeded) — شکست دوگانه پایدار",
+    "DNS الکترو ۷۸.۱۵۷.۴۲.۱۰۰ (timeout) — سرکوب پایدار DNS ضدفیلترینگ",
+    "اسنپ snapp.ir (redirect loop، متوقف بعد از ۱۰ redirect) — سیکل‌سازی پایدار حالت قانون DPI",
+    "شاپرک www.shaparak.ir (deadline exceeded) — تایم‌اوت گیت‌وی پرداخت تداوم دارد",
+    "شاتل www.shatel.ir (بازیابی یافت، ۱۲۹۷ms لیتنسی) — عبور قبلی ۵۸۵۰ms بود، پریدن گذرا حل شد",
+    "بانک سامان sb24.ir (تخریب، ۳۲۹۸ms لیتنسی) — همچنان فراتر از آستانه ۳ ثانیه، تخریب جزئی از ۳۱۳۰ms",
+    "~۹۵.۸٪ از رنج‌های IP پراب‌شده غیرقابل‌دسترس — اعمال وایت‌لیست در ~۴.۲٪ تثبیت (۴۵/۱۰۶۸)، ۷۸ اپراتور"
   ],
   "public_summary": "Iran's internet remains in stable partial outage with a notable DPI appliance signal: Irancell's gateway FLAPPED back from silent timeout (DROP) to active TCP RST (connection refused), confirming persistent rule-state oscillation across redundant DPI nodes in the gateway cluster. All 4 major ISP gateways remain unreachable externally while domestic and whitelisted foreign services operate normally. Selective-internet architecture holds at 4.2% external reachability (45/1068). Shatel latency recovered from 5.85s to 1.3s; Saman Bank steady at 3.3s. Electro DNS suppression, Snapp redirect-loop, Shaparak timeout, and Asiatech isolation all persist unchanged. All circumvention tools and foreign platforms fully accessible.",
   "public_summary_fa": "اینترنت ایران در سکوتِ جزئی پایدار باقی مانده با یک سیگنال مهم از دستگاه DPI: گیت‌وی ایرانسل از timeout خاموش (DROP) دوباره به RST فعالِ TCP (connection refused) برگشت، که نوسان مداوم حالت قانون در نودهای DPI پشتیبان گیت‌وی را تأیید می‌کند. همه ۴ گیت‌وی ISP بزرگ از بیرون غیرقابل‌دسترس‌اند در حالی که سرویس‌های داخلی و خارجی وایت‌لیست‌شده به‌صورت عادی کار می‌کنند. معماری اینترنتِ انتخابی در ۴.۲٪ دسترس‌پذیری خارجی (۴۵/۱۰۶۸) تثبیت است. لیتنسی شاتل از ۵.۸۵ ثانیه به ۱.۳ ثانیه بهبود یافت؛ بانک سامان در ۳.۳ ثانیه ثابت. سرکوب DNS الکترو، redirect-loop اسنپ، تایم‌اوت شاپرک و انزوا آسیاتک تداوم دارند. همه ابزارهای عبور و پلتفرم‌های خارجی به‌صورت کامل قابل‌دسترس‌اند.",
