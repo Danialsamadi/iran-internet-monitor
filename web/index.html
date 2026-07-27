@@ -125,10 +125,27 @@ a:hover { color: var(--color-accent-700); }
 .lang-row { max-width: 1180px; margin: 20px auto 0; display: flex; align-items: center; gap: 14px; font-size: 13px; padding-inline: 4px; }
 @media (max-width: 900px) {
   .pad { padding-inline: 18px; }
-  .grid2, .grid2w, .grid4, .ep-grid { grid-template-columns: 1fr !important; }
+  .grid2, .grid2w, .ep-grid { grid-template-columns: 1fr !important; }
+  .grid4 { grid-template-columns: repeat(2, 1fr) !important; }
   h1 { font-size: 34px !important; }
   .verdict { font-size: 44px !important; }
   .hrow { grid-template-columns: 110px 1fr 48px !important; }
+  .navbtn { padding: 10px 4px; }
+  nav[aria-label="Pages"] { gap: 4px 18px !important; }
+  .ep-grid aside { border-inline-end: 0 !important; border-bottom: 1px solid var(--color-divider); }
+  .cat-list { flex-direction: row !important; flex-wrap: wrap; }
+  .catbtn { width: auto; gap: 6px; }
+}
+@media (max-width: 560px) {
+  .pad { padding-inline: 14px; }
+  .sheet { margin: 16px auto 40px; }
+  .lang-row { flex-wrap: wrap; margin-top: 12px; padding-inline: 10px; }
+  h1 { font-size: 27px !important; }
+  .verdict { font-size: 34px !important; }
+  .cmyk-num { font-size: 38px !important; }
+  .hrow { grid-template-columns: 92px 1fr 44px !important; }
+  .table { font-size: 12px; }
+  .table th, .table td { padding-inline: 6px; }
 }
 </style>
 </head>
@@ -152,7 +169,7 @@ a:hover { color: var(--color-accent-700); }
 <script>
 (() => {
 "use strict";
-const UP = "#3f9142", DEG = "#edbb00", DOWN = "#d6006c", UNK = "#bab6b6";
+const UP = "var(--up)", DEG = "var(--deg)", DOWN = "var(--down)", UNK = "var(--unk)";
 const $ = (s, el) => (el || document).querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
 
@@ -352,7 +369,7 @@ function endpoints() {
         ${tallies().map(tl => `<span class="btn btn-secondary" style="font-size:11.5px;padding:4px 9px;gap:5px;cursor:default">${dot(tl[0])}${t(tl[1],tl[2])} ${num(tl[3])}</span>`).join("")}
       </div>
       <div class="h-label">${t("Category","دسته")}</div>
-      <div style="display:flex;flex-direction:column;gap:2px">
+      <div class="cat-list" style="display:flex;flex-direction:column;gap:2px">
         ${cats.map((c, i) => `
           <button class="catbtn" data-group="${i}" ${i === state.group ? 'aria-current="true"' : ""}>
             ${state.lang === "fa" && c.name_fa ? esc(c.name_fa) : esc(c.name)}
