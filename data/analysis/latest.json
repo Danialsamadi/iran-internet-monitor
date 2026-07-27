@@ -1,57 +1,57 @@
 {
-  "ts": "2026-07-27T11:22:56Z",
+  "ts": "2026-07-27T11:41:35Z",
   "overall_status": "partial_outage",
   "severity": "major",
   "suspected_causes": [
     "Sustained stealth blackout / selective-internet posture: all four ISP international gateways (TIC x2, Irancell, Asiatech) externally unreachable while BGP routes hold and domestic services function -- centralized DPI + protocol whitelist at national gateway layer per Bock et al. FOCI'20 whitelister architecture",
-    "Irancell gateway (5.232.0.1) REJECT STATE NOW CONFIRMED STABLE -- 'connection refused' for 7+ consecutive passes spanning ~60+ minutes (10:21, 10:31, 10:41, 10:52, 11:02, 11:12, 11:22) after prior DROP<->REJECT oscillation across 7+ passes; sustained REJECT strongly indicates DPI cluster rule-state convergence post-reconfiguration, eliminating prior ambiguity",
+    "Irancell gateway (5.232.0.1) REJECT->DROP REVERSION CONFIRMED -- gateway returned 'connection refused' (REJECT) for 7+ consecutive passes spanning ~60+ minutes (10:21-11:22Z) then reverted to 'i/o timeout' (DROP) this pass; DROP<->REJECT oscillation RE-ESTABLISHED suggests DPI cluster rule-state NOT fully converged, re-entering contested configuration cycle",
     "Protocol whitelist enforcement stable at ~4.0% -- 43 of 1,068 labeled IP ranges reachable across 78 operators (consistent with prior ~3.8-4.2%); UDP/ICMP/SSH/VPN silently dropped at gateway per IRBlock (Tai et al.) USENIX Security '25 -- institutionalized whitelist architecture",
-    "Electro DNS (78.157.42.100) persistently timing out while Shecan (178.22.122.100, 225ms) and TIC DNS (217.218.155.155, 218ms) remain fast -- sustained targeted suppression of anti-censorship DNS resolver infrastructure, consistent with mandatory national DNS routing enforcement",
-    "Asiatech dual failure persists -- gateway (94.182.0.1 timeout) + web portal (www.asiatech.ir deadline exceeded) both down across all observed passes -- ISP-specific isolation likely CRA directive or sustained infrastructure degradation; web portal degradation newly confirmed this pass",
-    "Snowflake broker (snowflake-broker.torproject.net) LATENCY STABILIZED at ~615ms (prior pass 621ms, before that 3,117ms degraded) -- transient interference resolved; broker externally reachable, no active circumvention targeting observed",
+    "Electro DNS (78.157.42.100) persistently timing out while Shecan (178.22.122.100, 226ms) and TIC DNS (217.218.155.155, 239ms) remain fast -- sustained targeted suppression of anti-censorship DNS resolver infrastructure, consistent with mandatory national DNS routing enforcement",
+    "Asiatech dual failure persists -- gateway (94.182.0.1 timeout) + web portal (www.asiatech.ir deadline exceeded) both down across all observed passes -- ISP-specific isolation likely CRA directive or sustained infrastructure degradation",
+    "Snowflake broker (snowflake-broker.torproject.net) LATENCY STABLE at ~632ms (prior pass 615ms, before that 3,117ms degraded) -- transient interference remains resolved; broker externally reachable, no active circumvention targeting observed",
     "Foreign platforms (Google, GitHub, Cloudflare, YouTube, Instagram, Telegram, WhatsApp, Wikipedia) externally fast -- economic-necessity whitelisting under selective-internet model maintained",
     "Circumvention tools fully externally reachable -- Tor check, BridgeDB, Snowflake broker, Psiphon all up with stable latency; no active circumvention targeting observed this pass",
     "Snapp (snapp.ir) redirect loop persists ('stopped after 10 redirects') -- likely application-layer misconfiguration or intentional traffic shaping rather than censorship; Shaparak (www.shaparak.ir) timeout persists -- payment gateway instability under high load or selective throttling",
-    "Saman Bank (degraded 3.2s) and Respina (degraded 2.4s) show variable domestic latency -- likely NIN congestion or selective QoS discrimination rather than targeted filtering"
+    "Saman Bank (degraded 3.3s) and Respina (degraded 3.1s) show variable domestic latency -- likely NIN congestion or selective QoS discrimination rather than targeted filtering"
   ],
   "suspected_causes_fa": [
     "همه چهار گیت‌وی بین‌المللی ISP از خارج unreachable در حالی‌که BGP برقرار و سرویس‌های داخلی کار می‌کنند -- بلک‌اوت مخفی/اینترنت انتخابی مداوم با DPI متمرکز + لیست‌سفید پروتکل در لایه گیت‌وی ملی (معماری وایت‌لیستر بک et al. FOCI'20)",
-    "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱) روی REJECT تثبیت شده -- 'connection refused' برای ۷+ پاس متوالی در چادر ~۶۰+ دقیقه (۱۰:۲۱، ۱۰:۳۱، ۱۰:۴۱، ۱۰:۵۲، ۱۱:۰۲، ۱۱:۱۲، ۱۱:۲۲) پس از نوسان DROP<->REJECT در ۷+ پاس پیشین؛ REJECT پایدار قویاً همگرایی rule-state کلاستر DPI پس از reconfiguration را نشان می‌دهد",
+    "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱) بازگشت REJECT به DROP تأیید شده -- گیت‌وی برای ۷+ پاس متوالی در چادر ~۶۰+ دقیقه (۱۰:۲۱-۱۱:۲۲Z) 'connection refused' (REJECT) داد، سپس این پاس به 'i/o timeout' (DROP) بازگشت؛ نوسان DROP<->REJECT مجدداً برقرار -- کلاستر DPI هنوز به rule-state همگرایی نیافته، دوباره در چرخه reconfiguration متنازع",
     "اجبار لیست‌سفید پروتکل در ~۴.۰٪ ثابت -- ۴۳ از ۱۰۶۸ رنج IP برچسب‌گذاری‌شده در ۷۸ اپراتور قابل‌دسترسی (هم‌سطح با ~۳.۸-۴.۲٪); UDP/ICMP/SSH/VPN در گیت‌وی دراپ بی‌صدا (IRBlock، تای et al. USENIX Security '25) -- معماری وایت‌لیست مؤسساتی",
-    "الکترو DNS (۷۸.۱۵۷.۴۲.۱۰۰) مداوم تایم‌اوت در حالی‌که شکان (۲۲۵ms) و TIC DNS (۲۱۸ms) سریع -- سرکوب هدفمند زیرساخت DNS ضد سانسور، هم‌سو با اجبار روتینگ ملی DNS",
-    "دوال شکست آسیاتک پابرجا -- گیت‌وی (۹۴.۱۸۲.۰.۱ تایم‌اوت) + پورتال وب (www.asiatech.ir deadline exceeded) هر دو down در همه پاس‌ها -- ایزوله‌سازی ISP-specific، احتمالاً دستور CRA یا تدهور زیرساختی مداوم؛ پورتال وب تازه degraded تأیید شده",
-    "بروکر Snowflake (snowflake-broker.torproject.net) لیتنسی در ~۶۱۵ms پایدار (پاس پیشین ۶۲۱ms، پیش‌تر ۳،۱۱۷ms degraded) -- تداخل transient حل شده؛ بروکر externally reachable، هیچ هدف‌گیری عبور فعال مشاهده نشد",
+    "الکترو DNS (۷۸.۱۵۷.۴۲.۱۰۰) مداوم تایم‌اوت در حالی‌که شکان (۲۲۶ms) و TIC DNS (۲۳۹ms) سریع -- سرکوب هدفمند زیرساخت DNS ضد سانسور، هم‌سو با اجبار روتینگ ملی DNS",
+    "دوال شکست آسیاتک پابرجا -- گیت‌وی (۹۴.۱۸۲.۰.۱ تایم‌اوت) + پورتال وب (www.asiatech.ir deadline exceeded) هر دو down در همه پاس‌ها -- ایزوله‌سازی ISP-specific، احتمالاً دستور CRA یا تدهور زیرساختی مداوم",
+    "بروکر Snowflake (snowflake-broker.torproject.net) لیتنسی در ~۶۳۲ms پایدار (پاس پیشین ۶۱۵ms، پیش‌تر ۳،۱۱۷ms degraded) -- تداخل transient حل مانده؛ بروکر externally reachable، هیچ هدف‌گیری عبور فعال مشاهده نشد",
     "پلتفرم‌های خارجی (گوگل، گیت‌هاب، کلادفلر، یوتیوب، اینستاگرام، تلگرام، واتس‌اپ، ویکی‌پدیا) از خارج سریع -- وایت‌لیستینگ ضرورت اقتصادی در مدل اینترنت انتخابی حفظ شده",
     "ابزارهای عبور اکثریت externally reachable -- Tor check، BridgeDB، بروکر Snowflake، Psiphon همگی up با لیتنسی پایدار؛ هیچ هدف‌گیری عبور فعال این پاس مشاهده نشد",
     "اسنپ (snapp.ir) لوپ redirect پابرجا ('stopped after 10 redirects') -- احتمالاً misconfiguration لایه اپلیکیشن یا traffic shaping عمدی نه سانسور؛ شاپرک (www.shaparak.ir) تایم‌اوت پابرجا -- ناپایداری گیت‌وی پرداخت تحت بار بالا یا throttling انتخابی",
-    "بانک سامان (degraded ۳.۲s) و رسپینا (degraded ۲.۴s) تاخیر متغیر داخلی -- احتمالاً congestion نین یا QoS discrimination избирательный نه فیلترینگ هدفمند"
+    "بانک سامان (degraded ۳.۳s) و رسپینا (degraded ۳.۱s) تاخیر متغیر داخلی -- احتمالاً congestion نین یا QoS discrimination избирательный نه فیلترینگ هدفمند"
   ],
   "affected_services": [
     "TIC gateways (2.187.1.1 connection refused, 78.38.112.1 timeout)",
-    "Irancell gateway (5.232.0.1 connection refused -- STABILIZED REJECT for 7+ consecutive passes spanning ~60+ minutes after prior DROP<->REJECT oscillation)",
-    "Asiatech gateway (94.182.0.1 timeout) + web portal (www.asiatech.ir deadline exceeded -- newly confirmed down)",
+    "Irancell gateway (5.232.0.1 timeout -- REVERTED to DROP after 7+ passes of stable REJECT spanning ~60+ minutes)",
+    "Asiatech gateway (94.182.0.1 timeout) + web portal (www.asiatech.ir deadline exceeded)",
     "Electro DNS (78.157.42.100 timeout)",
     "Snapp (snapp.ir down -- stopped after 10 redirects)",
     "Shaparak (www.shaparak.ir timeout)",
-    "Saman Bank (degraded, 3.2s latency)",
-    "Respina (degraded, 2.4s latency)",
-    "Irancell web portal (degraded 9.9s -- worsened from prior pass)"
+    "Saman Bank (degraded, 3.3s latency)",
+    "Respina (degraded, 3.1s latency)",
+    "Irancell web portal (UP 1.7s -- IMPROVED from prior degraded 9.9s)"
   ],
   "affected_services_fa": [
     "گیت‌وی‌های TIC (۲.۱۸۷.۱.۱ رد اتصال، ۷۸.۳۸.۱۱۲.۱ تایم‌اوت)",
-    "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱ رد اتصال -- REJECT پایدار برای ۷+ پاس متوالی در چادر ~۶۰+ دقیقه پس از نوسان DROP<->REJECT)",
-    "گیت‌وی آسیاتک (۹۴.۱۸۲.۰.۱ تایم‌اوت) + پورتال وب (www.asiatech.ir deadline exceeded -- تازه down تأیید شده)",
+    "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱ تایم‌اوت -- بازگشت به DROP پس از ۷+ پاس REJECT پایدار در چادر ~۶۰+ دقیقه)",
+    "گیت‌وی آسیاتک (۹۴.۱۸۲.۰.۱ تایم‌اوت) + پورتال وب (www.asiatech.ir deadline exceeded)",
     "الکترو DNS (۷۸.۱۵۷.۴۲.۱۰۰ تایم‌اوت)",
     "اسنپ (snapp.ir down -- متوقف پس از ۱۰ redirect)",
     "شاپرک (www.shaparak.ir تایم‌اوت)",
-    "بانک سامان (degraded، ۳.۲ ثانیه تاخیر)",
-    "رسپینا (degraded، ۲.۴ ثانیه تاخیر)",
-    "پورتال وب ایرانسل (degraded ۹.۹s -- بدتر از پاس پیشین)"
+    "بانک سامان (degraded، ۳.۳ ثانیه تاخیر)",
+    "رسپینا (degraded، ۳.۱ ثانیه تاخیر)",
+    "پورتال وب ایرانسل (UP ۱.۷s -- بهبودی از degraded ۹.۹s پیشین)"
   ],
-  "public_summary": "Iran remains in sustained stealth blackout: all four ISP international gateways externally unreachable while BGP routes hold. CONFIRMED: Irancell gateway REJECT state ('connection refused') sustained for 7+ consecutive passes spanning ~60+ minutes after prior DROP<->REJECT oscillation -- DPI cluster rule-state convergence confirmed. Protocol whitelist stable at ~4.0% external IP reachability. Snowflake broker latency stabilized at ~615ms. Asiatech web portal newly degraded. Circumvention tools fully externally reachable.",
-  "public_summary_fa": "ایران در بلک‌اوت مخفی مداوم: هر چهار گیت‌وی بین‌المللی ISP از خارج unreachable در حالی‌که BGP برقرار. تأیید شده: گیت‌وی ایرانسل روی REJECT ('connection refused') برای ۷+ پاس متوالی در چادر ~۶۰+ دقیقه پس از نوسان DROP<->REJECT تثبیت یافته -- همگرایی rule-state کلاستر DPI تأیید شد. وایت‌لیست پروتکل در ~۴.۰٪ دسترس‌پذیری IP خارجی ثابت. لیتنسی بروکر Snowflake در ~۶۱۵ms پایدار. پورتال وب آسیاتک تازه degraded. ابزارهای عبور اکثریت externally reachable.",
-  "insight": "Irancell gateway's sustained REJECT state across 7+ passes (~60+ minutes) now provides definitive forensic evidence of DPI cluster rule-state convergence after what was likely a contested reconfiguration cycle -- the prior DROP<->REJECT oscillation was the smoking gun of non-converged multi-node rule-sets. Cross-referencing IODA/Cloudflare Radar BGP community data at the 10:21Z flip timestamp will distinguish scheduled reconfiguration vs. contested policy resolution. Asiatech web portal degradation (new this pass) suggests ISP-specific isolation deepening.",
-  "insight_fa": "حالت REJECT پایدار گیت‌وی ایرانسل در ۷+ پاس (~۶۰+ دقیقه) اکنون مدرک قطعی کانونی همگرایی rule-state کلاستر DPI پس از ciclo reconfiguration محتمل متنازع را می‌دهد -- نوسان DROP<->REJECT پیشین smoking gun عدم همگرایی rule-setهای چندنود بود. Cross-reference با BGP community IODA/Cloudflare Radar در timestamp ۱۰:۲۱Z تمایز بین reconfiguration برنامه‌ریزی vs. حل policy متنازع را می‌دهد. تدهور پورتال وب آسیاتک (تازه این پاس) ایزوله‌سازی ISP-specific عمیق‌تر را نشان می‌دهد.",
-  "recommendation": "Correlate Irancell gateway REJECT stabilization timestamp (10:21Z) with IODA/Cloudflare Radar BGP community and route-announcement data for AS44244 (Irancell) and AS12880 (TIC) -- look for community tag changes or re-announcements coinciding with DROP->REJECT flip. Monitor next 3-5 passes to confirm REJECT state is sustained (not re-entering oscillation). Track Snowflake broker latency for continued stability. Monitor Asiatech web portal for recovery or further degradation indicating escalating ISP-specific isolation.",
-  "recommendation_fa": "timestamp تثبیت REJECT گیت‌وی ایرانسل (۱۰:۲۱Z) را با داده‌های BGP community و route-announcement IODA/Cloudflare Radar برای AS44244 (ایرانسل) و AS12880 (TIC) هم‌ارزیابی کنید -- community tag یا re-announcement هم‌زمان با فلیپ DROP->REJECT جستجو کنید. ۳-۵ پاس آینده را برای تأیید پایداری state REJECT (نه بازگشت به نوسان) رصد کنید. لیتنسی بروکر Snowflake را برای تداوم پایداری دنبال کنید. پورتال وب آسیاتک را برای ریکاوری یا تدهور بیشتر نشان‌دهنده ایزوله‌سازی ISP-specific تشدید شده رصد کنید."
+  "public_summary": "Iran remains in sustained stealth blackout: all four ISP international gateways externally unreachable while BGP holds. CRITICAL CHANGE: Irancell gateway REVERTED from stable REJECT ('connection refused' for 7+ consecutive passes over ~60 minutes) back to DROP ('i/o timeout') -- DPI cluster rule-state oscillation RE-ESTABLISHED, indicating non-converged configuration. Protocol whitelist stable at ~4.0% external IP reachability. Snowflake broker latency stable. Circumvention tools fully externally reachable.",
+  "public_summary_fa": "ایران در بلک‌اوت مخفی مداوم: هر چهار گیت‌وی بین‌المللی ISP از خارج unreachable در حالی‌که BGP برقرار. تغییر بحرانی: گیت‌وی ایرانسل از REJECT پایدار ('connection refused' برای ۷+ پاس متوالی در ~۶۰ دقیقه) به DROP ('i/o timeout') بازگشت -- نوسان rule-state کلاستر DPI مجدداً برقرار، همگرایی configuration رد می‌شود. وایت‌لیست پروتکل در ~۴.۰٪ دسترس‌پذیری IP خارجی ثابت. لیتنسی بروکر Snowflake پایدار. ابزارهای عبور اکثریت externally reachable.",
+  "insight": "Irancell gateway's REJECT->DROP reversion after 60+ minutes of stable REJECT proves the DPI cluster never achieved true rule-state convergence -- the prior oscillation was not resolved but merely suppressed. Cross-referencing IODA/Cloudflare Radar BGP community data at BOTH the 10:21Z DROP->REJECT flip AND the ~11:41Z REJECT->DROP reversion will distinguish whether this is a cyclic reconfiguration loop or persistent policy conflict.",
+  "insight_fa": "بازگشت گیت‌وی ایرانسل از REJECT به DROP پس از ۶۰+ دقیقه REJECT پایدار اثبات می‌کند کلاستر DPI هرگز به همگرایی واقعی rule-state نرسیده -- نوسان پیشین حل نشده، تنها موقت suprim شده بود. Cross-reference داده‌های BGP community IODA/Cloudflare Radar در هر دو فلیپ ۱۰:۲۱Z (DROP->REJECT) و ~۱۱:۴۱Z (REJECT->DROP) تمایز بین loop reconfiguration چکلی vs. policy conflict مداوم را می‌دهد.",
+  "recommendation": "Correlate BOTH Irancell gateway state-transition timestamps (10:21Z DROP->REJECT, ~11:41Z REJECT->DROP) with IODA/Cloudflare Radar BGP community and route-announcement data for AS44244 (Irancell) and AS12880 (TIC) -- look for community tag changes or re-announcements at BOTH timestamps. Monitor next 3-5 passes to determine if DROP state stabilizes or oscillation continues. Track Snowflake broker latency for continued stability. Monitor Asiatech web portal for recovery or further degradation indicating escalating ISP-specific isolation.",
+  "recommendation_fa": "هر دو timestamp انتقال state گیت‌وی ایرانسل (۱۰:۲۱Z DROP->REJECT، ~۱۱:۴۱Z REJECT->DROP) را با داده‌های BGP community و route-announcement IODA/Cloudflare Radar برای AS44244 (ایرانسل) و AS12880 (TIC) هم‌ارزیابی کنید -- community tag یا re-announcement هم‌زمان با هر دو فلیپ جستجو کنید. ۳-۵ پاس آینده را برای تعیین پایداری state DROP یا تداوم نوسان رصد کنید. لیتنسی بروکر Snowflake را برای تداوم پایداری دنبال کنید. پورتال وب آسیاتک را برای ریکاوری یا تدهور بیشتر نشان‌دهنده ایزوله‌سازی ISP-specific تشدید شده رصد کنید."
 }
