@@ -17,6 +17,7 @@ import (
 	"iran-internet-monitor/internal/checker"
 	"iran-internet-monitor/internal/config"
 	"iran-internet-monitor/internal/git"
+	"iran-internet-monitor/internal/radar"
 	"iran-internet-monitor/internal/storage"
 )
 
@@ -63,8 +64,21 @@ func runPass(repoDir string, skipLLM, skipGit bool) error {
 			log.Printf("ip ranges skipped: %v", err)
 		}
 	}()
+	// Cloudflare Radar signals (no-op without CLOUDFLARE_API_TOKEN) — fetched
+	// alongside the probes, best-effort like the LLM step
+	var radarData json.RawMessage
+	radarDone := make(chan struct{})
+	go func() {
+		defer close(radarDone)
+		var err error
+		if radarData, err = radar.Fetch(ctx, filepath.Join(repoDir, "data")); err != nil {
+			log.Printf("radar skipped: %v", err)
+			radarData = nil
+		}
+	}()
 	results := chk.RunAll(ctx, cfg.Categories, cfg.Check.Concurrency)
 	<-rangesDone
+	<-radarDone
 
 	// 2. persist the pass
 	latest, err := store.SavePass(results)
@@ -94,7 +108,7 @@ func runPass(repoDir string, skipLLM, skipGit bool) error {
 			// prompt.md at the repo root overrides the built-in system prompt
 			PromptFile: filepath.Join(repoDir, "prompt.md"),
 		}
-		if analysis, err = an.Run(ctx, latest, networks); err != nil {
+		if analysis, err = an.Run(ctx, latest, networks, radarData); err != nil {
 			log.Printf("analysis skipped: %v", err)
 			analysis = nil
 		} else {
