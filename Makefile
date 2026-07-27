@@ -18,7 +18,7 @@ run-once: build
 
 ## print the crontab line for this checkout
 cron: build
-	@echo '*/5 * * * * cd $(CURDIR) && ./$(BIN) -repo . >> monitor.log 2>&1'
+	@echo '*/10 * * * * cd $(CURDIR) && ./$(BIN) -repo . >> monitor.log 2>&1'
 
 clean:
 	rm -rf bin
