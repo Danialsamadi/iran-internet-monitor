@@ -7,7 +7,7 @@
 <meta name="description" content="Independent real-time monitor of Iran's internet: connectivity, censorship, ISP reachability and circumvention tools, probed every 5 minutes from outside Iran with raw open data. پایش زنده اینترنت ایران.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Vazirmatn:wght@400;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
 <style>
 /* ── Broadsheet design-system tokens (from the IranNet design project) ── */
 :root {
@@ -70,7 +70,9 @@ a:hover { color: var(--color-accent-700); }
    for assistive tech, the plates are aria-hidden repeats. */
 [dir="rtl"] .cmyk-num,
 [dir="rtl"] .cmyk-head { font-family: Vazirmatn, var(--font-body); }
-[dir="ltr"] .cmyk-num,
+[dir="rtl"] .cmyk-num { font-weight: 600; }
+/* Archivo Black is a single 400-weight face — no synthetic bold, or the plates smear */
+[dir="ltr"] .cmyk-num { font-family: "Archivo Black", var(--font-body); font-weight: 400; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
 [dir="ltr"] .cmyk-head { font-family: var(--font-body); }
 .cmyk-head { position: relative; }
 .cmyk-head .paper { color: var(--color-bg);
@@ -270,7 +272,7 @@ function overview() {
     <div class="grid4" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px 16px">
       ${tallies().map(tl => `
         <div>
-          ${plateText(num(tl[3]), "cmyk-num", "font-size:50px;font-weight:600")}
+          ${plateText(num(tl[3]), "cmyk-num", "font-size:50px")}
           <div style="margin-top:20px;display:flex;align-items:center;gap:7px;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600">
             ${dot(tl[0])}${t(tl[1], tl[2])}
           </div>
@@ -486,7 +488,7 @@ function networks() {
         </p>
       </div>
       <div>
-        ${plateText(num(pct) + "%", "cmyk-num", "font-size:56px;font-weight:600")}
+        ${plateText(num(pct) + "%", "cmyk-num", "font-size:56px")}
         <div style="margin-top:22px;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600">
           ${t("of ranges answering","بازه‌های پاسخ‌گو")}
         </div>
