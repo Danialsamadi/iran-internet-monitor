@@ -8,15 +8,21 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Vazirmatn:wght@400;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<script>/* before first paint, so there is no light flash */
+document.documentElement.dataset.theme = localStorage.theme ||
+  (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");</script>
 <style>
 /* ── Broadsheet design-system tokens (from the IranNet design project) ── */
 :root {
+  color-scheme: light;
+  --color-page: #e7e5e2;
   --color-bg: #f3f2f2;
   --color-surface: #eae9e9;
   --color-text: #201e1d;
+  --color-muted: rgba(32,30,29,.65);
   --color-accent: #0088b0;
   --color-accent-2: #d6006c;
-  --color-divider: color-mix(in srgb, #201e1d 16%, transparent);
+  --color-divider: color-mix(in srgb, var(--color-text) 16%, transparent);
   --color-accent-100: #e9f8ff;
   --color-accent-700: #006786;
   --color-accent-800: #004961;
@@ -26,12 +32,36 @@
   --color-neutral-100: #f8f4f4;
   --color-neutral-800: #444141;
   --color-process-yellow: #edbb00;
+  --sheet-shadow: 0 2px 14px rgba(0,0,0,.09);
   --font-heading: "Source Serif 4", system-ui, serif;
   --font-body: "Source Serif 4", system-ui, serif;
   --up: #3f9142; --deg: #edbb00; --down: #d6006c; --unk: #bab6b6;
 }
+/* Night edition — same broadsheet, printed on dark stock. The ink scales
+   invert (…-700/-800 get lighter, the -100 tints get darker) so every
+   existing pairing keeps its contrast direction. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-page: #100f0e;
+  --color-bg: #1b1917;
+  --color-surface: #262321;
+  --color-text: #e9e6e1;
+  --color-muted: rgba(233,230,225,.62);
+  --color-accent: #45b8db;
+  --color-accent-2: #ff4f95;
+  --color-accent-100: #0d2b34;
+  --color-accent-700: #74cce6;
+  --color-accent-800: #a8dff0;
+  --color-accent-2-100: #391323;
+  --color-accent-2-700: #ff80b2;
+  --color-accent-2-800: #ffabcb;
+  --color-neutral-100: #242120;
+  --color-neutral-800: #cfcac5;
+  --sheet-shadow: 0 2px 18px rgba(0,0,0,.55);
+  --up: #55ad59; --deg: #edbb00; --down: #ff4f95; --unk: #5f5c59;
+}
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; background: #e7e5e2; color: var(--color-text); font: 400 15px/1.55 var(--font-body); }
+body { margin: 0; background: var(--color-page); color: var(--color-text); font: 400 15px/1.55 var(--font-body); }
 h1,h2,h3,h4,h5 { font-family: var(--font-heading); font-weight: 600; line-height: 1.12; letter-spacing: -0.015em; margin: 0 0 10px; }
 a { color: var(--color-accent); text-underline-offset: 3px; }
 a:hover { color: var(--color-accent-700); }
@@ -78,11 +108,11 @@ a:hover { color: var(--color-accent-700); }
 .blip { width: 7px; height: 7px; border-radius: 50%; background: var(--color-accent-2); animation: blip 1.6s ease-in-out infinite; display: inline-block; }
 @media (prefers-reduced-motion: reduce) { .blip { animation: none; } }
 
-.sheet { max-width: 1180px; margin: 28px auto 60px; background: var(--color-bg); border: 1px solid rgba(0,0,0,.1); box-shadow: 0 2px 14px rgba(0,0,0,.09); }
+.sheet { max-width: 1180px; margin: 28px auto 60px; background: var(--color-bg); border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent); box-shadow: var(--sheet-shadow); }
 .pad { padding-inline: 34px; }
-.muted { color: rgba(32,30,29,.65); }
+.muted { color: var(--color-muted); }
 .kicker { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--color-accent-700); }
-.h-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(32,30,29,.65); margin-bottom: 8px; }
+.h-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 8px; }
 .navbtn { background: none; border: 0; cursor: pointer; font-weight: 600; font-size: 14px;
   padding: 6px 2px; border-bottom: 2px solid transparent; color: var(--color-text); }
 .navbtn[aria-current="page"] { border-color: var(--color-accent); color: var(--color-accent-800); }
@@ -108,6 +138,10 @@ a:hover { color: var(--color-accent-700); }
   <div class="seg" role="radiogroup" aria-label="Language">
     <label class="seg-opt"><input type="radio" name="lang" value="en" checked>English</label>
     <label class="seg-opt"><input type="radio" name="lang" value="fa">فارسی</label>
+  </div>
+  <div class="seg" role="radiogroup" aria-label="Theme" style="margin-inline-start:auto">
+    <label class="seg-opt" title="Light"><input type="radio" name="theme" value="light" aria-label="Light theme">☀︎</label>
+    <label class="seg-opt" title="Dark"><input type="radio" name="theme" value="dark" aria-label="Dark theme">☾</label>
   </div>
 </div>
 
@@ -211,7 +245,7 @@ function masthead() {
         <div class="kicker">${t("Independent connectivity observatory","رصدخانه مستقل اتصال‌پذیری")}</div>
         <h1 style="font-size:46px;letter-spacing:-.03em;margin:5px 0 0">${t("IranNet Monitor","پایش اینترنت ایران")}</h1>
       </div>
-      <div style="text-align:end;font-size:12px;line-height:1.5;color:rgba(32,30,29,.65);padding-bottom:6px">
+      <div style="text-align:end;font-size:12px;line-height:1.5;color:var(--color-muted);padding-bottom:6px">
         <div>${dateLong}</div>
         <div>${t("Next probe in","پروب بعدی تا")} <b style="font-variant-numeric:tabular-nums;color:var(--color-accent-2-700)">${elapsedMin >= 10 ? "—" : num(cd)}</b></div>
       </div>
@@ -219,7 +253,7 @@ function masthead() {
     <div style="height:4px;background:var(--color-text);margin-top:14px"></div>
     <nav style="display:flex;gap:26px;align-items:center;padding:0 2px;flex-wrap:wrap" aria-label="Pages">
       ${PAGES.map(p => `<button class="navbtn" data-page="${p[0]}" ${state.page === p[0] ? 'aria-current="page"' : ""}>${t(p[1], p[2])}</button>`).join("")}
-      <span style="margin-inline-start:auto;display:flex;align-items:center;gap:7px;font-size:11.5px;color:rgba(32,30,29,.65)">
+      <span style="margin-inline-start:auto;display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--color-muted)">
         <span class="blip"></span>${t("last check","آخرین بررسی")} ${rel}
       </span>
     </nav>
@@ -262,14 +296,14 @@ function overview() {
   <div class="pad grid2w" style="padding-top:34px;display:grid;grid-template-columns:1.25fr 1fr;gap:44px;align-items:start">
     <div>
       <h4 style="margin:0 0 4px">${t("Last 24 hours","۲۴ ساعت گذشته")}</h4>
-      <div style="font-size:11.5px;color:rgba(32,30,29,.65);margin-bottom:14px">${t("48 half-hour buckets per row","۴۸ بازه نیم‌ساعته در هر ردیف")}</div>
+      <div style="font-size:11.5px;color:var(--color-muted);margin-bottom:14px">${t("48 half-hour buckets per row","۴۸ بازه نیم‌ساعته در هر ردیف")}</div>
       <div class="hrow" style="display:grid;grid-template-columns:175px 1fr 56px;gap:5px 14px;align-items:center">
         ${headline.map(s => `
           <div style="font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(svcName(s))}</div>
           ${cellStrip(s.cells, 14)}
-          <div style="font-size:11.5px;text-align:end;font-variant-numeric:tabular-nums;color:rgba(32,30,29,.65)">${num(s.uptime24.toFixed(1))}%</div>`).join("")}
+          <div style="font-size:11.5px;text-align:end;font-variant-numeric:tabular-nums;color:var(--color-muted)">${num(s.uptime24.toFixed(1))}%</div>`).join("")}
       </div>
-      <div style="display:flex;gap:16px;font-size:11px;color:rgba(32,30,29,.65);margin-top:14px">
+      <div style="display:flex;gap:16px;font-size:11px;color:var(--color-muted);margin-top:14px">
         <span style="display:flex;align-items:center;gap:5px">${dot("up")}${t("up","در دسترس")}</span>
         <span style="display:flex;align-items:center;gap:5px">${dot("degraded")}${t("degraded","کند")}</span>
         <span style="display:flex;align-items:center;gap:5px">${dot("down")}${t("down","قطع")}</span>
@@ -277,12 +311,12 @@ function overview() {
     </div>
     <div>
       <h4 style="margin:0 0 4px">${t("Response-time histogram","هیستوگرام زمان پاسخ")}</h4>
-      <div style="font-size:11.5px;color:rgba(32,30,29,.65);margin-bottom:18px">${t("Endpoints per latency bucket, this pass","تعداد نقاط در هر بازه تأخیر، این دور")}</div>
+      <div style="font-size:11.5px;color:var(--color-muted);margin-bottom:18px">${t("Endpoints per latency bucket, this pass","تعداد نقاط در هر بازه تأخیر، این دور")}</div>
       <div class="bars" style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end">
         ${bars(lat.map(b => b[1]), (v,i) => i >= 5 ? DOWN : i >= 3 ? DEG : UP, null, 120, v => v)}
       </div>
       <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;border-top:1px solid var(--color-text);padding-top:6px">
-        ${lat.map(b => `<div style="font-size:10px;text-align:center;line-height:1.25;color:rgba(32,30,29,.65)">${b[0]}</div>`).join("")}
+        ${lat.map(b => `<div style="font-size:10px;text-align:center;line-height:1.25;color:var(--color-muted)">${b[0]}</div>`).join("")}
       </div>
     </div>
   </div>
@@ -295,10 +329,10 @@ function overview() {
         <div style="border-top:3px solid var(--color-text);padding-top:9px">
           <div style="display:flex;align-items:baseline;gap:8px">
             <span class="tag tag-accent-2">${t("DOWN","قطع")}</span>
-            <span style="font-size:11px;color:rgba(32,30,29,.65);font-variant-numeric:tabular-nums">${fmtTime(state.site.ts)}</span>
+            <span style="font-size:11px;color:var(--color-muted);font-variant-numeric:tabular-nums">${fmtTime(state.site.ts)}</span>
           </div>
           <div style="font-size:14.5px;margin-top:6px;line-height:1.35">${esc(svcName(s))}</div>
-          <div style="font-size:11px;color:rgba(32,30,29,.65)">${esc(s.kind)}</div>
+          <div style="font-size:11px;color:var(--color-muted)">${esc(s.kind)}</div>
         </div>`).join("")}
     </div>`}
   </div>`;
@@ -329,7 +363,7 @@ function endpoints() {
     <div style="padding:22px 28px 34px;min-width:0;overflow-x:auto">
       <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px">
         <h4 style="margin:0">${state.lang === "fa" && g.name_fa ? esc(g.name_fa) : esc(g.name)}</h4>
-        <span style="font-size:11.5px;color:rgba(32,30,29,.65)">${num(rows.length)} ${t("endpoints","نقطه")}</span>
+        <span style="font-size:11.5px;color:var(--color-muted)">${num(rows.length)} ${t("endpoints","نقطه")}</span>
       </div>
       <table class="table">
         <thead><tr>
@@ -342,7 +376,7 @@ function endpoints() {
             <tr>
               <td>
                 <div style="display:flex;align-items:center;gap:8px">${dot(s.status)}<span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:270px">${esc(svcName(s))}</span></div>
-                <div style="font-size:10.5px;color:rgba(32,30,29,.65);margin-inline-start:16px">${esc(s.kind)}</div>
+                <div style="font-size:10.5px;color:var(--color-muted);margin-inline-start:16px">${esc(s.kind)}</div>
               </td>
               <td><span class="${tagClass(s.status)}">${t(s.status || "no data", {up:"در دسترس",degraded:"کند",down:"قطع"}[s.status] || "بدون داده")}</span></td>
               <td style="text-align:end;font-variant-numeric:tabular-nums;white-space:nowrap">${s.latency_ms ? num(s.latency_ms) + " ms" : "—"}</td>
@@ -368,37 +402,37 @@ function history() {
   return `
   <div class="pad" style="padding-top:30px">
     <h3 style="margin:0 0 4px">${t("Thirty days of downtime","سی روز قطعی")}</h3>
-    <p style="font-size:13.5px;color:rgba(32,30,29,.65);margin:0 0 20px;max-width:70ch">
+    <p style="font-size:13.5px;color:var(--color-muted);margin:0 0 20px;max-width:70ch">
       ${t("Hours per day in which at least a third of monitored endpoints were unreachable.","ساعت‌هایی از هر روز که دست‌کم یک‌سوم نقاط پایش‌شده در دسترس نبوده‌اند.")}
     </p>
     <div class="bars" style="display:grid;grid-template-columns:repeat(${day.length || 1},1fr);gap:5px;align-items:end;height:150px">
       ${bars(day, v => v > 12 ? DOWN : v > 7 ? DEG : UP, 24, 130)}
     </div>
     <div style="display:grid;grid-template-columns:repeat(${day.length || 1},1fr);gap:5px;border-top:1px solid var(--color-text);padding-top:6px">
-      ${dayLabels.map(l => `<div style="font-size:9.5px;text-align:center;font-variant-numeric:tabular-nums;color:rgba(32,30,29,.65)">${l}</div>`).join("")}
+      ${dayLabels.map(l => `<div style="font-size:9.5px;text-align:center;font-variant-numeric:tabular-nums;color:var(--color-muted)">${l}</div>`).join("")}
     </div>
-    <div style="font-size:11px;color:rgba(32,30,29,.65);margin-top:6px">${t("Hours unreachable per day · scale 0–24","ساعت قطعی در روز · مقیاس ۰ تا ۲۴")}</div>
+    <div style="font-size:11px;color:var(--color-muted);margin-top:6px">${t("Hours unreachable per day · scale 0–24","ساعت قطعی در روز · مقیاس ۰ تا ۲۴")}</div>
   </div>
 
   <div class="pad grid2w" style="padding-top:36px;padding-bottom:40px;display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:start">
     <div>
       <h4 style="margin:0 0 4px">${t("When outages happen","زمان وقوع قطعی‌ها")}</h4>
-      <div style="font-size:11.5px;color:rgba(32,30,29,.65);margin-bottom:16px">${t("Down-events by hour of day, Tehran time, 30-day window","تعداد رخداد بر حسب ساعت شبانه‌روز، به وقت تهران، بازه ۳۰ روزه")}</div>
+      <div style="font-size:11.5px;color:var(--color-muted);margin-bottom:16px">${t("Down-events by hour of day, Tehran time, 30-day window","تعداد رخداد بر حسب ساعت شبانه‌روز، به وقت تهران، بازه ۳۰ روزه")}</div>
       <div class="bars" style="display:grid;grid-template-columns:repeat(24,1fr);gap:4px;align-items:end;height:120px">
         ${(() => { const m = Math.max(1, ...hour); return bars(hour, v => v > m*.66 ? DOWN : v > m*.33 ? DEG : UP, null, 110); })()}
       </div>
       <div style="display:grid;grid-template-columns:repeat(24,1fr);gap:4px;border-top:1px solid var(--color-text);padding-top:6px">
-        ${hour.map((_, h) => `<div style="font-size:9.5px;text-align:center;font-variant-numeric:tabular-nums;color:rgba(32,30,29,.65)">${num(String(h).padStart(2,"0"))}</div>`).join("")}
+        ${hour.map((_, h) => `<div style="font-size:9.5px;text-align:center;font-variant-numeric:tabular-nums;color:var(--color-muted)">${num(String(h).padStart(2,"0"))}</div>`).join("")}
       </div>
     </div>
     <div>
       <h4 style="margin:0 0 4px">${t("Response-time histogram","هیستوگرام زمان پاسخ")}</h4>
-      <div style="font-size:11.5px;color:rgba(32,30,29,.65);margin-bottom:16px">${t("Endpoints per latency bucket, this pass","تعداد نقاط در هر بازه تأخیر، این دور")}</div>
+      <div style="font-size:11.5px;color:var(--color-muted);margin-bottom:16px">${t("Endpoints per latency bucket, this pass","تعداد نقاط در هر بازه تأخیر، این دور")}</div>
       <div class="bars" style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end">
         ${bars(lat.map(b => b[1]), (v,i) => i >= 5 ? DOWN : i >= 3 ? DEG : UP, null, 120, v => v)}
       </div>
       <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;border-top:1px solid var(--color-text);padding-top:6px">
-        ${lat.map(b => `<div style="font-size:10px;text-align:center;line-height:1.25;color:rgba(32,30,29,.65)">${b[0]}</div>`).join("")}
+        ${lat.map(b => `<div style="font-size:10px;text-align:center;line-height:1.25;color:var(--color-muted)">${b[0]}</div>`).join("")}
       </div>
     </div>
   </div>`;
@@ -418,11 +452,11 @@ function analysis() {
   <div class="pad grid2w" style="padding-top:30px;padding-bottom:40px;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:start">
     <div>
       <h3 style="margin:0 0 4px">${t("Machine reading","تحلیل ماشینی")}</h3>
-      <div style="font-size:11.5px;color:rgba(32,30,29,.65);margin-bottom:22px">${esc(an.model || "hermes3")} · ${t("local, one note per pass","محلی، یک یادداشت در هر دور")}</div>
+      <div style="font-size:11.5px;color:var(--color-muted);margin-bottom:22px">${esc(an.model || "hermes3")} · ${t("local, one note per pass","محلی، یک یادداشت در هر دور")}</div>
       <div style="display:grid;grid-template-columns:auto 1fr;gap:12px;padding:16px 0;border-top:1px solid var(--color-divider)">
         <i class="dot" style="margin-top:6px;background:${sev === "CRITICAL" || sev === "MAJOR" ? DOWN : sev === "MINOR" ? DEG : UP}"></i>
         <div>
-          <div style="display:flex;align-items:baseline;gap:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(32,30,29,.65)">
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-muted)">
             <span style="font-variant-numeric:tabular-nums">${fmtTime(an.ts || state.site.ts)}</span><span>${esc(sev)}</span>
           </div>
           <div style="font-size:19px;line-height:1.3;margin-top:5px">${esc((causes)[0] || t("Analysis","تحلیل"))}</div>
@@ -461,7 +495,7 @@ function networks() {
     <div class="grid2" style="display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start;margin-bottom:30px">
       <div>
         <h3 style="margin:0 0 4px">${t("Labeled Iranian IP ranges","بازه‌های IP برچسب‌گذاری‌شده ایران")}</h3>
-        <p style="font-size:13.5px;color:rgba(32,30,29,.65);margin:0;max-width:60ch">
+        <p style="font-size:13.5px;color:var(--color-muted);margin:0;max-width:60ch">
           ${t(`One representative address per registered allocation, TCP-probed on port 80 from outside Iran each pass — ${num(nw.ranges_total)} ranges covering ${num(totalIPs.toLocaleString("en-US"))} addresses, grouped by operator.`,
                `از هر تخصیص ثبت‌شده یک نشانی نماینده، هر دور از خارج ایران روی درگاه ۸۰ بررسی می‌شود — ${num(nw.ranges_total)} بازه شامل ${num(totalIPs.toLocaleString("en-US"))} نشانی، به تفکیک اپراتور.`)}
         </p>
@@ -541,21 +575,21 @@ function about() {
     <div>
       <h5 style="margin:0 0 10px;font-size:10px;letter-spacing:.16em;text-transform:uppercase">${t("Where the numbers come from","منابع داده")}</h5>
       ${SOURCES.map(s => `
-        <div style="display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:13.5px;border-bottom:1px solid rgba(32,30,29,.07)">
+        <div style="display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:13.5px;border-bottom:1px solid color-mix(in srgb, var(--color-text) 8%, transparent)">
           <span style="font-weight:600">${s[0]}</span>
-          <span style="color:rgba(32,30,29,.65);text-align:end">${t(s[1], s[2])}</span>
+          <span style="color:var(--color-muted);text-align:end">${t(s[1], s[2])}</span>
         </div>`).join("")}
       <h5 style="margin:22px 0 10px;font-size:10px;letter-spacing:.16em;text-transform:uppercase">${t("Cross-references & research","مراجع متقاطع و تحقیقات")}</h5>
       ${REFERENCES.map(r => `
-        <div style="display:flex;justify-content:space-between;gap:14px;padding:6px 0;font-size:12px;border-bottom:1px solid rgba(32,30,29,.04)">
+        <div style="display:flex;justify-content:space-between;gap:14px;padding:6px 0;font-size:12px;border-bottom:1px solid color-mix(in srgb, var(--color-text) 5%, transparent)">
           <span style="font-weight:600">${esc(r[0])}</span>
-          <span style="color:rgba(32,30,29,.65);text-align:end">${t(r[1], r[2])}</span>
+          <span style="color:var(--color-muted);text-align:end">${t(r[1], r[2])}</span>
         </div>`).join("")}
       <div style="display:flex;gap:6px;align-items:center;margin-top:22px">
         <i style="width:15px;height:15px;background:${UP};display:inline-block"></i>
         <i style="width:15px;height:15px;background:${DEG};display:inline-block"></i>
         <i style="width:15px;height:15px;background:${DOWN};display:inline-block"></i>
-        <span style="font-size:11px;color:rgba(32,30,29,.65);margin-inline-start:6px">${t("up · degraded · down","در دسترس · کند · قطع")}</span>
+        <span style="font-size:11px;color:var(--color-muted);margin-inline-start:6px">${t("up · degraded · down","در دسترس · کند · قطع")}</span>
       </div>
     </div>
   </div>`;
@@ -585,6 +619,14 @@ function render() {
 
 document.querySelectorAll('input[name="lang"]').forEach(r =>
   r.addEventListener("change", () => { state.lang = r.value; render(); }));
+
+document.querySelectorAll('input[name="theme"]').forEach(r => {
+  r.checked = r.value === document.documentElement.dataset.theme;
+  r.addEventListener("change", () => {
+    document.documentElement.dataset.theme = r.value;
+    localStorage.theme = r.value;
+  });
+});
 
 // keep the countdown/masthead clock honest without re-rendering everything each second
 setInterval(() => { state.now = Date.now(); if (state.site) render(); }, 30000);
