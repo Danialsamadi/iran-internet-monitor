@@ -1,16 +1,16 @@
 {
-  "ts": "2026-07-27T03:21:34Z",
+  "ts": "2026-07-27T03:31:30Z",
   "overall_status": "partial_outage",
   "severity": "major",
   "suspected_causes": [
     "All 4 ISP international gateways unreachable from external probes (TIC 2.187.1.1: connection refused, TIC 78.38.112.1: timeout, Irancell 5.232.0.1: timeout, Asiatech 94.182.0.1: timeout) while BGP routes remain visible via observatories — persistent stealth blackout posture with centralized DPI filtering at national gateway layer, consistent with Bock et al. FOCI'20 whitelister architecture",
-    "Protocol whitelist enforcement stable at 4.2% — 45 of 1,068 labeled IP ranges reachable across 78 operators (45/1068 this pass, unchanged); UDP/ICMP/SSH/VPN silently dropped at gateway — institutionalized whitelist architecture per IRBlock (Tai et al.) USENIX Security '25",
-    "TIC DNS (217.218.155.155) RECOVERED from 5,227ms spike to 229ms baseline — transient 23x latency spike in previous pass resolved within 10 minutes, confirming transient internal congestion/throttling on TIC infrastructure rather than sustained policy shift",
-    "Electro DNS (78.157.42.100) persistently timing out while Shecan (178.22.122.100, 229ms) remains fast — sustained targeted suppression of anti-censorship DNS resolver infrastructure, consistent with mandatory national DNS routing enforcement",
-    "Asiatech dual failure persists — gateway (94.182.0.1 timeout) + web portal (www.asiatech.ir deadline exceeded) both down — ISP-specific isolation, likely CRA directive or sustained infrastructure degradation",
-    "Snapp (snapp.ir) remains in redirect-loop error state (stopped after 10 redirects) — consistent across all observed passes; persistent DPI rule-state fluctuation across multiple enforcement nodes rather than deliberate policy change",
+    "Protocol whitelist enforcement stable at 4.2% — 45 of 1,068 labeled IP ranges reachable across 78 operators (unchanged from previous pass); UDP/ICMP/SSH/VPN silently dropped at gateway — institutionalized whitelist architecture per IRBlock (Tai et al.) USENIX Security '25",
+    "TIC DNS (217.218.155.155) stable at 229ms baseline — no recurrence of the 5,227ms spike observed 10 minutes ago; transient congestion event confirmed as resolved, no policy shift detected",
+    "Electro DNS (78.157.42.100) persistently timing out while Shecan (178.22.122.100, 228ms) remains fast — sustained targeted suppression of anti-censorship DNS resolver infrastructure, consistent with mandatory national DNS routing enforcement",
+    "Asiatech dual failure persists — gateway (94.182.0.1 timeout) + web portal (www.asiatech.ir deadline exceeded) both down across consecutive passes — ISP-specific isolation, likely CRA directive or sustained infrastructure degradation rather than transient issue",
+    "Snapp (snapp.ir) remains in redirect-loop error state (stopped after 10 redirects) — unchanged across all observed passes; persistent DPI rule-state fluctuation across multiple enforcement nodes rather than deliberate policy change",
     "Shaparak payment gateway (www.shaparak.ir) deadline-exceeded timeout persists — domestic payment infrastructure degradation or targeted application-layer filtering at gateway",
-    "Saman Bank (sb24.ir) slightly improved from 3,100ms to 3,267ms — still elevated but trending toward operational threshold; sustained borderline state across multiple passes",
+    "Saman Bank (sb24.ir) continues slow positive trend at 3,187ms (improved from 3,267ms in previous pass) — still elevated but approaching operational threshold; sustained borderline state across multiple passes",
     "Irancell gateway error remains at \"i/o timeout\" (silent packet drop) rather than \"connection refused\" (active TCP RST injection) — drop policy stable across redundant DPI gateway appliances with no RST flapping"
   ],
   "affected_services": [
@@ -18,14 +18,14 @@
     "TIC gateway 78.38.112.1 (timeout) — persistent",
     "Irancell gateway 5.232.0.1 (timeout) — persistent, stable drop policy",
     "Asiatech gateway 94.182.0.1 (timeout) + web portal www.asiatech.ir (deadline exceeded) — dual failure persistent",
-    "TIC DNS 217.218.155.155 (RECOVERED, 229ms latency) — transient 23x spike resolved",
+    "TIC DNS 217.218.155.155 (stable at 229ms) — transient spike from 10 min ago fully resolved, no recurrence",
     "Electro DNS 78.157.42.100 (timeout) — sustained anti-censorship DNS suppression",
     "Snapp snapp.ir (redirect loop, stopped after 10 redirects) — persistent DPI rule-state cycling",
     "Shaparak www.shaparak.ir (deadline exceeded) — payment gateway timeout persists",
-    "Saman Bank sb24.ir (degraded, 3.3s latency) — borderline degraded, trending positive",
-    "~95.8% of probed IP ranges unreachable — whitelist enforcement stable at ~4.2% (45/1068)"
+    "Saman Bank sb24.ir (degraded, 3.2s latency) — continued slow improvement toward operational",
+    "~95.8% of probed IP ranges unreachable — whitelist enforcement stable at ~4.2% (45/1068), 78 operators"
   ],
-  "public_summary": "Iran's internet remains in stable partial outage with all 4 major ISP international gateways unreachable from external probes while domestic and whitelisted foreign services operate normally. The selective-internet architecture is unchanged: 95.8% of IP ranges blocked, protocol whitelist enforced at 4.2% (45/1068), Electro DNS suppression continues, Snapp remains in redirect-loop state, Shaparak payment gateway timeout persists, Asiatech dual failure continues. TIC DNS (217.218.155.155) recovered from a 5,227ms transient spike back to 229ms baseline, confirming the spike was transient congestion rather than sustained throttling. All circumvention tools (Tor, Snowflake, Psiphon) and foreign platforms remain fully accessible. Saman Bank latency slightly improved (3.3s).",
-  "insight": "The TIC DNS 23x latency spike (223ms to 5,227ms) has fully resolved within one 10-minute interval, confirming it was transient congestion on TIC infrastructure rather than a policy shift — the only notable deviation in an otherwise identical pass, reinforcing the stability of the institutionalized stealth blackout architecture.",
-  "recommendation": "Continue monitoring at current 10-minute intervals. Priority watch items: (1) TIC DNS — fully recovered, but monitor for recurrence of >2s latency which would signal sustained throttling of the state DNS resolver; (2) Snapp error state — redirect-loop persists across all observed passes, now well beyond 60-minute threshold confirming persistent DPI rule-state issue rather than transient; (3) Saman Bank trending toward operational (3.3s) — watch for drop below 2,000ms threshold. No immediate action needed."
+  "public_summary": "Iran's internet remains in stable partial outage with no significant changes from the previous pass 10 minutes ago. All 4 major ISP international gateways remain unreachable while domestic and whitelisted foreign services operate normally. The selective-internet architecture is unchanged: 95.8% of IP ranges blocked, protocol whitelist enforced at 4.2% (45/1068). Saman Bank latency continued its slow improvement (3,267ms to 3,187ms). TIC DNS stable at 229ms confirming the earlier 5,227ms spike was transient. Electro DNS suppression, Snapp redirect-loop, and Shaparak timeout all persist unchanged. All circumvention tools (Tor, Snowflake, Psiphon) and foreign platforms remain fully accessible.",
+  "insight": "This pass is functionally identical to the previous pass 10 minutes ago with no state changes except a 80ms latency improvement on Saman Bank — the stealth blackout architecture remains completely stable with zero fluctuation in the whitelist ratio (45/1068, unchanged across consecutive passes), confirming this is a mature, institutionalized censorship posture rather than an active escalation or de-escalation.",
+  "recommendation": "Continue monitoring at current 10-minute intervals. The system is in a stable state with no emerging threats or resolution signals. Priority watch items unchanged: (1) Snapp redirect-loop persists — now well beyond 60-minute threshold confirming persistent DPI rule-state issue; (2) Saman Bank approaching operational threshold at 3.2s — watch for drop below 2,000ms; (3) TIC DNS fully stable at 229ms — monitor for any recurrence of latency spikes above 1s. No immediate action needed."
 }
