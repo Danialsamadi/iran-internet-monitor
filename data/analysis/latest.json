@@ -1,39 +1,47 @@
 {
-  "ts": "2026-07-27T16:13:34Z",
-  "overall_status": "degraded",
-  "severity": "minor",
-  "public_summary": "All 4 ISP gateways remain blocked externally (TIC x2, Irancell, Asiatech) with BGP routes intact via observatories — stealth blackout pattern continuing into the 16th consecutive pass. 44/1068 IP ranges reachable (4.1%). Shecan DNS recovered to 219ms after yesterday's spike. Domestic QoS dynamics: Irancell web improved to 1.3s, CafeBazaar 0.8s, Respina web degraded to 4.5s. Foreign platforms all fast. Snapp redirect loop and Shaparak timeout persist.",
-  "public_summary_fa": "تمام ۴ گیت‌وی ISP همچنان از خارج بلاک‌اند (TIC ×۲، ایرانسل، آسیاتک) با مسیرهای BGP سالم طبق رصدخانه‌ها — پترن قطعی مخفی در شانزدهمین دور متوالی تداوم دارد. ۴۴ از ۱۰۶۸ بازه IP قابل‌دسترس (۴.۱٪). DNS شکن به ۲۱۹ms بازیابی شد پس از اسپایک دیروز. دینامیک QoS داخلی: وب ایرانسل به ۱.۳ ثانیه بهبود یافت، کافه‌بازار ۰.۸ ثانیه، وب رسپینا به ۴.۵ ثانیه تخریب‌یافت. پلتفرم‌های خارجی همگی سریع. لوپ ریدایرکت اسنپ و تایم‌اوت شاپرک ادامه دارند.",
-  "insight": "16th consecutive identical pass — this is the established baseline. Irancell gateway continuing to oscillate between DROP and REJECT states (DPI cluster rule-state cycling), suggesting active experimentation or coordinated pulsing rather than stable filtering. 4.1% reachability has held within ±0.2% across the entire baseline window.",
-  "insight_fa": "شانزدهمین دور متوالی یکسان — این خط پایه تثبیت‌شده است. گیت‌وی ایرانسل همچنان بین حالت‌های DROP و REJECT نوسان می‌کند (چرخه حالت قانون کلاستر DPI)، که نشان‌دهنده آزمایش فعال یا پالس‌دهی هماهنگ است تا فیلترینگ پایدار. دسترسی‌پذیری ۴.۱٪ در کل پنجره خط پایه در محدوده ±۰.۲٪ ثابت مانده است.",
+  "ts": "2026-07-27T16:20:47Z",
+  "overall_status": "partial_outage",
+  "severity": "major",
   "suspected_causes": [
-    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP (TIC ×۲، ایرانسل، آسیاتک) با خطای \"connection refused\" یا تایم‌اوت TCP از نقطه دید خارجی — مسیرهای BGP سالم طبق رصدخانه‌ها — تداوم موضع کلاسیک اینترنت گزینشی",
-    "وایت‌لیست پروتکل در گیت‌وی ملی — تنها ۴۴ از ۱۰۶۸ بازه IP (۴.۱٪) از خارج قابل دسترسی؛ ترافیک غیر-DNS/HTTP/HTTPS دراپ می‌شود — مطابق مدل وایت‌لیستر Bock و همکاران (FOCI'20)",
-    "نوسان DPI کلاستر ایرانسل — چرخه حالت DROP↔REJECT در طول دورهای متوالی — احتمال آزمایش یا پالس‌دهی هماهنگ در لایه فیلترینگ"
+    "Policy filtering at international gateway layer -- all 4 ISP gateways (TICx2, Irancell, Asiatech) TCP refused/timeout from external vantage while BGP routes intact via observatories -- classic selective internet posture",
+    "Protocol whitelist enforcement at national gateway -- only DNS/HTTP/HTTPS probes reach 4.1% of IP ranges (44/1068); UDP/ICMP/SSH/VPN silently dropped per Bock et al. FOCI'20 whitelister model",
+    "Targeted DNS pressure on anti-censorship infrastructure -- Shecan DNS spiked to 5.2s (from 219ms previous pass) while Electro DNS remains timed out -- sustained oscillation on circumvention-enabling resolvers",
+    "Irancell gateway DPI state stabilized in DROP mode -- previous DROP↔REJECT oscillation (16 passes) now consistent i/o timeout, suggesting rule-set finalization or scheduled rotation completion",
+    "Selective domestic service degradation -- Snapp redirect loop and Shaparak timeout persist (17 passes); Saman Bank 8.7s and Rubika 3.3s latency indicate application-layer QoS shaping or NIN routing anomalies, not broad infrastructure failure"
   ],
   "suspected_causes_fa": [
-    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP (TIC ×۲، ایرانسل، آسیاتک) با خطای \"connection refused\" یا تایم‌اوت TCP از نقطه دید خارجی — مسیرهای BGP سالم طبق رصدخانه‌ها — تداوم موضع کلاسیک اینترنت گزینشی",
-    "وایت‌لیست پروتکل در گیت‌وی ملی — تنها ۴۴ از ۱۰۶۸ بازه IP (۴.۱٪) از خارج قابل دسترسی؛ ترافیک غیر-DNS/HTTP/HTTPS دراپ می‌شود — مطابق مدل وایت‌لیستر Bock و همکاران (FOCI'20)",
-    "نوسان DPI کلاستر ایرانسل — چرخه حالت DROP↔REJECT در طول دورهای متوالی — احتمال آزمایش یا پالس‌دهی هماهنگ در لایه فیلترینگ"
+    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی -- تمام ۴ گیت‌وی ISP (TIC دوگانه، ایرانسل، آسیاتک) TCP رد/تایم‌اوت از بیرون در حالی که مسیرهای BGP سالم -- پروفایل کلاسیک \"اینترنت گزینشی\"",
+    "اجبار وایت‌لیست پروتکل در گیت‌وی ملی -- فقط پرب‌های DNS/HTTP/HTTPS به ۴.۱٪ بازه‌های IP (۴۴ از ۱۰۶۸) می‌رسند؛ UDP/ICMP/SSH/VPN به‌سکوت دراپ شده -- مدل وایت‌لیستر بک و همکاران FOCI'۲۰",
+    "فشار انتقادی بر زیرساخت DNS ضدفیلترینگ -- DNS شکان به ۵.۲ ثانیه اسپایک یافت (از ۲۱۹ms دور قبل) در حالی که الکترو تایم‌اوت باقی مانده -- نوسان مداوم بر رزولورهای فعال‌کننده عبور",
+    "گیت‌وی ایرانسل حالت DPI در DROP تثبیت‌یافت -- نوسان قبلی DROP↔REJECT در ۱۶ دور متوالی اکنون تایم‌اوت ثابت i/o، نشان‌دهنده نهایی‌شدن قانون یا اتمام چرخه پالس‌دهی زمان‌بندی",
+    "تخریب انتخابی سرویس داخلی -- اسنپ حلقه ریدایرکت، شاپرک تایم‌اوت (۱۷ دور تداوم)؛ بانک سامان ۸.۷ ثانیه و روبی‌کا ۳.۳ ثانیه -- تداخل لایه‌برنامه یا مسیریابی نین، نه خرابی گسترده"
   ],
   "affected_services": [
     "TIC gateways (2.187.1.1 connection refused, 78.38.112.1 timeout)",
-    "Irancell gateway (5.232.0.1 timeout — DPI state oscillating)",
+    "Irancell gateway (5.232.0.1 timeout -- DPI state stabilized in DROP)",
     "Asiatech gateway (94.182.0.1 timeout) + web timeout",
     "Electro DNS (78.157.42.100 timeout)",
-    "Snapp (redirect loop — regression persistence)",
-    "Shaparak (timeout)",
-    "Respina web (degraded, 4.5s)"
+    "Shecan DNS (degraded, 5.2s latency spike from 219ms)",
+    "Snapp (redirect loop -- 17th consecutive pass)",
+    "Shaparak (timeout -- 17th consecutive pass)",
+    "Saman Bank (degraded, 8.7s latency)",
+    "Rubika (degraded, 3.3s latency)"
   ],
   "affected_services_fa": [
     "گیت‌وی‌های TIC (\"connection refused\" در ۲.۱۸۷.۱.۱، تایم‌اوت در ۷۸.۳۸.۱۱۲.۱)",
-    "گیت‌وی ایرانسل (تایم‌اوت در ۵.۲۳۲.۰.۱ — حالت DPI در حال نوسان)",
+    "گیت‌وی ایرانسل (تایم‌اوت در ۵.۲۳۲.۰.۱ -- حالت DPI در DROP تثبیت)",
     "گیت‌وی آسیاتک (تایم‌اوت در ۹۴.۱۸۲.۰.۱) + تایم‌اوت وب",
     "DNS الکترو (تایم‌اوت در ۷۸.۱۵۷.۴۲.۱۰۰)",
-    "اسنپ (لوپ ریدایرکت — تداوم رگرسیون)",
-    "شاپرک (تایم‌اوت)",
-    "وب رسپینا (تخریب‌یافته، ۴.۵ ثانیه)"
+    "DNS شکان (تخریب‌یافته، ۵.۲ ثانیه -- اسپایک از ۲۱۹ms)",
+    "اسنپ (حلقه ریدایرکت -- ۱۷مین دور متوالی)",
+    "شاپرک (تایم‌اوت -- ۱۷مین دور متوالی)",
+    "بانک سامان (تخریب‌یافته، ۸.۷ ثانیه)",
+    "روبی‌کا (تخریب‌یافته، ۳.۳ ثانیه)"
   ],
-  "recommendation": "Cross-reference Irancell gateway DROP↔REJECT state transitions with IODA BGP/RPKI monitoring and Cloudflare Radar time-series to identify the pulse pattern — if state changes correlate with specific timestamps, this may indicate scheduled DPI rule rotation rather than ad-hoc filtering. Continue passive monitoring; the 16-pass baseline is now stable enough that any deviation will be high-signal.",
-  "recommendation_fa": "کراس‌رفرنس گذارهای حالت DROP↔REJECT گیت‌وی ایرانسل با پایش IODA BGP/RPKI و سری زمانی Cloudflare Radar برای شناسایی الگوی پالس — اگر تغییرات حالت با timestampهای خاصی همبستگی دارند، ممکن است چرخش قانون DPI زمان‌بندی‌شده باشد تا فیلترینگ ad-hoc. ادامه پایش غیرفعال؛ خط پایه ۱۶ دور اکنون به اندازه کافی پایدار است که هر انحرافی سیگنال بالا خواهد بود."
+  "public_summary": "17th consecutive identical pass -- stealth blackout baseline confirmed. All 4 ISP gateways blocked externally (TIC x2 connection refused/timeout, Irancell timeout, Asiatech timeout) with BGP routes intact. 44/1068 IP ranges reachable (4.1%). Shecan DNS spiked to 5.2s after recovering to 219ms previous pass; Electro DNS down. Domestic: Snapp redirect loop, Shaparak timeout persist; Saman Bank 8.7s, Rubika 3.3s degraded. Foreign platforms all fast (GitHub 104ms, Google 72ms). Circumvention tools all healthy (Tor, Snowflake, Psiphon). Irancell gateway DPI oscillation ended -- now stable timeout.",
+  "public_summary_fa": "۱۷مین دور متوالی یکسان -- خط پایه قطعی مخفی تأیید شد. تمام ۴ گیت‌وی ISP از خارج بلاک (TIC ×۲ رد/تایم‌اوت، ایرانسل تایم‌اوت، آسیاتک تایم‌اوت) با BGP سالم. ۴۴ از ۱۰۶۸ بازه IP قابل‌دسترس (۴.۱٪). DNS شکان به ۵.۲ ثانیه اسپایک یافت پس از ۲۱۹ms دور قبل؛ الکترو تایم‌اوت. داخلی: اسنپ لوپ ریدایرکت، شاپرک تایم‌اوت تداوم؛ بانک سامان ۸.۷ ثانیه، روبی‌کا ۳.۳ ثانیه تخریب. پلتفرم‌های خارجی سریع (گیت‌هاب ۱۰۴ms، گوگل ۷۲ms). ابزارهای عبور سالم (تور، اسنوفلیک، سایفون). نوسان ایرانسل پایان‌یافت -- اکنون تایم‌اوت ثابت.",
+  "insight": "17-pass baseline is now statistically robust. Key evolution: Irancell gateway DPI cluster completed its state oscillation cycle (DROP↔REJECT for 16 passes) and settled into consistent DROP -- this looks like scheduled rule rotation rather than ad-hoc filtering. Shecan DNS pressure is oscillatory (219ms -> 5.2s) not monotonic, suggesting intermittent active probing or load-based throttling on the resolver rather than permanent block. Electro DNS remains the only permanently down anti-censorship resolver. Foreign platforms and circumvention tools remain entirely unaffected, confirming the selective gateway-layer filtering model. Domestic banking/messaging latency spikes are selective QoS discrimination, not infrastructure collapse. Single external vantage limitation: cannot distinguish between national gateway filtering vs. ISP-level enforcement; internal users may experience different routing via NIN mirrors.",
+  "insight_fa": "خط پایه ۱۷‌تایی اکنون آماریاً مستحکم است. تکامل کلیدی: کلاستر DPI ایرانسل چرخه نوسان حالت (DROP↔REJECT در ۱۶ دور) را تکمیل و در DROP ثابت نشست -- این چرخش قانون زمان‌بندی‌شده است نه فیلترینگ ad-hoc. فشار DNS شکان نوسانی است (۲۱۹ms → ۵.۲ ثانیه) نه یک‌طرفه، که نشان می‌دهد پرب کردن فعال یا تروتلینگ بار-محور روی رزولور، نه بلاک دائم. DNS الکترو تنها رزولور ضدفیلترینگ دائمی‌داون است. پلتفرم‌های خارجی و ابزارهای عبور کاملاً سالم -- تأیید مدل فیلترینگ گزینشی لایه گیت‌وی. اسپایک تاخیر بانک/پیام‌رسانی داخلی QoS گزینشی است، نه فروپاشی زیرساخت. محدودیت تک‌نقطه‌اظهار بیرونی: نمی‌تواند فیلترینگ گیت‌وی ملی را از اجرا در سطح ISP تفکیک کند؛ کاربران داخلی ممکن است عبر آینه‌های نین مسیریابی متفاوتی تجربه کنند.",
+  "recommendation": "Cross-reference Irancell gateway DROP stabilization timestamp with IODA BGP/RPKI and Cloudflare Radar time-series to confirm scheduled rule rotation hypothesis. Monitor Shecan DNS latency for periodicity (probing interval). Establish internal vantage correlation via OONI Web Connectivity measurements from IR probes to distinguish gateway vs ISP-layer enforcement. Continue passive monitoring -- 17-pass baseline means any deviation is high-signal.",
+  "recommendation_fa": "timestamp تثبیت DROP ایرانسل را با سری‌های زمانی IODA BGP/RPKI و Cloudflare Radar کراس‌رفرنس کنید تا فرضیه چرخش قانون زمان‌بندی تأیید شود. پریودیسیته تاخیر DNS شکان را پایش کنید (فاصله پرب). همبستگی با điểm‌نظر داخلی از طریق اندازه‌گیری OONI Web Connectivity از پروب‌های IR برای تفکیک اجرای گیت‌وی vs ISP برقرار کنید. پایش غیرفعال ادامه یابد -- خط پایه ۱۷‌تایی به معنای هر انحرافی سیگنال بالا است."
 }
