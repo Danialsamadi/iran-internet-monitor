@@ -211,7 +211,7 @@ const cellStrip = (cells, h) => `<div class="cellrow" style="height:${h}px">` +
 const bars = (vals, colorFn, max, h, fmt) => {
   const m = max || Math.max(1, ...vals);
   return vals.map((v, i) =>
-    `<div style="display:flex;flex-direction:column;justify-content:flex-end;gap:6px;height:${h + 22}px">
+    `<div style="display:flex;flex-direction:column;justify-content:flex-end;gap:6px;height:${fmt ? h + 22 : h}px">
        ${fmt ? `<div style="font-size:12px;text-align:center;font-variant-numeric:tabular-nums;font-weight:600">${num(fmt(v))}</div>` : ""}
        <i style="height:${Math.max(2, Math.round(v / m * h))}px;background:${colorFn(v, i)};width:100%;display:block"></i>
      </div>`).join("");
