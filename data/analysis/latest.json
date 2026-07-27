@@ -10,8 +10,8 @@
     "Snapp redirect loop (persistent across passes) and Shaparak payment gateway timeout indicate domestic application-layer filtering or misconfiguration, not international path issue",
     "Foreign platforms (Google, GitHub, Cloudflare, YouTube, Wikipedia) all fast (<300ms) — economic-necessity whitelisting under selective-internet model",
     "Circumvention tools (Tor, Snowflake, Psiphon, BridgeDB) all up and fast from external vantage — circumvention infrastructure externally reachable but internal user experience may differ due to DPI/active probing inside Iran",
-    "Mobinnet severely degraded (~9.7s latency, HTTP 200) — ISP-specific application-layer throttling or congestion, highest latency in current pass",
-    "Saman Bank persistently degraded (~3.1s latency, stable across passes) — targeted or systemic domestic banking QoS degradation"
+    "Mobinnet recovered from severe 9.7s degradation to 1.2s — transient ISP-specific congestion or time-of-day throttling rather than sustained targeting",
+    "Saman Bank persistently degraded (~2.9s latency, stable across passes) — targeted or systemic domestic banking QoS degradation"
   ],
   "suspected_causes_fa": [
     "تمام چهار گیت‌وی بین‌المللی ISP اصلی (TIC دو مورد، ایرانسل، آسیاتک) از بیرون غیرقابل‌دسترس — تأیید می‌کند فیلترینگِ سیاستی در لایه گیت‌وی ملی (نقاط اتکاء TIC/DCI) است، نه خرابی زیرساخت",
@@ -22,15 +22,15 @@
     "لوپ ریدایرکت اسنپ (مستمر در پاس‌ها) و تایم‌اوت شابارک به دلیل فیلترینگ/ پیکربندی لایه اپلیکیشن داخلی است، نه مسئله مسیر بین‌المللی",
     "پلتفرم‌های خارجی (گوگل، گیتهاب، کلودفلر، یوتیوب، ویکی‌پدیا) همه سریع (<۳۰۰ms) — لیست‌سبید ضرورت اقتصادی در مدل اینترنت انتخابی",
     "ابزارهای عبور (تور، اسنوفلیک، سایفون، بریج‌دی‌بی) همه از بیرون up و سریع — زیرساخت عبور از بیرون قابل‌دسترس اما تجربه کاربری داخلی ممکن است به‌دلیل DPI/پرب‌های فعال درون ایران متفاوت باشد",
-    "مبین‌نت degraded شدید (~۹.۷ ثانیه لیتنسی، HTTP 200) — تسریع/کندکردن یا تراکم لایه اپلیکیشن مخصوص ISP، بالاترین لیتنسی در پاس فعلی",
-    "بانک سامان مداماً degraded (~۳.۱ ثانیه لیتنسی، پایدار در پاس‌ها) — تخریب QoS هدفمند یا سیستمیک در بانکداری داخلی"
+    "مبین‌نت از degraded شدید ۹.۷ ثانیه به ۱.۲ ثانیه بهبود یافت — تراکم مخصوص ISP یا تسریع/کندکردن زمانیِ گذرا، نه هدف‌گیری مستمر",
+    "بانک سامان مداماً degraded (~۲.۹ ثانیه لیتنسی، پایدار در پاس‌ها) — تخریب QoS هدفمند یا سیستمیک در بانکداری داخلی"
   ],
   "affected_services": [
     "TIC international gateways (2.187.1.1, 78.38.112.1) — TCP connection refused / timeout",
     "Irancell gateway (5.232.0.1) — TCP connection refused",
     "Asiatech gateway (94.182.0.1) + web portal — dual failure",
-    "Mobinnet — severely degraded (~9.7s latency, highest in pass, HTTP 200)",
-    "Saman Bank — persistently degraded (~3.1s latency)",
+    "Mobinnet — recovered from 9.7s to 1.2s (transient spike resolved)",
+    "Saman Bank — persistently degraded (~2.9s latency)",
     "Snapp — redirect loop (10 redirects, persistent regression across passes)",
     "Shaparak payment gateway — timeout (context deadline exceeded)",
     "Electro DNS — timeout (targeted anti-circumvention pressure)",
@@ -40,18 +40,18 @@
     "گیت‌وی‌های بین‌المللی TIC (2.187.1.1، 78.38.112.1) — \"connection refused\" / تایم‌اوت TCP",
     "گیت‌وی ایرانسل (5.232.0.1) — \"connection refused\" TCP",
     "گیت‌وی + وب‌پورتال آسیاتک (94.182.0.1) — شکست دوگانه",
-    "مبین‌نت — degraded شدید (~۹.۷ ثانیه لیتنسی، بالاترین در پاس، HTTP 200)",
-    "بانک سامان — مداماً degraded (~۳.۱ ثانیه لیتنسی)",
+    "مبین‌نت — از ۹.۷ ثانیه به ۱.۲ ثانیه بهبود یافت (اسپایک گذرا حل شد)",
+    "بانک سامان — مداماً degraded (~۲.۹ ثانیه لیتنسی)",
     "اسنپ — لوپ ریدایرکت (۱۰ ریدایرکت، رگرسیون مستمر در پاس‌ها)",
     "شبارک درگاه پرداخت — تایم‌اوت (context deadline exceeded)",
     "DNS الکترو — تایم‌اوت (فشار هدفمند بر زیرساخت DNS دور زدن)",
     "~۹۵.۸٪ بازه‌های IP پروب‌شده غیرقابل‌دسترس (اجراهای لیست‌سبید)"
   ],
-  "public_summary": "Iran's internet remains in a stable partial outage consistent with the institutionalized selective-internet architecture. All major ISP international gateways are blocked from external probes while domestic services and whitelisted foreign platforms remain fast. Only ~4.2% of IP ranges are externally reachable, confirming protocol whitelist enforcement at the TIC/DCI gateway layer. Compared to the previous pass 10 minutes ago, Respina, Tapsi, and RIPEstat recovered from elevated latency; Mobinnet degraded to 9.7s; Saman Bank, Snapp, and Shaparak degradations persist. The overall censorship posture is unchanged.",
-  "public_summary_fa": "اینترنت ایران در وضعیت انقطاع جزئیِ پایدار مطابق با معماری نهادینه‌شده‌ی اینترنتِ انتخابی باقی مانده است. تمام گیت‌وی‌های بین‌المللی ISP اصلی از پروب‌های خارجی مسدود‌اند در حالی که سرویس‌های داخلی و پلتفرم‌های خارجی لیست‌سبیدشده سریع‌اند. تنها ~۴.۲٪ بازه‌های IP از بیرون قابل‌دسترس‌اند که اجرای لیست‌سبید پروتکل در لایه گیت‌وی TIC/DCI را تأیید می‌کند. مقایسه با پاس قبلی (۱۰ دقیقه پیش): رسپینا، تپسی، و RIPEstat از تاخیر بالا بهبود یافتند؛ مبین‌نت به ۹.۷ ثانیه تخریب یافت؛ تخریب‌های بانک سامان، اسنپ، و شبارک پایدار است. رویکرد کلی سانسور بدون تغییر است.",
-  "insight": "The oscillation pattern in domestic service latency — Respina/Tapsi/RIPEstat recovering while Mobinnet degrades severely to 9.7s — reveals that application-layer QoS manipulation in Iran's selective-internet is not static but dynamically redistributed across ISPs, consistent with time-of-day throttling schedules or real-time DPI policy adjustments rather than fixed infrastructure congestion. The anti-circumvention DNS layer (Electro down, Shecan up) and the gateway block remain the stable backbone of the censorship architecture while domestic service latency fluctuates as a secondary control mechanism.",
-  "insight_fa": "الگوی نوسان لیتنسی سرویس‌های داخلی — بهبود رسپینا/تپسی/RIPEstat در حالی که مبین‌نت به شدت به ۹.۷ ثانیه تخریب می‌یابد — نشان می‌دهد دستکاری QoS لایه اپلیکیشن در اینترنت انتخابی ایران ایستا نیست بلکه به‌صورت پویا بین ISPها بازتوزیع می‌شود، مطابق با زمان‌بندی تسریع/کندکردن روزانه یا تنظیمات لحظه‌ای سیاست DPI، نه تراکم زیرساخت ثابت. لایه DNS ضدفیلترینگ (الکترو down، شکن up) و بلاک گیت‌وی ستون فقرات پایدار معماری سانسور باقی می‌مانند در حالی که لیتنسی سرویس‌های داخلی به‌عنوان مکانیزم کنترل فرعی در نوسان است.",
-  "recommendation": "Continue pass-over-pass tracking of domestic service latency differentials to map the ISP-specific QoS redistribution pattern; add timestamped latency histograms per ISP to distinguish time-of-day throttling from ISP-targeted pressure. The Mobinnet 9.7s spike deserves dedicated monitoring — if it recurs at the same time in subsequent passes, it confirms scheduled throttling rather than congestion.",
-  "recommendation_fa": "ردیابی پاس‌به‌پاسِ تمایز لیتنسی سرویس‌های داخلی را برای ترسیم الگوی بازتوزیع QoS مخصوص ISP ادامه دهید؛ هیستوگرام‌های لیتنسی زمان‌بندی‌شده به تفکیک ISP اضافه کنید تا تسریع/کندکردن زمانی از فشار مخصوص ISP متمایز شود. اسپایک ۹.۷ ثانیه‌ای مبین‌نت نیازمند پایش اختصاصی است — اگر در پاس‌های بعدی در همان زمان تکرار شود، تسریع زمان‌بندی‌شده را تأیید می‌کند نه تراکم.",
-  "ts": "2026-07-27T00:11:27Z"
+  "public_summary": "Iran's internet remains in a stable partial outage consistent with the institutionalized selective-internet architecture. All major ISP international gateways are blocked from external probes while domestic services and whitelisted foreign platforms remain fast. Only ~4.2% of IP ranges are externally reachable, confirming protocol whitelist enforcement at the TIC/DCI gateway layer. Compared to the previous pass 10 minutes ago, Mobinnet recovered from a severe 9.7s spike to 1.2s; Saman Bank, Snapp, and Shaparak degradations persist; Electro DNS remains down. The overall censorship posture is unchanged.",
+  "public_summary_fa": "اینترنت ایران در وضعیت انقطاع جزئیِ پایدار مطابق با معماری نهادینه‌شده‌ی اینترنتِ انتخابی باقی مانده است. تمام گیت‌وی‌های بین‌المللی ISP اصلی از پروب‌های خارجی مسدود‌اند در حالی که سرویس‌های داخلی و پلتفرم‌های خارجی لیست‌سبیدشده سریع‌اند. تنها ~۴.۲٪ بازه‌های IP از بیرون قابل‌دسترس‌اند که اجرای لیست‌سبید پروتکل در لایه گیت‌وی TIC/DCI را تأیید می‌کند. مقایسه با پاس قبلی (۱۰ دقیقه پیش): مبین‌نت از اسپایک شدید ۹.۷ ثانیه به ۱.۲ ثانیه بهبود یافت؛ تخریب‌های بانک سامان، اسنپ، و شبارک پایدار است؛ DNS الکترو همچنان down. رویکرد کلی سانسور بدون تغییر است.",
+  "insight": "The transient Mobinnet 9.7s spike resolving to 1.2s within a single 10-minute interval — while the gateway block, Electro DNS suppression, and protocol whitelist remain static — reveals that Iran's selective-internet operates on two distinct temporal layers: a stable censorship backbone (gateway filtering, DNS targeting, whitelist enforcement) and a dynamic QoS redistribution layer where domestic service latency is actively reshuffled across ISPs, likely via time-of-day throttling schedules or real-time DPI policy adjustments rather than fixed congestion.",
+  "insight_fa": "حل‌شدن اسپایک ۹.۷ ثانیه‌ای مبین‌نت به ۱.۲ ثانیه در کمتر از یک بازه ۱۰ دقیقه‌ای — در حالی که بلاک گیت‌وی، سرکوب DNS الکترو، و لیست‌سبید پروتکل ایستا می‌مانند — نشان می‌دهد اینترنت انتخابی ایران روی دو لایه زمانی متمایز کار می‌کند: یک ستون فقرات سانسور پایدار (فیلترینگ گیت‌وی، هدف‌گیری DNS، اجرای لیست‌سبید) و یک لایه بازتوزیع QoS پویا که در آن لیتنسی سرویس‌های داخلی به‌صورت فعال بین ISPها جابجا می‌شود، احتمالاً از طریق زمان‌بندی تسریع/کندکردن روزانه یا تنظیمات لحظه‌ای سیاست DPI، نه تراکم ثابت.",
+  "recommendation": "Add timestamped latency histograms per ISP across 24-hour cycles to distinguish scheduled throttling windows from ISP-targeted pressure events; the Mobinnet spike timing within the interval suggests it may correlate with a specific throttling window boundary.",
+  "recommendation_fa": "هیستوگرام‌های لیتنسی زمان‌بندی‌شده به تفکیک ISP بر روی چرخه ۲۴ ساعته اضافه کنید تا پنجره‌های تسریع/کندکردن زمان‌بندی‌شده از رویدادهای فشار مخصوص ISP متمایز شوند؛ زمان‌بندی اسپایک مبین‌نت در بازه نشان می‌دهد ممکن است با مرز یک پنجره تسریع/کندکردن هم‌زمان باشد.",
+  "ts": "2026-07-27T00:21:26Z"
 }
