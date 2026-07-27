@@ -65,29 +65,14 @@ a:hover { color: var(--color-accent-700); }
 .seg-opt input { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
 .seg-opt:has(input:checked) { background: var(--color-accent); color: var(--color-bg); }
 
-/* CMYK plate headline / numerals — three misregistered process plates whose
-   multiply overlap prints the dark core; the .paper span carries the text
-   for assistive tech, the plates are aria-hidden repeats. */
+/* Headline / big-numeral typography (the old CMYK plate effect is gone —
+   plateText now renders the text once, plain). */
 [dir="rtl"] .cmyk-num,
 [dir="rtl"] .cmyk-head { font-family: Vazirmatn, var(--font-body); }
 [dir="rtl"] .cmyk-num { font-weight: 600; }
-/* Archivo Black is a single 400-weight face — no synthetic bold, or the plates smear */
 [dir="ltr"] .cmyk-num { font-family: "Archivo Black", var(--font-body); font-weight: 400; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
 [dir="ltr"] .cmyk-head { font-family: var(--font-body); }
-.cmyk-head { position: relative; }
-.cmyk-head .paper { color: var(--color-bg);
-  text-shadow: 0.027em 0.0185em 0 var(--color-bg), -0.0245em -0.0175em 0 var(--color-bg); }
-.cmyk-head .plate { position: absolute; inset: 0; mix-blend-mode: multiply; pointer-events: none; user-select: none; }
-.cmyk-head .plate-c { color: var(--color-accent); }
-.cmyk-head .plate-m { color: var(--color-accent-2); translate: 0.018em 0.0125em; }
-.cmyk-head .plate-y { color: var(--color-process-yellow); translate: -0.0155em -0.0115em; }
-.cmyk-num { position: relative; width: fit-content; line-height: 0.9; background: var(--color-bg); padding: 0.12em; margin: -0.12em; }
-.cmyk-num .paper { color: var(--color-bg);
-  text-shadow: 0.036em 0.025em 0 var(--color-bg), -0.031em -0.023em 0 var(--color-bg); }
-.cmyk-num .plate { position: absolute; inset: 0.12em; mix-blend-mode: multiply; pointer-events: none; user-select: none; }
-.cmyk-num .plate-c { color: var(--color-accent); }
-.cmyk-num .plate-m { color: var(--color-accent-2); translate: 0.036em 0.025em; }
-.cmyk-num .plate-y { color: var(--color-process-yellow); translate: -0.031em -0.023em; }
+.cmyk-num { display: inline-block; line-height: 0.9; }
 
 @keyframes blip { 0%,100%{opacity:1} 50%{opacity:.25} }
 .blip { width: 7px; height: 7px; border-radius: 50%; background: var(--color-accent-2); animation: blip 1.6s ease-in-out infinite; display: inline-block; }
@@ -167,13 +152,7 @@ const PAGES = [
 // services featured in the overview 24 h grid, most telling first
 const HEADLINE_IDS = ["telegram-web","whatsapp-web","instagram","tor-check","psiphon","shaparak","digikala","tic-gw-1"];
 
-const plateText = (txt, cls, style) => `
-  <span class="${cls}" style="${style || ""}">
-    <span class="paper">${esc(txt)}</span>
-    <span class="plate plate-c" aria-hidden="true">${esc(txt)}</span>
-    <span class="plate plate-m" aria-hidden="true">${esc(txt)}</span>
-    <span class="plate plate-y" aria-hidden="true">${esc(txt)}</span>
-  </span>`;
+const plateText = (txt, cls, style) => `<span class="${cls}" style="${style || ""}">${esc(txt)}</span>`;
 
 const cellStrip = (cells, h) => `<div class="cellrow" style="height:${h}px">` +
   [...(cells || "?".repeat(48))].map(c => `<i style="background:${cellColor(c)}"></i>`).join("") + "</div>";
