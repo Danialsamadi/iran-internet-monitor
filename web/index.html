@@ -102,7 +102,9 @@ a:hover { color: var(--color-accent-700); }
 [dir="rtl"] .cmyk-num { font-weight: 600; }
 [dir="ltr"] .cmyk-num { font-family: "Archivo Black", var(--font-body); font-weight: 400; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
 [dir="ltr"] .cmyk-head { font-family: var(--font-body); }
-.cmyk-num { display: inline-block; line-height: 0.9; }
+/* block with an exact 1em box so mixed Latin/Persian font metrics can't
+   change the plate height — keeps the labels below aligned across a row */
+.cmyk-num { display: block; width: fit-content; height: 1em; line-height: 1; }
 
 @keyframes blip { 0%,100%{opacity:1} 50%{opacity:.25} }
 .blip { width: 7px; height: 7px; border-radius: 50%; background: var(--color-accent-2); animation: blip 1.6s ease-in-out infinite; display: inline-block; }
