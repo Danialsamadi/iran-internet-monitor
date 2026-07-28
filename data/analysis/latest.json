@@ -1,29 +1,63 @@
 {
-  "ts": "2026-07-28T09:01:21Z",
+  "ts": "2026-07-28T10:01:01Z",
   "overall_status": "partial_outage",
   "severity": "major",
   "suspected_causes": [
-    "Policy filtering at international gateway layer — all 4 ISP gateways (TIC x2 refused/timeout, Irancell timeout, Asiatech timeout) blocked from external vantage with BGP routes intact — stealth blackout baseline (33rd consecutive pass)",
+    "Policy filtering at international gateway layer — all 4 ISP gateways (TIC x2 refused/timeout, Irancell timeout, Asiatech timeout) blocked from external vantage with BGP routes intact — stealth blackout baseline (34th consecutive pass)",
     "Protocol whitelist enforcement at national gateway — 40/1068 IP ranges (3.7%) reachable via DNS/HTTP/HTTPS; UDP/ICMP/SSH/VPN silently dropped per Bock et al. FOCI'20 whitelister model",
     "TIC GW 1 distinct failure mode — connection refused (TCP RST) vs i/o timeout on all other gateways indicates separate DPI appliance or rule set at that specific gateway device",
-    "Electro DNS permanently down (timeout) — persistent targeting of anti-censorship DNS resolver infrastructure since pass 1 (33 passes)",
+    "Targeted DNS pressure on anti-censorship infrastructure escalated — Electro DNS permanently down (34 passes), Shecan DNS now also down (transitioned from UP in pass 33) — both circumvention-enabling resolvers blocked from external vantage",
+    "Tor Project check endpoint re-blocked — was UP with 15x latency regression (55ms → 822ms) in pass 33, now DOWN with 'connection reset by peer' — confirms pass-32 recovery was transient, active anti-circumvention blocking re-imposed",
     "Shaparak payment gateway HTTP timeout persists — context deadline exceeded at transport/application layer, network-level blocking of resolved endpoint",
-    "Snapp redirect loop unchanged (33 passes) — structural issue with external reachability, not responsive to gateway filtering changes",
-    "Tor Project check endpoint latency regression — was fully recovered at 55ms HTTP 200 in pass 32, now degraded to 822ms; still UP but 15x latency increase suggests emerging throttling or network path instability rather than sustained policy lift"
+    "Snapp redirect loop unchanged (34 passes) — structural issue with external reachability, not responsive to gateway filtering changes",
+    "Asiatech web portal newly DOWN (timeout) — gateway + web both blocked from external vantage, consistent with ISP-level filtering enforcement"
+  ],
+  "suspected_causes_fa": [
+    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP (TIC دوگانه، ایرانسل، آسیاتک) TCP رد/تایم‌اوت از بیرون در حالی که مسیرهای BGP سالم — پایه‌خط 'بلاک‌اوت مخفی' (۳۴ پاس متوالی)",
+    "اجبار وایت‌لیست پروتکل در گیت‌وی ملی — فقط پرب‌های DNS/HTTP/HTTPS به ۳.۷٪ بازه‌های IP (۴۰ از ۱۰۶۸) می‌رسند؛ UDP/ICMP/SSH/VPN به‌سکوت دراپ شده — مدل وایت‌لیستر بک و همکاران FOCI'۲۰",
+    "گیت‌وی TIC شماره ۱ حالت شکست متمایز — رد اتصال (TCP RST) در برابر تایم‌اوت روی بقیه گیت‌وی‌ها نشان‌دهنده لوازم DPI یا مجموعه قوانین جداگانه در آن دستگاه خاص گیت‌وی",
+    "فشار مفسر بر زیرساخت DNS ضدفیلترینگ تشدید یافته — الکترو به‌صورت دائمی دراپ (۳۴ پاس)، شکان هم‌اکنون دراپ شده (از UP در پاس ۳۳ تغییر یافته) — هر دو رزولور فعال‌کننده عبور از دیدگاه خارجی مسدود",
+    "نقطه چک تور مجدداً مسدود — در پاس ۳۳ UP با ۱۵ برابر تاخیر (۵۵ms → ۸۲۲ms)، اکنون DOWN با 'connection reset by peer' — تأیید می‌کند که بهبودی پاس ۳۲ عارضی بود، بستن فعال ضدعبور مجدداً اعمال شده",
+    "گیت‌وی پرداخت شاپرک تایم‌اوت HTTP پابرجا — در لایه ترنسپورت/برنامه context deadline exceeded، مسدودسازی سطح شبکه روی اندپوینت حل‌شده",
+    "حلقه ریدایرکت اسنپ بدون تغییر (۳۴ پاس) — مسئله ساختاری در دسترسی خارجی، پاسخگو در برابر تغییرات فیلترینگ گیت‌وی نیست",
+    "پورتال وب آسیاتک تازه DOWN (تایم‌اوت) — گیت‌وی و وب هر دو از دیدگاه خارجی مسدود، هم‌سو با اجرای فیلترینگ سطح ISP"
   ],
   "affected_services": [
-    "TIC gateway 1 (2.187.1.1 connection refused — unique RST pattern) — 33rd consecutive pass",
-    "TIC gateway 2 (78.38.112.1 i/o timeout) — 33rd consecutive pass",
+    "TIC gateway 1 (2.187.1.1 connection refused — unique RST pattern) — 34th consecutive pass",
+    "TIC gateway 2 (78.38.112.1 i/o timeout) — 34th consecutive pass",
     "Irancell gateway (5.232.0.1 i/o timeout — sustained DPI reconfiguration)",
-    "Asiatech gateway (94.182.0.1 i/o timeout) + web portal down — 33rd consecutive pass",
+    "Asiatech gateway (94.182.0.1 i/o timeout) + web portal down — 34th consecutive pass",
     "Electro DNS (78.157.42.100 timeout — permanently down since pass 1)",
-    "Snapp (redirect loop — 33rd consecutive pass)",
+    "Shecan DNS (178.22.122.100 timeout — newly down from pass 33)",
+    "Snapp (redirect loop — 34th consecutive pass)",
     "Shaparak (HTTP context deadline exceeded — network-level blocking of resolved endpoint)",
-    "Saman Bank (degraded — 3301ms latency, HTTP 200)",
-    "Respina (degraded — 3715ms latency, HTTP 200 — improved from 5768ms in pass 32)",
-    "Tor Project check (UP but latency regression: 55ms → 822ms, 15x increase — may indicate emerging throttling)"
+    "Saman Bank (degraded — 3360ms latency, HTTP 200)",
+    "IRNA News (degraded — 5212ms latency, HTTP 200)",
+    "Google (degraded — 5059ms latency, HTTP 200)",
+    "GitHub (degraded — 5096ms latency, HTTP 200)",
+    "Tor Project check (DOWN — connection reset by peer; was UP 822ms in pass 33)",
+    "Asiatech web portal (timeout — newly down from pass 33)"
   ],
-  "public_summary": "33rd consecutive pass confirms stealth blackout baseline fully entrenched. All 4 ISP gateways blocked externally (TIC x2, Irancell, Asiatech) with BGP routes intact. 40/1068 IP ranges reachable (3.7%). All foreign platforms and circumvention tools remain accessible from outside. Tor check endpoint still UP but latency spiked from 55ms to 822ms (15x), suggesting emerging throttling on anti-circumvention infrastructure — the policy lift observed in pass 32 may not be sustained. Shaparak payment timeout persists; Snapp redirect loop continues.",
-  "insight": "Tor check's latency regression from 55ms to 822ms in a single pass — while remaining technically UP — strongly suggests the pass-32 recovery was a transient fluctuation or partial rule relaxation rather than a sustained policy change, and that DPI resources are being dynamically reallocated rather than permanently removed from anti-circumvention targeting.",
-  "recommendation": "Track Tor check endpoint latency trajectory over next 3-5 passes — if it returns to RST/blocked, confirms transient relaxation; if it stabilizes at ~800ms+, suggests throttling-based blocking strategy. Cross-reference with OONI Tor measurements from IR probes to verify bridge/obfs4 reachability and check whether the latency pattern correlates with time-of-day throttling cycles."
+  "affected_services_fa": [
+    "گیت‌وی TIC ۱ (۲.۱۸۷.۱.۱ رد اتصال — الگوی RST منحصر) — ۳۴ پاس متوالی",
+    "گیت‌وی TIC ۲ (۷۸.۳۸.۱۱۲.۱ تایم‌اوت) — ۳۴ پاس متوالی",
+    "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱ تایم‌اوت — بازپیکربندی DPI مداوم)",
+    "گیت‌وی آسیاتک (۹۴.۱۸۲.۰.۱ تایم‌اوت) + پورتال وب دراپ — ۳۴ پاس متوالی",
+    "DNS الکترو (۷۸.۱۵۷.۴۲.۱۰۰ تایم‌اوت — دائمی دراپ از پاس ۱)",
+    "DNS شکان (۱۷۸.۲۲.۱۲۲.۱۰۰ تایم‌اوت — تازه دراپ از پاس ۳۳)",
+    "اسنپ (حلقه ریدایرکت — ۳۴ پاس متوالی)",
+    "شاپرک (HTTP context deadline exceeded — مسدودسازی سطح شبکه روی اندپوینت حل‌شده)",
+    "بانک سامان (تخریب یافته — تاخیر ۳۳۶۰ms، HTTP ۲۰۰)",
+    "خبرگزاری ایرنا (تخریب یافته — تاخیر ۵۲۱۲ms، HTTP ۲۰۰)",
+    "گوگل (تخریب یافته — تاخیر ۵۰۵۹ms، HTTP ۲۰۰)",
+    "گیت‌هاب (تخریب یافته — تاخیر ۵۰۹۶ms، HTTP ۲۰۰)",
+    "چک تور (DOWN — connection reset by peer؛ در پاس ۳۳ UP با ۸۲۲ms بود)",
+    "پورتال وب آسیاتک (تایم‌اوت — تازه دراپ از پاس ۳۳)"
+  ],
+  "public_summary": "34th consecutive pass confirms stealth blackout baseline fully entrenched. All 4 ISP gateways blocked externally (TIC x2, Irancell, Asiatech) with BGP routes intact. 40/1068 IP ranges reachable (3.7%). Critical escalation: Shecan DNS now also down (both anti-censorship resolvers blocked), Tor Project check endpoint re-blocked with TCP RST (was UP with latency spike), Asiatech web portal newly down. Foreign platforms (Instagram, YouTube, Telegram, WhatsApp, Wikipedia) remain accessible from outside — economic necessity services left open.",
+  "public_summary_fa": "۳۴ پاس متوالی پایه‌خط بلاک‌اوت مخفی کاملاً مستحکم را تأیید می‌کند. تمام ۴ گیت‌وی ISP از بیرون مسدود (TIC دوگانه، ایرانسل، آسیاتک) با مسیرهای BGP سالم. ۴۰ از ۱۰۶۸ بازه IP قابل‌دسترس (۳.۷٪). تشدید بحرانی: DNS شکان هم‌اکنون دراپ شده (هر دو رزولور ضدفیلترینگ مسدود)، چک تور مجدداً با TCP RST مسدود (در پاس ۳۳ UP با تاخیر بود)، پورتال وب آسیاتک تازه دراپ. پلتفرم‌های خارجی (اینستاگرام، یوتیوب، تلگرام، واتس‌اپ، ویکی‌پدیا) از بیرون قابل‌دسترس — سرویس‌های ضرورت اقتصادی باز مانده‌اند.",
+  "insight": "Tor check's transition from UP (822ms latency) to DOWN (connection reset) in a single pass, combined with Shecan DNS simultaneously going down, confirms the pass-32/33 fluctuations were transient DPI resource reallocation — not policy relaxation — and the anti-circumvention layer is being actively reinforced.",
+  "insight_fa": "تغییر چک تور از UP (تاخیر ۸۲۲ms) به DOWN (connection reset) در یک پاس، هم‌زمان با دراپ شدن DNS شکان، تأیید می‌کند که نوسانات پاس ۳۲/۳۳ पुनःتخصیص موقت منابع DPI بوده — نه شل شدن سیاست — و لایه ضدعبور به‌صورت فعال تقویت می‌شود.",
+  "recommendation": "Track Tor BridgeDB and Snowflake broker reachability from Iranian vantage (OONI) to verify if bridge distribution channels are also being actively disrupted. Cross-reference with Filterwatch tiered-access reports to confirm whether SCN/Pro Internet tiers maintain Tor access while general public is blocked.",
+  "recommendation_fa": "دسترسی BridgeDB و بروکر Snowflake از دیدگاه ایرانی (OONI) را رصد کنید تا تایید شود کانال‌های توزیع پل هم به‌صورت فعال مختل شده‌اند. با گزارش‌های سطح‌دسترسی Filterwatch مرجع‌بندی کنید تا بررسی شود آیا لایه‌های SCN/Pro Internet همچنان دسترسی تور دارند در حالی که عموم مسدودند."
 }
