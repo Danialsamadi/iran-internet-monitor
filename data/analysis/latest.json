@@ -1,44 +1,40 @@
 {
-  "ts": "2026-07-28T01:00:49Z",
+  "ts": "2026-07-28T02:00:51Z",
   "overall_status": "partial_outage",
   "severity": "major",
   "suspected_causes": [
-    "Policy filtering at international gateway layer — all 4 ISP gateways (TIC x2 refused/timeout, Irancell timeout, Asiatech timeout) blocked from external vantage with BGP routes intact — selective internet posture (26th consecutive pass)",
+    "Policy filtering at international gateway layer — all 4 ISP gateways (TIC x2 refused/timeout, Irancell timeout, Asiatech timeout) blocked from external vantage with BGP routes intact — selective internet posture (27th consecutive pass)",
     "Protocol whitelist enforcement at national gateway — only 45/1068 IP ranges (4.2%) reachable via DNS/HTTP/HTTPS; UDP/ICMP/SSH/VPN silently dropped per Bock et al. FOCI'20 whitelister model",
-    "Irancell gateway DPI mode shift — changed from TCP RST (connection refused) to silent drop (i/o timeout), indicating rule reconfiguration or DPI state change on Irancell international gateway",
-    "Active Tor rule rotation confirmed — Tor check endpoint recovered from DOWN (connection reset) to UP (1939ms) in single pass; censors rotating blocking rules on Tor entry probes while BridgeDB/Snowflake/Psiphon remain healthy",
-    "CafeBazaar accelerating degradation — 7504ms (was 5804ms, was 4176ms) across three consecutive passes; selective QoS throttling or CDN path congestion targeting domestic app store",
-    "Electro DNS permanently down (timeout) — persistent targeting of anti-censorship DNS resolver infrastructure",
-    "Snapp redirect loop + Shaparak timeout unchanged (26 passes) — likely structural issues with external reachability of these domestic platforms",
-    "Tor Metrics recovered from degraded (4194ms) to healthy (552ms) — international path latency normalization, not censorship-related"
+    "Irancell gateway DPI reconfiguration persistent — i/o timeout mode sustained for multiple consecutive passes (shifted from earlier connection refused), suggesting permanent rule change rather than transient fluctuation",
+    "TIC GW 1 distinct failure mode — connection refused (TCP RST) vs i/o timeout on all other gateways indicates different filtering implementation at that specific gateway device, possibly separate DPI appliance or rule set",
+    "Electro DNS permanently down (timeout) — persistent targeting of anti-censorship DNS resolver infrastructure since pass 1",
+    "Snapp redirect loop + Shaparak timeout unchanged (27 passes) — structural issues with external reachability of these domestic platforms, not responsive to gateway filtering changes",
+    "CafeBazaar RECOVERED — 657ms (was 7504ms, 5804ms, 4176ms); the 3-pass degradation trajectory fully reversed, indicating CDN/path congestion rather than targeted QoS throttling"
   ],
   "suspected_causes_fa": [
-    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP (TIC ×۲ رد/تایم‌اوت، ایرانسل تایم‌اوت، آسیاتک تایم‌اوت) از خارج بلاک با BGP سالم — پستور اینترنت گزینشی (۲۶مین دور متوالی)",
+    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP (TIC ×۲ رد/تایم‌اوت، ایرانسل تایم‌اوت، آسیاتک تایم‌اوت) از خارج بلاک با BGP سالم — پستور اینترنت گزینشی (۲۷مین دور متوالی)",
     "اجبار وایت‌لیست پروتکل در گیت‌وی ملی — فقط ۴۵ از ۱۰۶۸ بازه IP (۴.۲٪) از طریق DNS/HTTP/HTTPS قابل‌دسترس؛ UDP/ICMP/SSH/VPN به‌سکوت دراپ — مدل وایت‌لیستر بک و همکاران FOCI'۲۰",
-    "تغییر حالت DPI گیت‌وی ایرانسل — از TCP RST (رد اتصال) به دراپ سکوت (تایم‌اوت) تغییر کرد، نشان‌دهنده بازپیکربندی قانون یا تغییر حالت DPI در گیت‌وی بین‌المللی ایرانسل",
-    "چرخش فعال قانون تور تأیید — پرب تور از DOWN (ریست کانکشن) به UP (۱۹۳۹ms) در یک دور بازگشت؛ سانسورگران قوانین مسدودسازی روی پرب‌های ورودی تور را چرخش می‌دهند در حالی که BridgeDB/اسنوفلیک/سایفون سالم‌اند",
-    "تسریع تخریب کافه‌بازار — ۷۵۰۴ms (از ۵۸۰۴ms، از ۴۱۷۶ms) در سه دور متوالی؛ QoS تبعیضی یا ازدحام مسیر CDN داخلی هدفمند روی فروشگاه اپلیکیشن",
-    "DNS الکترو دائمی‌داون (تایم‌اوت) — هدف‌گذاری پایدار رزولور DNS ضد فیلترینگ",
-    "اسنپ لوپ ریدایرکت + شاپرک تایم‌اوت بدون تغییر (۲۶ دور) — احتمالاً مشکلات ساختاری با دسترسی‌پذیری خارجی این سرویس‌های داخلی",
-    "Tor Metrics از تخریب (۴۱۹۴ms) به سالم (۵۵۲ms) بازگشت — نرمال‌سازی تاخیر مسیر بین‌المللی، نه مرتبط با فیلترینگ"
+    "بازپیکربندی DPI گیت‌وی ایرانسل پایدار ماند — حالت تایم‌اوت برای چندین دور متوالی حفظ شده (تغییر از رد اتصال اولیه)، نشان‌دهنده تغییر دائمی قانون نه نوسان گذرا",
+    "نحوه خرابی متفاوت TIC GW 1 — \"connection refused\" (TCP RST) در مقابل تایم‌اوت سایر گیت‌وی‌ها، پیاده‌سازی فیلترینگ متفاوت در آن دستگاه گیت‌وی خاص را نشان می‌دهد، احتمالاً دستگاه DPI یا مجموعه قوانین جداگانه",
+    "DNS الکترو دائمی‌داون (تایم‌اوت) — هدف‌گذاری پایدار رزولور DNS ضد فیلترینگ از دور ۱",
+    "اسنپ لوپ ریدایرکت + شاپرک تایم‌اوت بدون تغییر (۲۷ دور) — مشکلات ساختاری با دسترسی‌پذیری خارجی این سرویس‌های داخلی، نه واکنش‌پذیر به تغییرات فیلترینگ گیت‌وی",
+    "کافه‌بازار بازگشت سلامت — ۶۵۷ms (از ۷۵۰۴ms، ۵۸۰۴ms، ۴۱۷۶ms)؛ مسیر تخریب ۳دوره‌ای کاملاً معکوس شد، ازدحام مسیر CDN نه QoS تبعیضی تأیید می‌کند"
   ],
   "affected_services": [
-    "TIC gateway 1 (2.187.1.1 connection refused) — 26th consecutive pass",
-    "TIC gateway 2 (78.38.112.1 i/o timeout) — 26th consecutive pass",
-    "Irancell gateway (5.232.0.1 i/o timeout — SHIFTED from connection refused, DPI rule reconfigured)",
-    "Asiatech gateway (94.182.0.1 i/o timeout) + web portal down — 26th consecutive pass",
+    "TIC gateway 1 (2.187.1.1 connection refused — unique RST pattern) — 27th consecutive pass",
+    "TIC gateway 2 (78.38.112.1 i/o timeout) — 27th consecutive pass",
+    "Irancell gateway (5.232.0.1 i/o timeout — sustained DPI reconfiguration from earlier connection refused)",
+    "Asiatech gateway (94.182.0.1 i/o timeout) + web portal down — 27th consecutive pass",
     "Electro DNS (78.157.42.100 timeout — permanently down since pass 1)",
-    "Snapp (redirect loop — 26th consecutive pass)",
-    "Shaparak (timeout — 26th consecutive pass)",
-    "CafeBazaar (SEVERELY DEGRADED — 7504ms, accelerating from 5804ms)",
-    "Saman Bank (degraded — 3040ms, slight improvement from ~3300ms)",
-    "Tor check endpoint (RECOVERED — 1939ms, was DOWN with connection reset)",
-    "RIPEstat observatory (DOWN — deadline exceeded)"
+    "Snapp (redirect loop — 27th consecutive pass)",
+    "Shaparak (timeout — 27th consecutive pass)",
+    "Saman Bank (degraded — 3103ms, slight increase from 3040ms)",
+    "CafeBazaar RECOVERED (657ms — was 7504ms, full recovery from 3-pass degradation)"
   ],
-  "public_summary": "26th consecutive pass confirms stealth blackout baseline fully entrenched. All 4 ISP gateways blocked externally (TIC x2, Irancell, Asiatech) with BGP routes intact. 45/1068 IP ranges reachable (4.2%). NOTABLE CHANGE: Tor check endpoint recovered from DOWN/connection reset to UP (1939ms), confirming active rule rotation by censors on Tor entry probes. Irancell gateway shifted from connection refused to i/o timeout (DPI reconfiguration). CafeBazaar accelerating degradation across 3 passes (7504ms). Shecan DNS healthy (225ms). Foreign platforms fast from external vantage. Electro DNS still permanently down.",
-  "public_summary_fa": "۲۶مین دور متوالی — خط پایه قطعی مخفی کاملاً مستحکم. تمام ۴ گیت‌وی ISP از خارج بلاک (TIC ×۲، ایرانسل، آسیاتک) با BGP سالم. ۴۵ از ۱۰۶۸ بازه IP قابل‌دسترس (۴.۲٪). تغییر قابل‌توجه: پرب تور از DOWN/ریست کانکشن به UP (۱۹۳۹ms) بازگشت، چرخش فعال قانون سانسورگران روی پرب‌های ورودی تور تأیید شد. گیت‌وی ایرانسل از رد اتصال به تایم‌اوت تغییر حالت داد (بازپیکربندی DPI). کافه‌بازار تخریب شتابان در ۳ دور (۷۵۰۴ms). DNS شکان سالم (۲۲۵ms). پلتفرم‌های خارجی از خارج سریع. DNS الکترو همچنان دائمی‌داون.",
-  "insight": "The Tor check endpoint recovery (DOWN→UP in one pass) combined with the 26-pass gateway baseline and Irancell DPI mode shift (RST→silent drop) reveals that Iran's censorship apparatus is not static but dynamically managed — censors rotate rules on circumvention probes while maintaining the structural gateway blockade; the Irancell DPI shift suggests ongoing infrastructure tuning even within the entrenched stealth blackout posture.",
-  "insight_fa": "بازیابی پرب تور (DOWN→UP در یک دور) در ترکیب با خط پایه ۲۶تایی گیت‌وی و تغییر حالت DPI ایرانسل (RST→دراپ سکوت) نشان می‌دهد دستگاه سانسور ایران ایستا نیست بلکه به‌صورت پویا مدیریت می‌شود — سانسورگران قوانین روی پرب‌های عبور را چرخش می‌دهند در حالی که انسداد ساختاری گیت‌وی حفظ شده؛ تغییر حالت DPI ایرانسل نشان‌دهنده تنظیم مداوم زیرساخت حتی درون پستور قطعی مخفی مستحکم.",
-  "recommendation": "Track Irancell gateway DPI mode (RST vs timeout) across next 3-5 passes to determine if the shift from connection refused to i/o timeout is a permanent reconfiguration or transient fluctuation. Cross-reference Tor check recovery with OONI Tor censorship measurements from IR probes to map rule rotation cadence. Investigate CafeBazaar's 3-pass degradation trajectory (4176→5804→7504ms) — if it continues accelerating, it may indicate planned service-level throttling rather than incidental congestion.",
-  "recommendation_fa": "حالت DPI گیت‌وی ایرانسل (RST در مقابل تایم‌اوت) را در ۳-۵ دور آینده رصد کنید تا مشخص شود تغییر از رد اتصال به تایم‌اوت بازپیکربندی دائمی است یا نوسان گذرا. بازیابی پرب تور را با اندازه‌گیری‌های سانسور تور OONI از پروب‌های IR کراس‌رفرنس کنید تا کادانس چرخش قانون نقشه‌برداری شود. مسیر تخریب ۳دوره‌ای کافه‌بازار (۴۱۷۶→۵۸۰۴→۷۵۰۴ms) را بررسی کنید — اگر تسریع ادامه یابد، احتمالاً QoS هدفمند سطح سرویس است نه ازدحام تصادفی."
+  "public_summary": "27th consecutive pass confirms stealth blackout baseline fully entrenched. All 4 ISP gateways blocked externally (TIC x2, Irancell, Asiatech) with BGP routes intact. 45/1068 IP ranges reachable (4.2%). NOTABLE RECOVERY: CafeBazaar fully recovered from 3-pass degradation (7504ms to 657ms), confirming temporary CDN congestion rather than targeted throttling. RIPEstat observatory recovered from DOWN. Tor ecosystem latency improving (check endpoint 1939ms to 1046ms). Irancell gateway DPI mode shift (RST to timeout) persists across passes, likely permanent reconfiguration.",
+  "public_summary_fa": "۲۷مین دور متوالی — خط پایه قطعی مخفی کاملاً مستحکم. تمام ۴ گیت‌وی ISP از خارج بلاک (TIC ×۲، ایرانسل، آسیاتک) با BGP سالم. ۴۵ از ۱۰۶۸ بازه IP قابل‌دسترس (۴.۲٪). بازیابی قابل‌توجه: کافه‌بازار از تخریب ۳دوره‌ای کاملاً بازگشت (۷۵۰۴ms به ۶۵۷ms)، ازدحام موقت CDN تأیید شد. رصدخانه RIPEstat از DOWN بازگشت. اکوسیستم تور بهبود لتنسی (پرب چک ۱۹۳۹ms به ۱۰۴۶ms). حالت DPI گیت‌وی ایرانسل (تغییر از RST به تایم‌اوت) پایدار.",
+  "insight": "The CafeBazaar recovery fully reverses the 3-pass degradation trajectory (4176 to 5804 to 7504 to 657ms), proving it was transient CDN/path congestion rather than policy-driven QoS throttling — this is a useful false-positive calibration, confirming that not all domestic latency spikes indicate targeted censorship.",
+  "insight_fa": "بازگشت کافه‌بازار مسیر تخریب ۳دوره‌ای (۴۱۷۶ به ۵۸۰۴ به ۷۵۰۴ به ۶۵۷ms) را کاملاً معکوس می‌کند و ثابت می‌کند ازدحام موقت CDN/مسیر بوده نه QoS هدفمند سیاستی — این یک کالیبراسیون مفید مثبت کاذب است، تأیید می‌کند هر افزایش لتنسی داخلی نشان‌دهنده سانسور هدفمند نیست.",
+  "recommendation": "Continue tracking Irancell gateway DPI mode (sustained i/o timeout) to confirm permanence of reconfiguration. Monitor CafeBazaar latency across next 5 passes to validate recovery stability. The TIC GW 1 connection-refused pattern (unique among gateways) warrants investigation — it may indicate a separate DPI appliance with different rule implementation. Cross-reference IODA/OONI for any corroborating signal changes in IR.",
+  "recommendation_fa": "حالت DPI گیت‌وی ایرانسل (تایم‌اوت پایدار) را ادامه دهید تا دائمی بودن بازپیکربندی تأیید شود. لتنسی کافه‌بازار را در ۵ دور آینده رصد کنید تا پایداری بازیابی اعتبارسنجی شود. الگوی connection refused در TIC GW 1 (منحصربفرد در میان گیت‌وی‌ها) نیاز به بررسی دارد — ممکن است دستگاه DPI جداگانه با مجموعه قوانین متفاوت باشد. با IODA/OONI کراس‌رفرنس کنید."
 }
