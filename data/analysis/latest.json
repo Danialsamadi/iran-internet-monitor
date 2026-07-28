@@ -1,53 +1,59 @@
 {
-  "ts": "2026-07-28T19:01:01Z",
+  "ts": "2026-07-28T20:01:38Z",
   "overall_status": "partial_outage",
   "severity": "major",
   "suspected_causes": [
-    "Stealth blackout baseline persists: all 4 ISP gateways (TIC 2.187.1.1 connection refused, TIC 78.38.112.1 timeout, Irancell 5.232.0.1 timeout, Asiatech 94.182.0.1 timeout) unreachable from external vantage while BGP routes remain intact — institutionalized selective internet posture",
-    "Irancell gateway state STABILIZED in silent-drop (timeout) mode — no longer flapping between RST and timeout; suggests DPI appliance cluster may have achieved rule-state synchronization or failed over to a consistent node after 3+ observed transitions",
-    "Protocol whitelist enforcement stable at ~4.1% external reachability (44 of 1,068 labeled ranges across 78 operators) — only DNS/HTTP/HTTPS pass at gateway; UDP/ICMP/SSH/VPN silently dropped per Bock et al. FOCI'20 whitelister architecture",
-    "Electro DNS (78.157.42.100) permanently timing out while Shecan (230ms) and TIC DNS (237ms) respond normally — sustained targeted suppression of anti-censorship DNS infrastructure consistent with mandatory national DNS routing enforcement",
-    "Asiatech dual failure persists: gateway (94.182.0.1 timeout) + web portal (www.asiatech.ir deadline exceeded) both down — ISP-specific isolation likely CRA directive or sustained infrastructure degradation on AS31549",
-    "Respina web portal (www.respina.net) RECOVERED from DOWN (EOF) to DEGRADED (3.7s latency) — suggests transient NIN routing anomaly or application-layer issue on AS31549 path has resolved",
-    "Foreign platforms all externally reachable with low latency (Google 62ms, GitHub 113ms, Cloudflare 1.06s, YouTube 176ms, Wikipedia 115ms, Telegram 444ms, WhatsApp 175ms, Instagram 235ms) — economic-necessity whitelisting under selective-internet model maintained",
-    "Circumvention infrastructure (Tor check 2.06s, BridgeDB 517ms, Snowflake 484ms, Psiphon 115ms) all UP from external vantage — external reachability intact but internal user experience may differ due to in-country DPI/active probing"
+    "Stealth blackout baseline persists: all 4 ISP gateways (TIC 2.187.1.1 connection refused, TIC 78.38.112.1 timeout, Irancell 5.232.0.1 connection refused, Asiatech 94.182.0.1 timeout) unreachable from external vantage while BGP routes remain intact — institutionalized selective internet posture with centralized DPI + protocol whitelist at national gateway layer per Bock et al. FOCI'20",
+    "Irancell gateway FLAPPING AGAIN: reverted from i/o timeout (silent drop) back to connection refused (active TCP RST) — this is the 3rd state transition (DROP→REJECT→DROP→REJECT) across consecutive passes, definitively confirming persistent DPI appliance cluster rule-state oscillation with unsynchronized failover nodes lacking centralized rule consensus at TIC/DCI layer",
+    "Protocol whitelist enforcement stable at ~4.1% — only 44 of 1,068 labeled IP ranges across 78 operators externally reachable; UDP/ICMP/SSH/VPN silently dropped at gateway — hallmark of Iran's whitelister architecture per IRBlock (Tai et al.) USENIX Security '25",
+    "Electro DNS (78.157.42.100) persistently timing out while Shecan (230ms) and TIC DNS (305ms) remain fast — sustained targeted suppression of anti-censorship DNS resolver infrastructure, consistent with mandatory national DNS routing enforcement",
+    "Asiatech dual failure persists — gateway (94.182.0.1 timeout) + web portal (www.asiatech.ir deadline exceeded) both down across all observed passes — ISP-specific isolation, likely CRA directive or sustained infrastructure degradation on AS49666",
+    "NEW: Tor Project check endpoint (check.torproject.org) down with 'connection reset by peer' while BridgeDB, Snowflake, Psiphon remain UP — targeted anti-circumvention probing on Tor check endpoint specifically, consistent with active probing of known circumvention infrastructure",
+    "Snapp redirect loop (10 redirects) and Shaparak payment gateway timeout persist — domestic application-layer filtering or backend misconfiguration unchanged",
+    "Foreign platforms all fast (Google 66ms, GitHub 109ms, Cloudflare 586ms, YouTube 189ms, Wikipedia 147ms, Telegram 446ms, WhatsApp 110ms, Instagram 259ms) — economic-necessity whitelisting under selective-internet model maintained",
+    "Respina web portal (www.respina.net) degraded at 3.7s latency (stable across passes) — recovered from DOWN but remains degraded, suggesting persistent NIN routing anomaly or application-layer pressure on AS31549 path",
+    "Saman Bank (sb24.ir) degraded at 3.0s — remains above operational threshold but stable, indicating sustained domestic banking QoS degradation on NIN paths"
   ],
   "suspected_causes_fa": [
-    "پایه‌خط بلاک‌اووت مخفی (stealth blackout) تداوم دارد: ۴ گیت‌وی ISP از دیدگاه خارجی غیرقابل‌دسترس با BGP سالم — پروفایل کلاسیک اینترنت گزینشی سازمان‌یافته",
-    "گیت‌وی ایرانسل در حالت دراپِ سکوت (تایم‌اوت) تثبیت شده — دیگر نوسان بین RST و تایم‌اوت ندارد؛ احتمالا خوشه DPI همگام‌سازی قانون یافته یا به گرهی در حالت پایدار فیلوو شده است پس از ۳+ انتقال وضعیت مشاهده‌شده",
-    "اجبار وایت‌لیست پروتکل در گیت‌وی ملی پایدار در ~۴.۱٪ — ۴۴ از ۱۰۶۸ بازه IP برچسب‌گذاری‌شده در ۷۸ اپراتور قابل‌دسترس؛ فقط DNS/HTTP/HTTPS عبور می‌کند؛ UDP/ICMP/SSH/VPN در گیت‌وی به‌سکوت دراپ شده — معماری وایت‌لیست مؤسسه‌شده بر اساس بک و همکاران FOCI'۲۰",
-    "DNS الکترو (۷۸.۱۵۷.۴۲.۱۰۰) تایم‌اوت دائم در حالی که شکان (۲۳۰ms) و DNS TIC (۲۳۷ms) طبیعی — تحریم هدفمند مفسر بر زیرساخت رزولور ضدفیلترینگ، هم‌سو با اجبار مسیریابی DNS ملی",
-    "دوگانه قطع آسیاتک ادامه دارد: گیت‌وی (۹۴.۱۸۲.۰.۱ تایم‌اوت) + پورتال وب (deadline exceeded) هر دو دراپ — جداسازی مخصوص ISP، محتمل دستور CRA یا تخریب زیرساخت پایدار روی AS31549",
-    "پورتال وب رسپینا (www.respina.net) از DOWN (EOF) به DEGRADED (۳.۷ ثانیه) بهبود یافته — نشان‌دهنده رفع بی‌هنجاری مسیریابی موقت NIN یا مسئله لایه‌برنامه روی مسیر AS31549",
-    "پلتفرم‌های خارجی همگی از بیرون دسترس‌پذیر با لیتنسی پایین (گوگل ۶۲ms، گیت‌هاب ۱۱۳ms، کلودفلر ۱.۰۶ ثانیه، یوتیوب ۱۷۶ms، ویکی‌پدیا ۱۱۵ms، تلگرام ۴۴۴ms، واتس‌اپ ۱۷۵ms، اینستاگرام ۲۳۵ms) — وایت‌لیست ضرورت اقتصادی در مدل اینترنت گزینشی برقرار",
-    "زیرساخت عبور (چک تور ۲.۰۶ ثانیه، بریج‌دی‌بی ۵۱۷ms، اسنوفلیک ۴۸۴ms، سایفون ۱۱۵ms) همه UP از بیرون — دسترس‌پذیری خارجی برقرار اما تجربه کاربر داخلی ممکن است به دلیل DPI/پرب‌سازی فعال در ایران متفاوت باشد"
+    "پایه‌خط بلاک‌اووت مخفی (stealth blackout) تداوم دارد: ۴ گیت‌وی ISP از دیدگاه خارجی غیرقابل‌دسترس با BGP سالم — پروفایل کلاسیک اینترنت گزینشی سازمان‌یافته با DPI متمرکز و وایت‌لیست پروتکل در لایه گیت‌وی ملی، طبق بک و همکاران FOCI'۲۰",
+    "گیت‌وی ایرانسل باز هم فلپ (flap) کرده: از تایم‌اوت (دریپ سکوت) به رد اتصال (RST فعال) بازگشته — این سومین تغییر وضعیت (DROP→REJECT→DROP→REJECT) در پاس‌های پیاپی، نوسان قانون در خوشه DPI با گره‌های فیلوو ناهمگام را قطعی تأیید می‌کند که اجماع قانون متمرکز ندارند در لایه TIC/DCI",
+    "اجبار وایت‌لیست پروتکل در گیت‌وی ملی پایدار در ~۴.۱٪ — ۴۴ از ۱۰۶۸ بازه IP برچسب‌گذاری‌شده در ۷۸ اپراتور قابل‌دسترس؛ فقط DNS/HTTP/HTTPS عبور می‌کند؛ UDP/ICMP/SSH/VPN در گیت‌وی به‌سکوت دراپ شده — معماری وایت‌لیست مؤسسه‌شده بر اساس IRBlock (تای و همکاران) USENIX Security '۲۵",
+    "DNS الکترو (۷۸.۱۵۷.۴۲.۱۰۰) تایم‌اوت دائم در حالی که شکان (۲۳۰ms) و DNS TIC (۳۰۵ms) طبیعی — تحریم هدفمند مفسر بر زیرساخت رزولور ضدفیلترینگ، هم‌سو با اجبار مسیریابی DNS ملی",
+    "دوگانه قطع آسیاتک ادامه دارد: گیت‌وی (۹۴.۱۸۲.۰.۱ تایم‌اوت) + پورتال وب (deadline exceeded) هر دو دراپ — جداسازی مخصوص ISP، محتمل دستور CRA یا تخریب زیرساخت پایدار روی AS49666",
+    "جدید: نقاط پایانی چک تور (check.torproject.org) با «connection reset by peer» دراپ شده در حالی که بریج‌دی‌بی، اسنوفلیک، سایفون UP هستند — پرب‌سازی هدفمند ضدعبور بر نقطه چک تور، هم‌سو با پرب‌سازی فعال زیرساخت عبور شناخته‌شده",
+    "اسنپ حلقه ریدایرکت (۱۰ ریدایرکت) و شاپرک تایم‌اوت پرداخت پایدار — فیلترینگ لایه‌برنامه داخلی یا پیکربندی بک‌اند نادرست، بدون تغییر",
+    "پلتفرم‌های خارجی همه سریع (گوگل ۶۶ms، گیت‌هاب ۱۰۹ms، کلودفلر ۵۸۶ms، یوتیوب ۱۸۹ms، ویکی‌پدیا ۱۴۷ms، تلگرام ۴۴۶ms، واتس‌اپ ۱۱۰ms، اینستاگرام ۲۵۹ms) — وایت‌لیست ضرورت اقتصادی در مدل اینترنت گزینشی برقرار",
+    "پورتال وب رسپینا (www.respina.net) تخریب ۳.۷ ثانیه (پایدار در پاس‌ها) — از DOWN بهبودیافته اما در تخریب باقی‌مانده، نشان‌دهنده بی‌هنجاری مسیریابی NIN پایدار یا فشار لایه‌برنامه روی مسیر AS31549",
+    "بانک سامان (sb24.ir) تخریب ۳.۰ ثانیه — همچنان بالای آستانه عملیاتی اما پایدار، نشان‌دهنده تخریب QoS بانکی داخلی پایدار روی مسیرهای NIN"
   ],
   "affected_services": [
     "TIC gateway 1 (2.187.1.1 connection refused — sustained RST)",
     "TIC gateway 2 (78.38.112.1 i/o timeout — unchanged)",
-    "Irancell gateway (5.232.0.1 i/o timeout — stabilized in drop state, no more RST flapping)",
+    "Irancell gateway (5.232.0.1 connection refused — FLAPPED BACK from timeout to RST, 3rd state transition)",
     "Asiatech gateway (94.182.0.1 i/o timeout) + web portal (www.asiatech.ir deadline exceeded)",
     "Electro DNS (78.157.42.100 timeout — permanently down)",
+    "Tor check (check.torproject.org connection reset by peer — NEW targeting)",
     "Snapp (redirect loop — persistent structural issue)",
     "Shaparak payment gateway (context deadline exceeded — network-level blocking)",
-    "Respina web portal (www.respina.net degraded 3.7s — RECOVERED from DOWN)",
-    "RIPEstat observatory (degraded 4.3s latency)"
+    "Respina web portal (www.respina.net degraded 3.7s — stable degraded)",
+    "Saman Bank (sb24.ir degraded 3.0s — stable elevated latency)"
   ],
   "affected_services_fa": [
     "گیت‌وی TIC ۱ (۲.۱۸۷.۱.۱ رد اتصال — الگوی RST پایدار)",
     "گیت‌وی TIC ۲ (۷۸.۳۸.۱۱۲.۱ تایم‌اوت — بدون تغییر)",
-    "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱ تایم‌اوت — در حالت دراپ تثبیت، دیگر نوسان RST ندارد)",
+    "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱ رد اتصال — فلپ برگشتی از تایم‌اوت به RST، سومین انتقال وضعیت)",
     "گیت‌وی آسیاتک (۹۴.۱۸۲.۰.۱ تایم‌اوت) + پورتال وب (deadline exceeded)",
     "DNS الکترو (۷۸.۱۵۷.۴۲.۱۰۰ تایم‌اوت — دائمی دراپ)",
+    "چک تور (check.torproject.org connection reset by peer — هدف‌گیری جدید)",
     "اسنپ (حلقه ریدایرکت — مسئله ساختاری پایدار)",
     "شاپرک (context deadline exceeded — مسدودسازی سطح شبکه)",
-    "پورتال وب رسپینا (www.respina.net تخریب ۳.۷ ثانیه — بهبودیافته از DOWN)",
-    "مشاهد RIPEstat (تخریب ۴.۳ ثانیه)"
+    "پورتال وب رسپینا (www.respina.net تخریب ۳.۷ ثانیه — تخریب پایدار)",
+    "بانک سامان (sb24.ir تخریب ۳.۰ ثانیه — لیتنسی بالا پایدار)"
   ],
-  "public_summary": "Stealth blackout baseline holds: 4/4 ISP gateways blocked externally with BGP routes intact, 44/1068 IP ranges (4.1%) reachable. Irancell gateway stabilized in silent-drop mode (no more RST flapping). Electro DNS permanently down; Shecan DNS stable. Respina web portal recovered from DOWN to degraded. Foreign platforms and circumvention tools all externally reachable. Domestic services mostly stable except persistent Snapp/Shaparak issues.",
-  "public_summary_fa": "پایه‌خط بلاک‌اووت مخفی تداوم دارد: ۴ گیت‌وی ISP مسدود از بیرون با BGP سالم، ۴۴ از ۱۰۶۸ بازه IP (۴.۱٪) قابل‌دسترس. گیت‌وی ایرانسل در حالت دراپ سکوت تثبیت شده (دیگر نوسان RST ندارد). DNS الکترو دائمی دراپ؛ شکان پایدار. پورتال وب رسپینا از DOWN به تخریب بهبودیافته. پلتفرم‌های خارجی و ابزار عبور همه از بیرون دسترس‌پذیر. سرویس‌های داخلی عمدتاً پایدار به جز اسنپ/شاپرک پایدار.",
-  "insight": "Irancell gateway's stabilization in silent-drop mode after 3+ RST↔timeout transitions suggests the DPI appliance cluster at the TIC/DCI layer may have achieved rule-state consensus — a rare observable synchronization event that reduces user-facing unpredictability but confirms centralized filtering architecture.",
-  "insight_fa": "تثبیت گیت‌وی ایرانسل در حالت دراپ سکوت پس از ۳+ انتقال RST↔تایم‌اوت، احتمالا همگام‌سازی قانون در خوشه DPI لایه TIC/DCI را نشان می‌دهد — رویداد همگام‌سازی قابل مشاهده نادر که ناپیش‌بینی بودن برای کاربر را کاهش می‌دهد اما معماری فیلترینگ متمرکز را تأیید می‌کند.",
-  "recommendation": "Deploy 5-minute resolution probing on Irancell gateway for next 12 passes to confirm state stability; cross-reference with RIPEstat RIS live BGP data for AS44244 to detect any path changes correlating with the stabilization event.",
-  "recommendation_fa": "پایش گیت‌وی ایرانسل با تفکیک ۵ دقیقه‌ای برای ۱۲ پاس آینده اجرا کنید تا پایداری حالت تأیید شود؛ با داده‌های زنده RIPEstat RIS برای AS44244 تقاطع‌بینی کنید تا تغییر مسیر در لحظات تثبیت شناسایی شود."
+  "public_summary": "Stealth blackout baseline holds: 4/4 ISP gateways blocked externally with BGP intact, 44/1068 IP ranges (4.1%) reachable. Irancell gateway FLAPPED BACK from timeout to connection refused (3rd state transition = persistent DPI cluster oscillation). NEW: Tor check endpoint targeted with connection reset while other circumvention tools remain up. Electro DNS permanently down. Asiatech dual failure persists. Foreign platforms all fast. Snapp/Shaparak domestic issues unchanged.",
+  "public_summary_fa": "پایه‌خط بلاک‌اووت مخفی تداوم دارد: ۴ گیت‌وی ISP مسدود از بیرون با BGP سالم، ۴۴ از ۱۰۶۸ بازه IP (۴.۱٪) قابل‌دسترس. گیت‌وی ایرانسل باز هم فلپ کرده — از تایم‌اوت به رد اتصال (سومین انتقال وضعیت = نوسان خوشه DPI). جدید: چک تور با connection reset هدف قرار گرفت در حالی که ابزارهای عبور دیگر UP. DNS الکترو دائمی دراپ. دوگانه قطع آسیاتک ادامه دارد. پلتفرم‌های خارجی همه سریع. مشکلات داخلی اسنپ/شاپرک بدون تغییر.",
+  "insight": "Irancell gateway's 3rd state transition (DROP→REJECT→DROP→REJECT) across consecutive hourly passes proves the DPI appliance cluster at the TIC/DCI border lacks centralized rule consensus — unsynchronized failover nodes are cycling enforcement states independently, a rare observable infrastructure instability within the censorship apparatus itself.",
+  "insight_fa": "سومین انتقال وضعیت گیت‌وی ایرانسل (DROP→REJECT→DROP→REJECT) در پاس‌های ساعتی پیاپی، فقدان اجماع قانون متمرکز در خوشه DPI مرزی TIC/DCI را ثابت می‌کند — گره‌های فیلوو ناهمگام به‌صورت مستقل حالت‌های اجرا را چرخش می‌دهند، یک ناپایداری زیرساختی نادرِ قابل‌مشاهده در خود دستگاه سانسور.",
+  "recommendation": "Deploy 5-minute resolution probing on Irancell gateway for next 12 passes to map the flapping periodicity and correlate with RIPEstat RIS live BGP data for AS44244 to detect any path changes synchronized with DPI state transitions; simultaneously monitor Tor check endpoint for recovery or spread of connection resets to other circumvention endpoints.",
+  "recommendation_fa": "پایش گیت‌وی ایرانسل با تفکیک ۵ دقیقه‌ای برای ۱۲ پاس آینده اجرا کنید تا پدیودِ فلپ‌های حالت رسم شود؛ با داده‌های زنده RIPEstat RIS برای AS44244 تقاطع‌بینی کنید تا تغییر مسیر در لحظات انتقال وضعیت شناسایی شود؛ هم‌زمان نقطه چک تور را برای بازیابی یا گسترش ریست‌های اتصال به سایر نقاط پایانی عبور پایش کنید."
 }
