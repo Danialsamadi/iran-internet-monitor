@@ -1,40 +1,49 @@
 {
-  "ts": "2026-07-28T02:00:51Z",
+  "ts": "2026-07-28T03:00:57Z",
   "overall_status": "partial_outage",
   "severity": "major",
   "suspected_causes": [
-    "Policy filtering at international gateway layer — all 4 ISP gateways (TIC x2 refused/timeout, Irancell timeout, Asiatech timeout) blocked from external vantage with BGP routes intact — selective internet posture (27th consecutive pass)",
-    "Protocol whitelist enforcement at national gateway — only 45/1068 IP ranges (4.2%) reachable via DNS/HTTP/HTTPS; UDP/ICMP/SSH/VPN silently dropped per Bock et al. FOCI'20 whitelister model",
-    "Irancell gateway DPI reconfiguration persistent — i/o timeout mode sustained for multiple consecutive passes (shifted from earlier connection refused), suggesting permanent rule change rather than transient fluctuation",
+    "Policy filtering at international gateway layer — all 4 ISP gateways (TIC x2 refused/timeout, Irancell timeout, Asiatech timeout) blocked from external vantage with BGP routes intact — selective internet posture (28th consecutive pass)",
+    "Protocol whitelist enforcement at national gateway — 45/1068 IP ranges (4.2%) reachable via DNS/HTTP/HTTPS; UDP/ICMP/SSH/VPN silently dropped per Bock et al. FOCI'20 whitelister model",
     "TIC GW 1 distinct failure mode — connection refused (TCP RST) vs i/o timeout on all other gateways indicates different filtering implementation at that specific gateway device, possibly separate DPI appliance or rule set",
     "Electro DNS permanently down (timeout) — persistent targeting of anti-censorship DNS resolver infrastructure since pass 1",
-    "Snapp redirect loop + Shaparak timeout unchanged (27 passes) — structural issues with external reachability of these domestic platforms, not responsive to gateway filtering changes",
-    "CafeBazaar RECOVERED — 657ms (was 7504ms, 5804ms, 4176ms); the 3-pass degradation trajectory fully reversed, indicating CDN/path congestion rather than targeted QoS throttling"
+    "Shaparak DNS resolution failure changed qualitatively — error shifted from i/o timeout to 'no such host' (DNS NXDOMAIN via 8.8.8.8), indicating either DNS-level intervention on the domain, zone modification, or aggressive DNS filtering escalation",
+    "Snapp redirect loop unchanged (28 passes) — structural issue with external reachability, not responsive to gateway filtering changes",
+    "RIPEstat observatory intermittently failing again (DOWN after brief recovery) — likely RIPEstat server-side issue, not Iran-related"
   ],
   "suspected_causes_fa": [
-    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP (TIC ×۲ رد/تایم‌اوت، ایرانسل تایم‌اوت، آسیاتک تایم‌اوت) از خارج بلاک با BGP سالم — پستور اینترنت گزینشی (۲۷مین دور متوالی)",
-    "اجبار وایت‌لیست پروتکل در گیت‌وی ملی — فقط ۴۵ از ۱۰۶۸ بازه IP (۴.۲٪) از طریق DNS/HTTP/HTTPS قابل‌دسترس؛ UDP/ICMP/SSH/VPN به‌سکوت دراپ — مدل وایت‌لیستر بک و همکاران FOCI'۲۰",
-    "بازپیکربندی DPI گیت‌وی ایرانسل پایدار ماند — حالت تایم‌اوت برای چندین دور متوالی حفظ شده (تغییر از رد اتصال اولیه)، نشان‌دهنده تغییر دائمی قانون نه نوسان گذرا",
-    "نحوه خرابی متفاوت TIC GW 1 — \"connection refused\" (TCP RST) در مقابل تایم‌اوت سایر گیت‌وی‌ها، پیاده‌سازی فیلترینگ متفاوت در آن دستگاه گیت‌وی خاص را نشان می‌دهد، احتمالاً دستگاه DPI یا مجموعه قوانین جداگانه",
+    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP (TIC ×۲ رد/تایم‌اوت، ایرانسل تایم‌اوت، آسیاتک تایم‌اوت) از خارج بلاک با BGP سالم — پستور اینترنت گزینشی (۲۸مین دور متوالی)",
+    "اجبار وایت‌لیست پروتکل در گیت‌وی ملی — ۴۵ از ۱۰۶۸ بازه IP (۴.۲٪) از طریق DNS/HTTP/HTTPS قابل‌دسترس؛ UDP/ICMP/SSH/VPN به‌سکوت دراپ — مدل وایت‌لیستر بک و همکاران FOCI'۲۰",
+    "نحوه خرابی متفاوت TIC GW 1 — \"connection refused\" (رد اتصال / TCP RST) در مقابل تایم‌اوت سایر گیت‌وی‌ها، پیاده‌سازی فیلترینگ متفاوت در آن دستگاه گیت‌وی خاص را نشان می‌دهد، احتمالاً دستگاه DPI جداگانه یا مجموعه قوانین متفاوت",
     "DNS الکترو دائمی‌داون (تایم‌اوت) — هدف‌گذاری پایدار رزولور DNS ضد فیلترینگ از دور ۱",
-    "اسنپ لوپ ریدایرکت + شاپرک تایم‌اوت بدون تغییر (۲۷ دور) — مشکلات ساختاری با دسترسی‌پذیری خارجی این سرویس‌های داخلی، نه واکنش‌پذیر به تغییرات فیلترینگ گیت‌وی",
-    "کافه‌بازار بازگشت سلامت — ۶۵۷ms (از ۷۵۰۴ms، ۵۸۰۴ms، ۴۱۷۶ms)؛ مسیر تخریب ۳دوره‌ای کاملاً معکوس شد، ازدحام مسیر CDN نه QoS تبعیضی تأیید می‌کند"
+    "خطای DNS شاپرک کیفیت تغییر کرد — از تایم‌اوت به \"no such host\" (NXDOMAIN از 8.8.8.8)، احتمالاً مداخله در سطح DNS روی دامنه، تغییر زون، یا تشدید فیلترینگ DNS",
+    "اسنپ لوپ ریدایرکت بدون تغییر (۲۸ دور) — مشکل ساختاری با دسترسی‌پذیری خارجی، نه واکنش‌پذیر به تغییرات فیلترینگ گیت‌وی",
+    "رصدخانه RIPEstat مجدداً ناپایدار (DOWN پس از بازیابی کوتاه) — احتمالاً مشکل سمت سرور RIPEstat، نه مرتبط با ایران"
   ],
   "affected_services": [
-    "TIC gateway 1 (2.187.1.1 connection refused — unique RST pattern) — 27th consecutive pass",
-    "TIC gateway 2 (78.38.112.1 i/o timeout) — 27th consecutive pass",
-    "Irancell gateway (5.232.0.1 i/o timeout — sustained DPI reconfiguration from earlier connection refused)",
-    "Asiatech gateway (94.182.0.1 i/o timeout) + web portal down — 27th consecutive pass",
+    "TIC gateway 1 (2.187.1.1 connection refused — unique RST pattern) — 28th consecutive pass",
+    "TIC gateway 2 (78.38.112.1 i/o timeout) — 28th consecutive pass",
+    "Irancell gateway (5.232.0.1 i/o timeout — sustained DPI reconfiguration)",
+    "Asiatech gateway (94.182.0.1 i/o timeout) + web portal down — 28th consecutive pass",
     "Electro DNS (78.157.42.100 timeout — permanently down since pass 1)",
-    "Snapp (redirect loop — 27th consecutive pass)",
-    "Shaparak (timeout — 27th consecutive pass)",
-    "Saman Bank (degraded — 3103ms, slight increase from 3040ms)",
-    "CafeBazaar RECOVERED (657ms — was 7504ms, full recovery from 3-pass degradation)"
+    "Snapp (redirect loop — 28th consecutive pass)",
+    "Shaparak (DNS no such host — error changed from i/o timeout to DNS resolution failure)",
+    "RIPEstat (context deadline exceeded — intermittent failure)"
   ],
-  "public_summary": "27th consecutive pass confirms stealth blackout baseline fully entrenched. All 4 ISP gateways blocked externally (TIC x2, Irancell, Asiatech) with BGP routes intact. 45/1068 IP ranges reachable (4.2%). NOTABLE RECOVERY: CafeBazaar fully recovered from 3-pass degradation (7504ms to 657ms), confirming temporary CDN congestion rather than targeted throttling. RIPEstat observatory recovered from DOWN. Tor ecosystem latency improving (check endpoint 1939ms to 1046ms). Irancell gateway DPI mode shift (RST to timeout) persists across passes, likely permanent reconfiguration.",
-  "public_summary_fa": "۲۷مین دور متوالی — خط پایه قطعی مخفی کاملاً مستحکم. تمام ۴ گیت‌وی ISP از خارج بلاک (TIC ×۲، ایرانسل، آسیاتک) با BGP سالم. ۴۵ از ۱۰۶۸ بازه IP قابل‌دسترس (۴.۲٪). بازیابی قابل‌توجه: کافه‌بازار از تخریب ۳دوره‌ای کاملاً بازگشت (۷۵۰۴ms به ۶۵۷ms)، ازدحام موقت CDN تأیید شد. رصدخانه RIPEstat از DOWN بازگشت. اکوسیستم تور بهبود لتنسی (پرب چک ۱۹۳۹ms به ۱۰۴۶ms). حالت DPI گیت‌وی ایرانسل (تغییر از RST به تایم‌اوت) پایدار.",
-  "insight": "The CafeBazaar recovery fully reverses the 3-pass degradation trajectory (4176 to 5804 to 7504 to 657ms), proving it was transient CDN/path congestion rather than policy-driven QoS throttling — this is a useful false-positive calibration, confirming that not all domestic latency spikes indicate targeted censorship.",
-  "insight_fa": "بازگشت کافه‌بازار مسیر تخریب ۳دوره‌ای (۴۱۷۶ به ۵۸۰۴ به ۷۵۰۴ به ۶۵۷ms) را کاملاً معکوس می‌کند و ثابت می‌کند ازدحام موقت CDN/مسیر بوده نه QoS هدفمند سیاستی — این یک کالیبراسیون مفید مثبت کاذب است، تأیید می‌کند هر افزایش لتنسی داخلی نشان‌دهنده سانسور هدفمند نیست.",
-  "recommendation": "Continue tracking Irancell gateway DPI mode (sustained i/o timeout) to confirm permanence of reconfiguration. Monitor CafeBazaar latency across next 5 passes to validate recovery stability. The TIC GW 1 connection-refused pattern (unique among gateways) warrants investigation — it may indicate a separate DPI appliance with different rule implementation. Cross-reference IODA/OONI for any corroborating signal changes in IR.",
-  "recommendation_fa": "حالت DPI گیت‌وی ایرانسل (تایم‌اوت پایدار) را ادامه دهید تا دائمی بودن بازپیکربندی تأیید شود. لتنسی کافه‌بازار را در ۵ دور آینده رصد کنید تا پایداری بازیابی اعتبارسنجی شود. الگوی connection refused در TIC GW 1 (منحصربفرد در میان گیت‌وی‌ها) نیاز به بررسی دارد — ممکن است دستگاه DPI جداگانه با مجموعه قوانین متفاوت باشد. با IODA/OONI کراس‌رفرنس کنید."
+  "affected_services_fa": [
+    "گیت‌وی TIC 1 (2.187.1.1 رد اتصال — الگوی RST منحصربفرد) — ۲۸مین دور متوالی",
+    "گیت‌وی TIC 2 (78.38.112.1 تایم‌اوت) — ۲۸مین دور متوالی",
+    "گیت‌وی ایرانسل (5.232.0.1 تایم‌اوت — بازپیکربندی پایدار DPI)",
+    "گیت‌وی آسیاتک (94.182.0.1 تایم‌اوت) + پورتال وب داون — ۲۸مین دور متوالی",
+    "DNS الکترو (78.157.42.100 تایم‌اوت — دائمی‌داون از دور ۱)",
+    "اسنپ (لوپ ریدایرکت — ۲۸مین دور متوالی)",
+    "شاپرک (DNS no such host — خطا از تایم‌اوت به خطای رزولوشن DNS تغییر کرد)",
+    "RIPEstat (context deadline exceeded — خرابی ناپایدار)"
+  ],
+  "public_summary": "28th consecutive pass confirms stealth blackout baseline fully entrenched. All 4 ISP gateways blocked externally (TIC x2, Irancell, Asiatech) with BGP routes intact. 45/1068 IP ranges reachable (4.2%). NOTABLE CHANGE: Shaparak payment gateway DNS resolution failure escalated from i/o timeout to NXDOMAIN ('no such host' via Google DNS), suggesting possible DNS-level intervention or zone modification. CafeBazaar stable at 882ms post-recovery. RIPEstat intermittently failing again. Domestic services mostly healthy; foreign platforms all accessible.",
+  "public_summary_fa": "۲۸مین دور متوالی — خط پایه قطعی مخفی کاملاً مستحکم. تمام ۴ گیت‌وی ISP از خارج بلاک (TIC ×۲، ایرانسل، آسیاتک) با BGP سالم. ۴۵ از ۱۰۶۸ بازه IP قابل‌دسترس (۴.۲٪). تغییر قابل‌توجه: شکست رزولوشن DNS درگاه پرداخت شاپرک از تایم‌اوت به NXDOMAIN ارتقا یافت (\"no such host\" از Google DNS)، احتمالاً مداخله در سطح DNS یا تغییر زون. کافه‌بازار پس از بازیابی پایدار روی ۸۸۲ms. RIPEstat مجدداً ناپایدار. سرویس‌های داخلی عمدتاً سالم؛ پلتفرم‌های خارجی همه در دسترس.",
+  "insight": "Shaparak's DNS error shift from i/o timeout to NXDOMAIN is qualitatively significant — it suggests the filtering mechanism may have evolved from network-layer blocking (gateway timeout) to application-layer DNS poisoning or zone-level intervention, representing a potential tightening of DNS manipulation targeting financial infrastructure.",
+  "insight_fa": "تغییر خطای DNS شاپرک از تایم‌اوت به NXDOMAIN از نظر کیفی مهم است — نشان می‌دهد مکانیزم فیلترینگ ممکن است از بلاک در لایه شبکه (تایم‌اوت گیت‌وی) به مسمومیت DNS در لایه اپلیکیشن یا مداخله در سطح زون تکامل یافته باشد، نشان‌دهنده احتمال تشدید فیلترینگ DNS روی زیرساخت مالی.",
+  "recommendation": "Investigate Shaparak DNS zone directly — check if www.shaparak.ir has valid A/AAAA records via authoritative DNS servers (not just Google DNS). The i/o timeout to NXDOMAIN shift may indicate DNS-level policy intervention on financial infrastructure that warrants separate tracking. Continue monitoring CafeBazaar for stability confirmation. Cross-reference IODA and OONI for corroborating signals on DNS manipulation targeting Iranian financial domains.",
+  "recommendation_fa": "زون DNS شاپرک را مستقیماً بررسی کنید — بررسی شود آیا www.shaparak.ir رکوردهای A/AAAA معتبر از سرورهای DNS مجاز (نه فقط Google DNS) دارد. تغییر از تایم‌اوت به NXDOMAIN ممکن است مداخله DNS سیاستی روی زیرساخت مالی را نشان دهد که نیاز به ردیابی جداگانه دارد. ثبات بازیابی کافه‌بازار را ادامه دهید. با IODA و OONI کراس‌رفرنس کنید برای شواهد مکمل درباره فیلترینگ DNS هدفمند روی دامنه‌های مالی ایران."
 }
