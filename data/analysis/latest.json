@@ -3,15 +3,15 @@
   "severity": "minor",
   "suspected_causes": [
     "Policy filtering at international gateway layer — all 4 ISP gateways (TIC x2, Irancell, Asiatech) return \"connection refused\" or TCP timeout while BGP routes remain intact — signature of centralized gateway filtering per Bock et al. FOCI'20",
-    "Protocol whitelist enforcement at national gateway — only 45/1068 Iranian IP ranges (4.2%) reachable from external vantage; UDP/ICMP/SSH/VPN dropped, only DNS/HTTP/HTTPS pass — matches Iran's protocol whitelister reverse-engineered by Bock et al.",
+    "Protocol whitelist enforcement at national gateway — only 46/1068 Iranian IP ranges (4.3%) reachable from external vantage; UDP/ICMP/SSH/VPN dropped, only DNS/HTTP/HTTPS pass — matches Iran's protocol whitelister reverse-engineered by Bock et al.",
     "Targeted pressure on anti-censorship DNS infrastructure — Electro DNS consistently timing out while Shecan and TIC DNS respond normally — pattern of selective DNS infrastructure disruption",
-    "Domestic QoS discrimination — foreign platforms (Google, GitHub, Cloudflare, YouTube) respond fast (140-300ms) while Iranian user traffic to international destinations is throttled or blocked at gateway"
+    "Domestic QoS discrimination — foreign platforms (Google, GitHub, Cloudflare, YouTube) respond fast (65-300ms) while Iranian user traffic to international destinations is throttled or blocked at gateway"
   ],
   "suspected_causes_fa": [
     "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP (TIC ×۲، ایرانسل، آسیاتک) با \"connection refused\" یا تایم‌اوت TCP — مسیرهای BGP سالم — امضای فیلترینگ متمرکز در گیت‌وی مطابق Bock et al. FOCI'20",
-    "اجبار وایت‌لیست پروتکل در گیت‌وی ملی — تنها ۴۵ از ۱۰۶۸ بازه IP ایرانی (۴.۲٪) از خارج قابل‌دسترس؛ UDP/ICMP/SSH/VPN دراپ، تنها DNS/HTTP/HTTPS عبور — مطابق وایت‌لیستِر پروتکل ایران که Bock et al. معکوس‌مهندسی کرده‌اند",
-    "فشار هدفمند بر زیرساخت DNS ضدфильترشکن — DNS الکترو به‌صورت مداوم تایم‌اوت در حالی که Shecan و DNS تیک پاسخ می‌دهند — الگوی اختلال هدفمند در زیرساخت DNS",
-    "تبعیض QoS داخلی — پلتفرم‌های خارجی (Google، GitHub، Cloudflare، YouTube) سریع پاسخ می‌دهند (۱۴۰-۳۰۰ms) در حالی که ترافیک کاربران ایرانی به مقاصد بین‌المللی در گیت‌وی دچار تاخیر یا بلاک است"
+    "اجبار وایت‌لیست پروتکل در گیت‌وی ملی — تنها ۴۶ از ۱۰۶۸ بازه IP ایرانی (۴.۳٪) از خارج قابل‌دسترس؛ UDP/ICMP/SSH/VPN دراپ، تنها DNS/HTTP/HTTPS عبور — مطابق وایت‌لیستِر پروتکل ایران که Bock et al. معکوس‌مهندسی کرده‌اند",
+    "فشار هدفمند بر زیرساخت DNS ضدفیلترشکن — DNS الکترو به‌صورت مداوم تایم‌اوت در حالی که Shecan و DNS تیک پاسخ می‌دهند — الگوی اختلال هدفمند در زیرساخت DNS",
+    "تبعیض QoS داخلی — پلتفرم‌های خارجی (Google، GitHub، Cloudflare، YouTube) سریع پاسخ می‌دهند (۶۵-۳۰۰ms) در حالی که ترافیک کاربران ایرانی به مقاصد بین‌المللی در گیت‌وی دچار تاخیر یا بلاک است"
   ],
   "affected_services": [
     "TIC gateway 2.187.1.1 (connection refused)",
@@ -19,11 +19,10 @@
     "Irancell gateway 5.232.0.1 (stable TCP timeout/DROP)",
     "Asiatech gateway 94.182.0.1 (TCP timeout) + web timeout",
     "Electro DNS 78.157.42.100 (UDP timeout)",
-    "Electro DNS 78.157.42.101 (degraded, 672ms latency)",
-    "Saman Bank (degraded, 3198ms latency)",
+    "Saman Bank (degraded, 3306ms latency)",
     "Snapp (persistent redirect loop)",
     "Shaparak payment gateway (persistent timeout)",
-    "External reachability of Iranian IP space: 4.2% (45/1068 ranges)"
+    "External reachability of Iranian IP space: 4.3% (46/1068 ranges)"
   ],
   "affected_services_fa": [
     "گیت‌وی تیک ۲.۱۸۷.۱.۱ (رد اتصال \"connection refused\")",
@@ -31,16 +30,15 @@
     "گیت‌وی ایرانسل ۵.۲۳۲.۰.۱ (تایم‌اوت TCP پایدار/DROP)",
     "گیت‌وی آسیاتک ۹۴.۱۸۲.۰.۱ (تایم‌اوت TCP) + وب‌سایت تایم‌اوت",
     "DNS الکترو ۷۸.۱۵۷.۴۲.۱۰۰ (تایم‌اوت UDP)",
-    "DNS الکترو ۷۸.۱۵۷.۴۲.۱۰۱ (کند، ۶۷۲ms)",
-    "بانک سامان (کند، ۳۱۹۸ms)",
+    "بانک سامان (کند، ۳۳۰۶ms)",
     "اسنپ (لوپ ریدایرکت مداوم)",
     "درگاه پرداخت شاپرک (تایم‌اوت مداوم)",
-    "دسترسی‌پذیری خارجی فضای IP ایران: ۴.۲٪ (۴۵/۱۰۶۸ بازه)"
+    "دسترسی‌پذیری خارجی فضای IP ایران: ۴.۳٪ (۴۶/۱۰۶۸ بازه)"
   ],
-  "public_summary": "24th consecutive stealth blackout pass: all 4 ISP gateways (TIC x2, Irancell, Asiatech) blocked externally with BGP routes intact — 4.2% external IP reachability (45/1068 ranges). Electro DNS down, Shaparak/Snapp persistent degradation. Domestic QoS stable; foreign platforms and circumvention tools (Psiphon 107ms, Tor 165ms) fully operational. Consistent selective-internet architecture, not a transient event.",
-  "public_summary_fa": "۲۴مین دور متوالی قطعی مخفی: تمام ۴ گیت‌وی ISP (TIC ×۲، ایرانسل، آسیاتک) از خارج بلاک‌اند با مسیرهای BGP سالم — ۴.۲٪ دسترسی‌پذیری IP خارجی (۴۵/۱۰۶۸ بازه). DNS الکترو، شاپرک، اسنپ تداوم اختلال. QoS داخلی پایدار؛ پلتفرم‌های خارجی و ابزارهای عبور (سایفون ۱۰۷ms، تور ۱۶۵ms) کاملاً فعال. معماری اینترنت گزینشی حالت پایدار، نه رویداد گذرا.",
-  "insight": "24th identical baseline confirms this is the steady-state 'selective internet' architecture — Irancell gateway has fully stabilized into DROP state after earlier oscillation; 4.2% external reachability matches whitelisted gov/edu/cloud ranges; protocol whitelist + gateway filtering + DNS pressure operating as designed per Bock et al. FOCI'20 and Jan 2026 tiered-access model.",
-  "insight_fa": "۲۴مین بیس‌لاین یکسان تأیید می‌کند که این معماری حالت پایدار «اینترنت گزینشی» است — گیت‌وی ایرانسل به‌صورت کامل در حالت DROP تثبیت شده پس از نوسان‌های اولیه؛ ۴.۲٪ دسترسی‌پذیری خارجی با بازه‌های وایت‌لیست‌گرد/آموزشی/ابری هم‌خوانی دارد؛ فیلتر پروتکل + فیلترینگ گیت‌وی + فشار DNS همانطور که Bock et al. FOCI'20 و مدل دسترسی درج‌بندی‌شده ژانویه ۲۰۲۶ پیش‌بینی کرده‌اند، کار می‌کنند.",
-  "recommendation": "Cross-reference with IODA/Filterwatch/OONI/NetBlocks/Cloudflare Radar for external validation of gateway filtering vs. infrastructure failure; monitor for exam-season throttling patterns (June/September) and evening QoS degradation (18:00-23:00 local); track Electro DNS and Shecan availability as leading indicators of DNS infrastructure pressure.",
-  "recommendation_fa": "تقاطع‌بررسی با IODA/Filterwatch/OONI/NetBlocks/Cloudflare Radar برای تأیید فیلترینگ گیت‌وی در برابر خرابی زیرساخت؛ رصد الگوهای تاخیر فصل امتحانات (ژوئن/سپتامبر) و افت QoS شبانه (۱۸:۰۰-۲۳:۰۰ محلی); پیگیری در دسترس بودن DNS الکترو و Shecan به‌عنوان شاخص‌های پیشرو برای فشار بر زیرساخت DNS."
+  "public_summary": "25th consecutive stealth blackout pass: all 4 ISP gateways (TIC x2, Irancell, Asiatech) blocked externally with BGP routes intact — 4.3% external IP reachability (46/1068 ranges). Electro DNS down, Shaparak/Snapp persistent degradation. Domestic QoS stable; foreign platforms and circumvention tools (Psiphon 224ms, Tor 479ms) fully operational. Consistent selective-internet architecture, not a transient event.",
+  "public_summary_fa": "۲۵مین دور متوالی قطعی مخفی: تمام ۴ گیت‌وی ISP (TIC ×۲، ایرانسل، آسیاتک) از خارج بلاک‌اند با مسیرهای BGP سالم — ۴.۳٪ دسترسی‌پذیری IP خارجی (۴۶/۱۰۶۸ بازه). DNS الکترو، شاپرک، اسنپ تداوم اختلال. QoS داخلی پایدار؛ پلتفرم‌های خارجی و ابزارهای عبور (سایفون ۲۲۴ms، تور ۴۷۹ms) کاملاً فعال. معماری اینترنت گزینشی حالت پایدار، نه رویداد گذرا.",
+  "insight": "25th identical baseline confirms this is the steady-state 'selective internet' architecture — Irancell gateway has fully stabilized into DROP state after earlier oscillation; 4.3% external reachability matches whitelisted gov/edu/cloud ranges; protocol whitelist + gateway filtering + DNS pressure operating as designed per Bock et al. FOCI'20 and Jan 2026 tiered-access model. Major ISPs (MCI 0%, ITC 0%, Irancell 0%, Rightel 0%) show zero external reachability — only smaller orgs (Rayaneh Danesh Golestan 33%, Raya Sepehr Vira 75%, Cooperative Afra 19%) have reachable ranges, confirming tiered access.",
+  "insight_fa": "۲۵مین بیس‌لاین یکسان تأیید می‌کند که این معماری حالت پایدار «اینترنت گزینشی» است — گیت‌وی ایرانسل به‌صورت کامل در حالت DROP تثبیت شده پس از نوسان‌های اولیه؛ ۴.۳٪ دسترسی‌پذیری خارجی با بازه‌های وایت‌لیست‌گرد/آموزشی/ابری هم‌خوانی دارد؛ فیلتر پروتکل + فیلترینگ گیت‌وی + فشار DNS همانطور که Bock et al. FOCI'20 و مدل دسترسی درج‌بندی‌شده ژانویه ۲۰۲۶ پیش‌بینی کرده‌اند، کار می‌کنند. ISPهای اصلی (همراه اول ۰٪، تیک ۰٪، ایرانسل ۰٪، رایتل ۰٪) دسترسی خارجی صفر دارند — تنها سازمان‌های کوچک‌تر (رایانه دانش گلستان ۳۳٪، رایا سپهر ویرا ۷۵٪، تعاونی افرا ۱۹٪) بازه‌های قابل‌دستی دارند، تأیید‌کننده دسترسی درج‌بندی.",
+  "recommendation": "Cross-reference with IODA/Filterwatch/OONI/NetBlocks/Cloudflare Radar for external validation of gateway filtering vs. infrastructure failure; monitor for exam-season throttling patterns (June/September) and evening QoS degradation (18:00-23:00 local); track Electro DNS and Shecan availability as leading indicators of DNS infrastructure pressure; monitor Raya Sepehr Vira and Cooperative Afra reachability as potential indicators of whitelist expansion.",
+  "recommendation_fa": "تقاطع‌بررسی با IODA/Filterwatch/OONI/NetBlocks/Cloudflare Radar برای تأیید فیلترینگ گیت‌وی در برابر خرابی زیرساخت؛ رصد الگوهای تاخیر فصل امتحانات (ژوئن/سپتامبر) و افت QoS شبانه (۱۸:۰۰-۲۳:۰۰ محلی); پیگیری در دسترس بودن DNS الکترو و Shecan به‌عنوان شاخص‌های پیشرو برای فشار بر زیرساخت DNS; رصد دسترسی‌پذیری رایا سپهر ویرا و تعاونی افرا به‌عنوان نشانگرهای بالقوه گسترش وایت‌لیست."
 }
