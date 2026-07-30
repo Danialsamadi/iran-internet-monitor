@@ -1,30 +1,30 @@
 {
-  "ts": "2026-07-30T16:05:41Z",
+  "ts": "2026-07-30T17:05:44Z",
   "overall_status": "partial_outage",
   "severity": "minor",
   "suspected_causes": [
     "Policy filtering at international gateway layer — all 4 ISP gateways (TIC x2, Irancell, Asiatech) return \"connection refused\" or TCP timeout while BGP routes remain intact — signature of centralized gateway filtering per Bock et al. FOCI'20",
-    "Protocol whitelist enforcement at national gateway — only 45/1068 Iranian IP ranges (4.2%) reachable from external vantage; UDP/ICMP/SSH/VPN dropped, only DNS/HTTP/HTTPS pass — matches Iran's protocol whitelister reverse-engineered by Bock et al.",
+    "Protocol whitelist enforcement at national gateway — only 43/1068 Iranian IP ranges (4.0%) reachable from external vantage; UDP/ICMP/SSH/VPN dropped, only DNS/HTTP/HTTPS pass — matches Iran's protocol whitelister reverse-engineered by Bock et al.",
     "Electro DNS consistently timing out — targeted pressure on anti-censorship DNS infrastructure persists",
     "Asiatech dual failure persists (gateway DROP + web portal timeout) — ISP-specific isolation on AS49666 sustained, likely CRA directive or chronic infrastructure degradation",
     "Domestic QoS discrimination — foreign platforms (Google, GitHub, Cloudflare, YouTube) respond fast while Iranian user traffic to international destinations is throttled or blocked at gateway",
-    "Domestic banking layer instability — Saman Bank recovered (2989ms) but Shaparak relapsed to timeout; Snapp redirect loop persists; payment layer remains fragile",
-    "Irancell web portal latency spike (10.6s vs 548ms previously) — potential evening throttling onset or gateway congestion at 16:05 UTC (19:35 Tehran)",
-    "Shecan DNS stable (223ms) — midday measurement captures baseline without peak-pressure distortion",
+    "Domestic banking layer instability — Saman Bank degraded (3349ms) but Shaparak persistently timeout; Snapp redirect loop persists; payment layer remains fragile",
+    "Irancell web portal latency normalized from evening spike (was 10.6s at 16:05 UTC, now 1.5s) — evening throttling peak has passed",
+    "Shecan DNS stable (225ms) — evening measurement captures post-peak baseline without peak-pressure distortion",
     "IODA, OONI, RIPEstat, Tor Metrics all operational — external observatories reachable",
-    "External reachability at 4.2% (45/1068 ranges) matches whitelisted gov/edu/cloud ranges — confirms tiered access model where only smaller orgs (Raya Sepehr Vira, Cooperative Afra) show external reachability"
+    "External reachability at 4.0% (43/1068 ranges) matches whitelisted gov/edu/cloud ranges — confirms tiered access model where only smaller orgs (Raya Sepehr Vira, Cooperative Afra) show external reachability"
   ],
   "suspected_causes_fa": [
     "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP (TIC ×۲، ایرانسل، آسیاتک) با \"connection refused\" یا تایم‌اوت TCP — مسیرهای BGP سالم — امضای فیلترینگ متمرکز در گیت‌وی مطابق Bock et al. FOCI'20",
-    "اجبار وایت‌لیست پروتکل در گیت‌وی ملی — تنها ۴۵ از ۱۰۶۸ بازه IP ایرانی (۴.۲٪) از خارج قابل‌دسترس؛ UDP/ICMP/SSH/VPN دراپ، تنها DNS/HTTP/HTTPS عبور — مطابق وایت‌لیستِر پروتکل ایران که Bock et al. معکوس‌مهندسی کرده‌اند",
+    "اجبار وایت‌لیست پروتکل در گیت‌وی ملی — تنها ۴۳ از ۱۰۶۸ بازه IP ایرانی (۴.۰٪) از خارج قابل‌دسترس؛ UDP/ICMP/SSH/VPN دراپ، تنها DNS/HTTP/HTTPS عبور — مطابق وایت‌لیستِر پروتکل ایران که Bock et al. معکوس‌مهندسی کرده‌اند",
     "فشار هدفمند بر زیرساخت DNS ضدفیلترشکن — DNS الکترو به‌صورت مداوم تایم‌اوت — الگو ادامه دارد",
     "دوال شکست آسیاتک تداوم دارد (گیت‌وی DROP + وب‌پورتال تایم‌اوت) — انزوا ISP-specific روی AS49666 تداوم دارد، احتمالاً دستورالعمل CRA یا تدهور زیرساختی مزمن",
     "تبعیض QoS داخلی — پلتفرم‌های خارجی (Google، GitHub، Cloudflare، YouTube) سریع پاسخ می‌دهند در حالی که ترافیک کاربران ایرانی به مقاصد بین‌المللی در گیت‌وی دچار تاخیر یا بلاک است",
-    "ناسازگاری لایه پرداخت داخلی — بانک سامان بهبودیافته (۲۹۸۹ms) اما شاپرک به تایم‌اوت بازگشته؛ اسنپ در لوپ ریدایرکت تداوم دارد؛ لایه پرداخت همچنان شکننده",
-    "اسپایک تاخیر وب‌پورتال ایرانسل (۱۰.۶s در برابر ۵۴۸ms پیشین) — احتمال آغاز تاخیر شبانه یا تراکم گیت‌وی در ۱۶:۰۵ UTC (۱۹:۳۵ تهران)",
-    "DNS شکن در بازه پایدار (۲۲۳ms) — اندازه‌گیری ظهر بیس‌لاین را بدون فشردگی اوج ثبت کرده است",
+    "ناسازگاری لایه پرداخت داخلی — بانک سامان پشیده (۳۳۴۹ms) اما شاپرک به تایم‌اوت پایدار؛ اسنپ در لوپ ریدایرکت تداوم دارد؛ لایه پرداخت همچنان شکننده",
+    "تخفیف تاخیر وب‌پورتال ایرانسل از اسپایک شبانه (۱۰.۶s در ۱۶:۰۵ UTC به ۱.۵s اکنون) — اوج تاخیر شبانه سپری شده",
+    "DNS شکن در بازه پایدار (۲۲۵ms) — اندازه‌گیری عصر بیس‌لاین را پس از اوج ثبت کرده است",
     "IODA، OONI، RIPEstat، Tor Metrics همگی فعال — نظارت‌گرهای خارجی قابل‌دسترس",
-    "دسترسی‌پذیری خارجی ۴.۲٪ (۴۵/۱۰۶۸ بازه) با بازه‌های وایت‌لیست‌گرد/آموزشی/ابری هم‌خوانی دارد — تأیید مدل دسترسی درج‌بندی که تنها سازمان‌های کوچک‌تر (رایا سپهر ویرا، تعاونی افرا) بازه‌های قابل‌دستی خارجی دارند"
+    "دسترسی‌پذیری خارجی ۴.۰٪ (۴۳/۱۰۶۸ بازه) با بازه‌های وایت‌لیست‌گرد/آموزشی/ابری هم‌خوانی دارد — تأیید مدل دسترسی درج‌بندی که تنها سازمان‌های کوچک‌تر (رایا سپهر ویرا، تعاونی افرا) بازه‌های قابل‌دستی خارجی دارند"
   ],
   "affected_services": [
     "TIC gateway 2.187.1.1 (connection refused)",
@@ -32,10 +32,10 @@
     "Irancell gateway 5.232.0.1 (stable TCP timeout/DROP)",
     "Asiatech gateway 94.182.0.1 (TCP timeout) + web portal (timeout)",
     "Electro DNS 78.157.42.100 (UDP timeout)",
-    "Irancell web portal (degraded: 10595ms latency spike)",
     "Snapp (redirect loop, 10+ redirects)",
-    "Shaparak (timeout relapsed)",
-    "External reachability of Iranian IP space: 4.2% (45/1068 ranges)"
+    "Shaparak (persistent timeout)",
+    "External reachability of Iranian IP space: 4.0% (43/1068 ranges)",
+    "Saman Bank (degraded: 3349ms latency)"
   ],
   "affected_services_fa": [
     "گیت‌وی تیک ۲.۱۸۷.۱.۱ (رد اتصال \"connection refused\")",
@@ -43,15 +43,15 @@
     "گیت‌وی ایرانسل ۵.۲۳۲.۰.۱ (تایم‌اوت TCP پایدار/DROP)",
     "گیت‌وی آسیاتک ۹۴.۱۸۲.۰.۱ (تایم‌اوت TCP) + وب‌سایت تایم‌اوت",
     "DNS الکترو ۷۸.۱۵۷.۴۲.۱۰۰ (تایم‌اوت UDP)",
-    "وب‌پورتال ایرانسل (پشیده: اسپایک تاخیر ۱۰۵۹۵ms)",
     "اسنپ (لوپ ریدایرکت، ۱۰+ ریدایرکت)",
-    "شاپرک (بازگشت به تایم‌اوت)",
-    "دسترسی‌پذیری خارجی فضای IP ایران: ۴.۲٪ (۴۵/۱۰۶۸ بازه)"
+    "شاپرک (تایم‌اوت پایدار)",
+    "دسترسی‌پذیری خارجی فضای IP ایران: ۴.۰٪ (۴۳/۱۰۶۸ بازه)",
+    "بانک سامان (پشیده: تاخیر ۳۳۴۹ms)"
   ],
-  "public_summary": "45th consecutive stealth blackout pass: all 4 ISP gateways (TIC x2, Irancell, Asiatech) blocked externally with BGP routes intact — 4.2% external IP reachability (45/1068 ranges). Irancell gateway stable DROP; Irancell web portal latency spiked to 10.6s. Electro DNS down. Snapp redirect loop persists. Shaparak relapsed to timeout, Saman Bank recovered. Foreign platforms and circumvention tools (Psiphon, Tor, Snowflake) fully operational. Confirms steady-state selective-internet architecture with domestic banking fragility and emerging evening QoS pressure.",
-  "public_summary_fa": "۴۵مین دور متوالی قطعی مخفی: تمام ۴ گیت‌وی ISP (TIC ×۲، ایرانسل، آسیاتک) از خارج بلاک‌اند با مسیرهای BGP سالم — ۴.۲٪ دسترسی‌پذیری IP خارجی (۴۵/۱۰۶۸ بازه). گیت‌وی ایرانسل پایدار در حالت DROP؛ وب‌پورتال ایرانسل تاخیر به ۱۰.۶s افزایش یافته. DNS الکترو از کار افتاده. اسنپ در لوپ ریدایرکت تداوم دارد. شاپرک به تایم‌اوت بازگشته، بانک سامان بهبودیافته. پلتفرم‌های خارجی و ابزارهای عبور (سایفون، تور، اسنوفلیک) کاملاً فعال. تأیید معماری حالت پایدار «اینترنت گزینشی» با شکنندگی بانکداری داخلی و فشردگی QoS شبانه در حال بروز.",
-  "insight": "45th identical baseline confirms this is the steady-state 'selective internet' architecture — Irancell gateway settled into stable DROP; 4.2% external reachability matches whitelisted gov/edu/cloud ranges; protocol whitelist + gateway filtering + DNS pressure operating as designed per Bock et al. FOCI'20 and 2026 tiered-access model. Major ISPs (MCI 0%, TIC 0%, Irancell 0%, Rightel 0%) show zero external reachability while smaller orgs (Raya Sepehr Vira, Cooperative Afra) have reachable ranges — tiered access confirmed. Irancell web latency spike at 16:05 UTC (19:35 Tehran) may signal evening throttling onset; Shaparak/Saman Bank flip-flop suggests payment layer has not stabilized.",
-  "insight_fa": "۴۵مین بیس‌لاین یکسان تأیید می‌کند که این معماری حالت پایدار «اینترنت گزینشی» است — گیت‌وی ایرانسل به‌صورت کامل در حالت DROP تثبیت شده؛ ۴.۲٪ دسترسی‌پذیری خارجی با بازه‌های وایت‌لیست‌گرد/آموزشی/ابری هم‌خوانی دارد؛ فیلتر پروتکل + فیلترینگ گیت‌وی + فشار DNS همانطور که Bock et al. FOCI'20 و مدل دسترسی درج‌بندی ۲۰۲۶ پیش‌بینی کرده‌اند، کار می‌کنند. ISPهای اصلی (همراه اول ۰٪، تیک ۰٪، ایرانسل ۰٪، رایتل ۰٪) دسترسی خارجی صفر دارند در حالی که سازمان‌های کوچک‌تر (رایا سپهر ویرا، تعاونی افرا) بازه‌های قابل‌دستی دارند — تأیید‌کننده دسترسی درج‌بندی. اسپایک تاخیر ایرانسل در ۱۶:۰۵ UTC (۱۹:۳۵ تهران) می‌تواند آغاز تاخیر شبانه را نشان‌دهد؛ نوسان شاپرک/بانک سامان نشان می‌دهد لایه پرداخت هنوز تثبیت نشده است.",
-  "recommendation": "Cross-reference with IODA/Filterwatch/OONI/NetBlocks/Cloudflare Radar for external validation of gateway filtering vs infrastructure failure; monitor Irancell web latency and Instagram/YouTube latency for evening QoS degradation (18:00-23:00 local); track Electro DNS and Shecan availability as leading indicators of DNS infrastructure pressure; monitor Raya Sepehr Vira and Cooperative Afra reachability as potential indicators of whitelist expansion; probe Saman Bank and Shaparak in next cycle to confirm payment layer stability pattern; add Instagram latency tracking as evening throttling indicator.",
-  "recommendation_fa": "تقاطع‌بررسی با IODA/Filterwatch/OONI/NetBlocks/Cloudflare Radar برای تأیید فیلترینگ گیت‌وی در برابر خرابی زیرساخت؛ رصد تاخیر وب‌پورتال ایرانسل و تاخیر اینستاگرام/یوتیوب برای افت QoS شبانه (۱۸:۰۰-۲۳:۰۰ محلی); پیگیری در دسترس بودن DNS الکترو و شکن به‌عنوان شاخص‌های پیشرو برای فشار بر زیرساخت DNS؛ رصد دسترسی‌پذیری رایا سپهر ویرا و تعاونی افرا به‌عنوان نشانگرهای بالقوه گسترش وایت‌لیست؛ درگاه‌های بانک سامان و شاپرک را در دور بعدی پرب‌زنید تا تداوم الگوی پایداری لایه پرداخت تأیید شود؛ افزودن ردیابی تاخیر اینستاگرام به‌عنوان شاخص تاخیر شبانه."
+  "public_summary": "46th consecutive stealth blackout pass: all 4 ISP gateways (TIC x2, Irancell, Asiatech) blocked externally with BGP routes intact — 4.0% external IP reachability (43/1068 ranges). Irancell gateway stable DROP; Irancell web latency normalized from evening spike. Electro DNS down. Snapp redirect loop persists. Shaparak persistently timeout, Saman Bank degraded. Foreign platforms and circumvention tools (Psiphon, Tor, Snowflake) fully operational. Confirms steady-state selective-internet architecture with domestic banking fragility and post-peak evening QoS normalization.",
+  "public_summary_fa": "۴۶مین دور متوالی قطعی مخفی: تمام ۴ گیت‌وی ISP (TIC ×۲، ایرانسل، آسیاتک) از خارج بلاک‌اند با مسیرهای BGP سالم — ۴.۰٪ دسترسی‌پذیری IP خارجی (۴۳/۱۰۶۸ بازه). گیت‌وی ایرانسل پایدار در حالت DROP؛ تاخیر وب‌پورتال ایرانسل از اوج شبانه بازگردانده شده. DNS الکترو از کار افتاده. اسنپ در لوپ ریدایرکت تداوم دارد. شاپرک به‌صورت پایدار تایم‌اوت، بانک سامان پشیده. پلتفرم‌های خارجی و ابزارهای عبور (سایفون، تور، اسنوفلیک) کاملاً فعال. تأیید معماری حالت پایدار «اینترنت گزینشی» با شکنندگی بانکداری داخلی و نرمال‌سازی QoS پس از اوج شبانه.",
+  "insight": "46th identical baseline confirms this is the steady-state 'selective internet' architecture — Irancell gateway settled into stable DROP; 4.0% external reachability matches whitelisted gov/edu/cloud ranges; protocol whitelist + gateway filtering + DNS pressure operating as designed per Bock et al. FOCI'20 and 2026 tiered-access model. Major ISPs (MCI 0%, TIC 0%, Irancell 0%, Rightel 0%) show zero external reachability while smaller orgs (Raya Sepehr Vira, Cooperative Afra) have reachable ranges — tiered access confirmed. Evening Irancell latency spike resolved post-peak; Shaparak/Saman Bank instability suggests payment layer has not stabilized.",
+  "insight_fa": "۴۶مین بیس‌لاین یکسان تأیید می‌کند که این معماری حالت پایدار «اینترنت گزینشی» است — گیت‌وی ایرانسل به‌صورت کامل در حالت DROP تثبیت شده؛ ۴.۰٪ دسترسی‌پذیری خارجی با بازه‌های وایت‌لیست‌گرد/آموزشی/ابری هم‌خوانی دارد؛ فیلتر پروتکل + فیلترینگ گیت‌وی + فشار DNS همانطور که Bock et al. FOCI'20 و مدل دسترسی درج‌بندی ۲۰۲۶ پیش‌بینی کرده‌اند، کار می‌کنند. ISPهای اصلی (همراه اول ۰٪، تیک ۰٪، ایرانسل ۰٪، رایتل ۰٪) دسترسی خارجی صفر دارند در حالی که سازمان‌های کوچک‌تر (رایا سپهر ویرا، تعاونی افرا) بازه‌های قابل‌دستی دارند — تأیید‌کننده دسترسی درج‌بندی. اسپایک تاخیر ایرانسل پس از اوج شبانه حل شده؛ نوسان شاپرک/بانک سامان نشان می‌دهد لایه پرداخت هنوز تثبیت نشده است.",
+  "recommendation": "Cross-reference with IODA/Filterwatch/OONI/NetBlocks/Cloudflare Radar for external validation of gateway filtering vs infrastructure failure; monitor Irancell web latency and Instagram/YouTube latency for next evening QoS degradation cycle (18:00-23:00 local); track Electro DNS and Shecan availability as leading indicators of DNS infrastructure pressure; monitor Raya Sepehr Vira and Cooperative Afra reachability as potential indicators of whitelist expansion; probe Saman Bank and Shaparak in next cycle to confirm payment layer stability pattern; add Instagram latency tracking as evening throttling indicator.",
+  "recommendation_fa": "تقاطع‌بررسی با IODA/Filterwatch/OONI/NetBlocks/Cloudflare Radar برای تأیید فیلترینگ گیت‌وی در برابر خرابی زیرساخت؛ رصد تاخیر وب‌پورتال ایرانسل و تاخیر اینستاگرام/یوتیوب برای چرخه افت QoS شبانه بعدی (۱۸:۰۰-۲۳:۰۰ محلی); پیگیری در دسترس بودن DNS الکترو و شکن به‌عنوان شاخص‌های پیشرو برای فشار بر زیرساخت DNS؛ رصد دسترسی‌پذیری رایا سپهر ویرا و تعاونی افرا به‌عنوان نشانگرهای بالقوه گسترش وایت‌لیست؛ درگاه‌های بانک سامان و شاپرک را در دور بعدی پرب‌زنید تا تداوم الگوی پایداری لایه پرداخت تأیید شود؛ افزودن ردیابی تاخیر اینستاگرام به‌عنوان شاخص تاخیر شبانه."
 }
