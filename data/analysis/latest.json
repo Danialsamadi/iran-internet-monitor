@@ -1,18 +1,20 @@
 {
-  "ts": "2026-08-01T21:00:59Z",
+  "ts": "2026-08-01T22:01:00Z",
   "overall_status": "partial_outage",
   "severity": "minor",
-  "public_summary": "All 4 ISP gateways blocked externally (TIC x2, Irancell, Asiatech) with BGP routes intact — 51st consecutive stealth blackout pass. 27/40 up, 5 degraded, 8 down. Bank Saman further degraded (4149ms), Filimo slower (1986ms). Electro DNS down, Shaparak timeout, Snapp redirect loop persist. Domestic QoS variable. Foreign platforms mostly fast. Circumvention tools all up.",
-  "public_summary_fa": "تمام ۴ گیت‌وی ISP از خارج بلاک‌اند (TIC ×۲، ایرانسل، آسیاتک) با مسیرهای BGP سالم — ۵۱مین دور متوالی قطعی مخفی. ۲۷/۴۰ بالا، ۵ تخریب‌یافته، ۸ قطع. بانک سامان بیشتر مختل (۴۱۴۹ms)، فیلیمو کندتر (۱۹۸۶ms). DNS الکترو قطع، شاپرک تایم‌اوت، اسنپ لوپ ریدایرکت تداوم دارند. QoS داخلی متغیر. پلتفرم‌های خارجی بیشتر سریع. ابزارهای عبور همه بالا.",
-  "insight": "51st consecutive identical baseline — Bank Saman further degraded, Filimo slower, CafeBazaar/YouTube/WhatsApp Web degraded, illustrating persistent NIN domestic QoS fragility. Core architecture unchanged: all 4 ISP gateways down, 4.0% external reachability, Electro DNS offline. Payment layer remains unstable.",
-  "insight_fa": "۵۱مین بیس‌لاین متوالی یکسان — بانک سامان بیشتر مختل، فیلیمو کندتر، کافه‌بازار/یوتیوب/واتس‌اپ وب مختل، نشان‌دهنده شکنندگی پایدار QoS داخلی NIN. معماری اصلی بدون تغییر: تمام ۴ گیت‌وی ISP قطع، ۴.۰٪ دسترسی‌پذیری خارجی، DNS الکترو آفلاین. لایه پرداخت ناپایدار باقی مانده.",
+  "public_summary": "All 4 ISP gateways blocked externally (TIC x2, Irancell, Asiatech) with BGP routes intact — 52nd consecutive stealth blackout pass. 28/40 up, 3 degraded, 9 down. Bank Saman further degraded (4973ms), Wikipedia newly degraded (4126ms). Filimo, CafeBazaar, WhatsApp Web, YouTube recovered. Electro DNS down, Shaparak timeout, Snapp redirect loop persist. Domestic QoS volatile. Foreign platforms mostly fast. Circumvention tools all up.",
+  "public_summary_fa": "تمام ۴ گیت‌وی ISP از خارج بلاک‌اند (TIC ×۲، ایرانسل، آسیاتک) با مسیرهای BGP سالم — ۵۲مین دور متوالی قطعی مخفی. ۲۸/۴۰ بالا، ۳ تخریب‌یافته، ۹ قطع. بانک سامان بیشتر مختل (۴۹۷۳ms)، ویکی‌پدیا تازه مختل (۴۱۲۶ms). فیلیمو، کافه‌بازار، واتس‌اپ وب، یوتیوب بهبود یافته‌اند. DNS الکترو قطع، شاپرک تایم‌اوت، اسنپ لوپ ریدایرکت تداوم دارند. QoS داخلی نوسانی. پلتفرم‌های خارجی بیشتر سریع. ابزارهای عبور همه بالا.",
+  "insight": "52nd consecutive identical gateway baseline — domestic QoS volatility intensifies: Bank Saman worsening, Wikipedia newly degraded, while Filimo/CafeBazaar/WhatsApp/YouTube recover, illustrating NIN internal routing instability rather than policy shift. Core architecture frozen: 4 gateways down, 4.0% external reachability, Electro DNS offline, payment layer unstable.",
+  "insight_fa": "۵۲مین بیس‌لاین متوالی یکسان گیت‌وی‌ها — نوسان QoS داخلی تشدید شده: بانک سامان بدتر، ویکی‌پدیا تازه مختل، در حالی که فیلیمو/کافه‌بازار/واتس‌اپ/یوتیوب بازیابی شده‌اند، نشان‌دهنده ناپایداری روتینگ داخلی NIN نه تغییر سیاست. معماری اصلی یخ‌زده: ۴ گیت‌وی قطع، ۴.۰٪ دسترسی‌پذیری خارجی، DNS الکترو آفلاین، لایه پرداخت ناپایدار.",
   "suspected_causes": [
-    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP با \"connection refused\" یا تایم‌اوت TCP — مسیرهای BGP سالم",
-    "وایت‌لیست پروتکل در گیت‌وی ملی — ~۴٪ بازه IP از خارج قابل‌دسترس؛ ترافیک غیر-DNS/HTTP/HTTPS دراپ — مدل Bock et al. FOCI'20"
+    "Policy filtering at international gateway layer — all 4 ISP gateways with \"connection refused\" or TCP timeout — BGP routes intact",
+    "Protocol whitelist at national gateway — ~4% IP ranges externally reachable; non-DNS/HTTP/HTTPS traffic dropped — Bock et al. FOCI'20 model",
+    "NIN domestic QoS discrimination — variable latency on streaming/banking platforms suggests internal congestion shaping or resource contention"
   ],
   "suspected_causes_fa": [
     "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP با \"connection refused\" یا تایم‌اوت TCP — مسیرهای BGP سالم",
-    "وایت‌لیست پروتکل در گیت‌وی ملی — ~۴٪ بازه IP از خارج قابل‌دسترس؛ ترافیک غیر-DNS/HTTP/HTTPS دراپ — مدل Bock et al. FOCI'20"
+    "وایت‌لیست پروتکل در گیت‌وی ملی — ~۴٪ بازه IP از خارج قابل‌دسترس؛ ترافیک غیر-DNS/HTTP/HTTPS دراپ — مدل Bock et al. FOCI'20",
+    "تبعیض QoS در NIN داخلی — لیتنسی متغیر در پلتفرم‌های استریم/بانکداری نشان‌دهنده تراکم داخلی یا contention منبع است"
   ],
   "affected_services": [
     "TIC gateways (2.187.1.1 connection refused, 78.38.112.1 timeout)",
@@ -21,10 +23,8 @@
     "Electro DNS (78.157.42.100 timeout)",
     "Snapp (redirect loop)",
     "Shaparak (timeout)",
-    "Bank Saman (degraded 4149ms)",
-    "CafeBazaar (degraded 3411ms)",
-    "WhatsApp Web (degraded 5338ms)",
-    "YouTube (degraded 3661ms)"
+    "Bank Saman (degraded 4973ms)",
+    "Wikipedia (degraded 4126ms)"
   ],
   "affected_services_fa": [
     "گیت‌وی‌های TIC (\"connection refused\" در ۲.۱۸۷.۱.۱، تایم‌اوت در ۷۸.۳۸.۱۱۲.۱)",
@@ -33,11 +33,9 @@
     "DNS الکترو (تایم‌اوت در ۷۸.۱۵۷.۴۲.۱۰۰)",
     "اسنپ (لوپ ریدایرکت)",
     "شاپرک (تایم‌اوت)",
-    "بانک سامان (مختل ۴۱۴۹ms)",
-    "کافه‌بازار (مختل ۳۴۱۱ms)",
-    "واتس‌اپ وب (مختل ۵۳۳۸ms)",
-    "یوتیوب (مختل ۳۶۶۱ms)"
+    "بانک سامان (مختل ۴۹۷۳ms)",
+    "ویکی‌پدیا (مختل ۴۱۲۶ms)"
   ],
-  "recommendation": "Maintain hourly monitoring. Track Bank Saman stability over 24h to confirm if further degradation is transient or trend. Monitor Filimo and CafeBazaar for sustained recovery or further QoS decline. Watch for broader NIN domestic QoS shifts if more streaming/banking services degrade.",
-  "recommendation_fa": "نظارت ساعتی را حفظ کنید. ثبات بانک سامان را در ۲۴ ساعت آینده برای تأیید عدم استمراری مختل‌شدن بیشتر رصد کنید. بازگشت پایدار فیلیمو و کافه‌بازار را پایش کنید. در صورت مختل‌شدن سرویس‌های بیشتر استریم/بانکداری داخلی، به نشانه تغییرات QoS گسترده‌تر NIN توجه کنید."
+  "recommendation": "Maintain hourly monitoring. Track Bank Saman over 24h for trend confirmation — worsening latency suggests payment infrastructure stress. Monitor Wikipedia for sustained degradation indicating broader CDN/routing issue. Watch Filimo/CafeBazaar/WhatsApp/YouTube for regression signaling NIN QoS instability wave.",
+  "recommendation_fa": "نظارت ساعتی را حفظ کنید. بانک سامان را در ۲۴ ساعت برای تأیید روند پایش کنید — افزایش لیتنسی نشان‌دهنده فشار زیرساخت پرداخت است. ویکی‌پدیا را برای مختل‌شدن پایدار به عنوان نشانه مسئله CDN/روتینگ گسترده‌تر رصد کنید. بازگشت فیلیمو/کافه‌بازار/واتس‌اپ/یوتیوب را برای رگرسیون محتمل ناپایداری QoS داخلی NIN پایش کنید."
 }
