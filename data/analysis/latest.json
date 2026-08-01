@@ -1,1 +1,37 @@
-{"overall_status": "degraded", "severity": "minor", "public_summary": "All 4 ISP gateways blocked externally (TIC x2, Irancell, Asiatech) with BGP routes intact — 48th consecutive stealth blackout pass. 23/32 up, 8 degraded, 9 down. Irancell gateway stable DROP. Foreign platforms fast. Electro DNS down, Shaparak timeout, Snapp redirect loop persist. Domestic QoS variable.", "public_summary_fa": "تمام ۴ گیت‌وی ISP از خارج بلاک‌اند (TIC ×۲، ایرانسل، آسیاتک) با مسیرهای BGP سالم — ۴۸مین دور متوالی قطعی مخفی. ۲۳/۳۲ بالا، ۸ تخریب‌یافته، ۹ قطع. گیت‌وی ایرانسل پایدار در حالت DROP. پلتفرم‌های خارجی سریع. DNS الکترو قطع، شاپرک تایم‌اوت، اسنپ لوپ ریدایرکت تداوم دارند. QoS داخلی متغیر.", "insight": "48th consecutive identical baseline — Irancell gateway settled into stable DROP after early oscillation. Reachability ~4% within expected range. The consistency confirms steady-state selective internet architecture.", "insight_fa": "۴۸مین دور متوالی یکسان — گیت‌وی ایرانسل به حالت پایدار DROP رسیده پس از نوسان اولیه. دسترسی‌پذیری ~۴٪ در محدوده انتظار. ثبات این پترن تأیید می‌کند که معماری اینترنت گزینشی حالت پایدار است.", "suspected_causes": ["فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP با \"connection refused\" یا تایم‌اوت TCP — مسیرهای BGP سالم", "وایت‌لیست پروتکل در گیت‌وی ملی — ~۴٪ بازه IP از خارج قابل‌دسترس؛ ترافیک غیر-DNS/HTTP/HTTPS دراپ — مدل Bock et al. FOCI'20"], "suspected_causes_fa": ["فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP با \"connection refused\" یا تایم‌اوت TCP — مسیرهای BGP سالم", "وایت‌لیست پروتکل در گیت‌وی ملی — ~۴٪ بازه IP از خارج قابل‌دسترس؛ ترافیک غیر-DNS/HTTP/HTTPS دراپ — مدل Bock et al. FOCI'20"], "affected_services": ["TIC gateways (2.187.1.1 connection refused, 78.38.112.1 timeout)", "Irancell gateway (5.232.0.1 timeout — stable DROP)", "Asiatech gateway (94.182.0.1 timeout) + web timeout", "Electro DNS (78.157.42.100 timeout)", "Snapp (redirect loop)", "Shaparak (timeout)"], "affected_services_fa": ["گیت‌وی‌های TIC (\"connection refused\" در ۲.۱۸۷.۱.۱، تایم‌اوت در ۷۸.۳۸.۱۱۲.۱)", "گیت‌وی ایرانسل (تایم‌اوت در ۵.۲۳۲.۰.۱ — DROP پایدار)", "گیت‌وی آسیاتک (تایم‌اوت در ۹۴.۱۸۲.۰.۱) + تایم‌اوت وب", "DNS الکترو (تایم‌اوت در ۷۸.۱۵۷.۴۲.۱۰۰)", "اسنپ (لوپ ریدایرکت)", "شاپرک (تایم‌اوت)"], "recommendation": "Baseline stable — monitor for deviation from 4% reachability or gateway state changes.", "recommendation_fa": "خط پایه پایدار است — پایش انحراف از ۴٪ دسترسی‌پذیری یا تغییر حالت گیت‌وی."}
+{
+  "ts": "2026-08-01T20:00:59Z",
+  "overall_status": "degraded",
+  "severity": "minor",
+  "public_summary": "All 4 ISP gateways blocked externally (TIC x2, Irancell, Asiatech) with BGP routes intact — 50th consecutive stealth blackout pass. 24/32 up, 8 degraded, 8 down. Filimo recovered (1577ms), Bank Saman re-degraded (3384ms). Irancell gateway stable DROP. Foreign platforms fast. Electro DNS down, Shaparak timeout, Snapp redirect loop persist. Domestic QoS variable.",
+  "public_summary_fa": "تمام ۴ گیت‌وی ISP از خارج بلاک‌اند (TIC ×۲، ایرانسل، آسیاتک) با مسیرهای BGP سالم — ۵۰مین دور متوالی قطعی مخفی. ۲۴/۳۲ بالا، ۸ تخریب‌یافته، ۸ قطع. فیلیمو بازگشت (۱۵۷۷ms)، بانک سامان دوباره مختل (۳۳۸۴ms). گیت‌وی ایرانسل پایدار در حالت DROP. پلتفرم‌های خارجی سریع. DNS الکترو قطع، شاپرک تایم‌اوت، اسنپ لوپ ریدایرکت تداوم دارند. QoS داخلی متغیر.",
+  "insight": "50th consecutive identical baseline — Filimo recovered but Bank Saman re-degraded, illustrating persistent NIN domestic QoS fragility. Core architecture unchanged: all 4 ISP gateways down, 4.0% external reachability, Electro DNS offline. Payment layer remains unstable despite prior recovery.",
+  "insight_fa": "۵۰مین بیس‌لاین متوالی یکسان — فیلیمو بازگشته اما بانک سامان دوباره مختل شده، نشان‌دهنده شکنندگی پایدار QoS داخلی NIN. معماری اصلی بدون تغییر: تمام ۴ گیت‌وی ISP قطع، ۴.۰٪ دسترسی‌پذیری خارجی، DNS الکترو آفلاین. لایه پرداخت با وجود 복귀 قبلی ناپایدار باقی مانده.",
+  "suspected_causes": [
+    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP با \"connection refused\" یا تایم‌اوت TCP — مسیرهای BGP سالم",
+    "وایت‌لیست پروتکل در گیت‌وی ملی — ~۴٪ بازه IP از خارج قابل‌دسترس؛ ترافیک غیر-DNS/HTTP/HTTPS دراپ — مدل Bock et al. FOCI'20"
+  ],
+  "suspected_causes_fa": [
+    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP با \"connection refused\" یا تایم‌اوت TCP — مسیرهای BGP سالم",
+    "وایت‌لیست پروتکل در گیت‌وی ملی — ~۴٪ بازه IP از خارج قابل‌دسترس؛ ترافیک غیر-DNS/HTTP/HTTPS دراپ — مدل Bock et al. FOCI'20"
+  ],
+  "affected_services": [
+    "TIC gateways (2.187.1.1 connection refused, 78.38.112.1 timeout)",
+    "Irancell gateway (5.232.0.1 timeout — stable DROP)",
+    "Asiatech gateway (94.182.0.1 timeout) + web timeout",
+    "Electro DNS (78.157.42.100 timeout)",
+    "Snapp (redirect loop)",
+    "Shaparak (timeout)",
+    "Bank Saman (degraded 3384ms)"
+  ],
+  "affected_services_fa": [
+    "گیت‌وی‌های TIC (\"connection refused\" در ۲.۱۸۷.۱.۱، تایم‌اوت در ۷۸.۳۸.۱۱۲.۱)",
+    "گیت‌وی ایرانسل (تایم‌اوت در ۵.۲۳۲.۰.۱ — DROP پایدار)",
+    "گیت‌وی آسیاتک (تایم‌اوت در ۹۴.۱۸۲.۰.۱) + تایم‌اوت وب",
+    "DNS الکترو (تایم‌اوت در ۷۸.۱۵۷.۴۲.۱۰۰)",
+    "اسنپ (لوپ ریدایرکت)",
+    "شاپرک (تایم‌اوت)",
+    "بانک سامان (مختل ۳۳۸۴ms)"
+  ],
+  "recommendation": "Maintain hourly monitoring. Track Bank Saman stability over 24h to confirm if re-degradation is transient. Monitor Filimo for sustained recovery. Watch for broader NIN domestic QoS shifts if more streaming/banking services degrade.",
+  "recommendation_fa": "نظارت ساعتی را حفظ کنید. ثبات بانک سامان را در ۲۴ ساعت آینده برای تأیید عدم استمراری مختل‌شدن مجدد رصد کنید. بازگشت پایدار فیلیمو را پایش کنید. در صورت مختل‌شدن سرویس‌های بیشتر استریم/بانکداری داخلی، به نشانه تغییرات QoS گسترده‌تر NIN توجه کنید."
+}
