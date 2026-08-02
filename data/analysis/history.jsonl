@@ -57,3 +57,50 @@
   "recommendation": "Maintain hourly monitoring. Track WhatsApp Web/Instagram/CafeBazaar over 24h for trend confirmation — simultaneous degradation suggests coordinated QoS shift. Monitor Wikipedia for sustained recovery indicating CDN/routing normalization. Watch Filimo/YouTube for regression signaling NIN QoS instability wave.",
   "recommendation_fa": "نظارت ساعتی را حفظ کنید. واتس‌اپ وب/اینستاگرام/کافه‌بازار را در ۲۴ ساعت برای تأیید روند پایش کنید — مختل‌شدن همزمان نشان‌دهنده تغییر QoS هماهنگ است. ویکی‌پدیا را برای بازیابی پایدار به عنوان نشانه نرمال‌سازی CDN/روتینگ رصد کنید. بازگشت فیلیمو/یوتیوب را برای رگرسیون محتمل ناپایداری QoS داخلی NIN پایش کنید."
 }
+{
+  "ts": "2026-08-02T00:01:01Z",
+  "overall_status": "partial_outage",
+  "severity": "minor",
+  "public_summary": "All 4 ISP gateways blocked externally (TIC x2, Irancell, Asiatech) with BGP routes intact — 54th consecutive stealth blackout pass. 27/40 up, 5 degraded, 8 down. Wikipedia regressed (4573ms vs 188ms). WhatsApp Web, CafeBazaar, Aparat, Mobinnet recovered. Bank Saman improved but still degraded (3126ms). Instagram/YouTube degraded persist. Electro DNS down, Shaparak timeout, Snapp redirect loop persist. Domestic QoS volatile. Foreign platforms mixed. Circumvention tools all up.",
+  "public_summary_fa": "تمام ۴ گیت‌وی ISP از خارج بلاک‌اند (TIC ×۲، ایرانسل، آسیاتک) با مسیرهای BGP سالم — ۵۴مین دور متوالی قطعی مخفی. ۲۷/۴۰ بالا، ۵ تخریب‌یافته، ۸ قطع. ویکی‌پدیا رگرسیون کرده (۴۵۷۳ms در برابر ۱۸۸ms). واتس‌اپ وب، کافه‌بازار، آپارات، مبین‌نت بازیابی شده‌اند. بانک سامان بهتر شده اما همچنان مختل (۳۱۲۶ms). اینستاگرام/یوتیوب مختل تداوم دارند. DNS الکترو قطع، شاپرک تایم‌اوت، اسنپ لوپ ریدایرکت تداوم دارند. QoS داخلی نوسانی. پلتفرم‌های خارجی مختلط. ابزارهای عبور همه بالا.",
+  "insight": "54th consecutive identical gateway baseline — QoS volatility shifts: Wikipedia regressed while WhatsApp/CafeBazaar/Aparat/Mobinnet recovered, confirming NIN internal routing instability rather than policy shift. Core architecture frozen: 4 gateways down, ~4% external range reachability, Electro DNS offline, payment layer unstable.",
+  "insight_fa": "۵۴مین بیس‌لاین متوالی یکسان گیت‌وی‌ها — نوسان QoS داخلی تغییر می‌کند: ویکی‌پدیا رگرسیون کرده در حالی که واتس‌اپ/کافه‌بازار/آپارات/مبین‌نت بازیابی شده‌اند، نشان‌دهنده ناپایداری روتینگ داخلی NIN نه تغییر سیاست. معماری اصلی یخ‌زده: ۴ گیت‌وی قطع، ~۴٪ دسترسی‌پذیری بازه‌های خارجی، DNS الکترو آفلاین، لایه پرداخت ناپایدار.",
+  "suspected_causes": [
+    "Policy filtering at international gateway layer — all 4 ISP gateways with \"connection refused\" or TCP timeout — BGP routes intact",
+    "Protocol whitelist at national gateway — ~4% IP ranges externally reachable; non-DNS/HTTP/HTTPS traffic dropped — Bock et al. FOCI'20 model",
+    "NIN domestic QoS discrimination — variable latency on streaming/banking/social platforms suggests internal congestion shaping or resource contention"
+  ],
+  "suspected_causes_fa": [
+    "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ گیت‌وی ISP با \"connection refused\" یا تایم‌اوت TCP — مسیرهای BGP سالم",
+    "وایت‌لیست پروتکل در گیت‌وی ملی — ~۴٪ بازه IP از خارج قابل‌دسترس؛ ترافیک غیر-DNS/HTTP/HTTPS دراپ — مدل Bock et al. FOCI'20",
+    "تبعیض QoS در NIN داخلی — لیتنسی متغیر در پلتفرم‌های استریم/بانکداری/شبکه اجتماعی نشان‌دهنده تراکم داخلی یا contention منبع است"
+  ],
+  "affected_services": [
+    "TIC gateways (2.187.1.1 connection refused, 78.38.112.1 timeout)",
+    "Irancell gateway (5.232.0.1 timeout — stable DROP)",
+    "Asiatech gateway (94.182.0.1 timeout) + web timeout",
+    "Electro DNS (78.157.42.100 timeout)",
+    "Snapp (redirect loop)",
+    "Shaparak (timeout)",
+    "Bank Saman (degraded 3126ms)",
+    "Instagram (degraded 3315ms)",
+    "YouTube (degraded 3288ms)",
+    "Wikipedia (degraded 4573ms — regressed from 188ms)",
+    "RIPEstat (degraded 14349ms)"
+  ],
+  "affected_services_fa": [
+    "گیت‌وی‌های TIC (\"connection refused\" در ۲.۱۸۷.۱.۱، تایم‌اوت در ۷۸.۳۸.۱۱۲.۱)",
+    "گیت‌وی ایرانسل (تایم‌اوت در ۵.۲۳۲.۰.۱ — DROP پایدار)",
+    "گیت‌وی آسیاتک (تایم‌اوت در ۹۴.۱۸۲.۰.۱) + تایم‌اوت وب",
+    "DNS الکترو (تایم‌اوت در ۷۸.۱۵۷.۴۲.۱۰۰)",
+    "اسنپ (لوپ ریدایرکت)",
+    "شاپرک (تایم‌اوت)",
+    "بانک سامان (مختل ۳۱۲۶ms)",
+    "اینستاگرام (مختل ۳۳۱۵ms)",
+    "یوتیوب (مختل ۳۲۸۸ms)",
+    "ویکی‌پدیا (مختل ۴۵۷۳ms — رگرسیون از ۱۸۸ms)",
+    "RIPEstat (مختل ۱۴۳۴۹ms)"
+  ],
+  "recommendation": "Maintain hourly monitoring. Track Wikipedia over 24h for sustained regression indicating CDN/routing failure vs transient spike. Monitor Bank Saman for continued improvement signaling payment layer stabilization. Watch Instagram/YouTube for trend confirmation — persistent degradation suggests coordinated QoS shift. Verify WhatsApp/CafeBazaar/Aparat/Mobinnet sustained recovery.",
+  "recommendation_fa": "نظارت ساعتی را حفظ کنید. ویکی‌پدیا را در ۲۴ ساعت برای رگرسیون پایدار به عنوان نشانه خرابی CDN/روتینگ در برابر اسپایک گذرا پایش کنید. بانک سامان را برای بهبود تداوم به عنوان نشانه استقرار لایه پرداخت رصد کنید. اینستاگرام/یوتیوب را برای تأیید روند پایش کنید — مختل ماندن تداوم نشان‌دهنده تغییر QoS هماهنگ است. بازیابی پایدار واتس‌اپ/کافه‌بازار/آپارات/مبین‌نت را تأیید کنید."
+}
