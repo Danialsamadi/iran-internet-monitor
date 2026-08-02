@@ -1,23 +1,23 @@
 {
-  "ts": "2026-08-02T22:01:16Z",
+  "ts": "2026-08-02T23:01:17Z",
   "overall_status": "partial_outage",
   "severity": "minor",
-  "public_summary": "Iran internet remains in stealth blackout regime — 71st consecutive hourly baseline. All 4 ISP gateways externally blocked (TIC x2, Irancell, Asiatech) with BGP routes intact. Foreign platforms fully accessible. Shecan DNS UP at 256ms (stable). Bank Saman DEGRADED further improved to 3186ms from 3653ms (sharp continuing improvement). RIPEstat stable healthy at 499ms. Irancell web 1378ms, Telegram Web 477ms, Wikipedia 249ms. Snapp redirect loop, Shaparak timeout, Asiatech web down, Electro DNS down persist. IP range reachability 4.1% (44/1068).",
-  "public_summary_fa": "اینترنت ایران در رژیم «قطعی مخفی» پایدار است — ۷۱مین خط پایه ساعتی متوالی. تمام ۴ درگاه ISP از خارج مسدود (TIC دوگانه، ایرانسل، آسیاتک) با مسیرهای BGP سالم. پلتفرم‌های خارجی کاملاً در دسترس. DNS شکن بالا در ۲۵۶ms (ثابت). بانک سامان مختل بهبود‌یافت به ۳۱۸۶ms از ۳۶۵۳ms (بهبود شتابان تداوم دارد). RIPEstat در ۴۹۹ms سالم و ثابت. وب ایرانسل ۱۳۷۸ms، تلگرام وب ۴۷۷ms، ویکی‌پدیا ۲۴۹ms. اسنپ لوپ ریدایرکت، شاپرک تایم‌اوت، وب آسیاتک قطع، DNS الکترو قطع تداوم دارد. دسترس‌پذیری محدوده IP ۴.۱٪ (۴۴/۱۰۶۸).",
-  "insight": "71st pass shows Bank Saman latency sharply improving further (3653→3186ms) — NIN financial path congestion rapidly easing while stealth filtering posture remains unchanged across all other vectors.",
-  "insight_fa": "۷۱مین دور بهبود شتابان‌تر لیتنسی بانک سامان (۳۶۵۳→۳۱۸۶ms) را نشان می‌دهد — تراکم NIN بر زیرساخت مالی به‌سرعت حل می‌شود در حالی که رژیم فیلترینگ مخفی در تمام بردارهای دیگر بدون تغییر باقی مانده است.",
+  "public_summary": "Iran internet remains in stealth blackout regime — 72nd consecutive hourly baseline. All 4 ISP gateways externally blocked (TIC x2, Irancell, Asiatech) with BGP routes intact. Foreign platforms fully accessible. Shecan DNS UP at 226ms (improved from 256ms). Bank Saman DEGRADED worsened to 3851ms from 3186ms (reversal of prior improvement trend). RIPEstat stable healthy at 473ms. Irancell web 1617ms, Telegram Web 429ms, Wikipedia 114ms. Snapp redirect loop, Shaparak timeout, Asiatech web down, Electro DNS down persist. IP range reachability 4.1% (44/1068).",
+  "public_summary_fa": "اینترنت ایران در رژیم «قطعی مخفی» پایدار است — ۷۲مین خط پایه ساعتی متوالی. تمام ۴ درگاه ISP از خارج مسدود (TIC دوگانه، ایرانسل، آسیاتک) با مسیرهای BGP سالم. پلتفرم‌های خارجی کاملاً در دسترس. DNS شکن بالا در ۲۲۶ms (بهبود از ۲۵۶ms). بانک سامان مختل بدتر شده به ۳۸۵۱ms از ۳۱۸۶ms (برگشت روند پیشین بهبود). RIPEstat در ۴۷۳ms سالم و ثابت. وب ایرانسل ۱۶۱۷ms، تلگرام وب ۴۲۹ms، ویکی‌پدیا ۱۱۴ms. اسنپ لوپ ریدایرکت، شاپرک تایم‌اوت، وب آسیاتک قطع، DNS الکترو قطع تداوم دارد. دسترس‌پذیری محدوده IP ۴.۱٪ (۴۴/۱۰۶۸).",
+  "insight": "72nd pass shows Bank Saman latency reversal — sharp worsening (3186→3851ms) contradicts prior improvement narrative, suggesting NIN financial path congestion re-emerging or measurement volatility, while stealth filtering posture remains frozen across all other vectors.",
+  "insight_fa": "۷۲مین دور برگشت لیتنسی بانک سامان را نشان می‌دهد — بدتر شدن شتابان (۳۱۸۶→۳۸۵۱ms) روایتی پیشینِ بهبود را نقض می‌کند، که نشان‌دهنده تراکم مجدد مسیر NIN مالی یا نوسان پایش است، در حالی که رژیم فیلترینگ مخفی در تمام بردارهای دیگر یخ‌زده مانده است.",
   "suspected_causes": [
     "Policy filtering at international gateway layer — all 4 gateways (TIC x2, Irancell, Asiatech) TCP refused/timeout — active filtering not infrastructure failure",
     "Anti-monitoring posture persists — only 4.1% IP ranges (44/1068) responsive from outside; consistent with tiered access / white SIM model where enterprise/gov/academic networks permit external probes",
-    "DNS-layer targeting — Electro DNS (anti-censorship) persistently down, Shecan stable UP at 256ms; targeted QoS pressure on anti-censorship resolver infrastructure fluctuates per-pass",
-    "Domestic QoS discrimination stable — foreign platforms (Google, GitHub, Cloudflare, YouTube) respond fast while Iranian user traffic to international destinations is throttled at gateway; Bank Saman degradation significantly improving (3653→3186ms) indicates NIN path congestion on financial infrastructure rapidly easing; RIPEstat stable healthy (499ms) signals TIC/DCI gateway path health sustained; Irancell web and Telegram Web remain recovered",
+    "DNS-layer targeting — Electro DNS (anti-censorship) persistently down, Shecan stable UP at 226ms (improved); targeted QoS pressure on anti-censorship resolver infrastructure fluctuates per-pass",
+    "Domestic QoS discrimination stable — foreign platforms (Google, GitHub, Cloudflare, YouTube) respond fast while Iranian user traffic to international destinations is throttled at gateway; Bank Saman degradation significantly worsening (3186→3851ms) indicates NIN financial path congestion re-emerging or volatile; RIPEstat stable healthy (473ms) signals TIC/DCI gateway path health sustained; Irancell web and Telegram Web remain accessible with moderate latency",
     "Protocol whitelist enforcement — UDP/ICMP/SSH/VPN dropped, only DNS/HTTP/HTTPS pass — signature of Iran's protocol whitelist filter (Bock et al., FOCI'20)"
   ],
   "suspected_causes_fa": [
     "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ درگاه (TIC دوگانه، ایرانسل، آسیاتک) TCP رد/تایم‌اوت — خرابی زیرساخت نیست، فیلترینگ فعال است",
     "موقف ضد پایش مداوم — فقط ۴.۱٪ بازه IP (۴۴/۱۰۶۸) از خارج پاسخگویند — اپراتورهای آموزشی/دولتی/ابری مجاز، ترافیک عمومی فیلتر — مدل «سیم‌کارت سفید» / دسترسی لایه‌ای",
-    "هدف‌گیری لایه DNS — DNS الکترو (ضدسانسور) به‌صورت مداوم قطع، شکن در ۲۵۶ms بالا و ثابت؛ فشار QoS هدفمند بر زیرساخت رزولورهای ضدسانسور در هر پاس متغیر است",
-    "تبعیض QoS داخلی پایدار — پلتفرم‌های خارجی (Google، GitHub، Cloudflare، YouTube) سریع پاسخ می‌دهند در حالی که ترافیک کاربران ایرانی به مقاصد بین‌المللی در گیت‌وی تروتلینگ می‌شود؛ بهبود چشمگیر بانک سامان (۳۶۵۳→۳۱۸۶ms) و ثبات RIPEstat (۴۹۹ms)، تراکم مسیر NIN بر زیرساخت مالی و سلامت گیت‌وی‌های TIC/DCI را بهبود‌یافته و پایدار نشان می‌دهد؛ وب ایرانسل و تلگرام وب بازیابی‌شده باقی مانده‌اند",
+    "هدف‌گیری لایه DNS — DNS الکترو (ضدسانسور) به‌صورت مداوم قطع، شکن در ۲۲۶ms بالا و ثابت (بهبود); فشار QoS هدفمند بر زیرساخت رزولورهای ضدسانسور در هر پاس متغیر است",
+    "تبعیض QoS داخلی پایدار — پلتفرم‌های خارجی (Google، GitHub، Cloudflare، YouTube) سریع پاسخ می‌دهند در حالی که ترافیک کاربران ایرانی به مقاصد بین‌المللی در گیت‌وی تروتلینگ می‌شود؛ بدتر شدن چشمگیر بانک سامان (۳۱۸۶→۳۸۵۱ms) و ثبات RIPEstat (۴۷۳ms)، تراکم مجدد یا نوسان مسیر NIN بر زیرساخت مالی و سلامت پایدار گیت‌وی‌های TIC/DCI را نشان می‌دهد؛ وب ایرانسل و تلگرام وب با لیتنسی متوسط در دسترس باقی مانده‌اند",
     "اجبار وایت‌لیست پروتکل — UDP/ICMP/SSH/VPN دراپ، تنها DNS/HTTP/HTTPS عبور — امضای فیلترینگ پروتکل ایران (Bock et al., FOCI'20)"
   ],
   "affected_services": [
@@ -25,31 +25,31 @@
     "Irancell gateway (5.232.0.1) — timeout",
     "Asiatech gateway (94.182.0.1) — timeout",
     "Asiatech web portal — context deadline exceeded",
-    "Shecan DNS — UP at 256ms (stable)",
+    "Shecan DNS — UP at 226ms (improved from 256ms)",
     "Electro DNS — timeout (persistent)",
     "Snapp — redirect loop (persistent)",
     "Shaparak payment gateway — context deadline exceeded (persistent)",
-    "Bank Saman — DEGRADED at 3186ms (improved from 3653ms)",
-    "Irancell web — UP at 1378ms (recovered)",
-    "Telegram Web — UP at 477ms (recovered)",
-    "Wikipedia — UP at 249ms (healthy)",
-    "RIPEstat — UP at 499ms (healthy)"
+    "Bank Saman — DEGRADED at 3851ms (worsened from 3186ms)",
+    "Irancell web — UP at 1617ms (increased from 1378ms)",
+    "Telegram Web — UP at 429ms (improved from 477ms)",
+    "Wikipedia — UP at 114ms (healthy, improved from 249ms)",
+    "RIPEstat — UP at 473ms (healthy)"
   ],
   "affected_services_fa": [
     "گیت‌وی‌های TIC (۲.۱۸۷.۱.۱، ۷۸.۳۸.۱۱۲.۱) — connection refused / تایم‌اوت",
     "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱) — تایم‌اوت",
     "گیت‌وی آسیاتک (۹۴.۱۸۲.۰.۱) — تایم‌اوت",
     "وب‌پورتال آسیاتک — context deadline exceeded",
-    "DNS شکن — بالا در ۲۵۶ms (ثابت)",
+    "DNS شکن — بالا در ۲۲۶ms (بهبود از ۲۵۶ms)",
     "DNS الکترو — تایم‌اوت (تداوم)",
     "اسنپ — لوپ ریدایرکت (تداوم)",
     "شاپرک درگاه پرداخت — context deadline exceeded (تداوم)",
-    "بانک سامان — مختل در ۳۱۸۶ms (بهبود از ۳۶۵۳ms)",
-    "وب ایرانسل — بالا در ۱۳۷۸ms (بازیابی شده)",
-    "تلگرام وب — بالا در ۴۷۷ms (بازیابی شده)",
-    "ویکی‌پدیا — بالا در ۲۴۹ms (سالم)",
-    "RIPEstat — بالا در ۴۹۹ms (سالم)"
+    "بانک سامان — مختل در ۳۸۵۱ms (بدتر از ۳۱۸۶ms)",
+    "وب ایرانسل — بالا در ۱۶۱۷ms (افزایش از ۱۳۷۸ms)",
+    "تلگرام وب — بالا در ۴۲۹ms (بهبود از ۴۷۷ms)",
+    "ویکی‌پدیا — بالا در ۱۱۴ms (سالم، بهبود از ۲۴۹ms)",
+    "RIPEstat — بالا در ۴۷۳ms (سالم)"
   ],
-  "recommendation": "Track Bank Saman trajectory — sharp continuing improvement (3653→3186ms) suggests NIN financial path congestion rapidly easing. RIPEstat stability (499ms) confirms TIC/DCI gateway health sustained. Monitor for re-degradation of Irancell web and Telegram Web; if they revert to DEGRADED, indicates expanding QoS discrimination beyond banking to major domestic platforms. Watch for any gateway recovery signal (first TCP success) as indicator of policy shift.",
-  "recommendation_fa": "مسیر بانک سامان را پایش کنید — بهبود شتابان‌تر تداوم‌یافته (۳۶۵۳→۳۱۸۶ms) نشان‌دهنده حل سریع تراکم مسیر NIN مالی است. ثبات RIPEstat (۴۹۹ms) سلامت گیت‌وی‌های TIC/DCI را تأیید می‌کند. وب ایرانسل و تلگرام وب برای مجدداً مختل شدن رصد کنید؛ اگر به مختل برگردند، گسترش تبعیض QoS از بانکداری به پلتفرم‌های خدماتی بزرگ را تأیید می‌کند. هرگونه سیگنال بازیابی گیت‌وی (اولین موفقیت TCP) را به‌عنوان نشان‌دهنده تغییر سیاست پایش کنید."
+  "recommendation": "Track Bank Saman trajectory closely — sharp reversal (3186→3851ms) contradicts prior easing; if trend continues, indicates NIN financial path congestion re-emerging. RIPEstat stability (473ms) confirms TIC/DCI gateway health sustained. Monitor for re-degradation of Irancell web (1617ms, up from 1378ms) and Telegram Web; if they revert to DEGRADED, indicates expanding QoS discrimination beyond banking to major domestic platforms. Watch for any gateway recovery signal (first TCP success) as indicator of policy shift.",
+  "recommendation_fa": "مسیر بانک سامان را با دقت پایش کنید — برگشت شتابان (۳۱۸۶→۳۸۵۱ms) روند پیشین تسهیل را نقض می‌کند؛ اگر تداوم یابد، تراکم مجدد مسیر NIN مالی را تأیید می‌کند. ثبات RIPEstat (۴۷۳ms) سلامت گیت‌وی‌های TIC/DCI را تأیید می‌کند. وب ایرانسل (۱۶۱۷ms، بالا از ۱۳۷۸ms) و تلگرام وب برای مجدداً مختل شدن رصد کنید؛ اگر به مختل برگردند، گسترش تبعیض QoS از بانکداری به پلتفرم‌های خدماتی بزرگ را تأیید می‌کند. هرگونه سیگنال بازیابی گیت‌وی (اولین موفقیت TCP) را به‌عنوان نشان‌دهنده تغییر سیاست پایش کنید."
 }
