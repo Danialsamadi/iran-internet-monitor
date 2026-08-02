@@ -1,23 +1,23 @@
 {
-  "ts": "2026-08-02T14:01:11Z",
+  "ts": "2026-08-02T15:01:12Z",
   "overall_status": "partial_outage",
   "severity": "minor",
-  "public_summary": "Iran internet remains in stealth blackout regime — 63rd consecutive hourly baseline. All 4 ISP gateways externally blocked (TIC x2, Irancell, Asiatech) with BGP routes intact. Foreign platforms fully accessible. Shecan DNS regressed to DEGRADED (5227ms) after prior UP, confirming hour-to-hour DNS-layer volatility. Bank Saman worsened from DEGRADED to DOWN. Snapp redirect loop, Shaparak timeout, Asiatech web down, Electro DNS down persist. IP range reachability 3.9% (42/1068).",
-  "public_summary_fa": "اینترنت ایران در رژیم «قطعی مخفی» پایدار است — ۶۳مین خط پایه ساعتی متوالی. تمام ۴ درگاه ISP از خارج مسدود (TIC دوگانه، ایرانسل، آسیاتک) با مسیرهای BGP سالم. پلتفرم‌های خارجی کاملاً در دسترس. DNS شکن تشدید به مختل (۵۲۲۷ms) پس از بالا، نوسان ساعت‌به‌ساعت لایه DNS را تأیید می‌کند. بانک سامان از مختل به قطع تشدید یافت. اسنپ لوپ ریدایرکت، شاپرک تایم‌اوت، وب آسیاتک قطع، DNS الکترو قطع تداوم دارد. دسترس‌پذیری محدوده IP ۳.۹٪ (۴۲/۱۰۶۸).",
-  "insight": "63rd pass shows Shecan DNS regression from UP to DEGRADED and Bank Saman collapse from DEGRADED to DOWN — DNS-layer oscillation and domestic QoS deterioration accelerate within frozen stealth blackout architecture, confirming intensifying dynamic NIN pressure rather than stabilization.",
-  "insight_fa": "۶۳مین دور رگرسیون DNS شکن از بالا به مختل و فروپاشی بانک سامان از مختل به قطع را نشان می‌دهد — نوسان لایه DNS و تشدید تخریب QoS داخلی در معماری قطعی مخفی یخ‌زده تداوم دارد، ثابت می‌کند فشار پویای NIN تشدید می‌یابد نه ثبات.",
+  "public_summary": "Iran internet remains in stealth blackout regime — 64th consecutive hourly baseline. All 4 ISP gateways externally blocked (TIC x2, Irancell, Asiatech) with BGP routes intact. Foreign platforms fully accessible. Shecan DNS recovered to UP (224ms) after prior DEGRADED, confirming DNS-layer volatility. Bank Saman improved from DOWN to DEGRADED (3670ms). Snapp redirect loop, Shaparak timeout, Asiatech web down, Electro DNS down persist. IP range reachability 4.1% (44/1068).",
+  "public_summary_fa": "اینترنت ایران در رژیم «قطعی مخفی» پایدار است — ۶۴مین خط پایه ساعتی متوالی. تمام ۴ درگاه ISP از خارج مسدود (TIC دوگانه، ایرانسل، آسیاتک) با مسیرهای BGP سالم. پلتفرم‌های خارجی کاملاً در دسترس. DNS شکن بهبودی به بالا (۲۲۴ms) پس از مختل، نوسان لایه DNS را تأیید می‌کند. بانک سامان از قطع به مختل بهبودی جزئی یافت. اسنپ لوپ ریدایرکت، شاپرک تایم‌اوت، وب آسیاتک قطع، DNS الکترو قطع تداوم دارد. دسترس‌پذیری محدوده IP ۴.۱٪ (۴۴/۱۰۶۸).",
+  "insight": "64th pass shows Shecan DNS recovery (DEGRADED→UP) and Bank Saman partial recovery (DOWN→DEGRADED) within frozen stealth blackout — DNS-layer oscillation and domestic QoS fluctuation intensify under static gateway filtering, confirming dynamic NIN pressure persists despite surface-level service fluctuations.",
+  "insight_fa": "۶۴مین دور بهبودی DNS شکن (مختل→بالا) و بهبودی جزئی بانک سامان (قطع→مختل) در قطعی مخفی یخ‌زده را نشان می‌دهد — نوسان لایه DNS و تذبذب QoS داخلی در زیر فیلترینگ گیت‌وی استاتیک تشدید می‌یابد، ثابت می‌کند فشار پویای NIN با وجود نوسانات سطحی سرویس‌ها تداوم دارد.",
   "suspected_causes": [
     "Policy filtering at international gateway layer — all 4 gateways (TIC x2, Irancell, Asiatech) TCP refused/timeout — active filtering not infrastructure failure",
-    "Anti-monitoring posture persists — only 3.9% IP ranges (42/1068) responsive from outside; consistent with tiered access / white SIM model where enterprise/gov/academic networks permit external probes",
+    "Anti-monitoring posture persists — only 4.1% IP ranges (44/1068) responsive from outside; consistent with tiered access / white SIM model where enterprise/gov/academic networks permit external probes",
     "DNS-layer targeting — Electro DNS (anti-censorship) persistently down, Shecan oscillating UP/DOWN hourly; targeted QoS pressure on anti-censorship resolver infrastructure fluctuates per-pass",
-    "Domestic QoS discrimination — foreign platforms (Google, GitHub, Cloudflare, YouTube) respond fast while Iranian user traffic to international destinations is throttled at gateway; Bank Saman collapse indicates NIN congestion or intentional QoS pressure",
+    "Domestic QoS discrimination — foreign platforms (Google, GitHub, Cloudflare, YouTube) respond fast while Iranian user traffic to international destinations is throttled at gateway; Bank Saman degraded indicates NIN congestion or intentional QoS pressure on financial infrastructure",
     "Protocol whitelist enforcement — UDP/ICMP/SSH/VPN dropped, only DNS/HTTP/HTTPS pass — signature of Iran's protocol whitelist filter (Bock et al., FOCI'20)"
   ],
   "suspected_causes_fa": [
     "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام ۴ درگاه (TIC دوگانه، ایرانسل، آسیاتک) TCP رد/تایم‌اوت — خرابی زیرساخت نیست، فیلترینگ فعال است",
-    "موقف ضد پایش مداوم — فقط ۳.۹٪ بازه IP (۴۲/۱۰۶۸) از خارج پاسخگویند — اپراتورهای آموزشی/دولتی/ابری مجاز، ترافیک عمومی فیلتر — مدل «سیم‌کارت سفید» / دسترسی لایه‌ای",
+    "موقف ضد پایش مداوم — فقط ۴.۱٪ بازه IP (۴۴/۱۰۶۸) از خارج پاسخگویند — اپراتورهای آموزشی/دولتی/ابری مجاز، ترافیک عمومی فیلتر — مدل «سیم‌کارت سفید» / دسترسی لایه‌ای",
     "هدف‌گیری لایه DNS — DNS الکترو (ضدسانسور) به‌صورت مداوم قطع، شکن ساعت‌به‌ساعت UP/DOWN نوسان می‌یابد؛ فشار QoS هدفمند بر زیرساخت رزولورهای ضدسانسور در هر پاس متغیر است",
-    "تبعیض QoS داخلی — پلتفرم‌های خارجی (Google، GitHub، Cloudflare، YouTube) سریع پاسخ می‌دهند در حالی که ترافیک کاربران ایرانی به مقاصد بین‌المللی در گیت‌وی تروتلینگ می‌شود؛ فروپاشی بانک سامان نشان‌دهنده تراکم NIN یا فشار QoS عمدی است",
+    "تبعیض QoS داخلی — پلتفرم‌های خارجی (Google، GitHub، Cloudflare، YouTube) سریع پاسخ می‌دهند در حالی که ترافیک کاربران ایرانی به مقاصد بین‌المللی در گیت‌وی تروتلینگ می‌شود؛ مختل شدن بانک سامان نشان‌دهنده تراکم NIN یا فشار QoS عمدی بر زیرساخت مالی است",
     "اجبار وایت‌لیست پروتکل — UDP/ICMP/SSH/VPN دراپ، تنها DNS/HTTP/HTTPS عبور — امضای فیلترینگ پروتکل ایران (Bock et al., FOCI'20)"
   ],
   "affected_services": [
@@ -25,25 +25,25 @@
     "Irancell gateway (5.232.0.1) — timeout",
     "Asiatech gateway (94.182.0.1) — timeout",
     "Asiatech web portal — context deadline exceeded",
-    "Shecan DNS — degraded at 5227ms (regression from UP)",
+    "Shecan DNS — UP at 224ms (recovered from DEGRADED)",
     "Electro DNS — timeout (persistent)",
     "Snapp — redirect loop (persistent)",
     "Shaparak payment gateway — context deadline exceeded (persistent)",
-    "Bank Saman — DOWN (context deadline exceeded, worsened from degraded)",
-    "RIPEstat observatory — degraded at 3671ms"
+    "Bank Saman — DEGRADED at 3670ms (partial recovery from DOWN)",
+    "RIPEstat observatory — not specifically degraded this pass"
   ],
   "affected_services_fa": [
     "گیت‌وی‌های TIC (۲.۱۸۷.۱.۱، ۷۸.۳۸.۱۱۲.۱) — connection refused / تایم‌اوت",
     "گیت‌وی ایرانسل (۵.۲۳۲.۰.۱) — تایم‌اوت",
     "گیت‌وی آسیاتک (۹۴.۱۸۲.۰.۱) — تایم‌اوت",
     "وب‌پورتال آسیاتک — context deadline exceeded",
-    "DNS شکن — مختل در ۵۲۲۷ms (رگرسیون از بالا)",
+    "DNS شکن — بالا در ۲۲۴ms (بهبودی از مختل)",
     "DNS الکترو — تایم‌اوت (تداوم)",
     "اسنپ — لوپ ریدایرکت (تداوم)",
     "شاپرک درگاه پرداخت — context deadline exceeded (تداوم)",
-    "بانک سامان — قطع (context deadline exceeded، بدتر از مختل)",
-    "نمایشگاه RIPEstat — مختل در ۳۶۷۱ms"
+    "بانک سامان — مختل در ۳۶۷۰ms (بهبودی جزئی از قطع)",
+    "نمایشگاه RIPEstat — در این پاس به‌صورت خاص مختل گزارش نشده"
   ],
-  "recommendation": "Monitor Shecan DNS trajectory — UP/DOWN/DEGRADED oscillation over 3+ passes confirms targeted QoS pressure on anti-censorship resolvers. Track Bank Saman for recovery signal; sustained DOWN indicates NIN path failure for financial infrastructure.",
-  "recommendation_fa": "مسیر DNS شکن را پایش کنید — نوسان UP/DOWN/مختل در ۳+ پاس، فشار QoS هدفمند بر رزولورهای ضدسانسور را تأیید می‌کند. بانک سامان را برای سیگنال بهبودی رصد کنید؛ قطع مداوم نشان‌دهنده شکست مسیر NIN برای زیرساخت مالی است."
+  "recommendation": "Track Shecan DNS trajectory — UP/DOWN/DEGRADED oscillation over 4+ passes confirms targeted QoS pressure on anti-censorship resolvers. Monitor Bank Saman for full recovery; sustained DEGRADED indicates NIN path congestion for financial infrastructure.",
+  "recommendation_fa": "مسیر DNS شکن را پایش کنید — نوسان UP/DOWN/مختل در ۴+ پاس، فشار QoS هدفمند بر رزولورهای ضدسانسور را تأیید می‌کند. بانک سامان برای بهبودی کامل رصد کنید؛ مختل مداوم نشان‌دهنده تراکم مسیر NIN برای زیرساخت مالی است."
 }
