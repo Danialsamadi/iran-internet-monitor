@@ -51,3 +51,13 @@
 - `scripts/deterministic_analyze.py` — zero-LLM bilingual analysis
 - `data/analysis/latest.json` — current analysis
 - `data/analysis/history.jsonl` — append-only history
+
+## 2026-08-04 — Agent — Hermes updated to v0.20.0
+
+- Hermes Agent updated from v0.19.0 to v0.20.0 (2026.8.3)
+- Dependencies updated: cryptography 48.0.1, mcp 1.28.1, nemo-relay 0.6.0, starlette 1.3.1, httplib2 0.32.0, pillow 12.3.0, pyasn1 0.6.4, python-multipart 0.0.32
+- Pip updated to 26.1.2
+- All cron jobs survived update and remain healthy:
+  - Data collection (`0ee6bfd619f4`) — `:00` hourly, `no_agent=true`
+  - Deterministic analysis (`f0c3e7163d25`) — `:05` hourly, `no_agent=true`
+  - Tech News Curator (`82ff22796edb`) — 4x/day Toronto
