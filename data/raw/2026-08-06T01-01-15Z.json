@@ -1,14 +1,14 @@
 {
-  "ts": "2026-07-30T00:05:32Z",
+  "ts": "2026-08-06T01:01:15Z",
   "overall": "partial_outage",
   "counts": {
-    "degraded": 1,
-    "down": 8,
-    "up": 31
+    "degraded": 2,
+    "down": 10,
+    "up": 28
   },
   "results": [
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "tic-gw-1",
       "name": "TIC gateway 2.187.1.1",
       "category": "ISP endpoints",
@@ -19,7 +19,7 @@
       "error": "dial tcp 2.187.1.1:80: connect: connection refused"
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "tic-gw-2",
       "name": "TIC gateway 78.38.112.1",
       "category": "ISP endpoints",
@@ -30,7 +30,7 @@
       "error": "dial tcp 78.38.112.1:80: i/o timeout"
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "irancell-gw",
       "name": "Irancell 5.232.0.1",
       "category": "ISP endpoints",
@@ -41,7 +41,7 @@
       "error": "dial tcp 5.232.0.1:80: i/o timeout"
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "asiatech-gw",
       "name": "Asiatech 94.182.0.1",
       "category": "ISP endpoints",
@@ -52,51 +52,51 @@
       "error": "dial tcp 94.182.0.1:80: i/o timeout"
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "shatel-web",
       "name": "Shatel",
       "category": "ISP endpoints",
       "type": "http",
       "target": "https://www.shatel.ir",
       "status": "up",
-      "latency_ms": 1485,
+      "latency_ms": 1171,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "respina-web",
       "name": "Respina",
       "category": "ISP endpoints",
       "type": "http",
       "target": "https://www.respina.net",
       "status": "up",
-      "latency_ms": 2791,
+      "latency_ms": 2477,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "mobinnet-web",
       "name": "Mobinnet",
       "category": "ISP endpoints",
       "type": "http",
       "target": "https://www.mobinnet.ir",
       "status": "up",
-      "latency_ms": 1359,
+      "latency_ms": 1452,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "irancell-web",
       "name": "Irancell",
       "category": "ISP endpoints",
       "type": "http",
       "target": "https://irancell.ir",
       "status": "up",
-      "latency_ms": 1141,
+      "latency_ms": 1606,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "asiatech-web",
       "name": "Asiatech",
       "category": "ISP endpoints",
@@ -107,27 +107,27 @@
       "error": "Get \"https://www.asiatech.ir\": context deadline exceeded"
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "dns-shecan",
       "name": "Shecan DNS",
       "category": "DNS resolvers",
       "type": "dns",
       "target": "178.22.122.100:53",
       "status": "up",
-      "latency_ms": 236
+      "latency_ms": 234
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "dns-tic",
       "name": "TIC DNS",
       "category": "DNS resolvers",
       "type": "dns",
       "target": "217.218.155.155:53",
       "status": "up",
-      "latency_ms": 238
+      "latency_ms": 227
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "dns-electro",
       "name": "Electro DNS",
       "category": "DNS resolvers",
@@ -138,18 +138,18 @@
       "error": "lookup aparat.com on 8.8.4.4:53: dial udp 78.157.42.100:53: i/o timeout"
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "digikala",
       "name": "Digikala",
       "category": "Domestic services",
       "type": "http",
       "target": "https://www.digikala.com",
       "status": "up",
-      "latency_ms": 565,
+      "latency_ms": 735,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "snapp",
       "name": "Snapp",
       "category": "Domestic services",
@@ -160,95 +160,96 @@
       "error": "Get \"https://snapp.ir/\": stopped after 10 redirects"
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "tapsi",
       "name": "Tapsi",
       "category": "Domestic services",
       "type": "http",
       "target": "https://tapsi.ir",
       "status": "up",
-      "latency_ms": 1095,
+      "latency_ms": 1175,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "aparat",
       "name": "Aparat",
       "category": "Domestic services",
       "type": "http",
       "target": "https://www.aparat.com",
-      "status": "up",
-      "latency_ms": 550,
-      "http_status": 200
+      "status": "down",
+      "latency_ms": 0,
+      "error": "http 504",
+      "http_status": 504
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "filimo",
       "name": "Filimo",
       "category": "Domestic services",
       "type": "http",
       "target": "https://www.filimo.com",
       "status": "up",
-      "latency_ms": 893,
+      "latency_ms": 808,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "cafebazaar",
       "name": "CafeBazaar",
       "category": "Domestic services",
       "type": "http",
       "target": "https://cafebazaar.ir",
-      "status": "up",
-      "latency_ms": 949,
+      "status": "degraded",
+      "latency_ms": 6326,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "rubika",
       "name": "Rubika",
       "category": "Domestic services",
       "type": "http",
       "target": "https://rubika.ir",
       "status": "up",
-      "latency_ms": 1449,
+      "latency_ms": 1746,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "eitaa",
       "name": "Eitaa",
       "category": "Domestic services",
       "type": "http",
       "target": "https://eitaa.com",
       "status": "up",
-      "latency_ms": 973,
+      "latency_ms": 955,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "balad",
       "name": "Balad",
       "category": "Domestic services",
       "type": "http",
       "target": "https://balad.ir",
       "status": "up",
-      "latency_ms": 781,
+      "latency_ms": 1063,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "bank-saman",
       "name": "Saman Bank",
       "category": "Domestic services",
       "type": "http",
       "target": "https://www.sb24.ir",
-      "status": "degraded",
-      "latency_ms": 3128,
+      "status": "up",
+      "latency_ms": 2916,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "shaparak",
       "name": "Shaparak",
       "category": "Domestic services",
@@ -259,40 +260,40 @@
       "error": "Get \"https://www.shaparak.ir\": context deadline exceeded"
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "irna",
       "name": "IRNA News",
       "category": "Domestic services",
       "type": "http",
       "target": "https://www.irna.ir",
       "status": "up",
-      "latency_ms": 222,
+      "latency_ms": 394,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "google",
       "name": "Google",
       "category": "Foreign platforms",
       "type": "http",
       "target": "https://www.google.com",
       "status": "up",
-      "latency_ms": 57,
+      "latency_ms": 66,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "cloudflare",
       "name": "Cloudflare",
       "category": "Foreign platforms",
       "type": "http",
       "target": "https://www.cloudflare.com",
       "status": "up",
-      "latency_ms": 457,
+      "latency_ms": 440,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "telegram-web",
       "name": "Telegram Web",
       "category": "Foreign platforms",
@@ -303,146 +304,146 @@
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:59Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "whatsapp-web",
       "name": "WhatsApp Web",
       "category": "Foreign platforms",
       "type": "http",
       "target": "https://web.whatsapp.com",
       "status": "up",
-      "latency_ms": 234,
+      "latency_ms": 193,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:59Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "instagram",
       "name": "Instagram",
       "category": "Foreign platforms",
       "type": "http",
       "target": "https://www.instagram.com",
       "status": "up",
-      "latency_ms": 334,
-      "http_status": 200
+      "latency_ms": 315,
+      "http_status": 429
     },
     {
-      "ts": "2026-07-30T00:04:59Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "youtube",
       "name": "YouTube",
       "category": "Foreign platforms",
       "type": "http",
       "target": "https://www.youtube.com",
       "status": "up",
-      "latency_ms": 174,
+      "latency_ms": 334,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:59Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "wikipedia",
       "name": "Wikipedia",
       "category": "Foreign platforms",
       "type": "http",
       "target": "https://fa.wikipedia.org",
       "status": "up",
-      "latency_ms": 105,
+      "latency_ms": 174,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:59Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "github",
       "name": "GitHub",
       "category": "Foreign platforms",
       "type": "http",
       "target": "https://github.com",
       "status": "up",
-      "latency_ms": 98,
+      "latency_ms": 150,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:59Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "tor-check",
       "name": "Tor Project",
       "category": "Circumvention",
       "type": "http",
       "target": "https://check.torproject.org",
-      "status": "up",
-      "latency_ms": 474,
-      "http_status": 200
+      "status": "down",
+      "latency_ms": 0,
+      "error": "Get \"https://check.torproject.org\": read tcp 198.46.146.56:55026-\u003e116.202.120.181:443: read: connection reset by peer"
     },
     {
-      "ts": "2026-07-30T00:04:59Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "tor-bridgedb",
       "name": "Tor BridgeDB",
       "category": "Circumvention",
       "type": "http",
       "target": "https://bridges.torproject.org",
       "status": "up",
-      "latency_ms": 518,
+      "latency_ms": 720,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:59Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "snowflake",
       "name": "Snowflake broker",
       "category": "Circumvention",
       "type": "http",
       "target": "https://snowflake-broker.torproject.net",
       "status": "up",
-      "latency_ms": 626,
+      "latency_ms": 469,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:59Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "psiphon",
       "name": "Psiphon",
       "category": "Circumvention",
       "type": "http",
       "target": "https://psiphon.ca",
       "status": "up",
-      "latency_ms": 131,
+      "latency_ms": 179,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:59Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "ioda-api",
       "name": "IODA signals (IR)",
       "category": "Observatories",
       "type": "http",
       "target": "https://api.ioda.inetintel.cc.gatech.edu/v2/entities/query?entityType=country\u0026entityCode=IR",
       "status": "up",
-      "latency_ms": 310,
+      "latency_ms": 233,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:59Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "ooni-api",
       "name": "OONI measurements (IR)",
       "category": "Observatories",
       "type": "http",
       "target": "https://api.ooni.io/api/v1/measurements?probe_cc=IR\u0026limit=1",
-      "status": "up",
-      "latency_ms": 589,
+      "status": "degraded",
+      "latency_ms": 5673,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:59Z",
+      "ts": "2026-08-06T01:00:42Z",
       "service_id": "ripestat",
       "name": "RIPEstat (AS12880)",
       "category": "Observatories",
       "type": "http",
       "target": "https://stat.ripe.net/data/routing-status/data.json?resource=AS12880",
       "status": "up",
-      "latency_ms": 469,
+      "latency_ms": 494,
       "http_status": 200
     },
     {
-      "ts": "2026-07-30T00:04:58Z",
+      "ts": "2026-08-06T01:00:41Z",
       "service_id": "tor-metrics",
       "name": "Tor Metrics",
       "category": "Observatories",
       "type": "http",
       "target": "https://metrics.torproject.org",
       "status": "up",
-      "latency_ms": 527,
+      "latency_ms": 548,
       "http_status": 200
     }
   ]
