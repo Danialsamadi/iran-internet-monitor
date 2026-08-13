@@ -1,25 +1,23 @@
 {
-  "ts": "2026-08-06T18:25:21Z",
+  "ts": "2026-08-13T21:05:51Z",
   "overall_status": "partial_outage",
   "severity": "major",
   "counts": {
     "degraded": 3,
-    "down": 8,
-    "up": 29
+    "down": 7,
+    "up": 30
   },
-  "public_summary": "Partial Outage — 29 up, 3 degraded, 8 down. All 2 ISP gateways blocked externally with BGP routes intact — stealth blackout pattern. 44/1068 IP ranges reachable (4.1%). DNS: Electro DNS (timeout) down. Snapp redirect loop. Shaparak timeout. Foreign platforms fast.",
-  "public_summary_fa": "اختلال جزئی — 29 بالا، 3 تخریب‌یافته، 8 قطع. تمام گیت‌وی‌های ISP از خارج بلاک‌اند با مسیرهای BGP سالم — پترن قطعی مخفی. 44 از 1068 بازه IP قابل‌دسترس (4.1٪). DNS: Electro DNS (timeout) قطع. اسنپ لوپ ریدایرکت. شاپرک تایم‌اوت. پلتفرم‌های خارجی سریع.",
-  "insight": "Pass 155: up: 31→29, degraded: 1→3. Reachability 4.1% within established 3.8-4.3% band. Gateway filtering persists with BGP intact — consistent with selective internet architecture (Bock et al. FOCI 20 whitelister model).",
-  "insight_fa": "دور 155: up: 31→29, degraded: 1→3. دسترسی‌پذیری 4.1٪ در محدوده تثبیت‌شده ۳.۸-۴.۳٪. فیلترینگ گیت‌وی با BGP سالم تداوم دارد — همسو با معماری اینترنت گزینشی (مدل وایت‌لیستر Bock و همکاران FOCI 20).",
+  "public_summary": "Partial Outage — 30 up, 3 degraded, 7 down. All 2 ISP gateways blocked externally with BGP routes intact — stealth blackout pattern. 44/1068 IP ranges reachable (4.1%). Snapp redirect loop. Shaparak timeout. Foreign platforms fast.",
+  "public_summary_fa": "اختلال جزئی — 30 بالا، 3 تخریب‌یافته، 7 قطع. تمام گیت‌وی‌های ISP از خارج بلاک‌اند با مسیرهای BGP سالم — پترن قطعی مخفی. 44 از 1068 بازه IP قابل‌دسترس (4.1٪). اسنپ لوپ ریدایرکت. شاپرک تایم‌اوت. پلتفرم‌های خارجی سریع.",
+  "insight": "Pass 327: no change from previous pass. Reachability 4.1% within established 3.8-4.3% band. Gateway filtering persists with BGP intact — consistent with selective internet architecture (Bock et al. FOCI 20 whitelister model).",
+  "insight_fa": "دور 327: no change from previous pass. دسترسی‌پذیری 4.1٪ در محدوده تثبیت‌شده ۳.۸-۴.۳٪. فیلترینگ گیت‌وی با BGP سالم تداوم دارد — همسو با معماری اینترنت گزینشی (مدل وایت‌لیستر Bock و همکاران FOCI 20).",
   "suspected_causes": [
     "Policy filtering at international gateway layer — all ISP gateways TCP refused/timeout from external vantage while BGP routes intact via observatories",
-    "Protocol whitelist enforcement at national gateway — only 4.1% of IP ranges reachable; non-DNS/HTTP/HTTPS traffic silently dropped (Bock et al. FOCI'20 whitelister model)",
-    "Targeted DNS pressure on anti-censorship infrastructure — Electro DNS (timeout) failing while other resolvers operational"
+    "Protocol whitelist enforcement at national gateway — only 4.1% of IP ranges reachable; non-DNS/HTTP/HTTPS traffic silently dropped (Bock et al. FOCI'20 whitelister model)"
   ],
   "suspected_causes_fa": [
     "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام گیت‌وی‌های ISP با خطای \"connection refused\" یا تایم‌اوت TCP از نقطه دید خارجی در حالی که مسیرهای BGP طبق رصدخانه‌ها سالم‌اند",
-    "اعمال وایت‌لیست پروتکل در گیت‌وی ملی — تنها 4.1٪ بازه‌های IP قابل‌دسترس؛ ترافیک غیر-DNS/HTTP/HTTPS به‌طور خاموش دراپ می‌شود (مدل وایت‌لیستر Bock و همکاران FOCI'20)",
-    "فشار هدفمند بر DNS زیرساخت‌های ضدسانسور — Electro DNS (timeout) ناموفق در حالی که ریزالورهای دیگر عملیاتی‌اند"
+    "اعمال وایت‌لیست پروتکل در گیت‌وی ملی — تنها 4.1٪ بازه‌های IP قابل‌دسترس؛ ترافیک غیر-DNS/HTTP/HTTPS به‌طور خاموش دراپ می‌شود (مدل وایت‌لیستر Bock و همکاران FOCI'20)"
   ],
   "affected_services": [
     "TIC gateway 2.187.1.1 (connection refused)",
@@ -27,12 +25,11 @@
     "Irancell 5.232.0.1 (timeout)",
     "Asiatech 94.182.0.1 (timeout)",
     "Asiatech",
-    "Electro DNS (timeout)",
     "Snapp",
     "Shaparak",
-    "degraded: Respina (3991ms)",
-    "degraded: Saman Bank (3044ms)",
-    "degraded: RIPEstat (AS12880) (4085ms)"
+    "degraded: Shatel (3225ms)",
+    "degraded: Saman Bank (3185ms)",
+    "degraded: RIPEstat (AS12880) (3505ms)"
   ],
   "affected_services_fa": [
     "TIC gateway 2.187.1.1 (connection refused)",
@@ -40,15 +37,14 @@
     "Irancell 5.232.0.1 (timeout)",
     "Asiatech 94.182.0.1 (timeout)",
     "Asiatech",
-    "Electro DNS (timeout)",
     "Snapp",
     "Shaparak",
-    "تخریب‌یافته: Respina (3991ms)",
-    "تخریب‌یافته: Saman Bank (3044ms)",
-    "تخریب‌یافته: RIPEstat (AS12880) (4085ms)"
+    "تخریب‌یافته: Shatel (3225ms)",
+    "تخریب‌یافته: Saman Bank (3185ms)",
+    "تخریب‌یافته: RIPEstat (AS12880) (3505ms)"
   ],
   "recommendation": "Continue passive monitoring. Next deviation from 4.1% reachability or gateway state changes will be high-signal. Cross-reference with IODA/NetBlocks/Cloudflare Radar for BGP anomalies.",
   "recommendation_fa": "ادامه پایش غیرفعال. هر انحراف از 4.1٪ دسترسی‌پذیری یا تغییر حالت گیت‌وی سیگنال بالا خواهد بود. کراس‌رفرنس با IODA/NetBlocks/Cloudflare Radar برای ناهنجاری‌های BGP.",
   "generator": "deterministic-v1",
-  "data_ts": "2026-08-06T18:25:12Z"
+  "data_ts": "2026-08-13T21:01:25Z"
 }
