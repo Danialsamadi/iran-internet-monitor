@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-02T21:00:59Z",
+  "ts": "2026-09-02T22:01:00Z",
   "overall": "partial_outage",
   "counts": {
-    "degraded": 2,
-    "down": 10,
+    "degraded": 3,
+    "down": 9,
     "up": 28
   },
   "categories": [
@@ -53,8 +53,8 @@
           "name_fa": "شاتل",
           "kind": "HTTP · www.shatel.ir",
           "status": "up",
-          "latency_ms": 1423,
-          "cells": "?u?u?u?u?u?u?u?u?u?g?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
+          "latency_ms": 1524,
+          "cells": "?u?u?u?u?u?u?u?u?g?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 95.83333333333333
         },
         {
@@ -63,8 +63,8 @@
           "name_fa": "رسپینا",
           "kind": "HTTP · www.respina.net",
           "status": "up",
-          "latency_ms": 2889,
-          "cells": "?u?u?u?g?u?g?u?u?u?g?u?g?g?u?u?g?g?g?u?g?d?g?u?u",
+          "latency_ms": 2830,
+          "cells": "?u?u?g?u?g?u?u?u?g?u?g?g?u?u?g?g?g?u?g?d?g?u?u?u",
           "uptime24": 54.166666666666664
         },
         {
@@ -73,8 +73,8 @@
           "name_fa": "مبین‌نت",
           "kind": "HTTP · www.mobinnet.ir",
           "status": "up",
-          "latency_ms": 1461,
-          "cells": "?u?u?u?u?u?u?u?u?u?g?u?u?u?u?g?u?u?u?u?u?u?u?u?u",
+          "latency_ms": 1592,
+          "cells": "?u?u?u?u?u?u?u?u?g?u?u?u?u?g?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 91.66666666666667
         },
         {
@@ -109,7 +109,7 @@
           "kind": "DNS · 178.22.122.100:53",
           "status": "up",
           "latency_ms": 243,
-          "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?g?u",
+          "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?g?u?u",
           "uptime24": 95.83333333333333
         },
         {
@@ -117,7 +117,7 @@
           "name": "TIC DNS",
           "kind": "DNS · 217.218.155.155:53",
           "status": "up",
-          "latency_ms": 321,
+          "latency_ms": 228,
           "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 100
         },
@@ -126,7 +126,7 @@
           "name": "Electro DNS",
           "kind": "DNS · 78.157.42.100:53",
           "status": "up",
-          "latency_ms": 276,
+          "latency_ms": 231,
           "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 100
         }
@@ -142,8 +142,8 @@
           "name_fa": "دیجی‌کالا",
           "kind": "HTTP · www.digikala.com",
           "status": "up",
-          "latency_ms": 562,
-          "cells": "?u?u?u?u?u?u?u?u?u?g?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
+          "latency_ms": 763,
+          "cells": "?u?u?u?u?u?u?u?u?g?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 95.83333333333333
         },
         {
@@ -172,9 +172,9 @@
           "name_fa": "آپارات",
           "kind": "HTTP · www.aparat.com",
           "status": "degraded",
-          "latency_ms": 3792,
-          "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?g?u?u?u?u?u?u?g?g?u?u?g",
-          "uptime24": 83.33333333333333
+          "latency_ms": 3398,
+          "cells": "?u?u?u?u?u?u?u?u?u?u?u?g?u?u?u?u?u?u?g?g?u?u?g?g",
+          "uptime24": 79.16666666666667
         },
         {
           "id": "filimo",
@@ -182,7 +182,7 @@
           "name_fa": "فیلیمو",
           "kind": "HTTP · www.filimo.com",
           "status": "up",
-          "latency_ms": 797,
+          "latency_ms": 786,
           "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 100
         },
@@ -192,7 +192,7 @@
           "name_fa": "کافه‌بازار",
           "kind": "HTTP · cafebazaar.ir",
           "status": "up",
-          "latency_ms": 840,
+          "latency_ms": 686,
           "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 100
         },
@@ -202,7 +202,7 @@
           "name_fa": "روبیکا",
           "kind": "HTTP · rubika.ir",
           "status": "up",
-          "latency_ms": 1196,
+          "latency_ms": 1418,
           "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 100
         },
@@ -212,8 +212,8 @@
           "name_fa": "ایتا",
           "kind": "HTTP · eitaa.com",
           "status": "up",
-          "latency_ms": 911,
-          "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?g?g?u?u?u?u",
+          "latency_ms": 881,
+          "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?g?g?u?u?u?u?u",
           "uptime24": 91.66666666666667
         },
         {
@@ -222,8 +222,8 @@
           "name_fa": "بلد",
           "kind": "HTTP · balad.ir",
           "status": "up",
-          "latency_ms": 374,
-          "cells": "?u?u?u?u?u?u?u?u?u?g?u?u?u?g?u?u?u?u?u?u?u?u?u?u",
+          "latency_ms": 553,
+          "cells": "?u?u?u?u?u?u?u?u?g?u?u?u?g?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 91.66666666666667
         },
         {
@@ -232,9 +232,9 @@
           "name_fa": "بانک سامان",
           "kind": "HTTP · www.sb24.ir",
           "status": "degraded",
-          "latency_ms": 3095,
-          "cells": "?u?u?u?u?u?u?u?u?g?g?g?g?g?g?g?g?g?g?g?g?g?u?g?g",
-          "uptime24": 37.5
+          "latency_ms": 3018,
+          "cells": "?u?u?u?u?u?u?u?g?g?g?g?g?g?g?g?g?g?g?g?g?u?g?g?g",
+          "uptime24": 33.333333333333336
         },
         {
           "id": "shaparak",
@@ -252,8 +252,8 @@
           "name_fa": "ایرنا",
           "kind": "HTTP · www.irna.ir",
           "status": "up",
-          "latency_ms": 516,
-          "cells": "?u?u?u?u??uu?u?u?u?g?u?u?u?u?u?g?u?g?g?g?u?g?u?u",
+          "latency_ms": 226,
+          "cells": "?u?u?u?u?u?u?u?u?g?u?u?u?u?u?g?u?g?g?g?u?g?u?u?u",
           "uptime24": 75
         }
       ]
@@ -267,8 +267,8 @@
           "name": "Google",
           "kind": "HTTP · www.google.com",
           "status": "up",
-          "latency_ms": 321,
-          "cells": "?u?u?u?u??uu?g?u?u?g?u?u?u?g?u?g?u?u?u?u?u?u?u?u",
+          "latency_ms": 94,
+          "cells": "?u?u?u?u?u?g?u?u?g?u?u?u?g?u?g?u?u?u?u?u?u?u?u?u",
           "uptime24": 83.33333333333333
         },
         {
@@ -276,17 +276,17 @@
           "name": "Cloudflare",
           "kind": "HTTP · www.cloudflare.com",
           "status": "up",
-          "latency_ms": 2331,
-          "cells": "?u?u?u?u??uu?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
+          "latency_ms": 185,
+          "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 100
         },
         {
           "id": "telegram-web",
           "name": "Telegram Web",
           "kind": "HTTP · web.telegram.org",
-          "status": "down",
-          "latency_ms": 0,
-          "cells": "?u?u?u?u??uu?u?u?u?u?u?u?u?u?u?u?d?u?u?u?u?d?d?d",
+          "status": "up",
+          "latency_ms": 449,
+          "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?d?u?u?u?u?d?d?d?u",
           "uptime24": 83.33333333333333
         },
         {
@@ -294,26 +294,26 @@
           "name": "WhatsApp Web",
           "kind": "HTTP · web.whatsapp.com",
           "status": "up",
-          "latency_ms": 88,
-          "cells": "?u?u?u?u??uu?u?u?u?u?u?u?u?u?u?g?g?g?u?u?u?u?g?u",
+          "latency_ms": 352,
+          "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?g?g?g?u?u?u?u?g?u?u",
           "uptime24": 83.33333333333333
         },
         {
           "id": "instagram",
           "name": "Instagram",
           "kind": "HTTP · www.instagram.com",
-          "status": "up",
-          "latency_ms": 1863,
-          "cells": "?u?u?u?u??uu?u?u?u?u?u?g?u?u?u?g?g?g?u?g?u?u?u?u",
-          "uptime24": 79.16666666666667
+          "status": "degraded",
+          "latency_ms": 4982,
+          "cells": "?u?u?u?u?u?u?u?u?u?u?g?u?u?u?g?g?g?u?g?u?u?u?u?g",
+          "uptime24": 75
         },
         {
           "id": "youtube",
           "name": "YouTube",
           "kind": "HTTP · www.youtube.com",
           "status": "up",
-          "latency_ms": 156,
-          "cells": "?u?u?u?u??uu?u?u?u?g?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
+          "latency_ms": 173,
+          "cells": "?u?u?u?u?u?u?u?u?g?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 95.83333333333333
         },
         {
@@ -321,8 +321,8 @@
           "name": "Wikipedia",
           "kind": "HTTP · fa.wikipedia.org",
           "status": "up",
-          "latency_ms": 412,
-          "cells": "?u?u?u?u??uu?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
+          "latency_ms": 209,
+          "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 100
         },
         {
@@ -330,8 +330,8 @@
           "name": "GitHub",
           "kind": "HTTP · github.com",
           "status": "up",
-          "latency_ms": 107,
-          "cells": "?u?u?u?u??uu?g?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
+          "latency_ms": 61,
+          "cells": "?u?u?u?u?u?g?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 95.83333333333333
         }
       ]
@@ -345,8 +345,8 @@
           "name": "Tor Project",
           "kind": "HTTP · check.torproject.org",
           "status": "up",
-          "latency_ms": 1207,
-          "cells": "?u?u?u?u??uu?g?u?u?u?u?u?u?g?u?g?u?u?d?d?g?d?u?u",
+          "latency_ms": 1955,
+          "cells": "?u?u?u?u?u?g?u?u?u?u?u?u?g?u?g?u?u?d?d?g?d?u?u?u",
           "uptime24": 70.83333333333333
         },
         {
@@ -354,8 +354,8 @@
           "name": "Tor BridgeDB",
           "kind": "HTTP · bridges.torproject.org",
           "status": "up",
-          "latency_ms": 2002,
-          "cells": "?u?u?u?u??uu?u?u?u?g?u?u?u?u?u?u?u?u?u?g?u?u?u?u",
+          "latency_ms": 707,
+          "cells": "?u?u?u?u?u?u?u?u?g?u?u?u?u?u?u?u?u?u?g?u?u?u?u?u",
           "uptime24": 91.66666666666667
         },
         {
@@ -363,8 +363,8 @@
           "name": "Snowflake broker",
           "kind": "HTTP · snowflake-broker.torproject.net",
           "status": "up",
-          "latency_ms": 488,
-          "cells": "?u?u?u?u??uu?u?u?u?g?u?g?u?u?u?u?u?u?u?u?u?u?u?u",
+          "latency_ms": 562,
+          "cells": "?u?u?u?u?u?u?u?u?g?u?g?u?u?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 91.66666666666667
         },
         {
@@ -372,8 +372,8 @@
           "name": "Psiphon",
           "kind": "HTTP · psiphon.ca",
           "status": "up",
-          "latency_ms": 113,
-          "cells": "?u?u?u?u??uu?u?g?u?u?u?u?u?g?u?u?u?u?u?u?u?u?u?u",
+          "latency_ms": 165,
+          "cells": "?u?u?u?u?u?u?g?u?u?u?u?u?g?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 91.66666666666667
         }
       ]
@@ -387,8 +387,8 @@
           "name": "IODA signals (IR)",
           "kind": "HTTP · api.ioda.inetintel.cc.gatech.edu/v2/entities/query?entityType=country\u0026entityCode=IR",
           "status": "up",
-          "latency_ms": 374,
-          "cells": "?u?u?u?u??uu?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
+          "latency_ms": 381,
+          "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 100
         },
         {
@@ -396,8 +396,8 @@
           "name": "OONI measurements (IR)",
           "kind": "HTTP · api.ooni.io/api/v1/measurements?probe_cc=IR\u0026limit=1",
           "status": "up",
-          "latency_ms": 1361,
-          "cells": "?u?u?u?g??uu?u?g?u?g?d?u?g?u?g?g?u?u?u?u?u?g?u?u",
+          "latency_ms": 2111,
+          "cells": "?u?u?g?u?u?u?g?u?g?d?u?g?u?g?g?u?u?u?u?u?g?u?u?u",
           "uptime24": 66.66666666666667
         },
         {
@@ -405,8 +405,8 @@
           "name": "RIPEstat (AS12880)",
           "kind": "HTTP · stat.ripe.net/data/routing-status/data.json?resource=AS12880",
           "status": "up",
-          "latency_ms": 512,
-          "cells": "?u?u?u?g??ud?u?u?u?u?u?u?u?u?u?u?u?d?g?u?d?g?u?u",
+          "latency_ms": 533,
+          "cells": "?u?u?g?u?d?u?u?u?u?u?u?u?u?u?u?u?d?g?u?d?g?u?u?u",
           "uptime24": 75
         },
         {
@@ -414,7 +414,7 @@
           "name": "Tor Metrics",
           "kind": "HTTP · metrics.torproject.org",
           "status": "up",
-          "latency_ms": 593,
+          "latency_ms": 771,
           "cells": "?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u?u",
           "uptime24": 100
         }
@@ -455,7 +455,7 @@
   ],
   "hour_hist": [
     241,
-    239,
+    240,
     240,
     235,
     241,
@@ -480,25 +480,25 @@
     232
   ],
   "analysis": {
-    "ts": "2026-09-02T20:05:24Z",
+    "ts": "2026-09-02T21:05:25Z",
     "overall_status": "partial_outage",
     "severity": "major",
     "counts": {
-      "degraded": 3,
+      "degraded": 2,
       "down": 10,
-      "up": 27
+      "up": 28
     },
-    "public_summary": "Partial Outage — 27 up, 3 degraded, 10 down. All 2 ISP gateways blocked externally with BGP routes intact — stealth blackout pattern. 43/1068 IP ranges reachable (4.0%). Snapp redirect loop. Shaparak timeout.",
-    "public_summary_fa": "اختلال جزئی — 27 بالا، 3 تخریب‌یافته، 10 قطع. تمام گیت‌وی‌های ISP از خارج بلاک‌اند با مسیرهای BGP سالم — پترن قطعی مخفی. 43 از 1068 بازه IP قابل‌دسترس (4.0٪). اسنپ لوپ ریدایرکت. شاپرک تایم‌اوت.",
-    "insight": "Pass 807: up: 25→27, degraded: 4→3, down: 11→10. Reachability 4.0% within established 3.8-4.3% band. Gateway filtering persists with BGP intact — consistent with selective internet architecture (Bock et al. FOCI 20 whitelister model).",
-    "insight_fa": "دور 807: up: 25→27, degraded: 4→3, down: 11→10. دسترسی‌پذیری 4.0٪ در محدوده تثبیت‌شده ۳.۸-۴.۳٪. فیلترینگ گیت‌وی با BGP سالم تداوم دارد — همسو با معماری اینترنت گزینشی (مدل وایت‌لیستر Bock و همکاران FOCI 20).",
+    "public_summary": "Partial Outage — 28 up, 2 degraded, 10 down. All 2 ISP gateways blocked externally with BGP routes intact — stealth blackout pattern. 44/1068 IP ranges reachable (4.1%). Snapp redirect loop. Shaparak timeout.",
+    "public_summary_fa": "اختلال جزئی — 28 بالا، 2 تخریب‌یافته، 10 قطع. تمام گیت‌وی‌های ISP از خارج بلاک‌اند با مسیرهای BGP سالم — پترن قطعی مخفی. 44 از 1068 بازه IP قابل‌دسترس (4.1٪). اسنپ لوپ ریدایرکت. شاپرک تایم‌اوت.",
+    "insight": "Pass 808: up: 27→28, degraded: 3→2. Reachability 4.1% within established 3.8-4.3% band. Gateway filtering persists with BGP intact — consistent with selective internet architecture (Bock et al. FOCI 20 whitelister model).",
+    "insight_fa": "دور 808: up: 27→28, degraded: 3→2. دسترسی‌پذیری 4.1٪ در محدوده تثبیت‌شده ۳.۸-۴.۳٪. فیلترینگ گیت‌وی با BGP سالم تداوم دارد — همسو با معماری اینترنت گزینشی (مدل وایت‌لیستر Bock و همکاران FOCI 20).",
     "suspected_causes": [
       "Policy filtering at international gateway layer — all ISP gateways TCP refused/timeout from external vantage while BGP routes intact via observatories",
-      "Protocol whitelist enforcement at national gateway — only 4.0% of IP ranges reachable; non-DNS/HTTP/HTTPS traffic silently dropped (Bock et al. FOCI'20 whitelister model)"
+      "Protocol whitelist enforcement at national gateway — only 4.1% of IP ranges reachable; non-DNS/HTTP/HTTPS traffic silently dropped (Bock et al. FOCI'20 whitelister model)"
     ],
     "suspected_causes_fa": [
       "فیلترینگ سیاستی در لایه گیت‌وی بین‌المللی — تمام گیت‌وی‌های ISP با خطای \"connection refused\" یا تایم‌اوت TCP از نقطه دید خارجی در حالی که مسیرهای BGP طبق رصدخانه‌ها سالم‌اند",
-      "اعمال وایت‌لیست پروتکل در گیت‌وی ملی — تنها 4.0٪ بازه‌های IP قابل‌دسترس؛ ترافیک غیر-DNS/HTTP/HTTPS به‌طور خاموش دراپ می‌شود (مدل وایت‌لیستر Bock و همکاران FOCI'20)"
+      "اعمال وایت‌لیست پروتکل در گیت‌وی ملی — تنها 4.1٪ بازه‌های IP قابل‌دسترس؛ ترافیک غیر-DNS/HTTP/HTTPS به‌طور خاموش دراپ می‌شود (مدل وایت‌لیستر Bock و همکاران FOCI'20)"
     ],
     "affected_services": [
       "TIC gateway 2.187.1.1 (connection refused)",
@@ -511,9 +511,8 @@
       "Tapsi",
       "Shaparak",
       "Telegram Web",
-      "degraded: Shecan DNS (5228ms)",
-      "degraded: Saman Bank (3158ms)",
-      "degraded: WhatsApp Web (4717ms)"
+      "degraded: Aparat (3792ms)",
+      "degraded: Saman Bank (3095ms)"
     ],
     "affected_services_fa": [
       "TIC gateway 2.187.1.1 (connection refused)",
@@ -526,18 +525,17 @@
       "Tapsi",
       "Shaparak",
       "Telegram Web",
-      "تخریب‌یافته: Shecan DNS (5228ms)",
-      "تخریب‌یافته: Saman Bank (3158ms)",
-      "تخریب‌یافته: WhatsApp Web (4717ms)"
+      "تخریب‌یافته: Aparat (3792ms)",
+      "تخریب‌یافته: Saman Bank (3095ms)"
     ],
-    "recommendation": "Continue passive monitoring. Next deviation from 4.0% reachability or gateway state changes will be high-signal. Cross-reference with IODA/NetBlocks/Cloudflare Radar for BGP anomalies.",
-    "recommendation_fa": "ادامه پایش غیرفعال. هر انحراف از 4.0٪ دسترسی‌پذیری یا تغییر حالت گیت‌وی سیگنال بالا خواهد بود. کراس‌رفرنس با IODA/NetBlocks/Cloudflare Radar برای ناهنجاری‌های BGP.",
+    "recommendation": "Continue passive monitoring. Next deviation from 4.1% reachability or gateway state changes will be high-signal. Cross-reference with IODA/NetBlocks/Cloudflare Radar for BGP anomalies.",
+    "recommendation_fa": "ادامه پایش غیرفعال. هر انحراف از 4.1٪ دسترسی‌پذیری یا تغییر حالت گیت‌وی سیگنال بالا خواهد بود. کراس‌رفرنس با IODA/NetBlocks/Cloudflare Radar برای ناهنجاری‌های BGP.",
     "generator": "deterministic-v1",
-    "data_ts": "2026-09-02T20:00:58Z"
+    "data_ts": "2026-09-02T21:00:59Z"
   },
-  "median_ms": 593,
+  "median_ms": 562,
   "networks": {
-    "ts": "2026-09-02T21:00:59Z",
+    "ts": "2026-09-02T22:01:00Z",
     "ranges_total": 1068,
     "ranges_up": 44,
     "orgs": [
@@ -555,7 +553,7 @@
         "ips": 1978368,
         "up": 5,
         "pct": 2.109704641350211,
-        "median_ms": 229
+        "median_ms": 232
       },
       {
         "org": "Information Technology Company (ITC)",
@@ -579,7 +577,7 @@
         "ips": 1212416,
         "up": 1,
         "pct": 11.11111111111111,
-        "median_ms": 278
+        "median_ms": 282
       },
       {
         "org": "Rightel Communication Service Company PJS",
@@ -603,7 +601,7 @@
         "ips": 205568,
         "up": 2,
         "pct": 2.4390243902439024,
-        "median_ms": 254
+        "median_ms": 244
       },
       {
         "org": "Respina Networks \u0026 Beyond PJSC",
@@ -611,7 +609,7 @@
         "ips": 169984,
         "up": 3,
         "pct": 15.789473684210526,
-        "median_ms": 288
+        "median_ms": 261
       },
       {
         "org": "Rayaneh Danesh Golestan Complex P.J.S. Co.",
@@ -619,7 +617,7 @@
         "ips": 155648,
         "up": 1,
         "pct": 33.333333333333336,
-        "median_ms": 179
+        "median_ms": 160
       },
       {
         "org": "Parvaresh Dadeha Co. Private Joint Stock",
@@ -633,9 +631,9 @@
         "org": "Asiatech Data Transmission company",
         "ranges": 47,
         "ips": 145920,
-        "up": 6,
-        "pct": 12.76595744680851,
-        "median_ms": 281
+        "up": 5,
+        "pct": 10.638297872340425,
+        "median_ms": 270
       },
       {
         "org": "Pishgaman Toseeh Ertebatat Company (Private Joint Stock)",
@@ -643,7 +641,7 @@
         "ips": 144128,
         "up": 2,
         "pct": 4.878048780487805,
-        "median_ms": 280
+        "median_ms": 253
       },
       {
         "org": "Institute for Research in Fundamental Sciences",
@@ -699,7 +697,7 @@
         "ips": 67072,
         "up": 3,
         "pct": 6.25,
-        "median_ms": 238
+        "median_ms": 235
       },
       {
         "org": "Iranian Research Organization for Science \u0026 Technology",
@@ -707,7 +705,7 @@
         "ips": 65536,
         "up": 1,
         "pct": 25,
-        "median_ms": 164
+        "median_ms": 170
       },
       {
         "org": "Afranet",
@@ -718,20 +716,20 @@
         "median_ms": 0
       },
       {
+        "org": "Raya Sepehr Vira Data Processing Company Ltd.",
+        "ranges": 4,
+        "ips": 57344,
+        "up": 3,
+        "pct": 75,
+        "median_ms": 157
+      },
+      {
         "org": "Datak Company LLC",
         "ranges": 6,
         "ips": 57344,
         "up": 0,
         "pct": 0,
         "median_ms": 0
-      },
-      {
-        "org": "Raya Sepehr Vira Data Processing Company Ltd.",
-        "ranges": 4,
-        "ips": 57344,
-        "up": 3,
-        "pct": 75,
-        "median_ms": 165
       },
       {
         "org": "Farabord Dadeh Haye Iranian Co.",
@@ -747,7 +745,7 @@
         "ips": 43520,
         "up": 3,
         "pct": 4.918032786885246,
-        "median_ms": 261
+        "median_ms": 270
       },
       {
         "org": "Hamara System Tabriz Engineering Company",
@@ -763,7 +761,7 @@
         "ips": 37888,
         "up": 1,
         "pct": 16.666666666666668,
-        "median_ms": 190
+        "median_ms": 194
       },
       {
         "org": "Farahoosh Dena PLC",
@@ -798,16 +796,16 @@
         "median_ms": 0
       },
       {
-        "org": "Farhang Azma Communications Company LTD",
-        "ranges": 3,
+        "org": "Shiraz Hamyar Co.",
+        "ranges": 2,
         "ips": 24576,
         "up": 0,
         "pct": 0,
         "median_ms": 0
       },
       {
-        "org": "Shiraz Hamyar Co.",
-        "ranges": 2,
+        "org": "Farhang Azma Communications Company LTD",
+        "ranges": 3,
         "ips": 24576,
         "up": 0,
         "pct": 0,
@@ -851,7 +849,7 @@
         "ips": 17408,
         "up": 1,
         "pct": 25,
-        "median_ms": 275
+        "median_ms": 218
       },
       {
         "org": "Pishgaman Toseeh Fanavari Etelaat Va Ertebatat Jonoub (Joint Stock Company)",
@@ -875,20 +873,28 @@
         "ips": 14336,
         "up": 1,
         "pct": 4.3478260869565215,
-        "median_ms": 515
+        "median_ms": 331
       },
       {
         "org": "Cooperative Afra ertebatat-e-sabet-e Rasa Co",
         "ranges": 31,
         "ips": 13056,
-        "up": 5,
-        "pct": 16.129032258064516,
-        "median_ms": 326
+        "up": 6,
+        "pct": 19.35483870967742,
+        "median_ms": 260
       },
       {
         "org": "Web Dadeh Paydar Co (Ltd)",
         "ranges": 44,
         "ips": 12800,
+        "up": 0,
+        "pct": 0,
+        "median_ms": 0
+      },
+      {
+        "org": "Vandad Vira Hooman LLC",
+        "ranges": 30,
+        "ips": 12288,
         "up": 0,
         "pct": 0,
         "median_ms": 0
@@ -904,14 +910,6 @@
       {
         "org": "khalij fars Ettela Resan Company J.S.",
         "ranges": 3,
-        "ips": 12288,
-        "up": 0,
-        "pct": 0,
-        "median_ms": 0
-      },
-      {
-        "org": "Vandad Vira Hooman LLC",
-        "ranges": 30,
         "ips": 12288,
         "up": 0,
         "pct": 0,
@@ -939,26 +937,10 @@
         "ips": 8704,
         "up": 3,
         "pct": 21.428571428571427,
-        "median_ms": 270
+        "median_ms": 267
       },
       {
-        "org": "DP IRAN PLC",
-        "ranges": 1,
-        "ips": 8192,
-        "up": 0,
-        "pct": 0,
-        "median_ms": 0
-      },
-      {
-        "org": "Boomerang Rayaneh",
-        "ranges": 1,
-        "ips": 8192,
-        "up": 0,
-        "pct": 0,
-        "median_ms": 0
-      },
-      {
-        "org": "Chapar Rasaneh LLC",
+        "org": "TOSE'EH ERTEBATAT NOVIN ARIA CO PJS",
         "ranges": 1,
         "ips": 8192,
         "up": 0,
@@ -971,26 +953,10 @@
         "ips": 8192,
         "up": 1,
         "pct": 100,
-        "median_ms": 70
+        "median_ms": 86
       },
       {
-        "org": "Pishgaman Tejarat Sayar Company (Private Joint Stock)",
-        "ranges": 1,
-        "ips": 8192,
-        "up": 0,
-        "pct": 0,
-        "median_ms": 0
-      },
-      {
-        "org": "TOSE'EH ERTEBATAT NOVIN ARIA CO PJS",
-        "ranges": 1,
-        "ips": 8192,
-        "up": 0,
-        "pct": 0,
-        "median_ms": 0
-      },
-      {
-        "org": "Homaye Jahan Nama Co. ( Private Joint Stock)",
+        "org": "Mellat Insurance Public Joint Stock Company",
         "ranges": 1,
         "ips": 8192,
         "up": 0,
@@ -1006,6 +972,30 @@
         "median_ms": 0
       },
       {
+        "org": "DP IRAN PLC",
+        "ranges": 1,
+        "ips": 8192,
+        "up": 0,
+        "pct": 0,
+        "median_ms": 0
+      },
+      {
+        "org": "Homaye Jahan Nama Co. ( Private Joint Stock)",
+        "ranges": 1,
+        "ips": 8192,
+        "up": 0,
+        "pct": 0,
+        "median_ms": 0
+      },
+      {
+        "org": "Chapar Rasaneh LLC",
+        "ranges": 1,
+        "ips": 8192,
+        "up": 0,
+        "pct": 0,
+        "median_ms": 0
+      },
+      {
         "org": "Rayaneh Gostar Farzanegan Ahwaz Company LTD.",
         "ranges": 1,
         "ips": 8192,
@@ -1014,7 +1004,15 @@
         "median_ms": 0
       },
       {
-        "org": "Mellat Insurance Public Joint Stock Company",
+        "org": "Pishgaman Tejarat Sayar Company (Private Joint Stock)",
+        "ranges": 1,
+        "ips": 8192,
+        "up": 0,
+        "pct": 0,
+        "median_ms": 0
+      },
+      {
+        "org": "Boomerang Rayaneh",
         "ranges": 1,
         "ips": 8192,
         "up": 0,
@@ -1038,7 +1036,15 @@
         "median_ms": 0
       },
       {
-        "org": "Rahanet Zanjan Co. (Private Joint-Stock)",
+        "org": "IRNA",
+        "ranges": 1,
+        "ips": 4096,
+        "up": 0,
+        "pct": 0,
+        "median_ms": 0
+      },
+      {
+        "org": "Pirooz Leen LLC",
         "ranges": 1,
         "ips": 4096,
         "up": 0,
@@ -1062,14 +1068,6 @@
         "median_ms": 0
       },
       {
-        "org": "IRNA",
-        "ranges": 1,
-        "ips": 4096,
-        "up": 0,
-        "pct": 0,
-        "median_ms": 0
-      },
-      {
         "org": "National Iranian Oil Company",
         "ranges": 1,
         "ips": 4096,
@@ -1078,7 +1076,7 @@
         "median_ms": 0
       },
       {
-        "org": "Shabakeh Gostar Dorna Cooperative Co.",
+        "org": "Research Institute Of Petroleum Industry",
         "ranges": 1,
         "ips": 4096,
         "up": 0,
@@ -1102,7 +1100,7 @@
         "median_ms": 0
       },
       {
-        "org": "Research Institute Of Petroleum Industry",
+        "org": "Rahanet Zanjan Co. (Private Joint-Stock)",
         "ranges": 1,
         "ips": 4096,
         "up": 0,
@@ -1110,15 +1108,15 @@
         "median_ms": 0
       },
       {
-        "org": "Armaghan Rahe Talaie",
+        "org": "Fanap - Passargad Arian Information \u0026 communication Tehchnology",
         "ranges": 1,
         "ips": 4096,
-        "up": 1,
-        "pct": 100,
-        "median_ms": 243
+        "up": 0,
+        "pct": 0,
+        "median_ms": 0
       },
       {
-        "org": "Fanap - Passargad Arian Information \u0026 communication Tehchnology",
+        "org": "Shabakeh Gostar Dorna Cooperative Co.",
         "ranges": 1,
         "ips": 4096,
         "up": 0,
@@ -1134,12 +1132,12 @@
         "median_ms": 0
       },
       {
-        "org": "Pirooz Leen LLC",
+        "org": "Armaghan Rahe Talaie",
         "ranges": 1,
         "ips": 4096,
-        "up": 0,
-        "pct": 0,
-        "median_ms": 0
+        "up": 1,
+        "pct": 100,
+        "median_ms": 238
       },
       {
         "org": "Toloe Rayaneh Loghman Educational and Cultural Co. LTD",
@@ -1147,7 +1145,7 @@
         "ips": 2816,
         "up": 1,
         "pct": 12.5,
-        "median_ms": 298
+        "median_ms": 257
       },
       {
         "org": "Aria Shatel PJSC",
